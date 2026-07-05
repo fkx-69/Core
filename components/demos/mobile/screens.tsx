@@ -47,7 +47,7 @@ export function HomeScreen({
         <p className="font-display text-lg font-bold">
           Rapido<span className="text-accent">.</span>
         </p>
-        <div className="mt-2 flex items-center gap-2 rounded-xl bg-surface px-3 py-2 text-xs text-muted">
+        <div className="mt-2 flex items-center gap-2 rounded-field bg-surface px-3 py-2 text-xs text-muted">
           <Search className="h-3.5 w-3.5" aria-hidden />
           Un restaurant, un plat…
         </div>
@@ -75,7 +75,7 @@ export function HomeScreen({
             <button
               type="button"
               onClick={() => onSelectRestaurant(resto.id)}
-              className="flex w-full items-center gap-3 rounded-xl border border-line bg-surface-raised p-2.5 text-left transition hover:border-accent/50"
+              className="flex w-full items-center gap-3 rounded-field border border-line bg-surface-raised p-2.5 text-left transition hover:border-accent/50"
             >
               <span
                 aria-hidden
@@ -152,7 +152,7 @@ export function RestaurantScreen({
         {restaurant.plats.map((plat) => (
           <li
             key={plat.id}
-            className="flex items-center gap-3 rounded-xl border border-line bg-surface-raised p-3"
+            className="flex items-center gap-3 rounded-field border border-line bg-surface-raised p-3"
           >
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold">{plat.nom}</p>
@@ -216,7 +216,7 @@ export function CartScreen({
         {panier.map(({ plat, qte }) => (
           <li
             key={plat.id}
-            className="flex items-center gap-2 rounded-xl border border-line bg-surface-raised p-2.5"
+            className="flex items-center gap-2 rounded-field border border-line bg-surface-raised p-2.5"
           >
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">{plat.nom}</p>
@@ -274,7 +274,7 @@ export function CartScreen({
         <button
           type="button"
           onClick={onOrder}
-          className="mt-3 w-full rounded-xl bg-accent py-2.5 text-sm font-semibold text-accent-contrast transition hover:bg-accent-hover"
+          className="mt-3 w-full rounded-field bg-accent py-2.5 text-sm font-semibold text-accent-contrast transition hover:bg-accent-hover"
         >
           Commander
         </button>
@@ -358,7 +358,7 @@ export function TrackingScreen({
         })}
       </ol>
 
-      <div className="mt-4 flex items-center gap-3 rounded-xl border border-line bg-surface-raised p-3">
+      <div className="mt-4 flex items-center gap-3 rounded-field border border-line bg-surface-raised p-3">
         <span
           aria-hidden
           className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft text-accent"
@@ -383,7 +383,7 @@ export function TrackingScreen({
         <button
           type="button"
           onClick={onNewOrder}
-          className="mt-3 w-full rounded-xl bg-accent py-2.5 text-sm font-semibold text-accent-contrast transition hover:bg-accent-hover"
+          className="mt-3 w-full rounded-field bg-accent py-2.5 text-sm font-semibold text-accent-contrast transition hover:bg-accent-hover"
         >
           Nouvelle commande
         </button>

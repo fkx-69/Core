@@ -94,7 +94,7 @@ export default function VitrineDemo() {
               {dropdownOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 top-full z-20 mt-1 w-40 overflow-hidden rounded-xl border border-line bg-surface-raised py-1 shadow-lg"
+                  className="absolute right-0 top-full z-20 mt-1 w-40 overflow-hidden rounded-field border border-line bg-surface-raised py-1 shadow-overlay"
                 >
                   {(Object.keys(CATEGORY_LABELS) as MenuCategory[]).map(
                     (category) => (
@@ -131,7 +131,7 @@ export default function VitrineDemo() {
         <div key={activeSection} className="screen-in flex-1 p-4 sm:p-6">
           {activeSection === "accueil" && (
             <div className="flex h-full flex-col">
-              <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-linear-to-br from-amber-200 via-orange-200 to-rose-200 p-8 text-center dark:from-amber-500/30 dark:via-orange-500/30 dark:to-rose-500/30">
+              <div className="flex flex-1 flex-col items-center justify-center rounded-field bg-linear-to-br from-amber-200 via-orange-200 to-rose-200 p-8 text-center dark:from-amber-500/30 dark:via-orange-500/30 dark:to-rose-500/30">
                 <UtensilsCrossed
                   className="h-10 w-10 text-amber-700 dark:text-amber-300"
                   aria-hidden
@@ -146,17 +146,17 @@ export default function VitrineDemo() {
                 <button
                   type="button"
                   onClick={() => goToMenu("entrees")}
-                  className="mt-6 rounded-xl bg-amber-800 px-5 py-2.5 text-sm font-medium text-amber-50 transition hover:bg-amber-900 dark:bg-amber-400 dark:text-amber-950 dark:hover:bg-amber-300"
+                  className="mt-6 rounded-field bg-amber-800 px-5 py-2.5 text-sm font-medium text-amber-50 transition hover:bg-amber-900 dark:bg-amber-400 dark:text-amber-950 dark:hover:bg-amber-300"
                 >
                   Voir le menu
                 </button>
               </div>
               <div className="mt-4 grid gap-3 text-sm text-muted sm:grid-cols-2">
-                <p className="flex items-center gap-2 rounded-xl border border-line px-4 py-3">
+                <p className="flex items-center gap-2 rounded-field border border-line px-4 py-3">
                   <Clock className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
                   Du mardi au samedi · 12h–14h et 19h–22h30
                 </p>
-                <p className="flex items-center gap-2 rounded-xl border border-line px-4 py-3">
+                <p className="flex items-center gap-2 rounded-field border border-line px-4 py-3">
                   <MapPin className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
                   8 quai Saint-Antoine, 69002 Lyon
                 </p>
@@ -194,7 +194,7 @@ export default function VitrineDemo() {
                 {MENU[menuCategory].map((item) => (
                   <li
                     key={item.name}
-                    className="flex items-baseline justify-between gap-4 rounded-xl border border-line px-4 py-3"
+                    className="flex items-baseline justify-between gap-4 rounded-field border border-line px-4 py-3"
                   >
                     <div>
                       <p className="text-sm font-semibold">{item.name}</p>
@@ -219,7 +219,7 @@ export default function VitrineDemo() {
                   type="button"
                   onClick={() => setLightboxIndex(i)}
                   aria-label={`Agrandir : ${item.caption}`}
-                  className={`h-28 rounded-xl bg-linear-to-br transition hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${item.gradient}`}
+                  className={`h-28 rounded-field bg-linear-to-br transition hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${item.gradient}`}
                 />
               ))}
             </div>
@@ -245,7 +245,7 @@ export default function VitrineDemo() {
               </button>
             </div>
             <div
-              className={`mt-2 flex-1 rounded-xl bg-linear-to-br ${GALLERY[lightboxIndex].gradient}`}
+              className={`mt-2 flex-1 rounded-field bg-linear-to-br ${GALLERY[lightboxIndex].gradient}`}
             />
             <div className="mt-3 flex items-center justify-between gap-4">
               <button

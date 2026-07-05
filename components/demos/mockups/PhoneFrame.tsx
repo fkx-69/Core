@@ -3,7 +3,7 @@ import { Signal, Wifi, BatteryFull } from "lucide-react";
 /** Mockup de smartphone en CSS : bordure épaisse, encoche, barre de statut. */
 export default function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto h-165 w-80 overflow-hidden rounded-[2.5rem] border-8 border-zinc-900 bg-background shadow-xl dark:border-zinc-700">
+    <div className="mx-auto h-165 w-80 overflow-hidden rounded-[2.5rem] border-8 border-zinc-900 bg-background shadow-raised dark:border-zinc-700">
       <div className="relative flex h-full flex-col">
         {/* Encoche */}
         <div
