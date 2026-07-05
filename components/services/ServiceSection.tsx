@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 import type { Service } from "@/lib/services-data";
 import Container from "@/components/ui/Container";
@@ -5,6 +6,7 @@ import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
+import { SERVICE_ILLUSTRATIONS } from "@/components/services/serviceIllustrations";
 
 /** Bloc service : numéral filaire, récit à gauche, rail bénéfices à droite (réf 6). */
 export default function ServiceSection({
@@ -60,6 +62,17 @@ export default function ServiceSection({
             </div>
 
             <div className="flex flex-col gap-6 lg:border-l lg:border-line lg:pl-14">
+              {SERVICE_ILLUSTRATIONS[service.id] && (
+                <div className="relative aspect-square w-full max-w-xs">
+                  <Image
+                    src={SERVICE_ILLUSTRATIONS[service.id]}
+                    alt=""
+                    fill
+                    className="object-contain"
+                    aria-hidden
+                  />
+                </div>
+              )}
               <Card>
                 <h3 className="font-display text-lg font-semibold">
                   Ce que vous y gagnez

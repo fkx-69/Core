@@ -1,10 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { SERVICES } from "@/lib/services-data";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import ServiceIcon from "@/components/services/ServiceIcon";
+import servicesPreviewIllustration from "@/public/assets/illustrations/home-services-preview.png";
 
 /** Illustration filaire d'un navigateur pour la grande tuile (réf 2). */
 function WireBrowser() {
@@ -57,8 +59,16 @@ export default function ServicesPreview() {
           <Reveal className="h-full">
             <Link
               href={`/services#${main.id}`}
-              className="group flex h-full flex-col rounded-card border border-line bg-surface-raised p-8 shadow-card transition duration-200 hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface-raised p-8 shadow-card transition duration-200 hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
+              <Image
+                src={servicesPreviewIllustration}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="absolute inset-0 -z-10 object-cover opacity-10"
+                aria-hidden
+              />
               <WireBrowser />
               <h3 className="mt-8 font-display text-2xl font-semibold">
                 {main.title}

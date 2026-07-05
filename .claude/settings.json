@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat)",
+      "Read(//tmp/**)",
+      "Bash(git log *)",
+      "Read(//home/ubuntu/.claude/skills/gpt-image-bridge/**)",
+      "Bash(~/.claude/skills/gpt-image-bridge/bin/gpt-image-2 \"Minimalist monoline vector-style illustration, thin uniform ~2px indigo \\(#4f46e5\\) linework on a fully transparent background, occasional soft flat fill in pale indigo \\(#eef2ff\\) at low opacity, no gradients, no photorealism, no text, no drop shadows, generous negative space, editorial tech-agency blueprint aesthetic. Abstract constellation with orbiting nodes, flowing connection lines, minimal geometric planets or ellipses. Suggest motion and interconnection. Size: wide landscape.\" /tmp/claude-1000/-home-ubuntu-code-core/b1b8bd6b-9f1d-4091-9077-3f882f7d41fe/scratchpad/home-hero.png --size 1400x900)",
+      "Read",
+      "Write",
+      "Edit",
+      "Bash"
+    ]
+  }
+}

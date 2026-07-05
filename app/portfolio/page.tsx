@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { StaticImageData } from "next/image";
 import { MousePointerClick } from "lucide-react";
 import { DEMO_ANCHORS, SERVICE_ANCHORS } from "@/lib/site";
 import Container from "@/components/ui/Container";
@@ -6,6 +7,11 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import DemoShell from "@/components/demos/DemoShell";
 import LazyDemo, { type DemoName } from "@/components/demos/LazyDemo";
+import IntroIllustration from "@/components/ui/IntroIllustration";
+import portfolioIntroIllustration from "@/public/assets/illustrations/portfolio-intro.png";
+import vitrineIllustration from "@/public/assets/illustrations/portfolio-vitrine.png";
+import dashboardIllustration from "@/public/assets/illustrations/portfolio-dashboard.png";
+import mobileIllustration from "@/public/assets/illustrations/portfolio-mobile.png";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -22,6 +28,7 @@ const DEMO_SECTIONS: {
   stack: string[];
   serviceAnchor: string;
   serviceLabel: string;
+  illustration: StaticImageData;
 }[] = [
   {
     anchor: DEMO_ANCHORS.vitrine,
@@ -33,6 +40,7 @@ const DEMO_SECTIONS: {
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     serviceAnchor: SERVICE_ANCHORS.sitesWeb,
     serviceLabel: "Sites web",
+    illustration: vitrineIllustration,
   },
   {
     anchor: DEMO_ANCHORS.dashboard,
@@ -44,6 +52,7 @@ const DEMO_SECTIONS: {
     stack: ["React", "Next.js", "Node.js", "PostgreSQL"],
     serviceAnchor: SERVICE_ANCHORS.applicationsWeb,
     serviceLabel: "Applications web",
+    illustration: dashboardIllustration,
   },
   {
     anchor: DEMO_ANCHORS.mobile,
@@ -55,6 +64,7 @@ const DEMO_SECTIONS: {
     stack: ["React Native", "Expo", "TypeScript", "Firebase"],
     serviceAnchor: SERVICE_ANCHORS.applicationsMobiles,
     serviceLabel: "Applications mobiles",
+    illustration: mobileIllustration,
   },
 ];
 
@@ -63,12 +73,15 @@ export default function PortfolioPage() {
     <>
       <div className="border-b border-line py-16 sm:py-20">
         <Container>
-          <SectionHeading
-            as="h1"
-            eyebrow="Portfolio"
-            title="Des démos à essayer, pas des captures d'écran"
-            intro="Chaque projet ci-dessous est une mini-application réellement fonctionnelle, avec des données factices. Cliquez, filtrez, commandez : l'interface réagit comme un vrai produit livré par Core."
-          />
+          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <SectionHeading
+              as="h1"
+              eyebrow="Portfolio"
+              title="Des démos à essayer, pas des captures d'écran"
+              intro="Chaque projet ci-dessous est une mini-application réellement fonctionnelle, avec des données factices. Cliquez, filtrez, commandez : l'interface réagit comme un vrai produit livré par Core."
+            />
+            <IntroIllustration src={portfolioIntroIllustration} alt="" />
+          </div>
           <p className="mt-6 flex w-fit items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-sm font-medium text-muted">
             <MousePointerClick className="h-4 w-4 text-accent" aria-hidden />
             Interagissez librement — un bouton « Réinitialiser » remet chaque démo à zéro.
@@ -93,6 +106,7 @@ export default function PortfolioPage() {
                 serviceHref={`/services#${section.serviceAnchor}`}
                 serviceLabel={section.serviceLabel}
                 flip={i % 2 === 1}
+                illustration={section.illustration}
               >
                 <LazyDemo demo={section.demo} />
               </DemoShell>

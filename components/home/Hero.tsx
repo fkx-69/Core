@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Container from "@/components/ui/Container";
+import homeHeroIllustration from "@/public/assets/illustrations/home-hero.png";
 
 /** Fausse fenêtre de code, détail décoratif du héro (réf 1). */
 function CodeCard() {
@@ -51,6 +53,10 @@ export default function Hero() {
         aria-hidden
         className="dot-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"
       />
+      {/* Illustration constellation de fond */}
+      <div aria-hidden className="pointer-events-none absolute -top-16 -right-16 -z-10 hidden opacity-20 lg:block">
+        <Image src={homeHeroIllustration} alt="" className="h-auto w-[34rem] max-w-none" />
+      </div>
       <Container className="relative py-24 sm:py-32">
         <div className="max-w-3xl">
           <h1 className="font-display text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl">

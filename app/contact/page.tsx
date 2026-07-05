@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT_INFO, SOCIAL_LINKS } from "@/lib/site";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SocialIcon from "@/components/ui/SocialIcon";
 import ContactForm from "@/components/contact/ContactForm";
+import IntroIllustration from "@/components/ui/IntroIllustration";
+import contactIntroIllustration from "@/public/assets/illustrations/contact-intro.png";
+import contactSidebarIllustration from "@/public/assets/illustrations/contact-sidebar.png";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -16,18 +20,31 @@ export default function ContactPage() {
   return (
     <div className="py-16 sm:py-20">
       <Container>
-        <SectionHeading
-          as="h1"
-          eyebrow="Contact"
-          title="Parlez-nous de votre projet"
-          intro="Décrivez-nous votre besoin : nous revenons vers vous sous 24 heures ouvrées avec un premier avis technique."
-        />
+        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center mb-14">
+          <SectionHeading
+            as="h1"
+            eyebrow="Contact"
+            title="Parlez-nous de votre projet"
+            intro="Décrivez-nous votre besoin : nous revenons vers vous sous 24 heures ouvrées avec un premier avis technique."
+          />
+          <IntroIllustration src={contactIntroIllustration} alt="" />
+        </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[2fr_1fr] lg:gap-14">
+        <div className="grid gap-10 lg:grid-cols-[2fr_1fr] lg:gap-14">
           <ContactForm />
 
           {/* Rail indigo doux continu (réf 8) */}
           <aside className="h-fit rounded-card bg-accent-soft/60 p-8 lg:sticky lg:top-24">
+            {contactSidebarIllustration && (
+              <div className="mb-6 flex justify-center">
+                <Image
+                  src={contactSidebarIllustration}
+                  alt=""
+                  className="h-auto w-full max-w-xs"
+                  aria-hidden
+                />
+              </div>
+            )}
             <h2 className="font-display text-lg font-semibold">
               Nos coordonnées
             </h2>

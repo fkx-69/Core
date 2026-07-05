@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 
@@ -20,6 +22,7 @@ export default function DemoShell({
   serviceHref,
   serviceLabel,
   flip = false,
+  illustration,
   children,
 }: {
   index: number;
@@ -30,6 +33,7 @@ export default function DemoShell({
   serviceHref: string;
   serviceLabel: string;
   flip?: boolean;
+  illustration?: StaticImageData;
   children: React.ReactNode;
 }) {
   const [resetKey, setResetKey] = useState(0);
@@ -47,6 +51,17 @@ export default function DemoShell({
         {children}
       </div>
       <div className={`lg:sticky lg:top-24 ${flip ? "lg:order-1" : ""}`}>
+        {illustration && (
+          <div className="mb-6 aspect-video relative w-full">
+            <Image
+              src={illustration}
+              alt=""
+              fill
+              className="object-contain"
+              aria-hidden
+            />
+          </div>
+        )}
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
           Démo {numeral} — {kind}
         </p>

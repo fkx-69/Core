@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { Award, Cpu, HeartHandshake, Rocket } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import whyUsIllustration from "@/public/assets/illustrations/home-why-us.png";
 
 const REASONS = [
   {
@@ -36,6 +38,14 @@ export default function WhyUs() {
             eyebrow="Pourquoi Core"
             title="Un partenaire, pas un simple prestataire"
             align="center"
+          />
+        </Reveal>
+        <Reveal className="mt-12 flex justify-center">
+          <Image
+            src={whyUsIllustration}
+            alt=""
+            className="max-w-2xl"
+            aria-hidden
           />
         </Reveal>
         <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-line">

@@ -3,6 +3,8 @@ import { SERVICES } from "@/lib/services-data";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ServiceSection from "@/components/services/ServiceSection";
+import IntroIllustration from "@/components/ui/IntroIllustration";
+import servicesIntroIllustration from "@/public/assets/illustrations/services-intro.png";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -15,12 +17,15 @@ export default function ServicesPage() {
     <>
       <div className="border-b border-line py-16 sm:py-20">
         <Container>
-          <SectionHeading
-            as="h1"
-            eyebrow="Services"
-            title="Ce que nous construisons pour vous"
-            intro="Quatre expertises complémentaires, un même objectif : livrer un logiciel utile, fiable et agréable à utiliser. Chaque service renvoie vers une démo interactive de notre portfolio."
-          />
+          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <SectionHeading
+              as="h1"
+              eyebrow="Services"
+              title="Ce que nous construisons pour vous"
+              intro="Quatre expertises complémentaires, un même objectif : livrer un logiciel utile, fiable et agréable à utiliser. Chaque service renvoie vers une démo interactive de notre portfolio."
+            />
+            <IntroIllustration src={servicesIntroIllustration} alt="" />
+          </div>
         </Container>
       </div>
       {SERVICES.map((service, i) => (

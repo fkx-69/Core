@@ -1,10 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { DEMO_ANCHORS } from "@/lib/site";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Reveal from "@/components/ui/Reveal";
+import portfolioTeaserIllustration from "@/public/assets/illustrations/home-portfolio-teaser.png";
 
 /** Miniature stylisée d'un navigateur avec un faux site vitrine. */
 function MiniBrowser() {
@@ -94,7 +96,15 @@ const TEASERS = [
 /** Aplat indigo doux, texte en bas à gauche, pile de mockups à droite (réf 4). */
 export default function PortfolioTeaser() {
   return (
-    <section className="bg-accent-soft/50 py-20 sm:py-28">
+    <section className="relative bg-accent-soft/50 py-20 sm:py-28">
+      <Image
+        src={portfolioTeaserIllustration}
+        alt=""
+        fill
+        sizes="100vw"
+        className="absolute inset-0 -z-10 object-cover opacity-10 pointer-events-none"
+        aria-hidden
+      />
       <Container>
         <div className="grid items-end gap-14 lg:grid-cols-[1fr_1.1fr]">
           <div>
