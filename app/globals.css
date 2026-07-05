@@ -123,6 +123,12 @@ body {
   background-size: 24px 24px;
 }
 
+/* Numéraux géants au contour filaire (page Services) */
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--line);
+  color: transparent;
+}
+
 /* Transition douce appliquée temporairement par le ThemeToggle */
 html.theme-transition,
 html.theme-transition * {

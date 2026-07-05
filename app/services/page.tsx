@@ -20,7 +20,6 @@ export default function ServicesPage() {
             eyebrow="Services"
             title="Ce que nous construisons pour vous"
             intro="Quatre expertises complémentaires, un même objectif : livrer un logiciel utile, fiable et agréable à utiliser. Chaque service renvoie vers une démo interactive de notre portfolio."
-            align="center"
           />
         </Container>
       </div>
@@ -28,6 +27,7 @@ export default function ServicesPage() {
         <ServiceSection
           key={service.id}
           service={service}
+          index={i}
           alternate={i % 2 === 1}
         />
       ))}
