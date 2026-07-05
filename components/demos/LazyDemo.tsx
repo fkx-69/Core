@@ -7,7 +7,7 @@ function Skeleton({ minH }: { minH: string }) {
   return (
     <div
       aria-hidden
-      className={`${minH} animate-pulse rounded-2xl border border-line bg-surface`}
+      className={`${minH} animate-pulse rounded-card border border-line bg-surface`}
     />
   );
 }
