@@ -60,7 +60,7 @@ function validateField(field: Field, values: FormValues): string | null {
 }
 
 const inputClasses =
-  "w-full rounded-xl border border-line bg-surface-raised px-4 py-3 text-sm text-foreground placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 aria-[invalid=true]:border-red-500";
+  "w-full rounded-field border border-line bg-surface-raised px-4 py-3 text-sm text-foreground placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 aria-[invalid=true]:border-danger";
 
 export default function ContactForm() {
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
@@ -105,9 +105,9 @@ export default function ContactForm() {
     return (
       <div
         role="status"
-        className="flex h-full flex-col items-center justify-center rounded-2xl border border-line bg-surface-raised p-10 text-center shadow-sm"
+        className="flex h-full flex-col items-center justify-center rounded-card border border-line bg-surface-raised p-10 text-center shadow-card"
       >
-        <CheckCircle2 className="h-12 w-12 text-accent" aria-hidden />
+        <CheckCircle2 className="h-12 w-12 text-ok" strokeWidth={1.5} aria-hidden />
         <h2 className="mt-4 font-display text-2xl font-semibold">
           Merci, {values.nom.trim().split(" ")[0]} !
         </h2>
@@ -123,11 +123,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className="rounded-2xl border border-line bg-surface-raised p-6 shadow-sm sm:p-8"
-    >
+    <form onSubmit={handleSubmit} noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="nom" className="mb-1.5 block text-sm font-medium">
@@ -147,7 +143,7 @@ export default function ContactForm() {
             className={inputClasses}
           />
           {errors.nom && (
-            <p id="nom-error" role="alert" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+            <p id="nom-error" role="alert" className="mt-1.5 text-sm text-danger">
               {errors.nom}
             </p>
           )}
@@ -171,7 +167,7 @@ export default function ContactForm() {
             className={inputClasses}
           />
           {errors.email && (
-            <p id="email-error" role="alert" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+            <p id="email-error" role="alert" className="mt-1.5 text-sm text-danger">
               {errors.email}
             </p>
           )}
@@ -199,7 +195,7 @@ export default function ContactForm() {
             className={inputClasses}
           />
           {errors.telephone && (
-            <p id="telephone-error" role="alert" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+            <p id="telephone-error" role="alert" className="mt-1.5 text-sm text-danger">
               {errors.telephone}
             </p>
           )}
@@ -230,7 +226,7 @@ export default function ContactForm() {
             ))}
           </select>
           {errors.typeProjet && (
-            <p id="typeProjet-error" role="alert" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+            <p id="typeProjet-error" role="alert" className="mt-1.5 text-sm text-danger">
               {errors.typeProjet}
             </p>
           )}
@@ -253,7 +249,7 @@ export default function ContactForm() {
             className={`${inputClasses} resize-y`}
           />
           {errors.message && (
-            <p id="message-error" role="alert" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+            <p id="message-error" role="alert" className="mt-1.5 text-sm text-danger">
               {errors.message}
             </p>
           )}

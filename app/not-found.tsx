@@ -5,7 +5,10 @@ export default function NotFound() {
   return (
     <div className="flex flex-1 items-center py-24">
       <Container className="text-center">
-        <p className="font-display text-7xl font-bold text-accent">404</p>
+        <p className="font-display text-8xl font-bold sm:text-9xl">
+          <span className="text-outline">404</span>
+          <span className="text-accent">.</span>
+        </p>
         <h1 className="mt-4 font-display text-3xl font-bold tracking-tight">
           Page introuvable
         </h1>
