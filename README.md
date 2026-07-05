@@ -4,6 +4,8 @@ Site vitrine de **Core**, agence de développement logiciel fictive : sites web,
 
 ## Lancer le projet
 
+Prérequis : Node.js 20.9 ou version ultérieure.
+
 ```bash
 npm install
 npm run dev
@@ -11,7 +13,11 @@ npm run dev
 
 Le site est disponible sur [http://localhost:3000](http://localhost:3000).
 
-Autres commandes : `npm run build` (build de production, Turbopack), `npm run start` (serveur de production), `npm run lint` (ESLint).
+Autres commandes :
+
+- `npm run build` : build de production avec Turbopack ;
+- `npm run start` : serveur de production après un build ;
+- `npm run lint` : vérification ESLint.
 
 ## Stack
 
@@ -53,3 +59,13 @@ Toggle dans le header, persisté en `localStorage`, avec respect de `prefers-col
 ## Démos du portfolio
 
 Chaque démo est un composant client isolé, chargé paresseusement (`next/dynamic` + IntersectionObserver) et remis à zéro par le bouton « Réinitialiser la démo » (remontage par changement de `key`). Toutes les données sont factices.
+
+## Limites actuelles
+
+- Le formulaire de contact valide les champs côté client, mais simule l'envoi : aucun message ne quitte le navigateur.
+- Les coordonnées, réseaux sociaux, témoignages implicites, résultats annoncés et projets du portfolio sont fictifs.
+- Le projet ne possède ni backend, ni base de données, ni authentification.
+
+## Documentation
+
+L'index des documents actifs et des archives se trouve dans [`docs/README.md`](docs/README.md). La vue d'ensemble technique canonique est [`docs/project-overview.md`](docs/project-overview.md).
