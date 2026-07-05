@@ -42,10 +42,10 @@ export default function Header() {
                   <Link
                     href={link.href}
                     aria-current={active ? "page" : undefined}
-                    className={`rounded-xl px-4 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                    className={`rounded-full px-4 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                       active
-                        ? "bg-accent-soft text-accent"
-                        : "text-muted hover:bg-surface hover:text-foreground"
+                        ? "text-foreground underline decoration-accent decoration-2 underline-offset-8"
+                        : "text-muted hover:text-foreground"
                     }`}
                   >
                     {link.label}
@@ -60,7 +60,7 @@ export default function Header() {
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface-raised text-foreground transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface-raised text-foreground transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:hidden"
             aria-expanded={menuOpen}
             aria-controls="menu-mobile"
             aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
@@ -92,7 +92,7 @@ export default function Header() {
                       href={link.href}
                       aria-current={active ? "page" : undefined}
                       onClick={() => setMenuOpen(false)}
-                      className={`block rounded-xl px-4 py-3 text-base font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      className={`block rounded-field px-4 py-3 text-base font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                         active
                           ? "bg-accent-soft text-accent"
                           : "text-muted hover:bg-surface hover:text-foreground"
