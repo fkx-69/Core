@@ -26,10 +26,10 @@ const DEMOS = {
     }),
   },
   dashboard: {
-    minH: "min-h-[720px]",
+    minH: "min-h-[1200px]",
     Component: dynamic(
       () => import("@/components/demos/dashboard/DashboardDemo"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[720px]" /> },
+      { ssr: false, loading: () => <Skeleton minH="min-h-[1200px]" /> },
     ),
   },
   mobile: {

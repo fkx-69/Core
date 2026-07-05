@@ -1,6 +1,14 @@
 "use client";
 
-import { ArrowDown, ArrowUp, ArrowUpDown, Check, Trash2 } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUp,
+  ArrowUpDown,
+  Check,
+  Clock,
+  Trash2,
+  X,
+} from "lucide-react";
 import type { Statut, Vente } from "@/components/demos/dashboard/data";
 
 export type SortColumn = "client" | "produit" | "categorie" | "montant" | "date" | "statut";
@@ -15,10 +23,12 @@ const COLUMNS: { key: SortColumn; label: string; numeric?: boolean }[] = [
   { key: "statut", label: "Statut" },
 ];
 
-const STATUS_STYLES: Record<Statut, string> = {
-  Payée: "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300",
-  "En attente": "bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300",
-  Annulée: "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300",
+/* Couleurs de statut réservées (tokens --ok/--warn/--danger), toujours
+   accompagnées d'une icône + libellé — jamais la couleur seule. */
+const STATUS_STYLES: Record<Statut, { classes: string; Icon: typeof Check }> = {
+  Payée: { classes: "bg-ok-soft text-ok", Icon: Check },
+  "En attente": { classes: "bg-warn-soft text-warn", Icon: Clock },
+  Annulée: { classes: "bg-danger-soft text-danger", Icon: X },
 };
 
 export default function SalesTable({
@@ -39,7 +49,7 @@ export default function SalesTable({
   formatDate: (iso: string) => string;
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-line">
+    <div className="overflow-x-auto rounded-field border border-line">
       <table className="w-full min-w-135 text-left text-sm">
         <thead>
           <tr className="border-b border-line bg-surface text-xs text-muted">
@@ -98,11 +108,17 @@ export default function SalesTable({
                 {formatDate(vente.date)}
               </td>
               <td className="px-3 py-2.5">
-                <span
-                  className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[vente.statut]}`}
-                >
-                  {vente.statut}
-                </span>
+                {(() => {
+                  const { classes, Icon } = STATUS_STYLES[vente.statut];
+                  return (
+                    <span
+                      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${classes}`}
+                    >
+                      <Icon className="h-3 w-3" aria-hidden />
+                      {vente.statut}
+                    </span>
+                  );
+                })()}
               </td>
               <td className="px-3 py-2.5">
                 <div className="flex items-center gap-1">
@@ -112,7 +128,7 @@ export default function SalesTable({
                       onClick={() => onMarkPaid(vente.id)}
                       aria-label={`Marquer la vente de ${vente.client} comme payée`}
                       title="Marquer payée"
-                      className="rounded-lg p-1.5 text-emerald-600 transition hover:bg-emerald-100 dark:text-emerald-400 dark:hover:bg-emerald-500/20"
+                      className="rounded-field p-1.5 text-ok transition hover:bg-ok-soft"
                     >
                       <Check className="h-4 w-4" aria-hidden />
                     </button>
@@ -122,7 +138,7 @@ export default function SalesTable({
                     onClick={() => onDelete(vente.id)}
                     aria-label={`Supprimer la vente de ${vente.client}`}
                     title="Supprimer"
-                    className="rounded-lg p-1.5 text-muted transition hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-500/20 dark:hover:text-red-400"
+                    className="rounded-field p-1.5 text-muted transition hover:bg-danger-soft hover:text-danger"
                   >
                     <Trash2 className="h-4 w-4" aria-hidden />
                   </button>

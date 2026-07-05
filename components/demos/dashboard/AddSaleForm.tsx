@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { CATEGORIES, type Categorie } from "@/components/demos/dashboard/data";
 
 const inputClasses =
-  "w-full rounded-lg border border-line bg-background px-3 py-2 text-sm transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30";
+  "w-full rounded-field border border-line bg-background px-3 py-2 text-sm transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30";
 
 export default function AddSaleForm({
   onAdd,
@@ -35,7 +35,7 @@ export default function AddSaleForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-xl border border-line bg-surface-raised p-4"
+      className="rounded-field border border-line bg-surface-raised p-4"
       aria-label="Ajouter une vente"
     >
       <p className="text-sm font-semibold">Nouvelle vente</p>
@@ -100,7 +100,7 @@ export default function AddSaleForm({
         </div>
         <button
           type="submit"
-          className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-contrast transition hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent lg:col-span-1"
+          className="inline-flex items-center justify-center gap-1.5 rounded-field bg-accent px-4 py-2 text-sm font-medium text-accent-contrast transition hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent lg:col-span-1"
         >
           <Plus className="h-4 w-4" aria-hidden />
           Ajouter

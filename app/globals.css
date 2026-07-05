@@ -17,17 +17,19 @@
   --accent-soft: #eef2ff;
   --accent-contrast: #ffffff;
 
-  /* Data-viz (mode clair) */
-  --chart-1: #2a78d6;
+  /* Data-viz (mode clair) — palette validée par scripts/validate_palette.js :
+     slots 2-3 sous 3:1 sur fond clair → secours assuré par la légende du donut
+     et la vue table (SalesTable). */
+  --chart-1: #4f46e5;
   --chart-2: #1baf7a;
   --chart-3: #eda100;
-  --chart-grid: #e1e0d9;
-  --chart-ink: #52514e;
+  --chart-grid: #e6e7ee;
+  --chart-ink: #5b6070;
 
   /* Statuts — AA sur leur fond -soft */
   --ok: #0f7a54;
   --ok-soft: #e6f6ef;
-  --warn: #9a6a00;
+  --warn: #8f6300;
   --warn-soft: #fbf1dc;
   --danger: #c0392f;
   --danger-soft: #fdecec;
@@ -52,12 +54,13 @@
   --accent-soft: #26264a;
   --accent-contrast: #0b0d13;
 
-  /* Data-viz (mode sombre) */
-  --chart-1: #3987e5;
+  /* Data-viz (mode sombre) — pas sélectionnée par inversion : #7480f6 remplace
+     l'accent #818cf8 (hors bande de luminance), validée sur #181b26. */
+  --chart-1: #7480f6;
   --chart-2: #199e70;
   --chart-3: #c98500;
-  --chart-grid: #2c2c2a;
-  --chart-ink: #c3c2b7;
+  --chart-grid: #262a38;
+  --chart-ink: #9aa0b3;
 
   /* Statuts — AA sur leur fond -soft */
   --ok: #4cd6a1;
