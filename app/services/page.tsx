@@ -1,0 +1,36 @@
+import type { Metadata } from "next";
+import { SERVICES } from "@/lib/services-data";
+import Container from "@/components/ui/Container";
+import SectionHeading from "@/components/ui/SectionHeading";
+import ServiceSection from "@/components/services/ServiceSection";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Sites web, applications web, applications mobiles et software sur mesure : découvrez les services de l'agence Core.",
+};
+
+export default function ServicesPage() {
+  return (
+    <>
+      <div className="border-b border-line py-16 sm:py-20">
+        <Container>
+          <SectionHeading
+            as="h1"
+            eyebrow="Services"
+            title="Ce que nous construisons pour vous"
+            intro="Quatre expertises complémentaires, un même objectif : livrer un logiciel utile, fiable et agréable à utiliser. Chaque service renvoie vers une démo interactive de notre portfolio."
+            align="center"
+          />
+        </Container>
+      </div>
+      {SERVICES.map((service, i) => (
+        <ServiceSection
+          key={service.id}
+          service={service}
+          alternate={i % 2 === 1}
+        />
+      ))}
+    </>
+  );
+}
