@@ -50,13 +50,11 @@ export default function DonutChart({
   const total = data.reduce((sum, d) => sum + d.value, 0);
   const slices = data.filter((d) => d.value > 0);
 
-  let angle = 0;
-  const paths = slices.map((d) => {
-    const start = angle;
+  const paths = slices.map((d, i) => {
+    const before = slices.slice(0, i).reduce((sum, s) => sum + s.value, 0);
+    const start = total > 0 ? (before / total) * Math.PI * 2 : 0;
     const sweep = total > 0 ? (d.value / total) * Math.PI * 2 : 0;
-    angle += sweep;
-    const index = data.indexOf(d);
-    return { d, index, path: arcPath(start, start + sweep) };
+    return { d, index: data.indexOf(d), path: arcPath(start, start + sweep) };
   });
 
   const active = hovered !== null ? data[hovered] : null;

@@ -19,7 +19,7 @@ export default function ServiceIcon({
   const Icon = icons[icon];
   return (
     <span
-      className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-soft text-accent ${className}`}
+      className={`inline-flex h-12 w-12 items-center justify-center rounded-field bg-accent-soft text-accent ${className}`}
       aria-hidden
     >
       <Icon className="h-6 w-6" />

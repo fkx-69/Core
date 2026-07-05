@@ -42,7 +42,7 @@ export default function ThemeToggle() {
       aria-label={
         isDark ? "Activer le thème clair" : "Activer le thème sombre"
       }
-      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface-raised text-foreground transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface-raised text-foreground transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
       {isDark ? (
         <Sun className="h-5 w-5" aria-hidden />
