@@ -26,31 +26,31 @@ const REASONS = [
   },
 ];
 
+/** Section calme : quatre colonnes séparées par des filets, sans cartes (réf 3). */
 export default function WhyUs() {
   return (
-    <section className="py-20 sm:py-24">
+    <section className="py-24 sm:py-32">
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="Pourquoi nous choisir"
+            eyebrow="Pourquoi Core"
             title="Un partenaire, pas un simple prestataire"
             align="center"
           />
         </Reveal>
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-line">
           {REASONS.map((reason, i) => (
-            <Reveal key={reason.title} delay={i * 100}>
-              <div className="h-full rounded-2xl border border-line bg-surface-raised p-6 shadow-sm transition duration-200 hover:shadow-md">
-                <span
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-soft text-accent"
+            <Reveal key={reason.title} delay={i * 100} className="lg:px-8">
+              <div className="text-center">
+                <reason.icon
+                  className="mx-auto h-7 w-7 text-foreground"
+                  strokeWidth={1.5}
                   aria-hidden
-                >
-                  <reason.icon className="h-6 w-6" />
-                </span>
+                />
                 <h3 className="mt-5 font-display text-lg font-semibold">
                   {reason.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
+                <p className="mt-3 text-sm leading-relaxed text-muted">
                   {reason.text}
                 </p>
               </div>

@@ -2,29 +2,31 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 
+/** Bannière pleine largeur indigo, empilée au centre (réf 5). */
 export default function CtaSection() {
   return (
-    <section className="py-20 sm:py-24">
-      <Container>
+    <section className="bg-accent py-24 text-accent-contrast sm:py-28">
+      <Container className="text-center">
         <Reveal>
-          <div className="rounded-2xl bg-accent px-6 py-14 text-center text-accent-contrast sm:px-12">
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              Un projet en tête ?
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed opacity-90">
-              Parlons-en. Nous vous répondons sous 24 h avec un premier avis
-              technique et une estimation honnête.
-            </p>
-            <div className="mt-8">
-              <Button
-                href="/contact"
-                size="lg"
-                className="!bg-accent-contrast !text-accent hover:opacity-90"
-              >
-                Nous contacter
-              </Button>
-            </div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-70">
+            Contact
+          </p>
+          <h2 className="mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            Un projet en tête ?
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed opacity-80">
+            Parlons de votre produit, de vos délais et de votre budget. Nous
+            vous répondons avec un premier avis technique et une estimation
+            honnête.
+          </p>
+          <div className="mt-10">
+            <Button href="/contact" variant="inverted" size="lg">
+              Discutons-en
+            </Button>
           </div>
+          <p className="mt-6 text-sm opacity-70">
+            Réponse sous 24 h — sans engagement.
+          </p>
         </Reveal>
       </Container>
     </section>
