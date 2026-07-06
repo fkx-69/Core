@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
+import Image from "next/image";
+import { Loader2, Send } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 const PROJECT_TYPES = [
@@ -107,7 +108,14 @@ export default function ContactForm() {
         role="status"
         className="flex h-full flex-col items-center justify-center rounded-card border border-line bg-surface-raised p-10 text-center shadow-card"
       >
-        <CheckCircle2 className="h-12 w-12 text-ok" strokeWidth={1.5} aria-hidden />
+        <Image
+          src="/assets/illustrations/contact-success.webp"
+          alt=""
+          width={900}
+          height={900}
+          className="h-auto w-full max-w-56 dark:brightness-200"
+          aria-hidden
+        />
         <h2 className="mt-4 font-display text-2xl font-semibold">
           Merci, {values.nom.trim().split(" ")[0]} !
         </h2>

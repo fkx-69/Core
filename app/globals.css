@@ -163,6 +163,32 @@ html.theme-transition * {
   }
 }
 
+/* Scroll sans barre visible (écrans des démos mobiles) */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bandeau défilant (démo VOLT) */
+@keyframes marquee {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -50% 0;
+  }
+}
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
 /* Transitions d'écrans dans les démos */
 @keyframes screen-in {
   from {

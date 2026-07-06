@@ -13,12 +13,12 @@ export default function IntroIllustration({
 }) {
   const isString = typeof src === "string";
   return (
-    <div className="hidden lg:block">
+    <div className="flex justify-center lg:justify-start">
       <Image
         src={src}
         alt={alt}
         {...(isString && width && height ? { width, height } : {})}
-        className="max-w-sm h-auto"
+        className="h-auto w-full max-w-xs sm:max-w-sm"
       />
     </div>
   );

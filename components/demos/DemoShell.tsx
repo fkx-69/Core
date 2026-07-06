@@ -22,6 +22,7 @@ export default function DemoShell({
   serviceLabel,
   flip = false,
   illustration,
+  switcher,
   children,
 }: {
   index: number;
@@ -33,6 +34,8 @@ export default function DemoShell({
   serviceLabel: string;
   flip?: boolean;
   illustration?: string;
+  /** Sélecteur de projet affiché au-dessus de la démo (catégories multi-démos). */
+  switcher?: React.ReactNode;
   children: React.ReactNode;
 }) {
   const [resetKey, setResetKey] = useState(0);
@@ -46,8 +49,9 @@ export default function DemoShell({
           : "lg:grid-cols-[1.7fr_1fr]"
       }`}
     >
-      <div key={resetKey} className={`min-w-0 ${flip ? "lg:order-2" : ""}`}>
-        {children}
+      <div className={`min-w-0 ${flip ? "lg:order-2" : ""}`}>
+        {switcher}
+        <div key={resetKey}>{children}</div>
       </div>
       <div className={`lg:sticky lg:top-24 ${flip ? "lg:order-1" : ""}`}>
         {illustration && (
@@ -62,7 +66,7 @@ export default function DemoShell({
           </div>
         )}
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-          Démo {numeral} — {kind}
+          {numeral} — {kind}
         </p>
         <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
           {title}

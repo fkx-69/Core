@@ -25,6 +25,27 @@ const DEMOS = {
       loading: () => <Skeleton minH="min-h-[560px]" />,
     }),
   },
+  volt: {
+    minH: "min-h-[600px]",
+    Component: dynamic(() => import("@/components/demos/volt/VoltDemo"), {
+      ssr: false,
+      loading: () => <Skeleton minH="min-h-[600px]" />,
+    }),
+  },
+  parfum: {
+    minH: "min-h-[600px]",
+    Component: dynamic(() => import("@/components/demos/parfum/ParfumDemo"), {
+      ssr: false,
+      loading: () => <Skeleton minH="min-h-[600px]" />,
+    }),
+  },
+  salon: {
+    minH: "min-h-[600px]",
+    Component: dynamic(() => import("@/components/demos/salon/SalonDemo"), {
+      ssr: false,
+      loading: () => <Skeleton minH="min-h-[600px]" />,
+    }),
+  },
   dashboard: {
     minH: "min-h-[1200px]",
     Component: dynamic(
@@ -32,9 +53,23 @@ const DEMOS = {
       { ssr: false, loading: () => <Skeleton minH="min-h-[1200px]" /> },
     ),
   },
+  pressing: {
+    minH: "min-h-[900px]",
+    Component: dynamic(
+      () => import("@/components/demos/pressing/PressingDemo"),
+      { ssr: false, loading: () => <Skeleton minH="min-h-[900px]" /> },
+    ),
+  },
   mobile: {
     minH: "min-h-[680px]",
     Component: dynamic(() => import("@/components/demos/mobile/MobileDemo"), {
+      ssr: false,
+      loading: () => <Skeleton minH="min-h-[680px]" />,
+    }),
+  },
+  banque: {
+    minH: "min-h-[680px]",
+    Component: dynamic(() => import("@/components/demos/banque/BanqueDemo"), {
       ssr: false,
       loading: () => <Skeleton minH="min-h-[680px]" />,
     }),

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   ArrowLeft,
   Bike,
@@ -11,7 +12,6 @@ import {
   ShoppingBag,
   Star,
   Trash2,
-  UtensilsCrossed,
 } from "lucide-react";
 import {
   ETAPES_LIVRAISON,
@@ -51,7 +51,7 @@ export function HomeScreen({
           <Search className="h-3.5 w-3.5" aria-hidden />
           Un restaurant, un plat…
         </div>
-        <div className="mt-2.5 flex gap-1.5 overflow-x-auto pb-1">
+        <div className="scrollbar-none mt-2.5 flex gap-1.5 overflow-x-auto pb-1">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -69,7 +69,7 @@ export function HomeScreen({
           ))}
         </div>
       </div>
-      <ul className="min-h-0 flex-1 space-y-2 overflow-y-auto px-4 pb-3">
+      <ul className="scrollbar-none min-h-0 flex-1 space-y-2 overflow-y-auto px-4 pb-3">
         {visibles.map((resto) => (
           <li key={resto.id}>
             <button
@@ -79,9 +79,15 @@ export function HomeScreen({
             >
               <span
                 aria-hidden
-                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-linear-to-br text-white ${resto.gradient}`}
+                className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg"
               >
-                <UtensilsCrossed className="h-5 w-5" />
+                <Image
+                  src={resto.image}
+                  alt=""
+                  fill
+                  sizes="48px"
+                  className="object-cover"
+                />
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-semibold">
@@ -125,19 +131,31 @@ export function RestaurantScreen({
 }) {
   return (
     <div className="flex h-full flex-col">
-      <div
-        className={`relative shrink-0 bg-linear-to-br px-4 pb-4 pt-3 text-white ${restaurant.gradient}`}
-      >
+      <div className="relative shrink-0 overflow-hidden px-4 pb-4 pt-3 text-white">
+        <Image
+          src={restaurant.image}
+          alt=""
+          fill
+          sizes="320px"
+          className="object-cover"
+          aria-hidden
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-linear-to-t from-stone-950/85 via-stone-950/40 to-stone-950/30"
+        />
         <button
           type="button"
           onClick={onBack}
           aria-label="Retour à la liste des restaurants"
-          className="rounded-full bg-black/20 p-1.5 transition hover:bg-black/35"
+          className="relative rounded-full bg-black/35 p-1.5 transition hover:bg-black/55"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
         </button>
-        <p className="mt-3 font-display text-lg font-bold">{restaurant.nom}</p>
-        <p className="flex items-center gap-2 text-[11px] opacity-90">
+        <p className="relative mt-6 font-display text-lg font-bold">
+          {restaurant.nom}
+        </p>
+        <p className="relative flex items-center gap-2 text-[11px] opacity-90">
           <span className="flex items-center gap-0.5">
             <Star className="h-3 w-3 fill-current" aria-hidden />
             {restaurant.note.toLocaleString("fr-FR")}
@@ -148,7 +166,7 @@ export function RestaurantScreen({
           </span>
         </p>
       </div>
-      <ul className="min-h-0 flex-1 space-y-2 overflow-y-auto px-4 py-3">
+      <ul className="scrollbar-none min-h-0 flex-1 space-y-2 overflow-y-auto px-4 py-3">
         {restaurant.plats.map((plat) => (
           <li
             key={plat.id}
@@ -212,7 +230,7 @@ export function CartScreen({
       <p className="px-4 pb-2 pt-3 font-display text-lg font-bold">
         Mon panier
       </p>
-      <ul className="min-h-0 flex-1 space-y-2 overflow-y-auto px-4">
+      <ul className="scrollbar-none min-h-0 flex-1 space-y-2 overflow-y-auto px-4">
         {panier.map(({ plat, qte }) => (
           <li
             key={plat.id}

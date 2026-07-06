@@ -77,18 +77,18 @@ function MiniPhone() {
 const TEASERS = [
   {
     anchor: DEMO_ANCHORS.vitrine,
-    title: "La Table Dorée",
-    text: "Site vitrine — navigation interne, menu et galerie cliquables.",
+    title: "Sites vitrines · 4 démos",
+    text: "Restaurant, boisson énergisante, maison de parfum, salon de beauté — quatre identités, quatre vrais sites.",
   },
   {
     anchor: DEMO_ANCHORS.dashboard,
-    title: "Boutique Lumen",
-    text: "Dashboard de ventes — graphiques, tableau filtrable, données vivantes.",
+    title: "Applications web · 2 démos",
+    text: "Dashboard de ventes et gestion de pressing en kanban — des données qui réagissent en direct.",
   },
   {
     anchor: DEMO_ANCHORS.mobile,
-    title: "Rapido",
-    text: "App de livraison — onglets, panier et suivi de commande animé.",
+    title: "Applications mobiles · 2 démos",
+    text: "Livraison de repas et néo-banque — panier, virements, suivi en temps réel.",
   },
 ];
 
