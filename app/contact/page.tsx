@@ -7,8 +7,6 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import SocialIcon from "@/components/ui/SocialIcon";
 import ContactForm from "@/components/contact/ContactForm";
 import IntroIllustration from "@/components/ui/IntroIllustration";
-import contactIntroIllustration from "@/public/assets/illustrations/contact-intro.png";
-import contactSidebarIllustration from "@/public/assets/illustrations/contact-sidebar.png";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -27,7 +25,7 @@ export default function ContactPage() {
             title="Parlez-nous de votre projet"
             intro="Décrivez-nous votre besoin : nous revenons vers vous sous 24 heures ouvrées avec un premier avis technique."
           />
-          <IntroIllustration src={contactIntroIllustration} alt="" />
+          <IntroIllustration src="/assets/illustrations/contact-intro.png" alt="" width={1000} height={500} />
         </div>
 
         <div className="grid gap-10 lg:grid-cols-[2fr_1fr] lg:gap-14">
@@ -35,16 +33,16 @@ export default function ContactPage() {
 
           {/* Rail indigo doux continu (réf 8) */}
           <aside className="h-fit rounded-card bg-accent-soft/60 p-8 lg:sticky lg:top-24">
-            {contactSidebarIllustration && (
-              <div className="mb-6 flex justify-center">
-                <Image
-                  src={contactSidebarIllustration}
-                  alt=""
-                  className="h-auto w-full max-w-xs"
-                  aria-hidden
-                />
-              </div>
-            )}
+            <div className="mb-6 flex justify-center">
+              <Image
+                src="/assets/illustrations/contact-sidebar.png"
+                alt=""
+                width={200}
+                height={200}
+                className="h-auto w-full max-w-xs"
+                aria-hidden
+              />
+            </div>
             <h2 className="font-display text-lg font-semibold">
               Nos coordonnées
             </h2>

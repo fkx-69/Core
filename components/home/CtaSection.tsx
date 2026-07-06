@@ -2,15 +2,16 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
-import ctaIllustration from "@/public/assets/illustrations/home-cta.png";
 
 /** Bannière pleine largeur indigo, empilée au centre (réf 5). */
 export default function CtaSection() {
   return (
     <section className="relative bg-accent py-24 text-accent-contrast sm:py-28 overflow-hidden">
       <Image
-        src={ctaIllustration}
+        src="/assets/illustrations/home-cta.png"
         alt=""
+        width={600}
+        height={600}
         className="absolute -bottom-8 -right-12 -z-10 opacity-15 hidden sm:block h-auto w-96"
         aria-hidden
       />

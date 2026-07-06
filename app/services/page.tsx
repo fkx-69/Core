@@ -4,7 +4,6 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ServiceSection from "@/components/services/ServiceSection";
 import IntroIllustration from "@/components/ui/IntroIllustration";
-import servicesIntroIllustration from "@/public/assets/illustrations/services-intro.png";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -24,7 +23,7 @@ export default function ServicesPage() {
               title="Ce que nous construisons pour vous"
               intro="Quatre expertises complémentaires, un même objectif : livrer un logiciel utile, fiable et agréable à utiliser. Chaque service renvoie vers une démo interactive de notre portfolio."
             />
-            <IntroIllustration src={servicesIntroIllustration} alt="" />
+            <IntroIllustration src="/assets/illustrations/services-intro.png" alt="" width={1000} height={500} />
           </div>
         </Container>
       </div>

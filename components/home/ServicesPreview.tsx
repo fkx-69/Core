@@ -6,7 +6,6 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import ServiceIcon from "@/components/services/ServiceIcon";
-import servicesPreviewIllustration from "@/public/assets/illustrations/home-services-preview.png";
 
 /** Illustration filaire d'un navigateur pour la grande tuile (réf 2). */
 function WireBrowser() {
@@ -62,7 +61,7 @@ export default function ServicesPreview() {
               className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface-raised p-8 shadow-card transition duration-200 hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <Image
-                src={servicesPreviewIllustration}
+                src="/assets/illustrations/home-services-preview.png"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

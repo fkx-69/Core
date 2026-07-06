@@ -6,7 +6,6 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Reveal from "@/components/ui/Reveal";
-import portfolioTeaserIllustration from "@/public/assets/illustrations/home-portfolio-teaser.png";
 
 /** Miniature stylisée d'un navigateur avec un faux site vitrine. */
 function MiniBrowser() {
@@ -98,7 +97,7 @@ export default function PortfolioTeaser() {
   return (
     <section className="relative bg-accent-soft/50 py-20 sm:py-28">
       <Image
-        src={portfolioTeaserIllustration}
+        src="/assets/illustrations/home-portfolio-teaser.png"
         alt=""
         fill
         sizes="100vw"

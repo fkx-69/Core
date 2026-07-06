@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import type { StaticImageData } from "next/image";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 
@@ -33,7 +32,7 @@ export default function DemoShell({
   serviceHref: string;
   serviceLabel: string;
   flip?: boolean;
-  illustration?: StaticImageData;
+  illustration?: string;
   children: React.ReactNode;
 }) {
   const [resetKey, setResetKey] = useState(0);

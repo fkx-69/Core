@@ -3,7 +3,6 @@ import { Award, Cpu, HeartHandshake, Rocket } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import whyUsIllustration from "@/public/assets/illustrations/home-why-us.png";
 
 const REASONS = [
   {
@@ -42,9 +41,11 @@ export default function WhyUs() {
         </Reveal>
         <Reveal className="mt-12 flex justify-center">
           <Image
-            src={whyUsIllustration}
+            src="/assets/illustrations/home-why-us.png"
             alt=""
-            className="max-w-2xl"
+            width={960}
+            height={280}
+            className="max-w-2xl h-auto"
             aria-hidden
           />
         </Reveal>
