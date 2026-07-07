@@ -39,7 +39,7 @@ export default function ContactPage() {
                 alt=""
                 width={200}
                 height={200}
-                className="h-auto w-full max-w-xs"
+                className="h-auto w-full max-w-sm"
                 aria-hidden
               />
             </div>

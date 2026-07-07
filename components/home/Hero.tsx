@@ -53,8 +53,8 @@ export default function Hero() {
         className="dot-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"
       />
       {/* Illustration constellation de fond */}
-      <div aria-hidden className="pointer-events-none absolute -top-16 -right-16 -z-10 hidden opacity-20 lg:block">
-        <Image src="/assets/illustrations/home-hero.png" alt="" width={1400} height={900} className="h-auto w-[34rem] max-w-none" />
+      <div aria-hidden className="pointer-events-none absolute -top-16 -right-16 -z-10 hidden opacity-60 md:block">
+        <Image src="/assets/illustrations/home-hero.png" alt="" width={1400} height={900} className="h-auto w-[38rem] max-w-none lg:w-[44rem]" />
       </div>
       <Container className="relative py-24 sm:py-32">
         <div className="max-w-3xl">

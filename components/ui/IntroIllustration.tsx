@@ -18,7 +18,7 @@ export default function IntroIllustration({
         src={src}
         alt={alt}
         {...(isString && width && height ? { width, height } : {})}
-        className="h-auto w-full max-w-xs sm:max-w-sm"
+        className="h-auto w-full max-w-md sm:max-w-lg lg:max-w-full"
       />
     </div>
   );
