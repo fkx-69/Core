@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 import type { Service } from "@/lib/services-data";
 import Container from "@/components/ui/Container";
@@ -5,42 +6,54 @@ import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
-import ServiceIcon from "@/components/services/ServiceIcon";
+import { SERVICE_ILLUSTRATIONS } from "@/components/services/serviceIllustrations";
 
+/** Bloc service : numéral filaire, récit à gauche, rail bénéfices à droite (réf 6). */
 export default function ServiceSection({
   service,
+  index,
   alternate = false,
 }: {
   service: Service;
+  index: number;
   alternate?: boolean;
 }) {
   const demoHref = service.demoAnchor
     ? `/portfolio#${service.demoAnchor}`
     : "/portfolio";
+  const numeral = String(index + 1).padStart(2, "0");
 
   return (
     <section
       id={service.id}
-      className={`scroll-mt-24 py-16 sm:py-20 ${alternate ? "bg-surface" : ""}`}
+      className={`scroll-mt-24 py-16 sm:py-24 ${alternate ? "bg-surface" : ""}`}
     >
       <Container>
         <Reveal>
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <ServiceIcon icon={service.icon} />
-              <h2 className="mt-5 font-display text-3xl font-bold tracking-tight">
+          <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-0">
+            <div className="lg:pr-14">
+              <p
+                aria-hidden
+                className="text-outline font-display text-7xl font-bold lg:text-8xl"
+              >
+                {numeral}
+              </p>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                Service {numeral}
+              </p>
+              <h2 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">
                 {service.title}
               </h2>
-              <p className="mt-1 font-medium text-accent">{service.tagline}</p>
-              <p className="mt-4 leading-relaxed text-muted">
+              <p className="mt-4 text-lg font-medium">{service.tagline}</p>
+              <p className="mt-4 max-w-xl leading-relaxed text-muted">
                 {service.description}
               </p>
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="mt-8 flex flex-wrap gap-2">
                 {service.technologies.map((tech) => (
                   <Badge key={tech}>{tech}</Badge>
                 ))}
               </div>
-              <div className="mt-8">
+              <div className="mt-10">
                 <Button href={demoHref} variant="outline">
                   {service.demoLabel}
                   <ArrowRight className="h-4 w-4" aria-hidden />
@@ -48,7 +61,18 @@ export default function ServiceSection({
               </div>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 lg:border-l lg:border-line lg:pl-14">
+              {SERVICE_ILLUSTRATIONS[service.id] && (
+                <div className="relative aspect-square w-full max-w-xs">
+                  <Image
+                    src={SERVICE_ILLUSTRATIONS[service.id]}
+                    alt=""
+                    fill
+                    className="object-contain"
+                    aria-hidden
+                  />
+                </div>
+              )}
               <Card>
                 <h3 className="font-display text-lg font-semibold">
                   Ce que vous y gagnez
@@ -57,10 +81,10 @@ export default function ServiceSection({
                   {service.benefits.map((benefit) => (
                     <li key={benefit} className="flex items-start gap-3">
                       <span
-                        className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent"
+                        className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-accent/40 text-accent"
                         aria-hidden
                       >
-                        <Check className="h-3.5 w-3.5" />
+                        <Check className="h-3 w-3" />
                       </span>
                       <span className="text-sm leading-relaxed">{benefit}</span>
                     </li>

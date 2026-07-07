@@ -9,7 +9,7 @@ export default function BrowserFrame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-line bg-surface-raised shadow-md">
+    <div className="overflow-hidden rounded-card border border-line bg-surface-raised shadow-raised">
       <div className="flex items-center gap-3 border-b border-line bg-surface px-4 py-2.5">
         <div className="flex gap-1.5" aria-hidden>
           <span className="h-3 w-3 rounded-full bg-red-400" />

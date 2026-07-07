@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 type Datum = { label: string; value: number };
 
 const SIZE = 160;
@@ -25,32 +29,35 @@ function arcPath(startAngle: number, endAngle: number) {
   ].join(" ");
 }
 
-/** Donut SVG maison (3 parts max) avec total au centre et légende. */
+/**
+ * Donut (3 parts max) : gap de surface de 2 px entre tranches, légende
+ * permanente, centre qui affiche le total — ou la tranche survolée/focalisée.
+ */
 export default function DonutChart({
   data,
   centerLabel,
   centerValue,
+  formatValue,
   title,
 }: {
   data: Datum[];
   centerLabel: string;
   centerValue: string;
+  formatValue: (value: number) => string;
   title: string;
 }) {
+  const [hovered, setHovered] = useState<number | null>(null);
   const total = data.reduce((sum, d) => sum + d.value, 0);
   const slices = data.filter((d) => d.value > 0);
 
-  let angle = 0;
-  const paths = slices.map((d) => {
-    const start = angle;
+  const paths = slices.map((d, i) => {
+    const before = slices.slice(0, i).reduce((sum, s) => sum + s.value, 0);
+    const start = total > 0 ? (before / total) * Math.PI * 2 : 0;
     const sweep = total > 0 ? (d.value / total) * Math.PI * 2 : 0;
-    angle += sweep;
-    return {
-      d,
-      path: arcPath(start, start + sweep),
-      color: COLORS[data.indexOf(d) % COLORS.length],
-    };
+    return { d, index: data.indexOf(d), path: arcPath(start, start + sweep) };
   });
+
+  const active = hovered !== null ? data[hovered] : null;
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -61,21 +68,38 @@ export default function DonutChart({
           aria-label={title}
           className="h-40 w-40"
         >
-          {paths.map(({ d, path, color }) => (
-            <path
-              key={d.label}
-              d={path}
-              fill={color}
-              stroke="var(--background)"
-              strokeWidth={2}
-            />
-          ))}
+          {paths.map(({ d, index, path }) => {
+            const pct = total > 0 ? Math.round((d.value / total) * 100) : 0;
+            return (
+              <path
+                key={d.label}
+                d={path}
+                fill={COLORS[index % COLORS.length]}
+                stroke="var(--surface-raised)"
+                strokeWidth={2}
+                opacity={hovered === null || hovered === index ? 1 : 0.55}
+                className="transition-opacity"
+                tabIndex={0}
+                aria-label={`${d.label} : ${formatValue(d.value)} (${pct} %)`}
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
+                onFocus={() => setHovered(index)}
+                onBlur={() => setHovered(null)}
+                style={{ outline: "none" }}
+              />
+            );
+          })}
         </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+        <div
+          role="status"
+          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center"
+        >
           <span className="font-display text-lg font-semibold leading-tight">
-            {centerValue}
+            {active ? formatValue(active.value) : centerValue}
           </span>
-          <span className="text-[10px] text-muted">{centerLabel}</span>
+          <span className="text-[10px] text-muted">
+            {active ? active.label : centerLabel}
+          </span>
         </div>
       </div>
       <ul className="w-full space-y-1.5 text-xs">
@@ -84,7 +108,7 @@ export default function DonutChart({
           return (
             <li key={d.label} className="flex items-center gap-2">
               <span
-                className="h-2.5 w-2.5 shrink-0 rounded-sm"
+                className="h-2.5 w-2.5 shrink-0 rounded-[2px]"
                 style={{ background: COLORS[i % COLORS.length] }}
                 aria-hidden
               />

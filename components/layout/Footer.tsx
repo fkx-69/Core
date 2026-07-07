@@ -6,10 +6,10 @@ import Container from "@/components/ui/Container";
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-surface">
-      <Container className="py-12">
+      <Container className="py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <p className="font-display text-2xl font-bold tracking-tight">
+            <p className="font-display text-3xl font-bold tracking-tight">
               Core<span className="text-accent">.</span>
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
 
           <nav aria-label="Nos services">
-            <p className="text-sm font-semibold uppercase tracking-widest text-muted">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Services
             </p>
             <ul className="mt-4 space-y-2">
@@ -37,7 +37,7 @@ export default function Footer() {
           </nav>
 
           <nav aria-label="Navigation du pied de page">
-            <p className="text-sm font-semibold uppercase tracking-widest text-muted">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Navigation
             </p>
             <ul className="mt-4 space-y-2">

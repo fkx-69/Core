@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Refactoring"
+  short_description: "Refactor code safely and consistently."
+  default_prompt: "Use $code-refactoring to improve this code while preserving expected behavior."

@@ -1,57 +1,114 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, MousePointerClick } from "lucide-react";
+import { MousePointerClick } from "lucide-react";
 import { DEMO_ANCHORS, SERVICE_ANCHORS } from "@/lib/site";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import DemoShell from "@/components/demos/DemoShell";
-import LazyDemo, { type DemoName } from "@/components/demos/LazyDemo";
+import DemoGroup, { type DemoEntry } from "@/components/demos/DemoGroup";
+import IntroIllustration from "@/components/ui/IntroIllustration";
 
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "Découvrez des exemples interactifs de réalisations Core : site vitrine, application web et application mobile, à tester directement dans votre navigateur.",
+    "Découvrez huit démos interactives de réalisations Core : sites vitrines, applications web et applications mobiles, à tester directement dans votre navigateur.",
 };
 
 const DEMO_SECTIONS: {
   anchor: string;
-  demo: DemoName;
-  title: string;
-  description: string;
-  stack: string[];
+  kind: string;
+  entries: DemoEntry[];
   serviceAnchor: string;
   serviceLabel: string;
+  illustration: string;
 }[] = [
   {
     anchor: DEMO_ANCHORS.vitrine,
-    demo: "vitrine",
-    title: "Site vitrine — Restaurant « La Table Dorée »",
-    description:
-      "Core a livré un site vitrine complet pour ce restaurant lyonnais fictif : présentation, menu par catégories et galerie photo. Naviguez entre les sections, ouvrez le menu déroulant et cliquez sur les photos de la galerie — tout fonctionne.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    kind: "Sites vitrines",
     serviceAnchor: SERVICE_ANCHORS.sitesWeb,
     serviceLabel: "Sites web",
+    illustration: "/assets/illustrations/portfolio-vitrine.png",
+    entries: [
+      {
+        demo: "vitrine",
+        title: "La Table Dorée",
+        description:
+          "Site vitrine d'un restaurant lyonnais fictif : navigation interne, menu par catégories et galerie photo avec lightbox. Ouvrez le menu déroulant, changez de catégorie, cliquez sur les photos — tout fonctionne.",
+        stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+        fullscreen: true,
+      },
+      {
+        demo: "volt",
+        title: "VOLT Energy",
+        description:
+          "Vitrine d'une marque de boisson énergisante : identité sombre et néon, sélecteur de saveurs qui rethème toute la page, panneau composition et bandeau défilant. Changez de saveur et regardez le site changer de peau.",
+        stack: ["Next.js", "TypeScript", "Tailwind CSS", "Motion"],
+        fullscreen: true,
+      },
+      {
+        demo: "parfum",
+        title: "Maison Élixir",
+        description:
+          "Vitrine d'une maison de parfum grassoise : direction artistique éditoriale, collection cliquable, fiche produit avec pyramide olfactive et sélecteur de contenance qui recalcule le prix. Ajoutez un flacon au coffret.",
+        stack: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
+        fullscreen: true,
+      },
+      {
+        demo: "salon",
+        title: "L'Écrin",
+        description:
+          "Vitrine d'un salon de beauté bordelais avec vraie prise de rendez-vous en trois étapes : choisissez une prestation, un jour, un créneau — les indisponibilités sont gérées — puis confirmez.",
+        stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+        fullscreen: true,
+      },
+    ],
   },
   {
     anchor: DEMO_ANCHORS.dashboard,
-    demo: "dashboard",
-    title: "Application web — Suivi des ventes « Boutique Lumen »",
-    description:
-      "Un dashboard de gestion des ventes livré à une boutique de décoration fictive. Ajoutez une vente, marquez-la payée, supprimez-la : les indicateurs, l'histogramme et le donut se recalculent en direct. Le tableau se filtre, se trie et se recherche.",
-    stack: ["React", "Next.js", "Node.js", "PostgreSQL"],
+    kind: "Applications web",
     serviceAnchor: SERVICE_ANCHORS.applicationsWeb,
     serviceLabel: "Applications web",
+    illustration: "/assets/illustrations/portfolio-dashboard.png",
+    entries: [
+      {
+        demo: "dashboard",
+        title: "Boutique Lumen",
+        description:
+          "Dashboard de gestion des ventes d'une boutique de décoration fictive. Ajoutez une vente, marquez-la payée, supprimez-la : indicateurs, histogramme et donut se recalculent en direct. Le tableau se filtre, se trie et se recherche.",
+        stack: ["React", "Next.js", "Node.js", "PostgreSQL"],
+        fullscreen: true,
+      },
+      {
+        demo: "pressing",
+        title: "Pressing des Halles",
+        description:
+          "Outil métier de gestion d'un pressing : les commandes avancent dans un pipeline kanban (reçue → nettoyage → repassage → prête), les retards sont signalés, la caisse s'incrémente à chaque retrait. Enregistrez un dépôt et faites-le avancer.",
+        stack: ["React", "Next.js", "NestJS", "PostgreSQL"],
+        fullscreen: true,
+      },
+    ],
   },
   {
     anchor: DEMO_ANCHORS.mobile,
-    demo: "mobile",
-    title: "Application mobile — « Rapido », livraison de repas",
-    description:
-      "L'app de commande d'un service de livraison fictif. Parcourez les restaurants, composez un panier, commandez, puis suivez la livraison qui progresse en temps réel dans l'onglet Suivi — le tout avec une navigation par onglets animée.",
-    stack: ["React Native", "Expo", "TypeScript", "Firebase"],
+    kind: "Applications mobiles",
     serviceAnchor: SERVICE_ANCHORS.applicationsMobiles,
     serviceLabel: "Applications mobiles",
+    illustration: "/assets/illustrations/portfolio-mobile.png",
+    entries: [
+      {
+        demo: "mobile",
+        title: "Rapido",
+        description:
+          "App de commande d'un service de livraison fictif. Parcourez les restaurants, composez un panier, commandez, puis suivez la livraison qui progresse en temps réel dans l'onglet Suivi.",
+        stack: ["React Native", "Expo", "TypeScript", "Firebase"],
+      },
+      {
+        demo: "banque",
+        title: "Nova",
+        description:
+          "App d'une néo-banque fictive : solde et historique vivants, virement avec pavé numérique qui débite réellement le compte, carte paramétrable (verrouillage instantané, plafonds, paiements à l'étranger).",
+        stack: ["React Native", "Expo", "TypeScript", "Plaid"],
+      },
+    ],
   },
 ];
 
@@ -60,15 +117,17 @@ export default function PortfolioPage() {
     <>
       <div className="border-b border-line py-16 sm:py-20">
         <Container>
-          <SectionHeading
-            as="h1"
-            eyebrow="Portfolio"
-            title="Des démos à essayer, pas des captures d'écran"
-            intro="Chaque projet ci-dessous est une mini-application réellement fonctionnelle, avec des données factices. Cliquez, filtrez, commandez : l'interface réagit comme un vrai produit livré par Core."
-            align="center"
-          />
-          <p className="mx-auto mt-6 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-2 text-sm font-medium text-accent">
-            <MousePointerClick className="h-4 w-4" aria-hidden />
+          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <SectionHeading
+              as="h1"
+              eyebrow="Portfolio"
+              title="Des démos à essayer, pas des captures d'écran"
+              intro="Huit projets fictifs, huit vraies mini-applications fonctionnelles. Cliquez, filtrez, réservez, commandez : chaque interface réagit comme un produit réellement livré par Core."
+            />
+            <IntroIllustration src="/assets/illustrations/portfolio-intro.png" alt="" width={1000} height={500} />
+          </div>
+          <p className="mt-6 flex w-fit items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-sm font-medium text-muted">
+            <MousePointerClick className="h-4 w-4 text-accent" aria-hidden />
             Interagissez librement — un bouton « Réinitialiser » remet chaque démo à zéro.
           </p>
         </Container>
@@ -78,27 +137,19 @@ export default function PortfolioPage() {
         <section
           key={section.anchor}
           id={section.anchor}
-          className={`scroll-mt-24 py-16 sm:py-20 ${i % 2 === 1 ? "bg-surface" : ""}`}
+          className={`scroll-mt-24 py-16 sm:py-24 ${i % 2 === 1 ? "bg-surface" : ""}`}
         >
           <Container>
             <Reveal>
-              <DemoShell
-                title={section.title}
-                description={section.description}
-                stack={section.stack}
-              >
-                <LazyDemo demo={section.demo} />
-              </DemoShell>
-              <p className="mt-6 text-sm text-muted">
-                Ce projet illustre notre service{" "}
-                <Link
-                  href={`/services#${section.serviceAnchor}`}
-                  className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
-                >
-                  {section.serviceLabel}
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-                </Link>
-              </p>
+              <DemoGroup
+                index={i}
+                kind={section.kind}
+                entries={section.entries}
+                serviceHref={`/services#${section.serviceAnchor}`}
+                serviceLabel={section.serviceLabel}
+                flip={i % 2 === 1}
+                illustration={section.illustration}
+              />
             </Reveal>
           </Container>
         </section>

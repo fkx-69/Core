@@ -17,12 +17,27 @@
   --accent-soft: #eef2ff;
   --accent-contrast: #ffffff;
 
-  /* Data-viz (mode clair) */
-  --chart-1: #2a78d6;
+  /* Data-viz (mode clair) — palette validée par scripts/validate_palette.js :
+     slots 2-3 sous 3:1 sur fond clair → secours assuré par la légende du donut
+     et la vue table (SalesTable). */
+  --chart-1: #4f46e5;
   --chart-2: #1baf7a;
   --chart-3: #eda100;
-  --chart-grid: #e1e0d9;
-  --chart-ink: #52514e;
+  --chart-grid: #e6e7ee;
+  --chart-ink: #5b6070;
+
+  /* Statuts — AA sur leur fond -soft */
+  --ok: #0f7a54;
+  --ok-soft: #e6f6ef;
+  --warn: #8f6300;
+  --warn-soft: #fbf1dc;
+  --danger: #c0392f;
+  --danger-soft: #fdecec;
+
+  /* Ombres — quasi plates sur les cartes, douces sur les éléments flottants */
+  --shadow-card: 0 1px 2px rgb(16 18 26 / 0.04);
+  --shadow-raised: 0 12px 32px -12px rgb(16 18 26 / 0.18);
+  --shadow-overlay: 0 24px 48px -12px rgb(16 18 26 / 0.28);
 }
 
 .dark {
@@ -39,12 +54,26 @@
   --accent-soft: #26264a;
   --accent-contrast: #0b0d13;
 
-  /* Data-viz (mode sombre) */
-  --chart-1: #3987e5;
+  /* Data-viz (mode sombre) — pas sélectionnée par inversion : #7480f6 remplace
+     l'accent #818cf8 (hors bande de luminance), validée sur #181b26. */
+  --chart-1: #7480f6;
   --chart-2: #199e70;
   --chart-3: #c98500;
-  --chart-grid: #2c2c2a;
-  --chart-ink: #c3c2b7;
+  --chart-grid: #262a38;
+  --chart-ink: #9aa0b3;
+
+  /* Statuts — AA sur leur fond -soft */
+  --ok: #4cd6a1;
+  --ok-soft: #12291f;
+  --warn: #e3b04b;
+  --warn-soft: #2c2312;
+  --danger: #f08a80;
+  --danger-soft: #331b1d;
+
+  /* Ombres — compensées par les bordures en mode sombre */
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-raised: 0 12px 32px -12px rgb(0 0 0 / 0.55);
+  --shadow-overlay: 0 24px 48px -12px rgb(0 0 0 / 0.65);
 }
 
 @theme inline {
@@ -63,8 +92,21 @@
   --color-chart-3: var(--chart-3);
   --color-chart-grid: var(--chart-grid);
   --color-chart-ink: var(--chart-ink);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-overlay: var(--shadow-overlay);
   --font-sans: var(--font-inter);
   --font-display: var(--font-space-grotesk);
+
+  /* Rayons — cartes/panneaux vs champs ; les boutons sont des pilules (rounded-full) */
+  --radius-card: 1rem;
+  --radius-field: 0.625rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -76,6 +118,18 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Trame de points discrète (héro, bandeaux) */
+.dot-grid {
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Numéraux géants au contour filaire (page Services) */
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--line);
+  color: transparent;
 }
 
 /* Transition douce appliquée temporairement par le ThemeToggle */
@@ -106,6 +160,32 @@ html.theme-transition * {
     opacity: 1;
     translate: none;
     transition: none;
+  }
+}
+
+/* Scroll sans barre visible (écrans des démos mobiles) */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bandeau défilant (démo VOLT) */
+@keyframes marquee {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -50% 0;
+  }
+}
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
   }
 }
 

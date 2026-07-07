@@ -11,8 +11,8 @@ export type Restaurant = {
   categorie: string;
   note: number;
   tempsLivraison: string;
-  /** Dégradé CSS servant d'avatar. */
-  gradient: string;
+  /** Photo vignette et bandeau de l'écran détail. */
+  image: string;
   plats: Plat[];
 };
 
@@ -23,7 +23,7 @@ export const RESTAURANTS: Restaurant[] = [
     categorie: "Italien",
     note: 4.8,
     tempsLivraison: "20-30 min",
-    gradient: "from-red-400 to-orange-400",
+    image: "/assets/demos/food/pizza.webp",
     plats: [
       { id: 101, nom: "Pizza Margherita", description: "Tomate, mozzarella di bufala, basilic", prix: 12.5 },
       { id: 102, nom: "Lasagnes maison", description: "Bœuf mijoté, béchamel gratinée", prix: 14 },
@@ -36,7 +36,7 @@ export const RESTAURANTS: Restaurant[] = [
     categorie: "Japonais",
     note: 4.7,
     tempsLivraison: "25-35 min",
-    gradient: "from-rose-400 to-pink-500",
+    image: "/assets/demos/food/sushi.webp",
     plats: [
       { id: 201, nom: "Plateau 12 pièces", description: "Saumon, thon, crevette, avocat", prix: 16.9 },
       { id: 202, nom: "Ramen tonkotsu", description: "Bouillon crémeux, porc braisé, œuf mollet", prix: 13.5 },
@@ -49,7 +49,7 @@ export const RESTAURANTS: Restaurant[] = [
     categorie: "Healthy",
     note: 4.6,
     tempsLivraison: "15-25 min",
-    gradient: "from-emerald-400 to-teal-500",
+    image: "/assets/demos/food/bowl.webp",
     plats: [
       { id: 301, nom: "Buddha bowl", description: "Quinoa, avocat, patate douce, houmous", prix: 11.9 },
       { id: 302, nom: "Salade César", description: "Poulet grillé, parmesan, croûtons", prix: 10.5 },
@@ -62,7 +62,7 @@ export const RESTAURANTS: Restaurant[] = [
     categorie: "Burger",
     note: 4.5,
     tempsLivraison: "20-30 min",
-    gradient: "from-amber-400 to-yellow-500",
+    image: "/assets/demos/food/burger.webp",
     plats: [
       { id: 401, nom: "Double smash", description: "Deux steaks, cheddar affiné, oignons", prix: 13.9 },
       { id: 402, nom: "Frites maison", description: "Pommes de terre fraîches, sel fumé", prix: 4.5 },
@@ -75,7 +75,7 @@ export const RESTAURANTS: Restaurant[] = [
     categorie: "Indien",
     note: 4.7,
     tempsLivraison: "30-40 min",
-    gradient: "from-orange-400 to-red-500",
+    image: "/assets/demos/food/curry.webp",
     plats: [
       { id: 501, nom: "Butter chicken", description: "Poulet mariné, sauce tomate-crème", prix: 13.5 },
       { id: 502, nom: "Cheese naan ×2", description: "Pain fromager cuit au tandoor", prix: 4.9 },

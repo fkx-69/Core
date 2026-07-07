@@ -62,6 +62,17 @@ export default function DashboardDemo() {
     [caJuin],
   );
 
+  // Delta du CA de juin comparé à mai (dernier mois clos).
+  const caMai = CA_MOIS_PRECEDENTS[CA_MOIS_PRECEDENTS.length - 1].montant;
+  const deltaPct = ((caJuin - caMai) / caMai) * 100;
+  const deltaCa = {
+    text: `${deltaPct >= 0 ? "+" : ""}${deltaPct.toLocaleString("fr-FR", {
+      maximumFractionDigits: 1,
+    })} % vs mai`,
+    up: deltaPct >= 0,
+    good: deltaPct >= 0,
+  };
+
   const caParCategorie = useMemo(
     () =>
       CATEGORIES.map((categorie) => ({
@@ -133,6 +144,7 @@ export default function DashboardDemo() {
           <StatTile
             label="Chiffre d'affaires (juin)"
             value={eur.format(caJuin)}
+            delta={deltaCa}
             hint="hors ventes annulées"
           />
           <StatTile label="Commandes" value={String(actives.length)} />
@@ -145,7 +157,7 @@ export default function DashboardDemo() {
 
         {/* Graphiques */}
         <div className="grid gap-3 lg:grid-cols-3">
-          <div className="rounded-xl border border-line bg-surface-raised p-4 lg:col-span-2">
+          <div className="rounded-field border border-line bg-surface-raised p-4 lg:col-span-2">
             <p className="text-sm font-semibold">Chiffre d&apos;affaires mensuel</p>
             <div className="mt-3">
               <BarChart
@@ -155,13 +167,14 @@ export default function DashboardDemo() {
               />
             </div>
           </div>
-          <div className="rounded-xl border border-line bg-surface-raised p-4">
+          <div className="rounded-field border border-line bg-surface-raised p-4">
             <p className="text-sm font-semibold">CA par catégorie</p>
             <div className="mt-3">
               <DonutChart
                 data={caParCategorie}
                 centerValue={eur.format(caJuin)}
                 centerLabel="en juin"
+                formatValue={(v) => eur.format(v)}
                 title="Répartition du chiffre d'affaires de juin par catégorie"
               />
             </div>
@@ -187,7 +200,7 @@ export default function DashboardDemo() {
               placeholder="Rechercher un client, un produit…"
               value={recherche}
               onChange={(e) => setRecherche(e.target.value)}
-              className="w-full rounded-lg border border-line bg-surface-raised py-2 pl-9 pr-3 text-sm transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+              className="w-full rounded-field border border-line bg-surface-raised py-2 pl-9 pr-3 text-sm transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
             />
           </div>
           <div>
@@ -198,7 +211,7 @@ export default function DashboardDemo() {
               id="demo-filtre-statut"
               value={filtreStatut}
               onChange={(e) => setFiltreStatut(e.target.value as Statut | "Tous")}
-              className="w-full rounded-lg border border-line bg-surface-raised px-3 py-2 text-sm transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 sm:w-44"
+              className="w-full rounded-field border border-line bg-surface-raised px-3 py-2 text-sm transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 sm:w-44"
             >
               <option value="Tous">Tous les statuts</option>
               <option value="Payée">Payée</option>
