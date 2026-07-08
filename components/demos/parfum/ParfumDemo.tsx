@@ -96,9 +96,9 @@ export default function ParfumDemo() {
                   key={parfum.id}
                   type="button"
                   onClick={() => openProduit(parfum)}
-                  className="group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900"
+                  className="group flex flex-col text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900"
                 >
-                  <span className="relative block aspect-4/5 overflow-hidden bg-stone-200">
+                  <span className="relative block aspect-4/5 shrink-0 overflow-hidden bg-stone-200">
                     <Image
                       src={parfum.image}
                       alt={`Flacon ${parfum.nom}`}
@@ -110,7 +110,7 @@ export default function ParfumDemo() {
                   <span className="mt-3 block font-display text-base font-semibold">
                     {parfum.nom}
                   </span>
-                  <span className="mt-0.5 block text-xs text-stone-500">
+                  <span className="mt-0.5 block min-h-8 text-xs text-stone-500">
                     {parfum.accroche}
                   </span>
                   <span className="mt-1 block text-sm font-medium">

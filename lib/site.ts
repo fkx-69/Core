@@ -23,9 +23,10 @@ export const DEMO_ANCHORS = {
 } as const;
 
 export const CONTACT_INFO = {
-  email: "contact@core-agency.fr",
-  phone: "+33 1 23 45 67 89",
-  address: "12 rue de l'Innovation, 75011 Paris",
+  email: "contact@core-agency.sn",
+  phone: "+221 33 821 45 67",
+  whatsapp: "+221 77 123 45 67",
+  address: "Immeuble Kébé, Avenue Cheikh Anta Diop, Dakar, Sénégal",
 } as const;
 
 export const SOCIAL_LINKS = [

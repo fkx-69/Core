@@ -26,15 +26,15 @@ export default function ServiceSection({
   return (
     <section
       id={service.id}
-      className={`scroll-mt-24 py-16 sm:py-24 ${alternate ? "bg-surface" : ""}`}
+      className={`group scroll-mt-24 py-16 sm:py-24 ${alternate ? "bg-surface" : ""}`}
     >
       <Container>
-        <Reveal>
-          <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-0">
-            <div className="lg:pr-14">
+        <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-0">
+          <Reveal variant="left" className="lg:pr-14">
+            <div>
               <p
                 aria-hidden
-                className="text-outline font-display text-7xl font-bold lg:text-8xl"
+                className="text-outline font-display text-7xl font-bold transition-colors duration-500 group-hover:text-accent-soft lg:text-8xl"
               >
                 {numeral}
               </p>
@@ -60,8 +60,13 @@ export default function ServiceSection({
                 </Button>
               </div>
             </div>
+          </Reveal>
 
-            <div className="flex flex-col gap-6 lg:border-l lg:border-line lg:pl-14">
+          <Reveal
+            variant="right"
+            delay={100}
+            className="flex flex-col gap-6 lg:border-l lg:border-line lg:pl-14"
+          >
               {SERVICE_ILLUSTRATIONS[service.id] && (
                 <div className="relative aspect-square w-full max-w-xs">
                   <Image
@@ -90,6 +95,9 @@ export default function ServiceSection({
                     </li>
                   ))}
                 </ul>
+                <p className="mt-5 border-t border-dashed border-teal/50 pt-4 text-sm font-semibold text-accent first-letter:uppercase">
+                  {service.priceFrom}
+                </p>
               </Card>
               <Card className="border-accent/30 bg-accent-soft/40">
                 <h3 className="font-display text-lg font-semibold">
@@ -99,9 +107,8 @@ export default function ServiceSection({
                   {service.useCase.text}
                 </p>
               </Card>
-            </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </Container>
     </section>
   );

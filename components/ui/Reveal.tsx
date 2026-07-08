@@ -2,14 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/** Fait apparaître son contenu (fade + slide-up) à l'entrée dans le viewport. */
+/** Fait apparaître son contenu (fade + slide) à l'entrée dans le viewport. */
 export default function Reveal({
   delay = 0,
+  variant = "up",
   className = "",
   children,
 }: {
   /** Décalage en ms, pour échelonner des éléments voisins. */
   delay?: number;
+  /** Direction d'entrée — mappe sur les classes .reveal-* de globals.css. */
+  variant?: "up" | "left" | "right" | "scale";
   className?: string;
   children: React.ReactNode;
 }) {
@@ -35,7 +38,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={`reveal ${variant !== "up" ? `reveal-${variant}` : ""} ${visible ? "is-visible" : ""} ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}

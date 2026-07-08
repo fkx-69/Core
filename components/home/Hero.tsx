@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Check } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Container from "@/components/ui/Container";
@@ -44,6 +45,44 @@ function CodeCard() {
   );
 }
 
+/** Mini-chip statistique flottante, même langage que la fenêtre de code. */
+function StatChip() {
+  return (
+    <div
+      aria-hidden
+      className="animate-float rounded-card border border-line bg-surface-raised px-5 py-3 shadow-raised"
+    >
+      <p className="font-display text-2xl font-bold">+40</p>
+      <p className="text-xs text-muted">projets livrés</p>
+    </div>
+  );
+}
+
+/** Mini-reçu mobile money filaire, coche teal — clin d'œil aux paiements locaux. */
+function MoneyChip() {
+  return (
+    <div
+      aria-hidden
+      className="animate-float w-40 rounded-card border border-line bg-surface-raised p-4 shadow-raised [animation-delay:1.8s]"
+    >
+      <div className="flex items-center gap-2">
+        <span className="h-5 w-5 rounded-full bg-accent-soft" />
+        <span className="h-2 w-16 rounded-full bg-line" />
+      </div>
+      <div className="mt-3 space-y-1.5">
+        <span className="block h-2 w-full rounded-full bg-line" />
+        <span className="block h-2 w-2/3 rounded-full bg-line" />
+      </div>
+      <div className="mt-3 flex items-center gap-2 border-t border-dashed border-teal/60 pt-3">
+        <span className="flex h-4 w-4 items-center justify-center rounded-full border border-teal text-teal">
+          <Check className="h-2.5 w-2.5" strokeWidth={3} />
+        </span>
+        <span className="h-2 w-14 rounded-full bg-line" />
+      </div>
+    </div>
+  );
+}
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
@@ -52,20 +91,29 @@ export default function Hero() {
         aria-hidden
         className="dot-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"
       />
+      {/* Papier millimétré, cantonné au quart supérieur droit */}
+      <div
+        aria-hidden
+        className="grid-paper pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_55%)]"
+      />
       {/* Illustration constellation de fond */}
       <div aria-hidden className="pointer-events-none absolute -top-16 -right-16 -z-10 hidden opacity-60 md:block">
-        <Image src="/assets/illustrations/home-hero.png" alt="" width={1400} height={900} className="h-auto w-[38rem] max-w-none lg:w-[44rem]" />
+        <Image src="/assets/illustrations/home-hero.png" alt="" width={1536} height={1024} className="h-auto w-[38rem] max-w-none lg:w-[44rem]" />
       </div>
       <Container className="relative py-24 sm:py-32">
         <div className="max-w-3xl">
-          <h1 className="font-display text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl">
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-surface-raised px-4 py-1.5 text-sm text-muted">
+            <span className="animate-pulse-dot h-2 w-2 rounded-full bg-ok" aria-hidden />
+            Disponibles — Dakar · Abidjan · à distance
+          </p>
+          <h1 className="mt-8 font-display text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl">
             Le logiciel sur mesure
             <span className="text-accent">.</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">
             Sites web, applications web et mobiles, software sur mesure : des
-            produits numériques fiables, rapides et élégants — pensés pour
-            votre métier.
+            produits numériques fiables, rapides et élégants — pensés pour les
+            entreprises d&apos;Afrique de l&apos;Ouest.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-8">
             <Button href="/services" size="lg">
@@ -73,9 +121,22 @@ export default function Hero() {
             </Button>
             <ArrowLink href="/contact">Nous contacter</ArrowLink>
           </div>
+          <ul className="mt-12 flex flex-wrap text-sm text-muted lg:divide-x lg:divide-line">
+            <li className="pr-5">Réponse sous 24 h</li>
+            <li className="px-5 first:pl-0">Devis clairs, en FCFA</li>
+            <li className="pl-5">Wave &amp; Orange Money intégrés</li>
+          </ul>
         </div>
         <div className="pointer-events-none absolute right-8 bottom-16 hidden xl:block">
-          <CodeCard />
+          <div className="relative">
+            <div className="absolute -top-16 -left-24">
+              <StatChip />
+            </div>
+            <CodeCard />
+            <div className="absolute -right-16 -bottom-10">
+              <MoneyChip />
+            </div>
+          </div>
         </div>
       </Container>
     </section>

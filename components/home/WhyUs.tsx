@@ -13,7 +13,7 @@ const REASONS = [
   {
     icon: HeartHandshake,
     title: "Accompagnement complet",
-    text: "Un interlocuteur unique, des points d'avancement réguliers et un suivi qui continue après la mise en ligne.",
+    text: "Un interlocuteur unique, des points d'avancement réguliers — sur place à Dakar et Abidjan ou en visio (GMT) — et un suivi qui continue après la mise en ligne.",
   },
   {
     icon: Cpu,
@@ -49,24 +49,36 @@ export default function WhyUs() {
             aria-hidden
           />
         </Reveal>
-        <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-line">
-          {REASONS.map((reason, i) => (
-            <Reveal key={reason.title} delay={i * 100} className="lg:px-8">
-              <div className="text-center">
-                <reason.icon
-                  className="mx-auto h-7 w-7 text-foreground"
-                  strokeWidth={1.5}
-                  aria-hidden
-                />
-                <h3 className="mt-5 font-display text-lg font-semibold">
-                  {reason.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">
-                  {reason.text}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="relative mt-16">
+          {/* Connecteur pointillé teal derrière la rangée d'icônes (lg+) */}
+          <div
+            aria-hidden
+            className="absolute top-14 right-12 left-12 hidden border-t border-dashed border-teal/40 lg:block"
+          />
+          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-line">
+            {REASONS.map((reason, i) => (
+              <Reveal key={reason.title} delay={i * 100} className="lg:px-8">
+                <div className="text-center">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted/70">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <div className="relative mx-auto mt-3 flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft">
+                    <reason.icon
+                      className="h-6 w-6 text-accent"
+                      strokeWidth={1.5}
+                      aria-hidden
+                    />
+                  </div>
+                  <h3 className="mt-5 font-display text-lg font-semibold">
+                    {reason.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">
+                    {reason.text}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </Container>
     </section>

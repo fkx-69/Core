@@ -20,7 +20,10 @@ export default function MentionsLegalesPage() {
               Éditeur du site
             </h2>
             <p>
-              Core SAS — société fictive présentée à titre de démonstration.
+              Core SARL (société fictive) — présentée à titre de
+              démonstration.
+              <br />
+              RCCM SN-DKR-2026-B-000 (fictif) · NINEA 004587923 (fictif)
               <br />
               {CONTACT_INFO.address}
               <br />
@@ -33,9 +36,8 @@ export default function MentionsLegalesPage() {
               Hébergement
             </h2>
             <p>
-              Hébergeur placeholder — 1 avenue du Cloud, 75000 Paris. Ce site
-              est un exemple : aucune donnée n&apos;est réellement collectée ni
-              hébergée.
+              Zone Cloud, Dakar (hébergeur fictif). Ce site est un exemple :
+              aucune donnée n&apos;est réellement collectée ni hébergée.
             </p>
           </section>
 
@@ -46,8 +48,10 @@ export default function MentionsLegalesPage() {
             <p>
               Le formulaire de contact de ce site est une démonstration : les
               informations saisies ne sont ni transmises ni conservées. Sur un
-              site en production, cette section détaillerait vos droits (RGPD)
-              et les traitements réalisés.
+              site en production, cette section détaillerait vos droits et les
+              traitements réalisés, conformément au RGPD et à la loi
+              sénégalaise n° 2008-12 sur la protection des données
+              personnelles.
             </p>
           </section>
 

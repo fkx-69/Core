@@ -66,7 +66,7 @@ export const CATEGORY_LABELS: Record<MenuCategory, string> = {
   desserts: "Desserts",
 };
 
-/** Photo de la salle voûtée, aussi utilisée en fond du héros. */
+/** Photo de la salle en terre cuite, aussi utilisée en fond du héros. */
 export const HERO_IMAGE = "/assets/demos/resto/hero.webp";
 
 export type GalleryItem = {
@@ -76,7 +76,7 @@ export type GalleryItem = {
 
 export const GALLERY: GalleryItem[] = [
   {
-    caption: "La salle principale et ses voûtes en pierre",
+    caption: "La salle principale, terre cuite et bogolan",
     image: HERO_IMAGE,
   },
   {

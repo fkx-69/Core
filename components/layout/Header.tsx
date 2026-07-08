@@ -56,7 +56,13 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <Link
+            href="/contact"
+            className="hidden items-center justify-center rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-contrast transition hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background md:inline-flex"
+          >
+            Démarrer un projet
+          </Link>
           <ThemeToggle />
           <button
             type="button"
@@ -104,6 +110,13 @@ export default function Header() {
                 );
               })}
             </ul>
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="mt-3 block w-full rounded-full bg-accent px-4 py-3 text-center text-base font-semibold text-accent-contrast transition hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              Démarrer un projet
+            </Link>
           </Container>
         </nav>
       )}

@@ -32,7 +32,7 @@ const INITIAL_VALUES: FormValues = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const PHONE_FR_RE = /^(\+33|0)\s?[1-9](\s?\d{2}){4}$/;
+const PHONE_INTL_RE = /^\+?[0-9][0-9 .-]{7,18}$/;
 
 function validateField(field: Field, values: FormValues): string | null {
   const value = values[field].trim();
@@ -47,9 +47,9 @@ function validateField(field: Field, values: FormValues): string | null {
     case "telephone":
       // Optionnel, mais vérifié si renseigné.
       if (!value) return null;
-      return PHONE_FR_RE.test(value)
+      return PHONE_INTL_RE.test(value)
         ? null
-        : "Ce numéro ne semble pas valide (format attendu : 06 12 34 56 78).";
+        : "Entrez un numéro valide (ex. +221 77 123 45 67).";
     case "typeProjet":
       return value ? null : "Veuillez sélectionner un type de projet.";
     case "message":
@@ -142,7 +142,7 @@ export default function ContactForm() {
             name="nom"
             type="text"
             autoComplete="name"
-            placeholder="Marie Dupont"
+            placeholder="Awa Ndiaye"
             value={values.nom}
             onChange={(e) => handleChange("nom", e.target.value)}
             onBlur={() => handleBlur("nom")}
@@ -166,7 +166,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
-            placeholder="marie@entreprise.fr"
+            placeholder="awa@entreprise.sn"
             value={values.email}
             onChange={(e) => handleChange("email", e.target.value)}
             onBlur={() => handleBlur("email")}
@@ -194,7 +194,7 @@ export default function ContactForm() {
             name="telephone"
             type="tel"
             autoComplete="tel"
-            placeholder="06 12 34 56 78"
+            placeholder="77 123 45 67"
             value={values.telephone}
             onChange={(e) => handleChange("telephone", e.target.value)}
             onBlur={() => handleBlur("telephone")}
@@ -248,7 +248,7 @@ export default function ContactForm() {
             id="message"
             name="message"
             rows={5}
-            placeholder="Décrivez votre projet en quelques lignes : objectifs, délais, budget indicatif…"
+            placeholder="Décrivez votre projet en quelques lignes : objectifs, délais, budget indicatif en FCFA…"
             value={values.message}
             onChange={(e) => handleChange("message", e.target.value)}
             onBlur={() => handleBlur("message")}

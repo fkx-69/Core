@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Core",
   },
   description:
-    "Core conçoit des sites web, applications web et mobiles, et logiciels sur mesure pour accélérer votre activité.",
+    "Core conçoit des sites web, applications web et applications mobiles pour les entreprises d'Afrique de l'Ouest, de Dakar à Abidjan.",
 };
 
 // Applique le thème avant le premier paint : localStorage, sinon préférence système.

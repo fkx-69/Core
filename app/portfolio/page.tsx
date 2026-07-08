@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import DemoGroup, { type DemoEntry } from "@/components/demos/DemoGroup";
+import CtaBanner from "@/components/shared/CtaBanner";
 import IntroIllustration from "@/components/ui/IntroIllustration";
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ const DEMO_SECTIONS: {
         demo: "vitrine",
         title: "La Table Dorée",
         description:
-          "Site vitrine d'un restaurant lyonnais fictif : navigation interne, menu par catégories et galerie photo avec lightbox. Ouvrez le menu déroulant, changez de catégorie, cliquez sur les photos — tout fonctionne.",
+          "Site vitrine d'un restaurant gastronomique fictif des Almadies, à Dakar : navigation interne, menu par catégories et galerie photo avec lightbox. Ouvrez le menu déroulant, changez de catégorie, cliquez sur les photos — tout fonctionne.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
         fullscreen: true,
       },
@@ -40,7 +41,7 @@ const DEMO_SECTIONS: {
         demo: "volt",
         title: "VOLT Energy",
         description:
-          "Vitrine d'une marque de boisson énergisante : identité sombre et néon, sélecteur de saveurs qui rethème toute la page, panneau composition et bandeau défilant. Changez de saveur et regardez le site changer de peau.",
+          "Vitrine d'une marque de boisson énergisante abidjanaise : identité sombre et néon, sélecteur de saveurs qui rethème toute la page, panneau composition et bandeau défilant. Changez de saveur et regardez le site changer de peau.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Motion"],
         fullscreen: true,
       },
@@ -48,7 +49,7 @@ const DEMO_SECTIONS: {
         demo: "parfum",
         title: "Maison Élixir",
         description:
-          "Vitrine d'une maison de parfum grassoise : direction artistique éditoriale, collection cliquable, fiche produit avec pyramide olfactive et sélecteur de contenance qui recalcule le prix. Ajoutez un flacon au coffret.",
+          "Vitrine d'une maison de parfum d'Abidjan : direction artistique éditoriale, collection cliquable, fiche produit avec pyramide olfactive et sélecteur de contenance qui recalcule le prix. Ajoutez un flacon au coffret.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
         fullscreen: true,
       },
@@ -56,7 +57,7 @@ const DEMO_SECTIONS: {
         demo: "salon",
         title: "L'Écrin",
         description:
-          "Vitrine d'un salon de beauté bordelais avec vraie prise de rendez-vous en trois étapes : choisissez une prestation, un jour, un créneau — les indisponibilités sont gérées — puis confirmez.",
+          "Vitrine d'un salon de beauté du Plateau, à Abidjan, avec vraie prise de rendez-vous en trois étapes : choisissez une prestation, un jour, un créneau — les indisponibilités sont gérées — puis confirmez.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
         fullscreen: true,
       },
@@ -73,7 +74,7 @@ const DEMO_SECTIONS: {
         demo: "dashboard",
         title: "Boutique Lumen",
         description:
-          "Dashboard de gestion des ventes d'une boutique de décoration fictive. Ajoutez une vente, marquez-la payée, supprimez-la : indicateurs, histogramme et donut se recalculent en direct. Le tableau se filtre, se trie et se recherche.",
+          "Dashboard de gestion des ventes d'une boutique de décoration dakaroise fictive. Ajoutez une vente, marquez-la payée, supprimez-la : indicateurs, histogramme et donut se recalculent en direct. Le tableau se filtre, se trie et se recherche.",
         stack: ["React", "Next.js", "Node.js", "PostgreSQL"],
         fullscreen: true,
       },
@@ -81,7 +82,7 @@ const DEMO_SECTIONS: {
         demo: "pressing",
         title: "Pressing des Halles",
         description:
-          "Outil métier de gestion d'un pressing : les commandes avancent dans un pipeline kanban (reçue → nettoyage → repassage → prête), les retards sont signalés, la caisse s'incrémente à chaque retrait. Enregistrez un dépôt et faites-le avancer.",
+          "Outil métier de gestion d'un pressing du quartier Sandaga, à Dakar : les commandes avancent dans un pipeline kanban (reçue → nettoyage → repassage → prête), les retards sont signalés, la caisse s'incrémente en FCFA à chaque retrait. Enregistrez un dépôt et faites-le avancer.",
         stack: ["React", "Next.js", "NestJS", "PostgreSQL"],
         fullscreen: true,
       },
@@ -98,14 +99,14 @@ const DEMO_SECTIONS: {
         demo: "mobile",
         title: "Rapido",
         description:
-          "App de commande d'un service de livraison fictif. Parcourez les restaurants, composez un panier, commandez, puis suivez la livraison qui progresse en temps réel dans l'onglet Suivi.",
+          "App de commande d'un service de livraison de repas fictif à Abidjan. Parcourez les restaurants, composez un panier, commandez, puis suivez la livraison qui progresse en temps réel dans l'onglet Suivi.",
         stack: ["React Native", "Expo", "TypeScript", "Firebase"],
       },
       {
         demo: "banque",
         title: "Nova",
         description:
-          "App d'une néo-banque fictive : solde et historique vivants, virement avec pavé numérique qui débite réellement le compte, carte paramétrable (verrouillage instantané, plafonds, paiements à l'étranger).",
+          "App d'une néo-banque fictive pensée pour les habitudes mobile money : solde et historique vivants, virement avec pavé numérique qui débite réellement le compte, carte paramétrable (verrouillage instantané, plafonds, paiements à l'étranger).",
         stack: ["React Native", "Expo", "TypeScript", "Plaid"],
       },
     ],
@@ -115,16 +116,32 @@ const DEMO_SECTIONS: {
 export default function PortfolioPage() {
   return (
     <>
-      <div className="border-b border-line py-16 sm:py-20">
-        <Container>
+      <div className="relative border-b border-line py-16 sm:py-20">
+        <div
+          aria-hidden
+          className="dot-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"
+        />
+        <Container className="relative">
           <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
-            <SectionHeading
-              as="h1"
-              eyebrow="Portfolio"
-              title="Des démos à essayer, pas des captures d'écran"
-              intro="Huit projets fictifs, huit vraies mini-applications fonctionnelles. Cliquez, filtrez, réservez, commandez : chaque interface réagit comme un produit réellement livré par Core."
-            />
-            <IntroIllustration src="/assets/illustrations/portfolio-intro.png" alt="" width={1000} height={500} />
+            <div>
+              <SectionHeading
+                as="h1"
+                eyebrow="Portfolio"
+                title="Des démos à essayer, pas des captures d'écran"
+                intro="Huit projets fictifs, huit vraies mini-applications fonctionnelles. Cliquez, filtrez, réservez, commandez : chaque interface réagit comme un produit réellement livré par Core."
+              />
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {["8 démos", "3 catégories", "0 capture d'écran"].map((chip) => (
+                  <li
+                    key={chip}
+                    className="rounded-full border border-line bg-surface-raised px-4 py-1.5 text-sm text-muted"
+                  >
+                    {chip}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <IntroIllustration src="/assets/illustrations/portfolio-intro.png" alt="" width={1536} height={1024} />
           </div>
           <p className="mt-6 flex w-fit items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-sm font-medium text-muted">
             <MousePointerClick className="h-4 w-4 text-accent" aria-hidden />
@@ -137,9 +154,21 @@ export default function PortfolioPage() {
         <section
           key={section.anchor}
           id={section.anchor}
-          className={`scroll-mt-24 py-16 sm:py-24 ${i % 2 === 1 ? "bg-surface" : ""}`}
+          className={`relative scroll-mt-24 overflow-hidden py-16 sm:py-24 ${i % 2 === 1 ? "bg-surface" : ""}`}
         >
-          <Container>
+          {i % 2 === 0 && (
+            <div
+              aria-hidden
+              className="dot-grid pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_55%)]"
+            />
+          )}
+          <span
+            aria-hidden
+            className="text-outline pointer-events-none absolute -top-8 right-2 hidden select-none font-display text-[12rem] font-bold leading-none lg:block"
+          >
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <Container className="relative">
             <Reveal>
               <DemoGroup
                 index={i}
@@ -154,6 +183,10 @@ export default function PortfolioPage() {
           </Container>
         </section>
       ))}
+      <CtaBanner
+        title="Votre projet mérite une démo aussi convaincante."
+        text="Racontez-nous votre idée : nous vous montrons, planning et budget en FCFA à l'appui, comment la transformer en produit que vos clients utilisent vraiment."
+      />
     </>
   );
 }

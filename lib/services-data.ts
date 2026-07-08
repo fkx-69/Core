@@ -10,6 +10,8 @@ export type Service = {
   benefits: string[];
   technologies: string[];
   useCase: { title: string; text: string };
+  /** Tarif d'appel affiché sur la fiche service. */
+  priceFrom: string;
   /** Ancre de la démo correspondante sur /portfolio (null → haut de page). */
   demoAnchor: string | null;
   demoLabel: string;
@@ -32,8 +34,9 @@ export const SERVICES: Service[] = [
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     useCase: {
       title: "Cas d'usage : restaurant gastronomique",
-      text: "Un restaurant nous confie sa présence en ligne : site vitrine avec menu interactif, galerie photo et réservation. Résultat : +40 % de demandes de réservation en trois mois.",
+      text: "Un restaurant des Almadies, à Dakar, nous confie sa présence en ligne : site vitrine avec menu interactif, galerie photo et réservation. Résultat : +40 % de demandes de réservation en trois mois.",
     },
+    priceFrom: "à partir de 1 500 000 FCFA",
     demoAnchor: DEMO_ANCHORS.vitrine,
     demoLabel: "Voir la démo « Site vitrine »",
   },
@@ -53,8 +56,9 @@ export const SERVICES: Service[] = [
     technologies: ["React", "Next.js", "Node.js", "PostgreSQL"],
     useCase: {
       title: "Cas d'usage : suivi des ventes",
-      text: "Une boutique de décoration pilote désormais ses ventes depuis un dashboard : indicateurs clés, graphiques et gestion des commandes au même endroit, à jour en permanence.",
+      text: "Une boutique de décoration d'Abidjan pilote désormais ses ventes depuis un dashboard : indicateurs clés, graphiques et gestion des commandes au même endroit, à jour en permanence.",
     },
+    priceFrom: "à partir de 4 000 000 FCFA",
     demoAnchor: DEMO_ANCHORS.dashboard,
     demoLabel: "Voir la démo « Application web »",
   },
@@ -74,8 +78,9 @@ export const SERVICES: Service[] = [
     technologies: ["React Native", "Expo", "TypeScript", "Firebase"],
     useCase: {
       title: "Cas d'usage : livraison de repas",
-      text: "Un réseau de restaurants lance son app de livraison : commande en trois écrans, suivi du livreur en temps réel et paiement intégré. 4,8/5 sur les stores dès le premier mois.",
+      text: "Un service de livraison abidjanais lance son app : commande en trois écrans, suivi du livreur en temps réel et paiement à la livraison. 4,8/5 sur les stores dès le premier mois.",
     },
+    priceFrom: "à partir de 5 000 000 FCFA",
     demoAnchor: DEMO_ANCHORS.mobile,
     demoLabel: "Voir la démo « Application mobile »",
   },
@@ -95,8 +100,9 @@ export const SERVICES: Service[] = [
     technologies: ["Node.js", "Python", "Docker", "AWS"],
     useCase: {
       title: "Cas d'usage : synchronisation e-commerce",
-      text: "Un distributeur synchronise automatiquement son stock entre sa boutique en ligne, son ERP et ses places de marché : zéro double saisie, zéro rupture non signalée.",
+      text: "Un distributeur Dakar–Abidjan synchronise automatiquement son stock entre sa boutique en ligne, son ERP et ses places de marché, avec intégration des paiements Wave et Orange Money : zéro double saisie, zéro rupture non signalée.",
     },
+    priceFrom: "sur devis",
     demoAnchor: null,
     demoLabel: "Explorer toutes nos démos",
   },

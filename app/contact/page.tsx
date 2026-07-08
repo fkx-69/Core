@@ -1,18 +1,49 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CONTACT_INFO, SOCIAL_LINKS } from "@/lib/site";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SocialIcon from "@/components/ui/SocialIcon";
 import ContactForm from "@/components/contact/ContactForm";
 import IntroIllustration from "@/components/ui/IntroIllustration";
+import Faq, { type FaqItem } from "@/components/ui/Faq";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
     "Contactez l'agence Core pour votre projet de site web, d'application web ou mobile, ou de logiciel sur mesure.",
 };
+
+const WHATSAPP_HREF = `https://wa.me/${CONTACT_INFO.whatsapp.replace(/\D/g, "")}`;
+
+const FAQ_ITEMS: FaqItem[] = [
+  {
+    question: "Quels sont vos tarifs ?",
+    answer:
+      "Un site vitrine démarre à 1 500 000 FCFA, une application web à 4 000 000 FCFA. Chaque projet reçoit un devis détaillé, poste par poste, sous 48 h — sans engagement.",
+  },
+  {
+    question: "Peut-on payer par Wave ou Orange Money ?",
+    answer:
+      "Oui. Nous acceptons Wave, Orange Money, MTN MoMo et le virement bancaire, avec un échéancier par jalons : vous ne payez que ce qui est livré.",
+  },
+  {
+    question: "Travaillez-vous à distance ?",
+    answer:
+      "Notre équipe est répartie entre Dakar et Abidjan. Nous travaillons en visio avec des points réguliers (fuseau GMT) et nous nous déplaçons pour les ateliers de cadrage.",
+  },
+  {
+    question: "Quels sont les délais typiques ?",
+    answer:
+      "Un site vitrine : 3 à 4 semaines. Une application web ou mobile : 6 à 12 semaines selon le périmètre. Vous testez un premier livrable dès les premières semaines.",
+  },
+  {
+    question: "Assurez-vous la maintenance après livraison ?",
+    answer:
+      "Oui : hébergement, supervision, correctifs et évolutions via un contrat de maintenance simple. Et vous restez propriétaire de 100 % du code.",
+  },
+];
 
 export default function ContactPage() {
   return (
@@ -66,6 +97,17 @@ export default function ContactPage() {
                 </a>
               </li>
               <li className="flex items-start gap-3">
+                <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted transition hover:text-accent"
+                >
+                  WhatsApp — {CONTACT_INFO.whatsapp}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
                 <span className="text-muted">{CONTACT_INFO.address}</span>
               </li>
@@ -75,7 +117,7 @@ export default function ContactPage() {
               Horaires
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Du lundi au vendredi, de 9 h à 18 h. En dehors de ces horaires,
+              Lundi – vendredi, 8 h – 18 h (GMT). En dehors de ces horaires,
               laissez-nous un message : nous vous rappelons.
             </p>
 
@@ -98,6 +140,13 @@ export default function ContactPage() {
               ))}
             </ul>
           </aside>
+        </div>
+
+        <div className="mt-20 sm:mt-24">
+          <SectionHeading eyebrow="FAQ" title="Questions fréquentes" />
+          <div className="mt-10 max-w-3xl">
+            <Faq items={FAQ_ITEMS} />
+          </div>
         </div>
       </Container>
     </div>

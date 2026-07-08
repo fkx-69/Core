@@ -65,7 +65,7 @@ export default function VitrineDemo() {
   );
 
   return (
-    <BrowserFrame url="https://latabledoree.fr">
+    <BrowserFrame url="https://latabledoree.sn">
       <div className="flex min-h-[480px] flex-col bg-background">
         {/* En-tête du site fictif */}
         <header className="relative z-10 flex items-center justify-between border-b border-line px-4 py-3 sm:px-6">
@@ -147,10 +147,10 @@ export default function VitrineDemo() {
                 />
                 <div className="relative">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200">
-                    Restaurant · Lyon 2ᵉ
+                    Restaurant · Dakar Plateau
                   </p>
                   <h4 className="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
-                    Une cuisine de saison, au cœur de Lyon
+                    Une cuisine de saison, au cœur de Dakar
                   </h4>
                   <p className="mx-auto mt-2 max-w-md text-sm text-amber-50/85">
                     Produits locaux, carte courte et vins choisis. Bienvenue à
@@ -172,7 +172,7 @@ export default function VitrineDemo() {
                 </p>
                 <p className="flex items-center gap-2 rounded-field border border-line px-4 py-3">
                   <MapPin className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-                  8 quai Saint-Antoine, 69002 Lyon
+                  12 avenue Léopold Sédar Senghor, Dakar
                 </p>
               </div>
             </div>

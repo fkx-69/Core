@@ -38,6 +38,9 @@
   --shadow-card: 0 1px 2px rgb(16 18 26 / 0.04);
   --shadow-raised: 0 12px 32px -12px rgb(16 18 26 / 0.18);
   --shadow-overlay: 0 24px 48px -12px rgb(16 18 26 / 0.28);
+
+  /* Teal éditorial — pointillés d'accent, hérité du langage des illustrations */
+  --teal: #2f7e6d;
 }
 
 .dark {
@@ -74,6 +77,9 @@
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
   --shadow-raised: 0 12px 32px -12px rgb(0 0 0 / 0.55);
   --shadow-overlay: 0 24px 48px -12px rgb(0 0 0 / 0.65);
+
+  /* Teal éditorial — éclairci pour rester lisible sur fond sombre */
+  --teal: #3fae95;
 }
 
 @theme inline {
@@ -98,6 +104,7 @@
   --color-warn-soft: var(--warn-soft);
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
+  --color-teal: var(--teal);
   --shadow-card: var(--shadow-card);
   --shadow-raised: var(--shadow-raised);
   --shadow-overlay: var(--shadow-overlay);
@@ -126,9 +133,29 @@ body {
   background-size: 24px 24px;
 }
 
+/* Variante inversée pour les bandeaux indigo pleins */
+.dot-grid-inverse {
+  background-image: radial-gradient(rgb(255 255 255 / 0.25) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Papier millimétré discret (héro) */
+.grid-paper {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
 /* Numéraux géants au contour filaire (page Services) */
 .text-outline {
   -webkit-text-stroke: 1.5px var(--line);
+  color: transparent;
+}
+
+/* Variante inversée — filigrane blanc sur les bandeaux indigo */
+.text-outline-inverse {
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.15);
   color: transparent;
 }
 
@@ -143,22 +170,35 @@ html.theme-transition * {
     stroke 300ms ease !important;
 }
 
-/* Apparition au scroll (composant Reveal) */
+/* Apparition au scroll (composant Reveal) — variantes directionnelles */
 .reveal {
   opacity: 0;
   translate: 0 16px;
 }
+.reveal.reveal-left {
+  translate: -20px 0;
+}
+.reveal.reveal-right {
+  translate: 20px 0;
+}
+.reveal.reveal-scale {
+  translate: 0 0;
+  scale: 0.96;
+}
 .reveal.is-visible {
   opacity: 1;
   translate: 0 0;
+  scale: 1;
   transition:
     opacity 0.6s ease,
-    translate 0.6s ease;
+    translate 0.6s ease,
+    scale 0.6s ease;
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     translate: none;
+    scale: none;
     transition: none;
   }
 }
@@ -183,8 +223,46 @@ html.theme-transition * {
 .animate-marquee {
   animation: marquee 18s linear infinite;
 }
+/* Variante lente (bandeau logos du site), en pause au survol */
+.animate-marquee-slow {
+  animation: marquee 40s linear infinite;
+}
+.marquee-pausable:hover .animate-marquee-slow {
+  animation-play-state: paused;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .animate-marquee-slow {
+    animation: none;
+  }
+}
+
+/* Flottement doux des éléments décoratifs (héro) */
+@keyframes float-y {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -8px;
+  }
+}
+.animate-float {
+  animation: float-y 5s ease-in-out infinite alternate;
+}
+
+/* Pastille de disponibilité qui pulse (héro) */
+@keyframes pulse-dot {
+  50% {
+    opacity: 0.4;
+  }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-pulse-dot {
     animation: none;
   }
 }
