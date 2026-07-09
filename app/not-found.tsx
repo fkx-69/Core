@@ -2,8 +2,24 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import ArrowLink from "@/components/ui/ArrowLink";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
+// Rendu dans le layout racine (sans chrome) : le header/footer Core sont
+// remontés ici pour que le 404 reste habillé quelle que soit l'URL manquée.
 export default function NotFound() {
+  return (
+    <>
+      <Header />
+      <main className="flex flex-1 flex-col">
+        <NotFoundContent />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+function NotFoundContent() {
   return (
     <div className="relative flex flex-1 items-center overflow-hidden py-24">
       <div

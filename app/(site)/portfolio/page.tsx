@@ -33,33 +33,29 @@ const DEMO_SECTIONS: {
         demo: "vitrine",
         title: "La Table Dorée",
         description:
-          "Site vitrine d'un restaurant gastronomique fictif des Almadies, à Dakar : navigation interne, menu par catégories et galerie photo avec lightbox. Ouvrez le menu déroulant, changez de catégorie, cliquez sur les photos — tout fonctionne.",
+          "Site complet d'un restaurant gastronomique fictif des Almadies, à Dakar : menu par catégories, galerie photo avec lightbox, réservation. L'aperçu se navigue tel quel dans le mockup ; « Visiter le site en entier » ouvre le vrai site pleine page, dans un nouvel onglet.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-        fullscreen: true,
       },
       {
         demo: "volt",
         title: "VOLT Energy",
         description:
-          "Vitrine d'une marque de boisson énergisante abidjanaise : identité sombre et néon, sélecteur de saveurs qui rethème toute la page, panneau composition et bandeau défilant. Changez de saveur et regardez le site changer de peau.",
+          "Site complet d'une marque de boisson énergisante abidjanaise : identité sombre et néon, sélecteur de saveurs qui rethème toute la page. Faites défiler l'aperçu comme un vrai site, puis cliquez sur « Visiter le site en entier » pour l'ouvrir pleine page dans un nouvel onglet.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Motion"],
-        fullscreen: true,
       },
       {
         demo: "parfum",
         title: "Maison Élixir",
         description:
-          "Vitrine d'une maison de parfum d'Abidjan : direction artistique éditoriale, collection cliquable, fiche produit avec pyramide olfactive et sélecteur de contenance qui recalcule le prix. Ajoutez un flacon au coffret.",
+          "Site complet d'une maison de parfum d'Abidjan : direction artistique éditoriale, collection cliquable, pyramide olfactive et prix par contenance. Explorez l'aperçu directement dans le mockup, ou ouvrez le vrai site pleine page via « Visiter le site en entier », dans un nouvel onglet.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
-        fullscreen: true,
       },
       {
         demo: "salon",
         title: "L'Écrin",
         description:
-          "Vitrine d'un salon de beauté du Plateau, à Abidjan, avec vraie prise de rendez-vous en trois étapes : choisissez une prestation, un jour, un créneau — les indisponibilités sont gérées — puis confirmez.",
+          "Site complet d'un salon de beauté du Plateau, à Abidjan, avec prise de rendez-vous en trois étapes : prestation, jour, créneau. Réservez directement dans l'aperçu, puis cliquez sur « Visiter le site en entier » pour ouvrir le vrai site pleine page dans un nouvel onglet.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
-        fullscreen: true,
       },
     ],
   },
@@ -128,7 +124,7 @@ export default function PortfolioPage() {
                 as="h1"
                 eyebrow="Portfolio"
                 title="Des démos à essayer, pas des captures d'écran"
-                intro="Huit projets fictifs, huit vraies mini-applications fonctionnelles. Cliquez, filtrez, réservez, commandez : chaque interface réagit comme un produit réellement livré par Core."
+                intro="Huit projets fictifs, huit vraies interfaces fonctionnelles. Cliquez, filtrez, réservez, commandez — et visitez chaque site vitrine en pleine page, comme s'il était déjà en ligne : chaque projet réagit comme un produit réellement livré par Core."
               />
               <ul className="mt-6 flex flex-wrap gap-2">
                 {["8 démos", "3 catégories", "0 capture d'écran"].map((chip) => (

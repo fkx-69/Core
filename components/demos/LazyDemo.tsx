@@ -16,34 +16,36 @@ function Skeleton({ minH }: { minH: string }) {
  * Les démos sont chargées dynamiquement (ssr: false — légal ici car composant
  * client) et montées à l'approche du viewport. Les hauteurs des skeletons
  * approchent celles des démos réelles pour que les ancres ne sautent pas.
+ * Les quatre sites vitrines pointent vers les aperçus de demos/sites/*
+ * (mockup navigateur ~48px + zone scrollable 560px + lien « Visiter » ~36px).
  */
 const DEMOS = {
   vitrine: {
-    minH: "min-h-[560px]",
-    Component: dynamic(() => import("@/components/demos/vitrine/VitrineDemo"), {
-      ssr: false,
-      loading: () => <Skeleton minH="min-h-[560px]" />,
-    }),
+    minH: "min-h-[640px]",
+    Component: dynamic(
+      () => import("@/components/demos/sites/table-doree/Preview"),
+      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
+    ),
   },
   volt: {
-    minH: "min-h-[600px]",
-    Component: dynamic(() => import("@/components/demos/volt/VoltDemo"), {
+    minH: "min-h-[640px]",
+    Component: dynamic(() => import("@/components/demos/sites/volt/Preview"), {
       ssr: false,
-      loading: () => <Skeleton minH="min-h-[600px]" />,
+      loading: () => <Skeleton minH="min-h-[640px]" />,
     }),
   },
   parfum: {
-    minH: "min-h-[600px]",
-    Component: dynamic(() => import("@/components/demos/parfum/ParfumDemo"), {
-      ssr: false,
-      loading: () => <Skeleton minH="min-h-[600px]" />,
-    }),
+    minH: "min-h-[640px]",
+    Component: dynamic(
+      () => import("@/components/demos/sites/elixir/Preview"),
+      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
+    ),
   },
   salon: {
-    minH: "min-h-[600px]",
-    Component: dynamic(() => import("@/components/demos/salon/SalonDemo"), {
+    minH: "min-h-[640px]",
+    Component: dynamic(() => import("@/components/demos/sites/ecrin/Preview"), {
       ssr: false,
-      loading: () => <Skeleton minH="min-h-[600px]" />,
+      loading: () => <Skeleton minH="min-h-[640px]" />,
     }),
   },
   dashboard: {

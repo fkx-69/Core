@@ -1,0 +1,42 @@
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
+import BrowserFrame from "@/components/demos/mockups/BrowserFrame";
+
+/**
+ * Aperçu embarqué d'un site de démonstration : le vrai site (composant
+ * partagé avec la page /demos/*) défile dans un mockup navigateur à hauteur
+ * fixe. Le conteneur est un `@container` : le site, écrit en container
+ * queries, y adopte de lui-même sa mise en page compacte.
+ */
+export default function SitePreview({
+  url,
+  href,
+  children,
+}: {
+  /** Fausse URL affichée dans la barre du navigateur. */
+  url: string;
+  /** Route réelle de la page démo (/demos/…), ouverte dans un nouvel onglet. */
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <BrowserFrame url={url}>
+        <div className="@container scrollbar-none h-[560px] overflow-y-auto overscroll-contain">
+          {children}
+        </div>
+      </BrowserFrame>
+      <div className="mt-3 flex justify-end">
+        <Link
+          href={href}
+          target="_blank"
+          rel="noopener"
+          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-raised px-3 py-1.5 text-xs font-medium text-muted shadow-card transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          Visiter le site en entier
+        </Link>
+      </div>
+    </div>
+  );
+}
