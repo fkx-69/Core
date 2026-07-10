@@ -2,36 +2,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { SERVICES } from "@/lib/services-data";
+import { SERVICE_ILLUSTRATIONS } from "@/components/services/serviceIllustrations";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import ServiceIcon from "@/components/services/ServiceIcon";
 
-/** Illustration filaire d'un navigateur pour la grande tuile (réf 2). */
-function WireBrowser() {
+/** Illustration riche d'un service (mêmes assets que la page Services). */
+function TileIllustration({
+  serviceId,
+  className,
+  sizes,
+}: {
+  serviceId: string;
+  className: string;
+  sizes: string;
+}) {
   return (
-    <div
-      aria-hidden
-      className="rounded-field border border-line bg-background p-3"
-    >
-      <div className="flex items-center gap-1.5 border-b border-line pb-2">
-        <span className="h-1.5 w-1.5 rounded-full border border-line" />
-        <span className="h-1.5 w-1.5 rounded-full border border-line" />
-        <span className="h-1.5 w-1.5 rounded-full border border-line" />
-      </div>
-      <div className="flex gap-3 pt-3">
-        <div className="h-14 w-1/2 rounded-field border border-line" />
-        <div className="flex-1 space-y-2 pt-1">
-          <div className="h-1.5 rounded-full bg-line" />
-          <div className="h-1.5 w-4/5 rounded-full bg-line" />
-          <div className="h-1.5 w-3/5 rounded-full border-b border-dashed border-teal/70" />
-        </div>
-      </div>
-      <div className="flex gap-2 pt-3">
-        <div className="h-8 flex-1 rounded-field border border-line" />
-        <div className="h-8 flex-1 rounded-field border border-line" />
-        <div className="h-8 flex-1 rounded-field bg-accent-soft/60" />
-      </div>
+    <div aria-hidden className={`relative ${className}`}>
+      <Image
+        src={SERVICE_ILLUSTRATIONS[serviceId]}
+        alt=""
+        fill
+        sizes={sizes}
+        className="object-contain transition-transform duration-200 group-hover:scale-[1.03]"
+      />
     </div>
   );
 }
@@ -82,7 +76,7 @@ const arrowLabel = (
 export default function ServicesPreview() {
   const [main, ...others] = SERVICES;
   return (
-    <section className="bg-surface py-20 sm:py-28">
+    <section className="bg-background py-20 sm:py-28">
       <Container>
         <Reveal>
           <SectionHeading
@@ -107,7 +101,11 @@ export default function ServicesPreview() {
               />
               <TileIndex n="01" />
               <CornerTicks />
-              <WireBrowser />
+              <TileIllustration
+                serviceId={main.id}
+                className="mx-auto aspect-square w-full max-w-sm"
+                sizes="384px"
+              />
               <h3 className="mt-8 font-display text-2xl font-semibold">
                 {main.title}
               </h3>
@@ -128,8 +126,7 @@ export default function ServicesPreview() {
               >
                 <TileIndex n="02" />
                 <CornerTicks />
-                <div className="flex items-start gap-4">
-                  <ServiceIcon icon={others[0].icon} />
+                <div className="flex items-start justify-between gap-6">
                   <div>
                     <h3 className="font-display text-xl font-semibold">
                       {others[0].title}
@@ -137,6 +134,14 @@ export default function ServicesPreview() {
                     <p className="mt-1 text-sm leading-relaxed text-muted">
                       {others[0].tagline}
                     </p>
+                  </div>
+                  {/* pr-20 : dégage le numéral filaire « 02 » du coin. */}
+                  <div className="hidden pr-20 sm:block">
+                    <TileIllustration
+                      serviceId={others[0].id}
+                      className="aspect-square w-48 shrink-0"
+                      sizes="192px"
+                    />
                   </div>
                 </div>
                 {arrowLabel}
@@ -158,7 +163,11 @@ export default function ServicesPreview() {
                   >
                     <TileIndex n={i === 0 ? "03" : "04"} />
                     <CornerTicks />
-                    <ServiceIcon icon={service.icon} />
+                    <TileIllustration
+                      serviceId={service.id}
+                      className="h-32 w-32"
+                      sizes="128px"
+                    />
                     <h3 className="mt-4 font-display text-lg font-semibold">
                       {service.title}
                     </h3>

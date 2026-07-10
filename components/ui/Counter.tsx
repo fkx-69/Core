@@ -10,6 +10,7 @@ export default function Counter({
   suffix = "",
   duration = 1200,
   className = "",
+  suffixClassName = "",
 }: {
   value: number;
   prefix?: string;
@@ -17,6 +18,8 @@ export default function Counter({
   /** Durée du comptage en ms. */
   duration?: number;
   className?: string;
+  /** Style du suffixe seul (ex. suffixe accentué des chiffres clés). */
+  suffixClassName?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(0);
@@ -61,7 +64,7 @@ export default function Counter({
     <span ref={ref} className={className} aria-label={`${prefix}${value}${suffix}`}>
       {prefix}
       {done ? value : display}
-      {suffix}
+      {suffix && <span className={suffixClassName}>{suffix}</span>}
     </span>
   );
 }

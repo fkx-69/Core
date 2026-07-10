@@ -64,7 +64,15 @@ export default function CtaBanner({
               Écrivez-nous sur WhatsApp
             </a>
           </div>
-          <p className="mt-6 text-sm opacity-70">{note}</p>
+          {/* Pastille qui répond à celle du héro — la page se referme comme
+              elle s'est ouverte, sur la disponibilité. */}
+          <p className="mt-8 inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm">
+            <span
+              className="animate-pulse-dot h-2 w-2 rounded-full bg-[#4cd6a1]"
+              aria-hidden
+            />
+            {note}
+          </p>
         </Reveal>
       </Container>
     </section>

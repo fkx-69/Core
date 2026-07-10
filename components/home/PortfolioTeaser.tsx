@@ -10,17 +10,20 @@ import Reveal from "@/components/ui/Reveal";
 const TEASERS = [
   {
     anchor: DEMO_ANCHORS.dashboard,
-    title: "Applications web · 2 démos",
+    title: "Applications web",
+    count: "2 démos",
     text: "Dashboard de ventes et gestion de pressing en kanban — trop grandes pour le héro, elles se testent en taille réelle.",
   },
   {
     anchor: DEMO_ANCHORS.mobile,
-    title: "Applications mobiles · 2 démos",
+    title: "Applications mobiles",
+    count: "2 démos",
     text: "Livraison de repas et néo-banque — panier, virements, suivi en temps réel.",
   },
   {
     anchor: DEMO_ANCHORS.vitrine,
-    title: "Sites vitrines · 4 démos",
+    title: "Sites vitrines",
+    count: "4 démos",
     text: "Restaurant, boisson énergisante, maison de parfum, salon de beauté — les quatre identités entrevues plus haut, en pleine page.",
   },
 ];
@@ -50,23 +53,33 @@ export default function PortfolioTeaser() {
             <Reveal delay={100}>
               <ul className="mt-10">
                 {TEASERS.map((teaser) => (
-                  <li key={teaser.anchor} className="border-t border-line/80">
+                  <li
+                    key={teaser.anchor}
+                    className="border-t border-line/80 last:border-b"
+                  >
                     <Link
                       href={`/portfolio#${teaser.anchor}`}
-                      className="group flex items-center justify-between gap-4 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      className="group flex items-center justify-between gap-6 py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >
-                      <span>
-                        <span className="font-display font-semibold">
-                          {teaser.title}
+                      <span className="min-w-0">
+                        <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                          <span className="font-display text-lg font-semibold transition-colors duration-200 group-hover:text-accent">
+                            {teaser.title}
+                          </span>
+                          <span className="rounded-full border border-line bg-surface-raised px-2.5 py-0.5 text-xs font-medium text-muted">
+                            {teaser.count}
+                          </span>
                         </span>
-                        <span className="mt-0.5 block text-sm leading-relaxed text-muted">
+                        <span className="mt-1 block text-sm leading-relaxed text-muted">
                           {teaser.text}
                         </span>
                       </span>
-                      <ArrowRight
-                        className="h-4 w-4 shrink-0 text-accent transition-transform duration-200 group-hover:translate-x-1"
+                      <span
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-surface-raised text-accent transition duration-200 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-contrast"
                         aria-hidden
-                      />
+                      >
+                        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -80,8 +93,8 @@ export default function PortfolioTeaser() {
             <Image
               src="/assets/illustrations/home-portfolio-stack.png"
               alt=""
-              width={1536}
-              height={1024}
+              width={1400}
+              height={933}
               className="mx-auto h-auto w-full max-w-lg"
               aria-hidden
             />

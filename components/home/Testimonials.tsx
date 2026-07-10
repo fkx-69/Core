@@ -1,7 +1,6 @@
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import Card from "@/components/ui/Card";
 
 const TESTIMONIALS = [
   {
@@ -27,10 +26,12 @@ const TESTIMONIALS = [
   },
 ];
 
-/** Trois témoignages clients, guillemet géant en filigrane sur chaque carte. */
+/** Trois témoignages en colonnes éditoriales séparées par des filets —
+ *  guillemet géant filaire, citation, signature sous un filet (pas de cartes,
+ *  même langage calme que « Pourquoi Core »). */
 export default function Testimonials() {
   return (
-    <section className="py-24 sm:py-32">
+    <section className="bg-background py-24 sm:py-32">
       <Container>
         <Reveal>
           <SectionHeading
@@ -39,29 +40,33 @@ export default function Testimonials() {
             align="center"
           />
         </Reveal>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-0 md:divide-x md:divide-line">
           {TESTIMONIALS.map((testimonial, i) => (
-            <Reveal key={testimonial.name} delay={i * 100} className="h-full">
-              <Card className="flex h-full flex-col p-8">
+            <Reveal key={testimonial.name} delay={i * 100} className="md:px-8">
+              <figure className="flex h-full flex-col">
                 <span
-                  className="text-outline font-display text-6xl leading-none font-bold select-none"
+                  className="text-outline font-display text-7xl leading-none font-bold select-none"
                   aria-hidden
                 >
                   “
                 </span>
-                <p className="mt-4 leading-relaxed text-foreground">
+                <blockquote className="mt-3 mb-6 leading-relaxed text-foreground">
                   {testimonial.quote}
-                </p>
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft font-semibold text-accent">
+                </blockquote>
+                <figcaption className="mt-auto flex items-center gap-3 border-t border-line/80 pt-6">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft font-semibold text-accent">
                     {testimonial.initials}
-                  </div>
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted">{testimonial.role}</p>
-                  </div>
-                </div>
-              </Card>
+                  </span>
+                  <span>
+                    <span className="block font-semibold">
+                      {testimonial.name}
+                    </span>
+                    <span className="block text-sm text-muted">
+                      {testimonial.role}
+                    </span>
+                  </span>
+                </figcaption>
+              </figure>
             </Reveal>
           ))}
         </div>
