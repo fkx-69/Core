@@ -267,6 +267,71 @@ html.theme-transition * {
   }
 }
 
+/* — Ambiances de marque du héro-scène — une classe par démo vitrine active.
+   Immersion totale : fond, encre, muted, filets et accent viennent de la
+   marque affichée. Palettes absolues (identiques en light et dark : la
+   marque EST le thème) ; accents et muted vérifiés AA sur leur fond. */
+.hero-theme-table-doree {
+  --hero-bg: #faf6ef;
+  --hero-ink: #241d16;
+  --hero-muted: #6b5c4a;
+  --hero-line: #e3d8c2;
+  --hero-surface: #fffdf8;
+  --hero-accent: #b45309;
+  --hero-accent-ink: #ffffff;
+  --hero-halo: rgb(180 83 9 / 0.14);
+}
+.hero-theme-volt {
+  --hero-bg: #0a0a0e;
+  --hero-ink: #f4f4f5;
+  --hero-muted: #a1a1aa;
+  --hero-line: #26262e;
+  --hero-surface: #15151b;
+  --hero-accent: #38bdf8;
+  --hero-accent-ink: #0a0a0e;
+  --hero-halo: rgb(56 189 248 / 0.13);
+}
+.hero-theme-elixir {
+  --hero-bg: #f7f3ec;
+  --hero-ink: #2c241b;
+  --hero-muted: #6e604c;
+  --hero-line: #e6dcc8;
+  --hero-surface: #fffcf5;
+  --hero-accent: #8a6a3b;
+  --hero-accent-ink: #ffffff;
+  --hero-halo: rgb(176 141 87 / 0.18);
+}
+.hero-theme-ecrin {
+  --hero-bg: #faf5f1;
+  --hero-ink: #3d2c29;
+  --hero-muted: #6b544e;
+  --hero-line: #ecdccf;
+  --hero-surface: #fffaf6;
+  --hero-accent: #b4552f;
+  --hero-accent-ink: #ffffff;
+  --hero-halo: rgb(201 111 74 / 0.14);
+}
+
+/* Barre de progression de l'auto-rotation du héro : le minuteur, c'est elle.
+   onAnimationEnd déclenche le passage à la démo suivante ; reduced-motion
+   coupe l'animation → l'événement ne part jamais, l'autoplay meurt seul. */
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.hero-progress {
+  animation: hero-progress 5s linear forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-progress {
+    animation: none;
+  }
+}
+
 /* Transitions d'écrans dans les démos */
 @keyframes screen-in {
   from {

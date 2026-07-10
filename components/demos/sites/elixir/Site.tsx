@@ -302,93 +302,106 @@ export default function Site() {
       <main>
         {/* ============================ HERO ============================ */}
         <section className="relative overflow-hidden border-b border-[#e4dac7]">
-          <Shell className="grid gap-10 pt-12 pb-14 @3xl:grid-cols-[minmax(0,1fr)_minmax(0,1.04fr)] @3xl:items-center @3xl:gap-14 @3xl:pt-20 @3xl:pb-24 @5xl:gap-20 @5xl:pt-24 @5xl:pb-28">
-            <div className="screen-in">
-              <Eyebrow>Haute parfumerie · Cocody</Eyebrow>
-              <h1 className="mt-6 [font-family:var(--font-elixir-display)] font-light leading-[0.9] tracking-[-0.01em] text-[#241d15]">
-                <span className="block text-[3.6rem] @sm:text-7xl @2xl:text-8xl @5xl:text-[7.5rem]">
-                  Maison
-                </span>
-                <span className="mt-1 block text-[3.6rem] italic text-[#3a2f22] @sm:text-7xl @2xl:text-8xl @5xl:text-[7.5rem]">
-                  Élixir
-                </span>
-              </h1>
-              <div className="elx-rule mt-6 h-px w-40 @3xl:w-52" aria-hidden />
-              <p className="mt-6 max-w-md [font-family:var(--font-elixir-display)] text-xl leading-relaxed text-[#4a4034] @2xl:text-2xl">
-                Trois eaux de parfum composées à la main, à partir des matières
-                premières de l&apos;Afrique de l&apos;Ouest — vétiver, karité,
-                bissap, fleur d&apos;oranger.
-              </p>
+          <div className="relative flex min-h-[580px] flex-col justify-end bg-[#17130d] @3xl:min-h-[680px] @5xl:min-h-[760px]">
+            <Image
+              src="/assets/demos/parfum/hero.webp"
+              alt="Flacon d'eau de parfum Maison Élixir posé sur une pierre de travertin, drapé de soie dorée"
+              fill
+              preload
+              sizes="100vw"
+              /* Le flacon est à ~65 % de la largeur de la source : en cadre
+                 étroit, le crop centré le sortirait du champ. */
+              className="object-cover object-[62%_50%] @3xl:object-center"
+            />
+            {/* Voile pour la lisibilité : dense en pied de section, renforcé
+                sur la colonne de texte à gauche. */}
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-[#17130d]/90 via-[#17130d]/40 to-[#17130d]/25"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-r from-[#17130d]/65 via-[#17130d]/25 to-transparent"
+            />
+            <span
+              className="pointer-events-none absolute inset-3 border border-[#f7f3ec]/20 @3xl:inset-5"
+              aria-hidden
+            />
 
-              <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <button
-                  type="button"
-                  onClick={() => scrollTo("elx-collection")}
-                  className="inline-flex items-center bg-[#241d15] px-7 py-3.5 text-[11px] uppercase tracking-[0.24em] text-[#f4ecdd] transition-colors hover:bg-[#3a2f22] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b08d57] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f3ec]"
-                >
-                  Découvrir la collection
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollTo("elx-maison")}
-                  className="border-b border-[#c3b596] pb-1 text-[11px] uppercase tracking-[0.24em] text-[#5f5545] transition-colors hover:border-[#8a5a24] hover:text-[#8a5a24] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b08d57]"
-                >
-                  La maison
-                </button>
+            <Shell className="relative pt-28 pb-12 @3xl:pt-40 @3xl:pb-16">
+              <div className="screen-in max-w-2xl">
+                <Eyebrow tone="encre">Haute parfumerie · Cocody</Eyebrow>
+                <h1 className="mt-6 [font-family:var(--font-elixir-display)] font-light leading-[0.9] tracking-[-0.01em] text-[#f4ecdd]">
+                  <span className="block text-[3.6rem] @sm:text-7xl @2xl:text-8xl @5xl:text-[7.5rem]">
+                    Maison
+                  </span>
+                  <span className="mt-1 block text-[3.6rem] italic text-[#e9d3a8] @sm:text-7xl @2xl:text-8xl @5xl:text-[7.5rem]">
+                    Élixir
+                  </span>
+                </h1>
+                <div className="elx-rule mt-6 h-px w-40 @3xl:w-52" aria-hidden />
+                <p className="mt-6 max-w-md [font-family:var(--font-elixir-display)] text-xl leading-relaxed text-[#e9e0cf] @2xl:text-2xl">
+                  Trois eaux de parfum composées à la main, à partir des matières
+                  premières de l&apos;Afrique de l&apos;Ouest — vétiver, karité,
+                  bissap, fleur d&apos;oranger.
+                </p>
+
+                <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("elx-collection")}
+                    className="inline-flex items-center bg-[#f4ecdd] px-7 py-3.5 text-[11px] uppercase tracking-[0.24em] text-[#241d15] transition-colors hover:bg-[#e9d3a8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b08d57] focus-visible:ring-offset-2 focus-visible:ring-offset-[#17130d]"
+                  >
+                    Découvrir la collection
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("elx-maison")}
+                    className="border-b border-[#f4ecdd]/40 pb-1 text-[11px] uppercase tracking-[0.24em] text-[#e9e0cf] transition-colors hover:border-[#c9a877] hover:text-[#c9a877] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b08d57]"
+                  >
+                    La maison
+                  </button>
+                </div>
               </div>
 
-              <dl className="mt-10 flex gap-8 border-t border-[#e4dac7] pt-6 text-[10px] uppercase tracking-[0.22em] text-[#6f6455] @3xl:mt-12">
-                <div>
-                  <dt className="sr-only">Fondée en</dt>
-                  <dd>
-                    <span className="[font-family:var(--font-elixir-display)] text-2xl tracking-normal text-[#241d15]">
-                      2019
-                    </span>
-                    <span className="mt-1 block">Fondée à Abidjan</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="sr-only">Nombre de parfums</dt>
-                  <dd>
-                    <span className="[font-family:var(--font-elixir-display)] text-2xl tracking-normal text-[#241d15]">
-                      3
-                    </span>
-                    <span className="mt-1 block">Eaux de parfum</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="sr-only">Production</dt>
-                  <dd>
-                    <span className="[font-family:var(--font-elixir-display)] text-2xl tracking-normal text-[#241d15]">
-                      100 %
-                    </span>
-                    <span className="mt-1 block">Assemblé en atelier</span>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-
-            <div className="screen-in relative">
-              <div className="relative aspect-[16/12] overflow-hidden bg-[#e9e0cf] @3xl:aspect-[5/6]">
-                <Image
-                  src="/assets/demos/parfum/hero.webp"
-                  alt="Flacon d'eau de parfum Maison Élixir posé sur une pierre de travertin, drapé de soie dorée"
-                  fill
-                  preload
-                  sizes="(min-width: 1280px) 620px, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
-                />
-                <span
-                  className="pointer-events-none absolute inset-3 border border-[#f7f3ec]/25"
-                  aria-hidden
-                />
+              <div className="screen-in mt-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-6 border-t border-[#f4ecdd]/20 pt-6 @3xl:mt-12">
+                <dl className="flex gap-8 text-[10px] uppercase tracking-[0.22em] text-[#cbbfa8]">
+                  <div>
+                    <dt className="sr-only">Fondée en</dt>
+                    <dd>
+                      <span className="[font-family:var(--font-elixir-display)] text-2xl tracking-normal text-[#f4ecdd]">
+                        2019
+                      </span>
+                      <span className="mt-1 block">Fondée à Abidjan</span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="sr-only">Nombre de parfums</dt>
+                    <dd>
+                      <span className="[font-family:var(--font-elixir-display)] text-2xl tracking-normal text-[#f4ecdd]">
+                        3
+                      </span>
+                      <span className="mt-1 block">Eaux de parfum</span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="sr-only">Production</dt>
+                    <dd>
+                      <span className="[font-family:var(--font-elixir-display)] text-2xl tracking-normal text-[#f4ecdd]">
+                        100 %
+                      </span>
+                      <span className="mt-1 block">Assemblé en atelier</span>
+                    </dd>
+                  </div>
+                </dl>
+                <p className="hidden items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-[#cbbfa8] @xl:flex">
+                  <span>Collection Signature</span>
+                  <span className="h-px w-7 bg-[#c9a877]/50" aria-hidden />
+                  <span>N° 01 — 03</span>
+                </p>
               </div>
-              <p className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-[#9a8b73]">
-                <span>Collection Signature</span>
-                <span>N° 01 — 03</span>
-              </p>
-            </div>
-          </Shell>
+            </Shell>
+          </div>
         </section>
 
         {/* ========================= LA COLLECTION ========================= */}
@@ -426,7 +439,8 @@ export default function Site() {
                           src={parfum.image}
                           alt={`Flacon ${parfum.nom}`}
                           fill
-                          sizes="(min-width: 576px) 33vw, 100vw"
+                          /* Cadre 3/4 sur source carrée : ~75 % visible. */
+                          sizes="(min-width: 576px) 44vw, 100vw"
                           className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                         />
                         <span
@@ -478,7 +492,8 @@ export default function Site() {
                   src={selection.image}
                   alt={`Flacon ${selection.nom} — eau de parfum Maison Élixir`}
                   fill
-                  sizes="(min-width: 576px) 42vw, 100vw"
+                  /* Cadre 4/5 sur source carrée : ~80 % visible. */
+                  sizes="(min-width: 576px) 53vw, 100vw"
                   className="screen-in object-cover"
                 />
                 <span

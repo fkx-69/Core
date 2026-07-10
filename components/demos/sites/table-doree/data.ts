@@ -40,6 +40,12 @@ export const IMAGES = {
     src: "/assets/demos/resto/chef.webp",
     alt: "Le chef Ousmane Dieng en cuisine, concentré sur un dressage",
   },
+  /** Recadrage 4/5 dédié au portrait de « La maison » — évite le crop
+   *  object-cover qui fait servir à next/image une variante trop petite. */
+  chefPortrait: {
+    src: "/assets/demos/resto/chef-portrait.webp",
+    alt: "Le chef Ousmane Dieng en cuisine, concentré sur un dressage",
+  },
   terrasse: {
     src: "/assets/demos/resto/terrasse.webp",
     alt: "La terrasse ombragée du restaurant, tables dressées sous les arbres",

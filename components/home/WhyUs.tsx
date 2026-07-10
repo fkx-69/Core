@@ -45,7 +45,7 @@ export default function WhyUs() {
             alt=""
             width={960}
             height={280}
-            className="max-w-2xl h-auto"
+            className="w-full max-w-2xl h-auto"
             aria-hidden
           />
         </Reveal>

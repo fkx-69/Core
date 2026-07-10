@@ -346,7 +346,8 @@ export default function Site() {
                     src="/assets/demos/salon/hero.webp"
                     alt="Salle d'accueil chaleureuse du salon L'Écrin, au Plateau"
                     fill
-                    sizes="660px"
+                    /* Cadre ~5/4 sur source 3:2 : ~85 % visible en largeur. */
+                    sizes="780px"
                     preload
                     className="object-cover"
                   />
@@ -579,7 +580,9 @@ export default function Site() {
                         src={g.image}
                         alt={g.alt}
                         fill
-                        sizes="360px"
+                        /* Arche portrait sur source carrée ou 3:2 : le crop
+                           latéral impose un hint plus large que l'affichage. */
+                        sizes="480px"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>

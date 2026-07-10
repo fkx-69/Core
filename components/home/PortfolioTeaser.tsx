@@ -9,19 +9,19 @@ import Reveal from "@/components/ui/Reveal";
 
 const TEASERS = [
   {
-    anchor: DEMO_ANCHORS.vitrine,
-    title: "Sites vitrines · 4 démos",
-    text: "Restaurant, boisson énergisante, maison de parfum, salon de beauté — quatre identités, quatre vrais sites.",
-  },
-  {
     anchor: DEMO_ANCHORS.dashboard,
     title: "Applications web · 2 démos",
-    text: "Dashboard de ventes et gestion de pressing en kanban — des données qui réagissent en direct.",
+    text: "Dashboard de ventes et gestion de pressing en kanban — trop grandes pour le héro, elles se testent en taille réelle.",
   },
   {
     anchor: DEMO_ANCHORS.mobile,
     title: "Applications mobiles · 2 démos",
     text: "Livraison de repas et néo-banque — panier, virements, suivi en temps réel.",
+  },
+  {
+    anchor: DEMO_ANCHORS.vitrine,
+    title: "Sites vitrines · 4 démos",
+    text: "Restaurant, boisson énergisante, maison de parfum, salon de beauté — les quatre identités entrevues plus haut, en pleine page.",
   },
 ];
 
@@ -44,7 +44,7 @@ export default function PortfolioTeaser() {
               <SectionHeading
                 eyebrow="Portfolio"
                 title="Des démos, pas des promesses"
-                intro="Chaque démo est une vraie mini-application interactive : cliquez, filtrez, commandez — tout réagit."
+                intro="Le héro vous a montré les vitrines ; voici le reste. Chaque démo est une vraie mini-application interactive : cliquez, filtrez, commandez — tout réagit."
               />
             </Reveal>
             <Reveal delay={100}>

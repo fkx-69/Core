@@ -342,8 +342,8 @@ export default function Site() {
                   <figure>
                     <div className="relative aspect-[4/5] overflow-hidden bg-[#e9dfc9]">
                       <Image
-                        src={IMAGES.chef.src}
-                        alt={IMAGES.chef.alt}
+                        src={IMAGES.chefPortrait.src}
+                        alt={IMAGES.chefPortrait.alt}
                         fill
                         sizes="(min-width: 1024px) 440px, (min-width: 768px) 45vw, 100vw"
                         className="object-cover"
