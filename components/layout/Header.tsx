@@ -11,6 +11,7 @@ import Container from "@/components/ui/Container";
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Ferme le menu mobile à l'appui sur Échap (les liens le ferment au clic).
   useEffect(() => {
@@ -22,8 +23,29 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* En haut de la home, le header rejoint la scène du héro : il redéfinit
+   * localement les tokens sémantiques (--background, --accent…) vers les
+   * vars --hero-* posées sur <html> par HeroShowcase — logo, nav, toggle et
+   * CTA se rethèment sans changer leurs classes. Les fallbacks sont la
+   * palette Table Dorée, thème initial rendu au SSR. Au scroll (ou hors
+   * home), retour au chrome standard. */
+  const themed = pathname === "/" && !scrolled;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-background/80 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 border-b text-foreground transition-colors duration-500 ${
+        themed
+          ? "border-transparent bg-background [--accent-contrast:var(--hero-accent-ink,#ffffff)] [--accent-hover:var(--hero-accent,#b45309)] [--accent-soft:var(--hero-halo)] [--accent:var(--hero-accent,#b45309)] [--background:var(--hero-bg,#faf6ef)] [--foreground:var(--hero-ink,#241d16)] [--line:var(--hero-line,#e3d8c2)] [--muted:var(--hero-muted,#6b5c4a)] [--surface-raised:var(--hero-surface,#fffdf8)] [--surface:var(--hero-surface,#fffdf8)]"
+          : "border-line bg-background/80 backdrop-blur"
+      }`}
+    >
       <Container className="flex h-16 items-center justify-between">
         <Link
           href="/"

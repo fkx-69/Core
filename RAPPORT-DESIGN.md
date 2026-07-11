@@ -2,6 +2,8 @@
 
 *Audit du 10 juillet 2026, branche `refonte/skills-redesign`. Méthode : lecture du code (pages `app/(site)`, composants `home/`, `layout/`, `ui/`, `shared/`), captures Playwright pleine page des 4 pages en desktop 1440 (clair + sombre) et mobile 390 (clair), inspection des PNG d'illustration (dimensions, alpha), sondes DOM (chargement des images, tailles servies).*
 
+> **Statut (11 juillet 2026)** : étapes 1 à 4 + finitions sûres **implémentées et vérifiées** (tsc, ESLint, captures light/dark/mobile). Notes d'implémentation : P1-1 résolu en supprimant l'image (pas de régénération) ; **P2-6 abandonné** — le filtre CSS `invert + hue-rotate` a été essayé puis retiré (rendu jugé mauvais) : les illustrations restent en version claire dans les deux modes, la seule voie propre restante est de générer de vraies variantes sombres des assets ; `loading="eager"` ajouté aux illustrations d'intro (LCP signalé par Next). **Restent à arbitrer** : P4-14 (identité couleur), P4-16 (mur de logos fictifs), la frise « Pourquoi Core » (P4-17b) et les variantes sombres d'illustrations (P2-6).
+
 ---
 
 ## Ce qui tient déjà très bien (à ne pas casser)
@@ -118,12 +120,12 @@ Les huit marques sont fictives (cohérentes avec les témoignages — bien vu), 
 
 ## Ordre d'attaque suggéré
 
-| Étape | Contenu | Effort |
+| Étape | Contenu | Statut |
 |---|---|---|
-| 1 | P1-1, P1-4, P1-5, P3-13 (nettoyages sûrs, une session) | ~1 h |
-| 2 | P1-2 + P1-3 (header thémé + CTA héro — le premier écran) | ½ journée |
-| 3 | P2 complet (passe mode sombre, dont variantes d'illustrations) | 1 journée |
-| 4 | P3-9/10/11/12 (structure pages) | 1 journée |
-| 5 | P4 (identité couleur, témoignages, mur de logos) | à arbitrer |
+| 1 | P1-1, P1-4, P1-5, P3-13 (nettoyages sûrs, une session) | ✅ fait |
+| 2 | P1-2 + P1-3 (header thémé + CTA héro — le premier écran) | ✅ fait |
+| 3 | P2-7/8 (poster chiffres, filigranes CTA) — P2-6 abandonné, illustrations laissées claires | ✅ / ⏳ |
+| 4 | P3-9/10/11/12 (structure pages) | ✅ fait |
+| 5 | P4 — témoignages (15) et stagger Reveal (17a) faits ; identité couleur (14), mur de logos (16), frise Pourquoi Core (17b) | ⏳ à arbitrer |
 
 **Captures de référence** (générées pour cet audit) : `/tmp/claude-1000/-home-ubuntu-code-core/aa87786b-a314-4edc-bb41-6d3ff2d1f395/scratchpad/v2-*.png` — desktop clair/sombre + mobile pour les 4 pages.

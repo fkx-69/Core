@@ -41,6 +41,7 @@ export default function WhyUs() {
             alt=""
             width={1400}
             height={369}
+            sizes="(min-width: 768px) 42rem, 100vw"
             className="w-full max-w-2xl h-auto"
             aria-hidden
           />

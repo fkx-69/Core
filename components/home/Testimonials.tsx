@@ -2,27 +2,50 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 
-const TESTIMONIALS = [
+// Le résultat concret de chaque citation est graissé : en lecture rapide,
+// la section devient une rangée de preuves.
+const TESTIMONIALS: {
+  initials: string;
+  name: string;
+  role: string;
+  quote: React.ReactNode;
+}[] = [
   {
     initials: "AN",
     name: "Awa Ndiaye",
     role: "Directrice — Téranga Bistro, Dakar",
-    quote:
-      "Le site a doublé nos réservations en trois mois. Les clients commandent depuis Dakar comme depuis la diaspora, et l'intégration Wave a tout changé pour les acomptes.",
+    quote: (
+      <>
+        Le site a <strong className="font-semibold">doublé nos réservations
+        en trois mois</strong>. Les clients commandent depuis Dakar comme
+        depuis la diaspora, et l&apos;intégration Wave a tout changé pour les
+        acomptes.
+      </>
+    ),
   },
   {
     initials: "YK",
     name: "Yao Koffi",
     role: "Gérant — Sandaga Market, Abidjan",
-    quote:
-      "Le dashboard remplace trois cahiers et un tableur. Je vois le chiffre du jour en FCFA, les retards et les stocks — depuis mon téléphone.",
+    quote: (
+      <>
+        Le dashboard <strong className="font-semibold">remplace trois cahiers
+        et un tableur</strong>. Je vois le chiffre du jour en FCFA, les
+        retards et les stocks — depuis mon téléphone.
+      </>
+    ),
   },
   {
     initials: "MD",
     name: "Mariama Diallo",
     role: "Fondatrice — Baobab Pay, Dakar",
-    quote:
-      "Livrée en six semaines, jalons tenus, zéro jargon. L'équipe comprend les réalités du mobile money mieux que certaines banques.",
+    quote: (
+      <>
+        <strong className="font-semibold">Livrée en six semaines, jalons
+        tenus, zéro jargon.</strong> L&apos;équipe comprend les réalités du
+        mobile money mieux que certaines banques.
+      </>
+    ),
   },
 ];
 

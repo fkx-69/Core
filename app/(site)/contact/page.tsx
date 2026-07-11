@@ -17,6 +17,22 @@ export const metadata: Metadata = {
 
 const WHATSAPP_HREF = `https://wa.me/${CONTACT_INFO.whatsapp.replace(/\D/g, "")}`;
 
+// Ce qui se passe après l'envoi — même promesse que la timeline « Méthode ».
+const NEXT_STEPS = [
+  {
+    title: "Réponse sous 24 h",
+    text: "Un premier avis technique sur votre besoin, par e-mail ou WhatsApp.",
+  },
+  {
+    title: "Appel de cadrage",
+    text: "Trente minutes pour préciser le périmètre, les délais et les priorités.",
+  },
+  {
+    title: "Devis sous 48 h",
+    text: "Chiffré poste par poste, en FCFA, sans engagement.",
+  },
+];
+
 const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Quels sont vos tarifs ?",
@@ -60,7 +76,38 @@ export default function ContactPage() {
         </div>
 
         <div className="grid gap-10 lg:grid-cols-[2fr_1fr] lg:gap-14">
-          <ContactForm />
+          <div>
+            <ContactForm />
+            {/* « Et ensuite ? » : équilibre la colonne face au rail et ancre
+                la promesse — nœuds numérotés et pointillés teal, écho de la
+                timeline Méthode de la page Services. */}
+            <div className="mt-14">
+              <h2 className="font-display text-lg font-semibold">
+                Et ensuite ?
+              </h2>
+              <ol className="mt-6 grid gap-8 sm:grid-cols-3">
+                {NEXT_STEPS.map((step, i) => (
+                  <li key={step.title} className="relative">
+                    {i < NEXT_STEPS.length - 1 && (
+                      <span
+                        aria-hidden
+                        className="absolute top-4 left-10 hidden w-[calc(100%-2.5rem)] border-t border-dashed border-teal/50 sm:block"
+                      />
+                    )}
+                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border border-accent bg-background font-display text-sm font-semibold text-accent">
+                      {i + 1}
+                    </span>
+                    <h3 className="mt-4 font-display text-sm font-semibold">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                      {step.text}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
 
           {/* Rail indigo doux continu (réf 8) */}
           <aside className="h-fit rounded-card bg-accent-soft/60 p-8 lg:sticky lg:top-24">
@@ -143,8 +190,8 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-20 sm:mt-24">
-          <SectionHeading eyebrow="FAQ" title="Questions fréquentes" />
-          <div className="mt-10 max-w-3xl">
+          <SectionHeading eyebrow="FAQ" title="Questions fréquentes" align="center" />
+          <div className="mx-auto mt-10 max-w-3xl">
             <Faq items={FAQ_ITEMS} />
           </div>
         </div>

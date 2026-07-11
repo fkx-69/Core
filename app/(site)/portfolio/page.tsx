@@ -126,13 +126,19 @@ export default function PortfolioPage() {
                 title="Des démos à essayer, pas des captures d'écran"
                 intro="Huit projets fictifs, huit vraies interfaces fonctionnelles. Cliquez, filtrez, réservez, commandez — et visitez chaque site vitrine en pleine page, comme s'il était déjà en ligne : chaque projet réagit comme un produit réellement livré par Core."
               />
+              {/* Sommaire ancré : trois écrans-fleuves plus bas, ces pilules y mènent. */}
               <ul className="mt-6 flex flex-wrap gap-2">
-                {["8 démos", "3 catégories", "0 capture d'écran"].map((chip) => (
-                  <li
-                    key={chip}
-                    className="rounded-full border border-line bg-surface-raised px-4 py-1.5 text-sm text-muted"
-                  >
-                    {chip}
+                {DEMO_SECTIONS.map((section) => (
+                  <li key={section.anchor}>
+                    <a
+                      href={`#${section.anchor}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-1.5 text-sm text-muted transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      {section.kind}
+                      <span className="text-xs font-semibold text-accent">
+                        {section.entries.length}
+                      </span>
+                    </a>
                   </li>
                 ))}
               </ul>

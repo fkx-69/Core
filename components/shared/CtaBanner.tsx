@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/site";
 import Container from "@/components/ui/Container";
@@ -22,19 +21,11 @@ export default function CtaBanner({
   return (
     <section className="relative overflow-hidden bg-accent py-24 text-accent-contrast sm:py-28">
       <div
-        className="dot-grid-inverse absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,transparent_35%,black_100%)]"
-        aria-hidden
-      />
-      <Image
-        src="/assets/illustrations/home-cta.png"
-        alt=""
-        width={600}
-        height={600}
-        className="absolute -bottom-8 -right-12 hidden h-auto w-96 opacity-25 sm:block"
+        className="dot-grid-accent absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,transparent_35%,black_100%)]"
         aria-hidden
       />
       <span
-        className="text-outline-inverse pointer-events-none absolute -bottom-10 -left-4 hidden select-none font-display text-[10rem] font-bold leading-none lg:block"
+        className="text-outline-accent pointer-events-none absolute -bottom-10 -left-4 hidden select-none font-display text-[10rem] font-bold leading-none lg:block"
         aria-hidden
       >
         Core.
@@ -54,11 +45,13 @@ export default function CtaBanner({
             <Button href="/contact" variant="inverted" size="lg">
               Discutons-en
             </Button>
+            {/* accent-contrast plutôt que white : blanc sur l'indigo en clair,
+                encre sur le périwinkle en sombre. */}
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold transition-colors hover:border-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="inline-flex items-center gap-2 rounded-full border border-accent-contrast/30 px-6 py-3 text-sm font-semibold transition-colors hover:border-accent-contrast/60 hover:bg-accent-contrast/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-contrast"
             >
               <MessageCircle className="h-4 w-4" aria-hidden />
               Écrivez-nous sur WhatsApp
@@ -66,7 +59,7 @@ export default function CtaBanner({
           </div>
           {/* Pastille qui répond à celle du héro — la page se referme comme
               elle s'est ouverte, sur la disponibilité. */}
-          <p className="mt-8 inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm">
+          <p className="mt-8 inline-flex items-center gap-2.5 rounded-full border border-accent-contrast/25 bg-accent-contrast/10 px-4 py-1.5 text-sm">
             <span
               className="animate-pulse-dot h-2 w-2 rounded-full bg-[#4cd6a1]"
               aria-hidden

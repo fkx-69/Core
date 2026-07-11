@@ -9,7 +9,7 @@ export default function Reveal({
   className = "",
   children,
 }: {
-  /** Décalage en ms, pour échelonner des éléments voisins. */
+  /** Décalage en ms, pour échelonner des éléments voisins (desktop seulement). */
   delay?: number;
   /** Direction d'entrée — mappe sur les classes .reveal-* de globals.css. */
   variant?: "up" | "left" | "right" | "scale";
@@ -39,7 +39,11 @@ export default function Reveal({
     <div
       ref={ref}
       className={`reveal ${variant !== "up" ? `reveal-${variant}` : ""} ${visible ? "is-visible" : ""} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={
+        delay
+          ? ({ "--reveal-delay": `${delay}ms` } as React.CSSProperties)
+          : undefined
+      }
     >
       {children}
     </div>

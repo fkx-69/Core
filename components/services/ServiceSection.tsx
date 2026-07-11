@@ -8,7 +8,9 @@ import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import { SERVICE_ILLUSTRATIONS } from "@/components/services/serviceIllustrations";
 
-/** Bloc service : numéral filaire, récit à gauche, rail bénéfices à droite (réf 6). */
+/** Bloc service : numéral filaire, récit et rail bénéfices (réf 6). Les
+ *  sections alternées (02, 04) changent de fond ET se miroitent — le rail
+ *  passe à gauche, pour casser la répétition des quatre blocs. */
 export default function ServiceSection({
   service,
   index,
@@ -29,8 +31,17 @@ export default function ServiceSection({
       className={`group scroll-mt-24 py-16 sm:py-24 ${alternate ? "bg-surface" : ""}`}
     >
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-0">
-          <Reveal variant="left" className="lg:pr-14">
+        <div
+          className={`grid gap-12 lg:gap-0 ${
+            alternate
+              ? "lg:grid-cols-[1fr_1.6fr]"
+              : "lg:grid-cols-[1.6fr_1fr]"
+          }`}
+        >
+          <Reveal
+            variant={alternate ? "right" : "left"}
+            className={alternate ? "lg:order-2 lg:pl-14" : "lg:pr-14"}
+          >
             <div>
               <p
                 aria-hidden
@@ -63,9 +74,13 @@ export default function ServiceSection({
           </Reveal>
 
           <Reveal
-            variant="right"
+            variant={alternate ? "left" : "right"}
             delay={100}
-            className="flex flex-col gap-6 lg:border-l lg:border-line lg:pl-14"
+            className={`flex flex-col gap-6 ${
+              alternate
+                ? "lg:order-1 lg:border-r lg:border-line lg:pr-14"
+                : "lg:border-l lg:border-line lg:pl-14"
+            }`}
           >
               {SERVICE_ILLUSTRATIONS[service.id] && (
                 <div className="relative aspect-square w-full max-w-xs">

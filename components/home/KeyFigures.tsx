@@ -15,8 +15,10 @@ const FIGURES = [
 export default function KeyFigures() {
   return (
     // border-y : délimite la bande en mode sombre, où le fond du site est
-    // aussi #0b0d13 (invisible en clair, la bande contraste déjà).
-    <section className="relative overflow-hidden border-y border-white/10 bg-[#0b0d13] py-20 sm:py-24">
+    // aussi #0b0d13 (invisible en clair, la bande contraste déjà). Le dégradé
+    // indigo profond (dark) recrée le « moment poster » que l'inversion
+    // clair/sombre produit d'elle-même en mode clair.
+    <section className="relative overflow-hidden border-y border-white/10 bg-[#0b0d13] py-20 sm:py-24 dark:bg-linear-to-b dark:from-[#141733] dark:to-[#0b0d13]">
       <div
         className="dot-grid-inverse pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
         aria-hidden

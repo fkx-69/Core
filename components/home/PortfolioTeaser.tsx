@@ -95,6 +95,7 @@ export default function PortfolioTeaser() {
               alt=""
               width={1400}
               height={933}
+              sizes="(min-width: 640px) 32rem, 100vw"
               className="mx-auto h-auto w-full max-w-lg"
               aria-hidden
             />

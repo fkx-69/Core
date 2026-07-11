@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import Container from "@/components/ui/Container";
 import BrowserFrame from "@/components/demos/mockups/BrowserFrame";
 import { HERO_SITES, type HeroSiteId } from "./sites";
@@ -120,6 +120,16 @@ export default function HeroShowcase() {
     };
   }, []);
 
+  // Reflète le thème de marque actif sur <html> : le header, hors de cette
+  // arborescence, peint les mêmes vars --hero-* tant qu'on est en haut de la
+  // home (la section, elle, porte l'attribut dès le SSR).
+  useEffect(() => {
+    document.documentElement.dataset.heroTheme = active;
+    return () => {
+      delete document.documentElement.dataset.heroTheme;
+    };
+  }, [active]);
+
   // Onglet de navigateur masqué : pause (le animationend pourrait sinon
   // partir en différé au retour et provoquer un switch fantôme).
   useEffect(() => {
@@ -168,7 +178,8 @@ export default function HeroShowcase() {
 
   return (
     <section
-      className={`hero-theme-${active} relative overflow-hidden bg-[color:var(--hero-bg)] transition-colors duration-700 lg:min-h-[calc(100svh-4rem)]`}
+      data-hero-theme={active}
+      className="relative overflow-hidden bg-[color:var(--hero-bg)] transition-colors duration-700 lg:min-h-[calc(100svh-4rem)]"
     >
       {/* Halo de marque — couleur pleine + blur (transitionnable). Premier
           enfant, sans z négatif : derrière le contenu, devant le fond. */}
@@ -239,15 +250,27 @@ export default function HeroShowcase() {
           <p className="text-xs text-[color:var(--hero-muted)] transition-colors duration-700">
             {site.secteur} — aperçu interactif, tout réagit.
           </p>
-          <Link
-            href={site.href}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-1.5 text-xs font-medium text-[color:var(--hero-muted)] shadow-card transition-colors duration-300 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)]"
-          >
-            <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-            Visiter le site en entier
-          </Link>
+          {/* Le héro convainc, cette paire convertit : visite complète en
+              secondaire, « Démarrer un projet » en primaire aux couleurs de
+              la marque affichée. */}
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href={site.href}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-1.5 text-xs font-medium text-[color:var(--hero-muted)] shadow-card transition-colors duration-300 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)]"
+            >
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+              Visiter le site en entier
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--hero-accent)] px-4 py-1.5 text-sm font-semibold text-[color:var(--hero-accent-ink)] shadow-card transition-colors duration-300 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--hero-bg)]"
+            >
+              Démarrer un projet
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </div>
         </div>
         <p aria-live="polite" className="sr-only">
           Démo affichée : {site.nom} — {site.secteur}

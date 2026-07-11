@@ -91,14 +91,6 @@ export default function ServicesPreview() {
               href={`/services#${main.id}`}
               className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface-raised p-8 shadow-card transition duration-200 hover:-translate-y-1 hover:border-accent/50 hover:shadow-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              <Image
-                src="/assets/illustrations/home-services-preview.png"
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="absolute inset-0 -z-10 object-cover opacity-10"
-                aria-hidden
-              />
               <TileIndex n="01" />
               <CornerTicks />
               <TileIllustration
@@ -135,12 +127,14 @@ export default function ServicesPreview() {
                       {others[0].tagline}
                     </p>
                   </div>
-                  {/* pr-20 : dégage le numéral filaire « 02 » du coin. */}
-                  <div className="hidden pr-20 sm:block">
+                  {/* pr : dégage le numéral filaire « 02 » du coin. Vignette
+                      compacte en mobile — les tuiles 03/04 gardent la leur,
+                      celle-ci ne doit pas être la seule nue. */}
+                  <div className="shrink-0 pr-12 sm:pr-20">
                     <TileIllustration
                       serviceId={others[0].id}
-                      className="aspect-square w-48 shrink-0"
-                      sizes="192px"
+                      className="aspect-square w-24 sm:w-48"
+                      sizes="(min-width: 640px) 192px, 96px"
                     />
                   </div>
                 </div>

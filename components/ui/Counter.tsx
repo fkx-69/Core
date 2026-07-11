@@ -61,7 +61,8 @@ export default function Counter({
   }, [value, duration]);
 
   return (
-    <span ref={ref} className={className} aria-label={`${prefix}${value}${suffix}`}>
+    // tabular-nums : largeur stable pendant le comptage (le suffixe ne danse pas).
+    <span ref={ref} className={`tabular-nums ${className}`} aria-label={`${prefix}${value}${suffix}`}>
       {prefix}
       {done ? value : display}
       {suffix && <span className={suffixClassName}>{suffix}</span>}
