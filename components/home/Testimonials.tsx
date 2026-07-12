@@ -24,14 +24,14 @@ const TESTIMONIALS: {
     ),
   },
   {
-    initials: "YK",
-    name: "Yao Koffi",
-    role: "Gérant — Sandaga Market, Abidjan",
+    initials: "CS",
+    name: "Coumba Sène",
+    role: "Gérante — Boutique Lumen, Dakar",
     quote: (
       <>
         Le dashboard <strong className="font-semibold">remplace trois cahiers
-        et un tableur</strong>. Je vois le chiffre du jour en FCFA, les
-        retards et les stocks — depuis mon téléphone.
+        et un tableur</strong>. Je vois le chiffre du mois en FCFA, les
+        paiements à encaisser et les stocks — depuis mon téléphone.
       </>
     ),
   },

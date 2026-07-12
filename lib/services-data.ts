@@ -56,7 +56,7 @@ export const SERVICES: Service[] = [
     technologies: ["React", "Next.js", "Node.js", "PostgreSQL"],
     useCase: {
       title: "Cas d'usage : suivi des ventes",
-      text: "Une boutique de décoration d'Abidjan pilote désormais ses ventes depuis un dashboard : indicateurs clés, graphiques et gestion des commandes au même endroit, à jour en permanence.",
+      text: "Une boutique de décoration de Dakar pilote ses ventes et son stock depuis une même application : indicateurs en FCFA, alertes de réassort et encaissements Wave, Orange Money, espèces ou carte, à jour en permanence.",
     },
     priceFrom: "à partir de 4 000 000 FCFA",
     demoAnchor: DEMO_ANCHORS.dashboard,

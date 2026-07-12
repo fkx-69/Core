@@ -11,12 +11,15 @@ import BrowserFrame from "@/components/demos/mockups/BrowserFrame";
 export default function SitePreview({
   url,
   href,
+  linkLabel = "Visiter le site en entier",
   children,
 }: {
   /** Fausse URL affichée dans la barre du navigateur. */
   url: string;
   /** Route réelle de la page démo (/demos/…), ouverte dans un nouvel onglet. */
   href: string;
+  /** Libellé adapté au type de produit présenté. */
+  linkLabel?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -34,7 +37,7 @@ export default function SitePreview({
           className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-raised px-3 py-1.5 text-xs font-medium text-muted shadow-card transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-          Visiter le site en entier
+          {linkLabel}
         </Link>
       </div>
     </div>

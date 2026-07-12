@@ -5,7 +5,7 @@ import Site from "./Site";
 export default function TableDoreePreview() {
   return (
     <SitePreview url="https://latabledoree.sn" href="/demos/table-doree">
-      <Site />
+      <Site embedded imageSizes="(min-width: 1024px) 55vw, 100vw" />
     </SitePreview>
   );
 }

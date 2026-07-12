@@ -94,8 +94,16 @@ function Eyebrow({
 /*  Site                                                               */
 /* ------------------------------------------------------------------ */
 
-export default function Site() {
+export default function Site({
+  embedded = false,
+  imageSizes,
+}: {
+  embedded?: boolean;
+  imageSizes?: string;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const Main = embedded ? "div" : "main";
+  const HeroHeading = embedded ? "h2" : "h1";
 
   // Fermeture du panneau mobile à la touche Échap.
   useEffect(() => {
@@ -183,12 +191,12 @@ export default function Site() {
           </Shell>
 
           {/* Panneau mobile — absolu sous le header, jamais fixed */}
-          {menuOpen && (
-            <nav
-              id="td-nav-mobile"
-              aria-label="Menu"
-              className="absolute inset-x-0 top-full border-b border-[#e3d8c2] bg-[#faf6ef] shadow-[0_24px_40px_-28px_rgba(36,29,22,0.45)] @3xl:hidden"
-            >
+          <nav
+            id="td-nav-mobile"
+            aria-label="Menu"
+            hidden={!menuOpen}
+            className="absolute inset-x-0 top-full border-b border-[#e3d8c2] bg-[#faf6ef] shadow-[0_24px_40px_-28px_rgba(36,29,22,0.45)] @3xl:hidden"
+          >
               <Shell className="flex flex-col py-4">
                 {NAV_LINKS.map((link) => (
                   <a
@@ -217,12 +225,11 @@ export default function Site() {
                   </a>
                 </div>
               </Shell>
-            </nav>
-          )}
+          </nav>
         </div>
       </header>
 
-      <main>
+      <Main>
         {/* ============================ HERO ============================ */}
         <section aria-label="Présentation" className="relative">
           <div className="relative flex min-h-[540px] flex-col justify-end overflow-hidden @3xl:min-h-[640px] @5xl:min-h-[720px]">
@@ -230,8 +237,11 @@ export default function Site() {
               src={IMAGES.hero.src}
               alt={IMAGES.hero.alt}
               fill
-              priority
-              sizes="100vw"
+              preload
+              sizes={
+                imageSizes ??
+                (embedded ? "(min-width: 1024px) 84vw, 100vw" : "100vw")
+              }
               className="object-cover"
             />
             <div
@@ -245,13 +255,13 @@ export default function Site() {
                   <span aria-hidden className="h-px w-8 bg-amber-300/70" />
                   Restaurant gastronomique · Les Almadies, Dakar
                 </p>
-                <h1 className="mt-5 max-w-3xl text-[2.75rem] leading-[1.04] text-[#f7f1e4] @2xl:text-6xl @5xl:text-7xl [font-family:var(--font-td-serif)]">
+                <HeroHeading className="mt-5 max-w-3xl text-[2.75rem] leading-[1.04] text-[#f7f1e4] @2xl:text-6xl @5xl:text-7xl [font-family:var(--font-td-serif)]">
                   La grande cuisine sénégalaise,
                   <br />
                   <span className="italic text-amber-300">
                     servie face à l’océan.
                   </span>
-                </h1>
+                </HeroHeading>
               </Reveal>
 
               <Reveal delay={120} className="mt-9 flex flex-wrap items-center gap-4">
@@ -486,7 +496,7 @@ export default function Site() {
 
         {/* ========================= RÉSERVATION ========================== */}
         <ReservationSection />
-      </main>
+      </Main>
 
       {/* ============================ FOOTER ============================ */}
       <footer className="relative bg-[#1c150e] text-[#cbbda3]">

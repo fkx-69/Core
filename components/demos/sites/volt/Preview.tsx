@@ -5,7 +5,7 @@ import Site from "./Site";
 export default function VoltPreview() {
   return (
     <SitePreview url="https://drinkvolt.ci" href="/demos/volt">
-      <Site />
+      <Site embedded />
     </SitePreview>
   );
 }

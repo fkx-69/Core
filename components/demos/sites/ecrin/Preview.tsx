@@ -5,7 +5,7 @@ import Site from "./Site";
 export default function EcrinPreview() {
   return (
     <SitePreview url="https://lecrin.ci" href="/demos/ecrin">
-      <Site />
+      <Site embedded />
     </SitePreview>
   );
 }

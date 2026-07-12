@@ -16,7 +16,7 @@ function Skeleton({ minH }: { minH: string }) {
  * Les démos sont chargées dynamiquement (ssr: false — légal ici car composant
  * client) et montées à l'approche du viewport. Les hauteurs des skeletons
  * approchent celles des démos réelles pour que les ancres ne sautent pas.
- * Les quatre sites vitrines pointent vers les aperçus de demos/sites/*
+ * Les sites vitrines et applications web pointent vers leurs aperçus dédiés
  * (mockup navigateur ~48px + zone scrollable 560px + lien « Visiter » ~36px).
  */
 const DEMOS = {
@@ -49,17 +49,17 @@ const DEMOS = {
     }),
   },
   dashboard: {
-    minH: "min-h-[1200px]",
+    minH: "min-h-[640px]",
     Component: dynamic(
-      () => import("@/components/demos/dashboard/DashboardDemo"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[1200px]" /> },
+      () => import("@/components/demos/apps/lumen/Preview"),
+      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
     ),
   },
   pressing: {
-    minH: "min-h-[900px]",
+    minH: "min-h-[640px]",
     Component: dynamic(
-      () => import("@/components/demos/pressing/PressingDemo"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[900px]" /> },
+      () => import("@/components/demos/apps/sandaga/Preview"),
+      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
     ),
   },
   mobile: {

@@ -156,8 +156,10 @@ type Ligne = { key: number; parfum: Parfum; contenance: Contenance; prix: number
 /*  Site                                                              */
 /* ------------------------------------------------------------------ */
 
-export default function Site() {
+export default function Site({ embedded = false }: { embedded?: boolean }) {
   const reduce = usePrefersReducedMotion();
+  const Main = embedded ? "div" : "main";
+  const HeroHeading = embedded ? "h2" : "h1";
 
   // Sélection / fiche produit
   const [selection, setSelection] = useState<Parfum>(PARFUMS[0]);
@@ -299,7 +301,7 @@ export default function Site() {
         </Shell>
       </header>
 
-      <main>
+      <Main>
         {/* ============================ HERO ============================ */}
         <section className="relative overflow-hidden border-b border-[#e4dac7]">
           <div className="relative flex min-h-[580px] flex-col justify-end bg-[#17130d] @3xl:min-h-[680px] @5xl:min-h-[760px]">
@@ -331,14 +333,14 @@ export default function Site() {
             <Shell className="relative pt-28 pb-12 @3xl:pt-40 @3xl:pb-16">
               <div className="screen-in max-w-2xl">
                 <Eyebrow tone="encre">Haute parfumerie · Cocody</Eyebrow>
-                <h1 className="mt-6 [font-family:var(--font-elixir-display)] font-light leading-[0.9] tracking-[-0.01em] text-[#f4ecdd]">
+                <HeroHeading className="mt-6 [font-family:var(--font-elixir-display)] font-light leading-[0.9] tracking-[-0.01em] text-[#f4ecdd]">
                   <span className="block text-[3.6rem] @sm:text-7xl @2xl:text-8xl @5xl:text-[7.5rem]">
                     Maison
                   </span>
                   <span className="mt-1 block text-[3.6rem] italic text-[#e9d3a8] @sm:text-7xl @2xl:text-8xl @5xl:text-[7.5rem]">
                     Élixir
                   </span>
-                </h1>
+                </HeroHeading>
                 <div className="elx-rule mt-6 h-px w-40 @3xl:w-52" aria-hidden />
                 <p className="mt-6 max-w-md [font-family:var(--font-elixir-display)] text-xl leading-relaxed text-[#e9e0cf] @2xl:text-2xl">
                   Trois eaux de parfum composées à la main, à partir des matières
@@ -485,8 +487,8 @@ export default function Site() {
         >
           <Shell className="grid grid-cols-1 gap-10 py-16 @xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] @xl:gap-12 @3xl:py-24 @5xl:gap-20">
             {/* Image du flacon */}
-            <div className="relative">
-              <div className="relative aspect-[4/5] overflow-hidden bg-[#efe6d5] @xl:sticky @xl:top-24">
+            <div className="relative @xl:sticky @xl:top-24">
+              <div className="relative aspect-[4/5] overflow-hidden bg-[#efe6d5]">
                 <Image
                   key={selection.image}
                   src={selection.image}
@@ -945,7 +947,7 @@ export default function Site() {
             </Reveal>
           </Shell>
         </section>
-      </main>
+      </Main>
 
       {/* ============================ FOOTER ============================ */}
       <footer className="bg-[#17130d] text-[#cbbfa8]">

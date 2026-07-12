@@ -84,7 +84,7 @@ export function AccueilScreen({
           Compte courant
         </p>
         <p className="font-display text-3xl font-bold tabular-nums tracking-tight">
-          {soldeVisible ? formatSolde(solde) : "•••••• €"}
+          {soldeVisible ? formatSolde(solde) : "•••••• FCFA"}
         </p>
         <div className="mt-3">
           <CarteVisuelle verrouillee={verrouillee} />
@@ -142,7 +142,7 @@ export function VirementScreen({
   const [saisie, setSaisie] = useState("");
   const [envoye, setEnvoye] = useState(false);
 
-  const montant = Number(saisie.replace(",", "."));
+  const montant = Number(saisie);
   const valide =
     beneficiaire !== null &&
     Number.isFinite(montant) &&
@@ -152,13 +152,8 @@ export function VirementScreen({
   function tape(touche: string) {
     setSaisie((s) => {
       if (touche === "⌫") return s.slice(0, -1);
-      if (touche === ",") {
-        if (s === "" || s.includes(",")) return s;
-        return `${s},`;
-      }
-      const [, dec] = s.split(",");
-      if (dec !== undefined && dec.length >= 2) return s;
-      if (s.replace(",", "").length >= 6) return s;
+      if (touche === "000" && s === "") return s;
+      if ((s + touche).length > 7) return s;
       return s + touche;
     });
   }
@@ -224,9 +219,9 @@ export function VirementScreen({
         className="mt-3 text-center font-display text-3xl font-bold tabular-nums tracking-tight"
       >
         {saisie === "" ? (
-          <span className="text-muted/50">0,00 €</span>
+          <span className="text-muted/50">0 FCFA</span>
         ) : (
-          `${saisie} €`
+          formatSolde(montant)
         )}
       </p>
       {saisie !== "" && montant > solde && (
@@ -236,7 +231,7 @@ export function VirementScreen({
       )}
 
       <div className="mt-auto grid grid-cols-3 gap-1.5 pb-2">
-        {["1", "2", "3", "4", "5", "6", "7", "8", "9", ",", "0", "⌫"].map(
+        {["1", "2", "3", "4", "5", "6", "7", "8", "9", "000", "0", "⌫"].map(
           (touche) => (
             <button
               key={touche}
@@ -311,7 +306,7 @@ export function CarteScreen({
 }) {
   const [enLigne, setEnLigne] = useState(true);
   const [etranger, setEtranger] = useState(false);
-  const [plafond, setPlafond] = useState(1500);
+  const [plafond, setPlafond] = useState(1_500_000);
 
   const reglages: {
     icon: typeof Lock;
@@ -379,22 +374,22 @@ export function CarteScreen({
             Plafond de paiement mensuel
           </label>
           <span className="text-xs font-semibold tabular-nums text-accent">
-            {plafond.toLocaleString("fr-FR")} €
+            {formatSolde(plafond)}
           </span>
         </div>
         <input
           id="nova-plafond"
           type="range"
-          min={500}
-          max={3000}
-          step={100}
+          min={500_000}
+          max={3_000_000}
+          step={100_000}
           value={plafond}
           onChange={(e) => setPlafond(Number(e.target.value))}
           className="mt-2 w-full accent-[var(--accent)]"
         />
         <p className="mt-1 flex justify-between text-[10px] text-muted">
-          <span>500 €</span>
-          <span>3 000 €</span>
+          <span>500 k FCFA</span>
+          <span>3 M FCFA</span>
         </p>
       </div>
     </div>

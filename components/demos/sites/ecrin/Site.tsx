@@ -164,8 +164,10 @@ function Bloc({
  * portfolio : toute la mise en page passe par des container queries Tailwind
  * (@sm…@7xl), jamais par les breakpoints d'écran.
  */
-export default function Site() {
+export default function Site({ embedded = false }: { embedded?: boolean }) {
   const [univers, setUnivers] = useState<UniversId>("coiffure");
+  const Main = embedded ? "div" : "main";
+  const HeroHeading = embedded ? "h2" : "h1";
 
   // Parcours de réservation
   const [prestation, setPrestation] = useState<Prestation | null>(null);
@@ -283,7 +285,7 @@ export default function Site() {
         </Bloc>
       </header>
 
-      <main id="ecrin-top" className="scroll-mt-[80px]">
+      <Main id="ecrin-top" className="scroll-mt-[80px]">
         {/* ——— Hero ——— */}
         <section className="relative overflow-hidden">
           <div
@@ -294,12 +296,12 @@ export default function Site() {
             <div className="grid items-center gap-10 @5xl:grid-cols-[1.02fr_1fr] @5xl:gap-14">
               <div className="screen-in">
                 <Eyebrow>Salon de beauté — Le Plateau, Abidjan</Eyebrow>
-                <h1 className="mt-5 [font-family:var(--font-ecrin-serif)] text-[2.4rem] font-light leading-[1.02] tracking-[-0.02em] text-[#3d2c29] @xl:text-[3rem] @3xl:text-[3.6rem] @5xl:text-[4.1rem]">
+                <HeroHeading className="mt-5 [font-family:var(--font-ecrin-serif)] text-[2.4rem] font-light leading-[1.02] tracking-[-0.02em] text-[#3d2c29] @xl:text-[3rem] @3xl:text-[3.6rem] @5xl:text-[4.1rem]">
                   Prenez le temps
                   <br />
                   d&apos;être{" "}
                   <em className="font-normal italic text-[#c96f4a]">rayonnante</em>.
-                </h1>
+                </HeroHeading>
                 <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#6b544e] @3xl:text-base">
                   Coiffure, soins du visage et onglerie d&apos;exception, dans un
                   salon feutré au cœur du Plateau. Une équipe experte, des produits
@@ -1049,7 +1051,7 @@ export default function Site() {
             </div>
           </Bloc>
         </section>
-      </main>
+      </Main>
 
       {/* ——— Pied de page ——— */}
       <footer className="border-t border-[#ecdccf] bg-[#f3e7de]">

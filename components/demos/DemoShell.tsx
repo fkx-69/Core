@@ -60,6 +60,7 @@ export default function DemoShell({
               src={illustration}
               alt=""
               fill
+              sizes="(min-width: 1024px) 32vw, 100vw"
               className="object-contain"
               aria-hidden
             />

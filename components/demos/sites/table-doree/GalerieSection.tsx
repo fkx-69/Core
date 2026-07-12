@@ -68,6 +68,7 @@ export default function GalerieSection() {
                 src={current.src}
                 alt={current.alt}
                 fill
+                loading={current.src === GALLERY[0].src ? "eager" : undefined}
                 sizes="(min-width: 1152px) 1088px, 94vw"
                 className="object-cover"
               />
@@ -103,6 +104,7 @@ export default function GalerieSection() {
                   src={item.src}
                   alt=""
                   fill
+                  loading={i === 0 ? "eager" : undefined}
                   sizes="(min-width: 672px) 15vw, 30vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />

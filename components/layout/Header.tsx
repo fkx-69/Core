@@ -49,6 +49,7 @@ export default function Header() {
       <Container className="flex h-16 items-center justify-between">
         <Link
           href="/"
+          onClick={() => setMenuOpen(false)}
           className="font-display text-2xl font-bold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
         >
           Core<span className="text-accent">.</span>
@@ -104,12 +105,12 @@ export default function Header() {
       </Container>
 
       {/* Panneau mobile */}
-      {menuOpen && (
-        <nav
-          id="menu-mobile"
-          aria-label="Navigation mobile"
-          className="border-t border-line bg-background md:hidden"
-        >
+      <nav
+        id="menu-mobile"
+        aria-label="Navigation mobile"
+        hidden={!menuOpen}
+        className="border-t border-line bg-background md:hidden"
+      >
           <Container className="py-3">
             <ul className="flex flex-col gap-1">
               {NAV_LINKS.map((link) => {
@@ -140,8 +141,7 @@ export default function Header() {
               Démarrer un projet
             </Link>
           </Container>
-        </nav>
-      )}
+      </nav>
     </header>
   );
 }

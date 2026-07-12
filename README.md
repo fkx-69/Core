@@ -1,6 +1,6 @@
 # Core — Site vitrine
 
-Site vitrine de **Core**, agence de développement logiciel fictive : sites web, applications web et mobiles, software sur mesure. Entièrement en français, avec un portfolio de **démos interactives** (mini site vitrine, dashboard de ventes, app mobile de livraison).
+Site vitrine de **Core**, agence de développement logiciel fictive : sites web, applications web et mobiles, software sur mesure. Entièrement en français, avec un portfolio de **huit démos interactives** : quatre sites vitrines, deux applications web et deux applications mobiles.
 
 ## Lancer le projet
 
@@ -32,7 +32,7 @@ app/
   layout.tsx            # Layout racine : fonts, script anti-flash du thème, Header/Footer
   page.tsx              # Accueil
   services/             # Les 4 services détaillés
-  portfolio/            # Les 3 démos interactives
+  portfolio/            # Les 8 démos interactives, regroupées par catégorie
   contact/              # Formulaire avec validation (envoi simulé)
   mentions-legales/     # Placeholder légal
   globals.css           # Tokens clair/sombre, @custom-variant dark, animations
@@ -43,10 +43,11 @@ components/
   services/             # Rendu d'un service
   contact/              # Formulaire de contact
   demos/                # Les démos du portfolio
+    apps/               # Applications web « Lumen » et « Sandaga »
+    sites/              # Sites « Table Dorée », « VOLT », « Élixir » et « Écrin »
+    banque/             # Démo mobile de néo-banque « Nova »
+    mobile/             # Démo mobile de livraison « Rapido »
     mockups/            # Cadres navigateur et smartphone (CSS)
-    vitrine/            # Démo restaurant « La Table Dorée »
-    dashboard/          # Démo dashboard « Boutique Lumen » (graphiques SVG maison)
-    mobile/             # Démo app de livraison « Rapido »
 lib/
   site.ts               # Navigation, coordonnées, ids d'ancres canoniques
   services-data.ts      # Source unique des 4 services
@@ -58,14 +59,10 @@ Toggle dans le header, persisté en `localStorage`, avec respect de `prefers-col
 
 ## Démos du portfolio
 
-Chaque démo est un composant client isolé, chargé paresseusement (`next/dynamic` + IntersectionObserver) et remis à zéro par le bouton « Réinitialiser la démo » (remontage par changement de `key`). Toutes les données sont factices.
+Chaque démo est un composant client isolé, chargé paresseusement (`next/dynamic` + `IntersectionObserver`) et remis à zéro par le bouton « Réinitialiser la démo » (remontage par changement de `key`). Les sites et applications web disposent aussi d’une route autonome sous `/demos/*`. Toutes les données sont factices.
 
 ## Limites actuelles
 
 - Le formulaire de contact valide les champs côté client, mais simule l'envoi : aucun message ne quitte le navigateur.
 - Les coordonnées, réseaux sociaux, témoignages implicites, résultats annoncés et projets du portfolio sont fictifs.
 - Le projet ne possède ni backend, ni base de données, ni authentification.
-
-## Documentation
-
-L'index des documents actifs et des archives se trouve dans [`docs/README.md`](docs/README.md). La vue d'ensemble technique canonique est [`docs/project-overview.md`](docs/project-overview.md).

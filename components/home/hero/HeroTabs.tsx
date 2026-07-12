@@ -15,12 +15,14 @@ import type { Autoplay } from "./HeroShowcase";
  */
 export default function HeroTabs({
   active,
+  visited,
   autoplay,
   onSelect,
   onProgressEnd,
   onToggleAutoplay,
 }: {
   active: HeroSiteId;
+  visited: readonly HeroSiteId[];
   autoplay: Autoplay;
   onSelect: (id: HeroSiteId) => void;
   onProgressEnd: () => void;
@@ -60,7 +62,9 @@ export default function HeroTabs({
             role="tab"
             id={`hero-tab-${s.id}`}
             aria-selected={s.id === active}
-            aria-controls={`hero-panel-${s.id}`}
+            aria-controls={
+              visited.includes(s.id) ? `hero-panel-${s.id}` : undefined
+            }
             tabIndex={s.id === active ? 0 : -1}
             title={s.secteur}
             onClick={() => onSelect(s.id)}

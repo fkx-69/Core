@@ -166,7 +166,7 @@ export default function ReservationSection() {
                     required
                     ref={setMinToday}
                     value={booking.date}
-                    onChange={(e) => set("date")(e.target.value)}
+                    onInput={(e) => set("date")(e.currentTarget.value)}
                     className={FIELD_CLASSES}
                   />
                 </div>

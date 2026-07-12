@@ -12,7 +12,7 @@ const TEASERS = [
     anchor: DEMO_ANCHORS.dashboard,
     title: "Applications web",
     count: "2 démos",
-    text: "Dashboard de ventes et gestion de pressing en kanban — trop grandes pour le héro, elles se testent en taille réelle.",
+    text: "Ventes, stocks et pressing en kanban — deux aperçus navigables, aussi disponibles en pleine page.",
   },
   {
     anchor: DEMO_ANCHORS.mobile,

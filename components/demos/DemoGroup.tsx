@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import DemoShell from "@/components/demos/DemoShell";
-import DemoStage from "@/components/demos/DemoStage";
 import LazyDemo, { type DemoName } from "@/components/demos/LazyDemo";
 
 export type DemoEntry = {
@@ -10,8 +9,6 @@ export type DemoEntry = {
   title: string;
   description: string;
   stack: string[];
-  /** Propose le plein écran (sites & applis web — inutile pour les mockups mobiles). */
-  fullscreen?: boolean;
 };
 
 /**
@@ -58,7 +55,7 @@ export default function DemoGroup({
       switcher={
         entries.length > 1 ? (
           <div
-            role="tablist"
+            role="group"
             aria-label={`Projets de la catégorie ${kind}`}
             className="mb-4 flex flex-wrap gap-2"
           >
@@ -66,8 +63,7 @@ export default function DemoGroup({
               <button
                 key={e.demo}
                 type="button"
-                role="tab"
-                aria-selected={i === active}
+                aria-pressed={i === active}
                 onClick={() => setActive(i)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                   i === active
@@ -82,11 +78,7 @@ export default function DemoGroup({
         ) : undefined
       }
     >
-      {entry.fullscreen ? (
-        <DemoStage label={entry.title}>{demo}</DemoStage>
-      ) : (
-        demo
-      )}
+      {demo}
     </DemoShell>
   );
 }

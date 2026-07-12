@@ -39,6 +39,7 @@ function NotFoundContent() {
             alt=""
             width={1200}
             height={800}
+            loading="eager"
             className="mx-auto h-auto w-full max-w-md dark:brightness-200"
             aria-hidden
           />

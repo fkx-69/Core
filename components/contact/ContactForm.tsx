@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Loader2, Send } from "lucide-react";
 import Button from "@/components/ui/Button";
@@ -69,6 +69,15 @@ export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const timeoutRef = useRef<number | null>(null);
 
+  useEffect(
+    () => () => {
+      if (timeoutRef.current !== null) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    },
+    [],
+  );
+
   function handleChange(field: Field, value: string) {
     setValues((v) => ({ ...v, [field]: value }));
     // Efface l'erreur dès que l'utilisateur corrige.
@@ -92,11 +101,15 @@ export default function ContactForm() {
 
     // Envoi simulé : pas de backend.
     setStatus("sending");
-    timeoutRef.current = window.setTimeout(() => setStatus("sent"), 900);
+    timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = null;
+      setStatus("sent");
+    }, 900);
   }
 
   function resetForm() {
-    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current);
+    timeoutRef.current = null;
     setValues(INITIAL_VALUES);
     setErrors({});
     setStatus("idle");

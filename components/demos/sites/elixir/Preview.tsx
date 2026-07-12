@@ -5,7 +5,7 @@ import Site from "./Site";
 export default function ElixirPreview() {
   return (
     <SitePreview url="https://maisonelixir.ci" href="/demos/elixir">
-      <Site />
+      <Site embedded />
     </SitePreview>
   );
 }

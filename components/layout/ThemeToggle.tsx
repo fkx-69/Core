@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 
 /* L'état du thème vit sur <html> (classe .dark, posée par le script
@@ -21,6 +21,17 @@ const getServerIsDark = () => false;
 /** Bascule clair/sombre, persistée dans localStorage. */
 export default function ThemeToggle() {
   const isDark = useSyncExternalStore(subscribe, getIsDark, getServerIsDark);
+  const transitionTimer = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (transitionTimer.current !== null) {
+        window.clearTimeout(transitionTimer.current);
+      }
+      document.documentElement.classList.remove("theme-transition");
+    },
+    [],
+  );
 
   function toggle() {
     const root = document.documentElement;
@@ -32,7 +43,13 @@ export default function ThemeToggle() {
     } catch {
       // localStorage indisponible (navigation privée) : le toggle reste fonctionnel.
     }
-    window.setTimeout(() => root.classList.remove("theme-transition"), 350);
+    if (transitionTimer.current !== null) {
+      window.clearTimeout(transitionTimer.current);
+    }
+    transitionTimer.current = window.setTimeout(() => {
+      root.classList.remove("theme-transition");
+      transitionTimer.current = null;
+    }, 350);
   }
 
   return (

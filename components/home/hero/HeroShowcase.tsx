@@ -42,7 +42,10 @@ function SiteSkeleton() {
  * dessus est instantané et son état interne (saveur VOLT, réservation…)
  * survit aux changements.
  */
-const SITE_COMPONENTS: Record<HeroSiteId, ComponentType> = {
+const SITE_COMPONENTS: Record<
+  HeroSiteId,
+  ComponentType<{ embedded?: boolean }>
+> = {
   "table-doree": dynamic(
     () => import("@/components/demos/sites/table-doree/Site"),
     { ssr: false, loading: () => <SiteSkeleton /> },
@@ -201,6 +204,7 @@ export default function HeroShowcase() {
         </h1>
         <HeroTabs
           active={active}
+          visited={visited}
           autoplay={autoplay}
           onSelect={select}
           onProgressEnd={advance}
@@ -239,7 +243,7 @@ export default function HeroShowcase() {
                         : "pointer-events-none opacity-0 motion-safe:translate-y-2 motion-safe:scale-[0.99]"
                     }`}
                   >
-                    <Site />
+                    <Site embedded />
                   </div>
                 );
               })}

@@ -18,17 +18,17 @@ export type Transaction = {
   date: string;
 };
 
-export const SOLDE_INITIAL = 2843.72;
+export const SOLDE_INITIAL = 2_843_720;
 
 export const TRANSACTIONS_INITIALES: Transaction[] = [
-  { id: 8, libelle: "Monoprix", categorie: "Courses", icon: ShoppingCart, montant: -54.3, date: "Aujourd'hui" },
-  { id: 7, libelle: "TCL abonnement", categorie: "Transport", icon: TrainFront, montant: -25, date: "Aujourd'hui" },
-  { id: 6, libelle: "La Table Dorée", categorie: "Restaurant", icon: UtensilsCrossed, montant: -68.5, date: "Hier" },
-  { id: 5, libelle: "Salaire — Studio Nova", categorie: "Revenus", icon: Briefcase, montant: 2450, date: "1 juil." },
-  { id: 4, libelle: "Netflix", categorie: "Abonnement", icon: Tv, montant: -13.49, date: "30 juin" },
-  { id: 3, libelle: "Pharmacie Bellecour", categorie: "Santé", icon: HeartPulse, montant: -18.9, date: "29 juin" },
-  { id: 2, libelle: "Carrefour City", categorie: "Courses", icon: ShoppingCart, montant: -32.75, date: "28 juin" },
-  { id: 1, libelle: "SNCF Connect", categorie: "Transport", icon: TrainFront, montant: -79, date: "27 juin" },
+  { id: 8, libelle: "Auchan Mermoz", categorie: "Courses", icon: ShoppingCart, montant: -54_300, date: "Aujourd'hui" },
+  { id: 7, libelle: "Dakar Dem Dikk", categorie: "Transport", icon: TrainFront, montant: -25_000, date: "Aujourd'hui" },
+  { id: 6, libelle: "La Table Dorée", categorie: "Restaurant", icon: UtensilsCrossed, montant: -68_500, date: "Hier" },
+  { id: 5, libelle: "Salaire — Studio Nova", categorie: "Revenus", icon: Briefcase, montant: 2_450_000, date: "1 juil." },
+  { id: 4, libelle: "Canal+", categorie: "Abonnement", icon: Tv, montant: -13_500, date: "30 juin" },
+  { id: 3, libelle: "Pharmacie du Plateau", categorie: "Santé", icon: HeartPulse, montant: -18_900, date: "29 juin" },
+  { id: 2, libelle: "Marché Kermel", categorie: "Courses", icon: ShoppingCart, montant: -32_750, date: "28 juin" },
+  { id: 1, libelle: "Air Sénégal", categorie: "Transport", icon: TrainFront, montant: -79_000, date: "27 juin" },
 ];
 
 export type Beneficiaire = {
@@ -47,11 +47,8 @@ export const BENEFICIAIRES: Beneficiaire[] = [
 ];
 
 export const formatSolde = (n: number) =>
-  n.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
+  `${Math.round(n).toLocaleString("fr-FR")}\u00a0FCFA`;
 
-/** Montant signé : « + 2 450,00 € » / « − 54,30 € ». */
+/** Montant signé : « + 2 450 000 FCFA » / « − 54 300 FCFA ». */
 export const formatMontant = (n: number) =>
-  `${n > 0 ? "+" : "−"} ${Math.abs(n).toLocaleString("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-  })}`;
+  `${n > 0 ? "+" : "−"} ${formatSolde(Math.abs(n))}`;

@@ -88,6 +88,7 @@ export default function ServiceSection({
                     src={SERVICE_ILLUSTRATIONS[service.id]}
                     alt=""
                     fill
+                    sizes="(min-width: 1024px) 20rem, 100vw"
                     className="object-contain"
                     aria-hidden
                   />

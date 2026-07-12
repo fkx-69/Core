@@ -70,17 +70,15 @@ const DEMO_SECTIONS: {
         demo: "dashboard",
         title: "Boutique Lumen",
         description:
-          "Dashboard de gestion des ventes d'une boutique de décoration dakaroise fictive. Ajoutez une vente, marquez-la payée, supprimez-la : indicateurs, histogramme et donut se recalculent en direct. Le tableau se filtre, se trie et se recherche.",
+          "Application de gestion d'une boutique de décoration dakaroise fictive : ventes en FCFA, paiements Wave, Orange Money, espèces ou carte, indicateurs vivants et vraie vue stock avec alertes de réassort. Naviguez dans l'aperçu ou ouvrez l'application complète en pleine page.",
         stack: ["React", "Next.js", "Node.js", "PostgreSQL"],
-        fullscreen: true,
       },
       {
         demo: "pressing",
-        title: "Pressing des Halles",
+        title: "Pressing Sandaga",
         description:
-          "Outil métier de gestion d'un pressing du quartier Sandaga, à Dakar : les commandes avancent dans un pipeline kanban (reçue → nettoyage → repassage → prête), les retards sont signalés, la caisse s'incrémente en FCFA à chaque retrait. Enregistrez un dépôt et faites-le avancer.",
+          "Outil de comptoir d'un pressing du quartier Sandaga, à Dakar : pipeline de production, retards, SMS simulés, encaissement en espèces, Wave ou Orange Money et caisse du jour détaillée en FCFA. Testez le parcours ici ou ouvrez l'application complète.",
         stack: ["React", "Next.js", "NestJS", "PostgreSQL"],
-        fullscreen: true,
       },
     ],
   },
@@ -124,7 +122,7 @@ export default function PortfolioPage() {
                 as="h1"
                 eyebrow="Portfolio"
                 title="Des démos à essayer, pas des captures d'écran"
-                intro="Huit projets fictifs, huit vraies interfaces fonctionnelles. Cliquez, filtrez, réservez, commandez — et visitez chaque site vitrine en pleine page, comme s'il était déjà en ligne : chaque projet réagit comme un produit réellement livré par Core."
+                intro="Huit projets fictifs, huit vraies interfaces fonctionnelles. Cliquez, filtrez, réservez, commandez — et visitez chaque site et chaque application web en pleine page, comme s'ils étaient déjà en ligne : chaque projet réagit comme un produit réellement livré par Core."
               />
               {/* Sommaire ancré : trois écrans-fleuves plus bas, ces pilules y mènent. */}
               <ul className="mt-6 flex flex-wrap gap-2">

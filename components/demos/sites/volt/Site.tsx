@@ -86,9 +86,10 @@ const ICONES_POINTS: Record<string, LucideIcon> = {
  * calées sur le `@container` porté par ce root. Le sélecteur de saveur
  * rethème l'intégralité de la page via les variables CSS --volt-*.
  */
-export default function Site() {
+export default function Site({ embedded = false }: { embedded?: boolean }) {
   const [saveurId, setSaveurId] = useState<SaveurId>(SAVEURS[0].id);
   const saveur = SAVEURS.find((s) => s.id === saveurId) ?? SAVEURS[0];
+  const Main = embedded ? "div" : "main";
 
   const theme = {
     "--volt-accent": saveur.accent,
@@ -117,15 +118,15 @@ export default function Site() {
       `}</style>
 
       <EnTete />
-      <main>
-        <Hero saveur={saveur} onSelect={setSaveurId} />
+      <Main>
+        <Hero saveur={saveur} onSelect={setSaveurId} embedded={embedded} />
         <Bandeau />
         <Saveurs saveur={saveur} onSelect={setSaveurId} />
         <Ingredients />
         <Marque />
         <PointsDeVente />
         <Distributeurs />
-      </main>
+      </Main>
       <PiedDePage />
     </div>
   );
@@ -314,10 +315,13 @@ function PiedDePage() {
 function Hero({
   saveur,
   onSelect,
+  embedded,
 }: {
   saveur: Saveur;
   onSelect: (id: SaveurId) => void;
+  embedded: boolean;
 }) {
+  const Heading = embedded ? "h2" : "h1";
   return (
     <section id="haut" className="relative overflow-hidden">
       <div
@@ -348,7 +352,7 @@ function Hero({
             />
             Volt {saveur.nom} — {saveur.accroche}
           </p>
-          <h1
+          <Heading
             className={`${display} mt-5 text-5xl uppercase leading-[0.92] tracking-tight @sm:text-6xl @xl:text-5xl @2xl:text-6xl @5xl:text-7xl @7xl:text-8xl`}
           >
             L’énergie
@@ -356,7 +360,7 @@ function Hero({
             <span className="italic text-[color:var(--volt-accent)] transition-colors duration-500 [text-shadow:0_0_50px_var(--volt-glow)]">
               d’Abidjan.
             </span>
-          </h1>
+          </Heading>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-zinc-400 @2xl:text-base">
             Boisson énergisante sans sucre, montée sur la noix de kola et le
             guarana. Préparée et embouteillée à Abidjan, taillée pour les
