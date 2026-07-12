@@ -24,10 +24,10 @@ export type Receipt = {
 export const TODAY = "2026-07-06";
 
 export const STAGES: { id: Stage; label: string; color: string }[] = [
-  { id: "recue", label: "Reçues", color: "#3b8ea5" },
-  { id: "nettoyage", label: "Nettoyage", color: "#087e72" },
-  { id: "repassage", label: "Repassage", color: "#d08b38" },
-  { id: "prete", label: "Prêtes", color: "#2c8a54" },
+  { id: "recue", label: "Reçues", color: "#e5ebed" },
+  { id: "nettoyage", label: "Nettoyage", color: "#e5ece8" },
+  { id: "repassage", label: "Repassage", color: "#f0ebe1" },
+  { id: "prete", label: "Prêtes", color: "#e5ece6" },
 ];
 
 /** Teintes des modes de paiement : le récit mobile money doit se voir. */

@@ -155,7 +155,7 @@ export function RevenueBars({ data, target }: { data: Datum[]; target?: number }
       {hovered !== null && (
         <div
           role="status"
-          className="pointer-events-none absolute -top-1 z-10 -translate-x-1/2 whitespace-nowrap rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] px-2.5 py-1 text-xs text-[var(--lumen-ink)] shadow-[0_8px_20px_-8px_rgba(38,33,25,0.25)]"
+          className="pointer-events-none absolute -top-1 z-10 -translate-x-1/2 whitespace-nowrap rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] px-2.5 py-1 text-xs text-[var(--lumen-ink)]"
           style={{
             left: `${(((hovered + 0.5) * (innerW / data.length) + PAD.left) / W) * 100}%`,
           }}

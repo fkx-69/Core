@@ -3,9 +3,9 @@
 import { AlertTriangle, Boxes, Minus, PackageCheck, Plus } from "lucide-react";
 import { formatFcfa, type StockItem } from "../data";
 
-/** Panneau de base : bordure chaude + ombre très douce, cohérent avec la vue Ventes. */
+/** Panneau de base : surface blanche et bordure fine, cohérent avec la vue Ventes. */
 const panel =
-  "rounded-[20px] border border-[var(--lumen-line)] bg-[var(--lumen-panel)] shadow-[0_1px_0_rgba(122,96,58,0.06),0_18px_44px_-36px_rgba(74,56,31,0.55)]";
+  "rounded-xl border border-[var(--lumen-line)] bg-[var(--lumen-panel)]";
 
 const display = "font-[family-name:var(--font-lumen-display)]";
 
@@ -54,7 +54,7 @@ export default function StockView({
       </div>
 
       {low.length > 0 && (
-        <div className="flex items-start gap-3 rounded-[20px] border border-[#e3c98e] bg-[#fdf3da] p-4 text-[#6d4b0c]">
+        <div className="flex items-start gap-3 rounded-xl border border-[#e7dfcc] bg-[#fbf7ec] p-4 text-[#746139]">
           <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
           <div>
             <p className={`${display} text-[15px] font-semibold italic`}>Réassort conseillé</p>
@@ -62,7 +62,7 @@ export default function StockView({
               {low.map((item) => (
                 <span
                   key={item.id}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e3c98e] bg-white/70 px-2.5 py-1 text-[11px] font-semibold"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e7dfcc] bg-white/70 px-2.5 py-1 text-[11px] font-semibold"
                 >
                   {item.product}
                   <span className="font-normal text-[#a3792f]">
@@ -86,7 +86,7 @@ export default function StockView({
                 return (
                   <tr key={item.id} className="border-t border-[var(--lumen-grid)] transition first:border-t-0 hover:bg-[var(--lumen-canvas)]/45">
                     <td className="px-4 py-3 font-bold @2xl:px-5">{item.product}</td><td className="px-3 py-3 font-mono text-[10px] text-[var(--lumen-muted)]">{item.reference}</td><td className="px-3 py-3 text-[var(--lumen-muted)]">{item.category}</td><td className="px-3 py-3 text-right font-bold tabular-nums">{formatFcfa(item.price)}</td><td className="px-3 py-3"><span className={`inline-flex items-center gap-1.5 text-xs font-bold ${isLow ? "text-[#8a5a00]" : "text-[#2f7048]"}`}><span className="size-1.5 rounded-full bg-current" aria-hidden />{item.quantity} en stock{isLow ? " · bas" : ""}</span></td>
-                    <td className="px-3 py-3"><div className="inline-flex items-center rounded-full border border-[var(--lumen-line)] bg-[var(--lumen-panel)]"><button type="button" onClick={() => onAdjust(item.id, -1)} disabled={item.quantity === 0} className="p-2 text-[var(--lumen-muted)] hover:text-[var(--lumen-copper)] disabled:opacity-30" aria-label={`Retirer une unité de ${item.product}`}><Minus className="size-3" aria-hidden /></button><span className="min-w-7 text-center font-bold tabular-nums">{item.quantity}</span><button type="button" onClick={() => onAdjust(item.id, 1)} className="p-2 text-[var(--lumen-muted)] hover:text-[var(--lumen-copper)]" aria-label={`Ajouter une unité de ${item.product}`}><Plus className="size-3" aria-hidden /></button></div></td>
+                    <td className="px-3 py-3"><div className="inline-flex items-center rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)]"><button type="button" onClick={() => onAdjust(item.id, -1)} disabled={item.quantity === 0} className="p-2 text-[var(--lumen-muted)] hover:text-[var(--lumen-copper)] disabled:opacity-30" aria-label={`Retirer une unité de ${item.product}`}><Minus className="size-3" aria-hidden /></button><span className="min-w-7 text-center font-bold tabular-nums">{item.quantity}</span><button type="button" onClick={() => onAdjust(item.id, 1)} className="p-2 text-[var(--lumen-muted)] hover:text-[var(--lumen-copper)]" aria-label={`Ajouter une unité de ${item.product}`}><Plus className="size-3" aria-hidden /></button></div></td>
                   </tr>
                 );
               })}

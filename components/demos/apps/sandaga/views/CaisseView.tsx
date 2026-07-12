@@ -15,9 +15,6 @@ const mono = "[font-family:var(--font-sandaga-mono)]";
 const display = "font-[family-name:var(--font-sandaga-display)]";
 const panel = "rounded-xl border border-[var(--sandaga-line)] bg-[var(--sandaga-panel)]";
 
-// Dents de scie du reçu : tuile SVG (triangles pointe en bas) répétée sous le grand total.
-const teeth = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='10'%3E%3Cpath d='M0 0H20L10 10Z' fill='%230d2f2b'/%3E%3C/svg%3E")`;
-
 export default function CaisseView({
   receipts,
   embedded,
@@ -50,19 +47,18 @@ export default function CaisseView({
 
       {closed && <div role="status" className="screen-in flex items-start gap-3 rounded-xl border border-[#a9d9bd] bg-[#eaf8ef] p-4 text-[#226a3e]"><CheckCircle2 className="mt-0.5 size-5 shrink-0" aria-hidden /><div><p className={`text-sm font-extrabold ${display}`}>Caisse équilibrée</p><p className="mt-0.5 text-xs">Le rapport de {formatFcfa(total)} est prêt à être transmis.</p></div></div>}
 
-      {/* Grand reçu sombre : total géant + bord inférieur en dents de scie. */}
-      <section aria-label="Total encaissé">
-        <div className="rounded-t-xl bg-[var(--sandaga-deep)] p-5 text-white @2xl:p-6">
-          <p className={`text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--sandaga-signal)] ${mono}`}>Total encaissé aujourd’hui</p>
+      {/* Total prioritaire, traité comme les autres surfaces de l'application. */}
+      <section aria-label="Total encaissé" className={`${panel} p-5 @2xl:p-6`}>
+        <div>
+          <p className={`text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--sandaga-muted)] ${mono}`}>Total encaissé aujourd’hui</p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
             <p className={`text-4xl font-black tracking-tight tabular-nums leading-none @2xl:text-6xl ${display}`}>{formatFcfa(total)}</p>
             <div className="flex flex-wrap items-center gap-2">
-              <p className={`rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold ${mono}`}>{receipts.length} retraits</p>
-              {total > 0 && <p className={`rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold ${mono}`}>{mobilePct} % mobile money</p>}
+              <p className={`rounded-md bg-[var(--sandaga-canvas)] px-3 py-1.5 text-xs font-semibold text-[var(--sandaga-muted)] ${mono}`}>{receipts.length} retraits</p>
+              {total > 0 && <p className={`rounded-md bg-[var(--sandaga-canvas)] px-3 py-1.5 text-xs font-semibold text-[var(--sandaga-muted)] ${mono}`}>{mobilePct} % mobile money</p>}
             </div>
           </div>
         </div>
-        <div aria-hidden className="h-2.5 w-full" style={{ backgroundImage: teeth, backgroundRepeat: "repeat-x", backgroundSize: "20px 10px" }} />
       </section>
 
       <div className="grid gap-3 @sm:grid-cols-3">

@@ -20,11 +20,11 @@ import {
 type SortKey = "date" | "client" | "amount";
 
 const field =
-  "w-full rounded-xl border border-[var(--lumen-line)] bg-[var(--lumen-canvas)]/50 px-3 py-2.5 text-sm text-[var(--lumen-ink)] outline-none transition placeholder:text-[var(--lumen-muted)] focus:border-[var(--lumen-copper)] focus:bg-[var(--lumen-panel)] focus:ring-2 focus:ring-[var(--lumen-copper-soft)]";
+  "w-full rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-canvas)]/50 px-3 py-2.5 text-sm text-[var(--lumen-ink)] outline-none transition placeholder:text-[var(--lumen-muted)] focus:border-[var(--lumen-copper)] focus:bg-[var(--lumen-panel)] focus:ring-2 focus:ring-[var(--lumen-copper-soft)]";
 
-/** Panneau de base : bordure chaude + ombre très douce, ton papier. */
+/** Panneau de base : surface blanche, bordure fine, sans effet décoratif. */
 const panel =
-  "rounded-[20px] border border-[var(--lumen-line)] bg-[var(--lumen-panel)] shadow-[0_1px_0_rgba(122,96,58,0.06),0_18px_44px_-36px_rgba(74,56,31,0.55)]";
+  "rounded-xl border border-[var(--lumen-line)] bg-[var(--lumen-panel)]";
 
 const display = "font-[family-name:var(--font-lumen-display)]";
 
@@ -154,7 +154,7 @@ export default function VentesView({
         <button
           type="button"
           onClick={() => setFormOpen((value) => !value)}
-          className="inline-flex items-center gap-2 rounded-full bg-[var(--lumen-copper)] px-4.5 py-2.5 text-sm font-bold text-[#fff8ec] shadow-[0_10px_24px_-12px_rgba(150,80,31,0.8)] transition hover:bg-[var(--lumen-copper-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)] focus-visible:ring-offset-2"
+          className="inline-flex items-center gap-2 rounded-md bg-[var(--lumen-ink)] px-4.5 py-2.5 text-sm font-bold text-white transition hover:bg-[#444744] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)] focus-visible:ring-offset-2 active:scale-[0.98]"
         >
           {formOpen ? <X className="size-4" aria-hidden /> : <Plus className="size-4" aria-hidden />}
           {formOpen ? "Fermer" : "Nouvelle vente"}
@@ -172,7 +172,7 @@ export default function VentesView({
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs text-[#a03e32]" role="alert">{error}</p>
-            <button type="submit" className="ml-auto rounded-full bg-[#211b12] px-4 py-2 text-sm font-bold text-[var(--lumen-canvas)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)]">Enregistrer la vente</button>
+            <button type="submit" className="ml-auto rounded-md bg-[var(--lumen-ink)] px-4 py-2 text-sm font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)] active:scale-[0.98]">Enregistrer la vente</button>
           </div>
         </form>
       )}
@@ -221,9 +221,9 @@ export default function VentesView({
           <div className="flex items-baseline gap-2"><h2 id="lumen-sales-title" className="text-[13px] font-bold">Dernières ventes</h2><p className={`${display} text-xs italic text-[var(--lumen-muted)]`}>{visible.length} résultat{visible.length > 1 ? "s" : ""}</p></div>
           <div className="flex gap-2">
             <label className="sr-only" htmlFor="lumen-status">Filtrer par statut</label>
-            <select id="lumen-status" value={status} onChange={(e) => setStatus(e.target.value as SaleStatus | "Toutes")} className="rounded-full border border-[var(--lumen-line)] bg-[var(--lumen-panel)] px-3 py-1.5 text-xs font-semibold outline-none focus:border-[var(--lumen-copper)]"><option>Toutes</option><option>Payée</option><option>En attente</option><option>Annulée</option></select>
+            <select id="lumen-status" value={status} onChange={(e) => setStatus(e.target.value as SaleStatus | "Toutes")} className="rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] px-3 py-1.5 text-xs font-semibold outline-none focus:border-[var(--lumen-copper)]"><option>Toutes</option><option>Payée</option><option>En attente</option><option>Annulée</option></select>
             <label className="sr-only" htmlFor="lumen-sort">Trier les ventes</label>
-            <span className="relative"><ArrowDownUp className="pointer-events-none absolute left-2.5 top-1/2 size-3 -translate-y-1/2 text-[var(--lumen-muted)]" aria-hidden /><select id="lumen-sort" value={sort} onChange={(e) => setSort(e.target.value as SortKey)} className="rounded-full border border-[var(--lumen-line)] bg-[var(--lumen-panel)] py-1.5 pl-7 pr-3 text-xs font-semibold outline-none focus:border-[var(--lumen-copper)]"><option value="date">Récentes</option><option value="amount">Montant</option><option value="client">Client</option></select></span>
+            <span className="relative"><ArrowDownUp className="pointer-events-none absolute left-2.5 top-1/2 size-3 -translate-y-1/2 text-[var(--lumen-muted)]" aria-hidden /><select id="lumen-sort" value={sort} onChange={(e) => setSort(e.target.value as SortKey)} className="rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] py-1.5 pl-7 pr-3 text-xs font-semibold outline-none focus:border-[var(--lumen-copper)]"><option value="date">Récentes</option><option value="amount">Montant</option><option value="client">Client</option></select></span>
           </div>
         </div>
         <div className="overflow-x-auto">

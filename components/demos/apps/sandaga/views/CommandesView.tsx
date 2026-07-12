@@ -97,17 +97,17 @@ export default function CommandesView({
         {STAGES.map((stage, stageIndex) => {
           const column = visible.filter((order) => order.stage === stage.id);
           return (
-            <section key={stage.id} aria-labelledby={`sandaga-${stage.id}`} className="min-w-0 rounded-xl bg-[#e3ece8]/60 p-2">
-              {/* En-tête = chip pleine couleur d'étape, compteur en pastille claire. */}
+            <section key={stage.id} aria-labelledby={`sandaga-${stage.id}`} className="min-w-0 rounded-xl border border-[var(--sandaga-line)] bg-[var(--sandaga-canvas)] p-2">
+              {/* En-tête = repère pastel discret, compteur bordé. */}
               <div className="flex items-center gap-2 rounded-lg px-2.5 py-2" style={{ backgroundColor: stage.color }}>
-                <h2 id={`sandaga-${stage.id}`} className="text-xs font-bold uppercase tracking-[0.06em] text-white">{stage.label}</h2>
-                <span className={`ml-auto grid min-w-5 place-items-center rounded-md bg-white/25 px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-white ${mono}`}>{column.length}</span>
+                <h2 id={`sandaga-${stage.id}`} className="text-xs font-bold uppercase tracking-[0.06em] text-[var(--sandaga-ink)]">{stage.label}</h2>
+                <span className={`ml-auto grid min-w-5 place-items-center rounded-md border border-black/5 bg-white/70 px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-[var(--sandaga-ink)] ${mono}`}>{column.length}</span>
               </div>
               <ul className="mt-2 space-y-2">
                 {column.map((order) => {
                   const lateOrder = isLate(order);
                   return (
-                    <li key={order.id} className="rounded-lg border border-[var(--sandaga-line)] bg-white p-3" style={{ borderTopWidth: 3, borderTopColor: stage.color, ...(lateOrder ? { borderLeftWidth: 2, borderLeftColor: "var(--sandaga-late)" } : {}) }}>
+                    <li key={order.id} className={`rounded-lg border border-[var(--sandaga-line)] bg-white p-3 ${lateOrder ? "border-l-2 border-l-[var(--sandaga-late)]" : ""}`}>
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
                           <p className={`truncate text-sm font-bold ${display}`}>{order.client}</p>
