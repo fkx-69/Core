@@ -46,11 +46,11 @@ export default function HeroTabs({
   }
 
   return (
-    <div className="mt-7 flex w-full items-center gap-3 sm:w-auto sm:justify-center">
+    <div className="mt-6 flex w-full items-center gap-3 sm:mt-7 sm:w-auto sm:justify-center">
       <div
         role="tablist"
         aria-label="Démos de sites vitrines"
-        className="scrollbar-none -mx-4 flex min-w-0 snap-x gap-2 overflow-x-auto px-4 sm:mx-0 sm:px-0"
+        className="grid w-full min-w-0 grid-cols-2 gap-2 sm:flex sm:w-auto"
       >
         {HERO_SITES.map((s) => (
           <button
@@ -69,7 +69,7 @@ export default function HeroTabs({
             title={s.secteur}
             onClick={() => onSelect(s.id)}
             onKeyDown={(e) => handleKey(e, s.id)}
-            className={`relative shrink-0 snap-start whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] ${
+            className={`relative flex min-h-11 items-center justify-center whitespace-nowrap rounded-full border px-3 py-2 text-sm font-medium transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:min-h-0 sm:px-4 ${
               s.id === active
                 ? "border-transparent bg-[color:var(--hero-accent)] text-[color:var(--hero-accent-ink)]"
                 : "border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] text-[color:var(--hero-muted)] hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)]"
@@ -100,7 +100,7 @@ export default function HeroTabs({
               : "Reprendre le défilement automatique des démos"
           }
           title={enabled ? "Suspendre le défilement" : "Reprendre le défilement"}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] text-[color:var(--hero-muted)] transition-colors duration-500 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)]"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] text-[color:var(--hero-muted)] transition-colors duration-500 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:h-9 sm:w-9"
         >
           {enabled ? (
             <Pause className="h-3.5 w-3.5" aria-hidden />

@@ -22,13 +22,13 @@ const INTRO_CHIPS = [
 export default function ServicesPage() {
   return (
     <>
-      <div className="relative border-b border-line py-16 sm:py-20">
+      <div className="relative border-b border-line py-12 sm:py-20">
         <div
           aria-hidden
           className="dot-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"
         />
         <Container className="relative">
-          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
             <div>
               <SectionHeading
                 as="h1"

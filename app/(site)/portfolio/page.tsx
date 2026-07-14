@@ -110,13 +110,13 @@ const DEMO_SECTIONS: {
 export default function PortfolioPage() {
   return (
     <>
-      <div className="relative border-b border-line py-16 sm:py-20">
+      <div className="relative border-b border-line py-12 sm:py-20">
         <div
           aria-hidden
           className="dot-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"
         />
         <Container className="relative">
-          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
             <div>
               <SectionHeading
                 as="h1"
@@ -130,7 +130,7 @@ export default function PortfolioPage() {
                   <li key={section.anchor}>
                     <a
                       href={`#${section.anchor}`}
-                      className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-1.5 text-sm text-muted transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-sm text-muted transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:min-h-0 sm:py-1.5"
                     >
                       {section.kind}
                       <span className="text-xs font-semibold text-accent">
@@ -143,7 +143,7 @@ export default function PortfolioPage() {
             </div>
             <IntroIllustration src="/assets/illustrations/portfolio-intro.png" alt="" width={1536} height={1024} />
           </div>
-          <p className="mt-6 flex w-fit items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-sm font-medium text-muted">
+          <p className="mt-6 flex w-full items-start gap-2 rounded-2xl border border-line bg-surface-raised px-4 py-3 text-sm font-medium leading-relaxed text-muted sm:w-fit sm:items-center sm:rounded-full sm:py-2">
             <MousePointerClick className="h-4 w-4 text-accent" aria-hidden />
             Interagissez librement — un bouton « Réinitialiser » remet chaque démo à zéro.
           </p>
@@ -154,7 +154,7 @@ export default function PortfolioPage() {
         <section
           key={section.anchor}
           id={section.anchor}
-          className={`relative scroll-mt-24 overflow-hidden py-16 sm:py-24 ${i % 2 === 1 ? "bg-surface" : ""}`}
+          className={`relative scroll-mt-24 overflow-hidden py-12 sm:py-24 ${i % 2 === 1 ? "bg-surface" : ""}`}
         >
           {i % 2 === 0 && (
             <div

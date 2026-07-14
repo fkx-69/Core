@@ -34,7 +34,7 @@ export default function StockView({
   ];
 
   return (
-    <div className="screen-in space-y-4 @2xl:space-y-5">
+    <div className="screen-in min-w-0 space-y-4 @2xl:space-y-5">
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--lumen-copper)]">Inventaire</p>
         <Heading className={`mt-1.5 ${display} text-[28px] font-semibold leading-none tracking-tight @2xl:text-[34px]`}>État du stock</Heading>
@@ -77,7 +77,32 @@ export default function StockView({
 
       <section className={`overflow-hidden ${panel}`} aria-labelledby="lumen-stock-title">
         <div className="flex flex-wrap items-baseline gap-2 px-4 py-3.5 @2xl:px-5"><h2 id="lumen-stock-title" className="text-[13px] font-bold">Catalogue produits</h2><p className={`${display} text-xs italic text-[var(--lumen-muted)]`}>+ et − simulent une entrée ou une sortie</p></div>
-        <div className="overflow-x-auto">
+        <ul className="divide-y divide-[var(--lumen-grid)] border-t border-[var(--lumen-line)] @3xl:hidden">
+          {visible.map((item) => {
+            const isLow = item.quantity <= item.threshold;
+            return (
+              <li key={item.id} className="p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-bold">{item.product}</p>
+                    <p className="mt-1 font-mono text-[10px] text-[var(--lumen-muted)]">{item.reference} · {item.category}</p>
+                  </div>
+                  <p className="shrink-0 text-sm font-bold tabular-nums">{formatFcfa(item.price)}</p>
+                </div>
+                <div className="mt-3 flex items-center justify-between gap-3">
+                  <span className={`inline-flex items-center gap-1.5 text-xs font-bold ${isLow ? "text-[#8a5a00]" : "text-[#2f7048]"}`}><span className="size-1.5 rounded-full bg-current" aria-hidden />{item.quantity} en stock{isLow ? " · bas" : ""}</span>
+                  <div className="inline-flex items-center rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)]">
+                    <button type="button" onClick={() => onAdjust(item.id, -1)} disabled={item.quantity === 0} className="grid size-11 place-items-center text-[var(--lumen-muted)] hover:text-[var(--lumen-copper)] disabled:opacity-30" aria-label={`Retirer une unité de ${item.product}`}><Minus className="size-4" aria-hidden /></button>
+                    <span className="min-w-7 text-center font-bold tabular-nums">{item.quantity}</span>
+                    <button type="button" onClick={() => onAdjust(item.id, 1)} className="grid size-11 place-items-center text-[var(--lumen-muted)] hover:text-[var(--lumen-copper)]" aria-label={`Ajouter une unité de ${item.product}`}><Plus className="size-4" aria-hidden /></button>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+          {visible.length === 0 && <li className="px-4 py-12 text-center text-[var(--lumen-muted)]">Aucun produit trouvé.</li>}
+        </ul>
+        <div className="hidden overflow-x-auto @3xl:block">
           <table className="w-full min-w-[660px] text-left text-[13px]">
             <thead className="text-[10px] uppercase tracking-[0.12em] text-[var(--lumen-muted)]"><tr className="border-b border-[var(--lumen-line)]"><th className="px-4 pb-2.5 font-bold @2xl:px-5">Produit</th><th className="px-3 pb-2.5 font-bold">Référence</th><th className="px-3 pb-2.5 font-bold">Catégorie</th><th className="px-3 pb-2.5 text-right font-bold">Prix</th><th className="px-3 pb-2.5 font-bold">Disponibilité</th><th className="px-3 pb-2.5 font-bold">Ajuster</th></tr></thead>
             <tbody>

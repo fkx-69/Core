@@ -149,7 +149,7 @@ function Bloc({
 }) {
   return (
     <div
-      className={`mx-auto w-full max-w-[1200px] px-5 @xl:px-8 @3xl:px-12 @5xl:px-16 ${className}`}
+      className={`mx-auto w-full max-w-[1200px] px-4 @sm:px-5 @xl:px-8 @3xl:px-12 @5xl:px-16 ${className}`}
     >
       {children}
     </div>
@@ -200,7 +200,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
 
   return (
     <div
-      className={`${fraunces.variable} ${karla.variable} @container [font-family:var(--font-ecrin-sans)] bg-[#faf5f1] text-[#3d2c29] antialiased`}
+      className={`${fraunces.variable} ${karla.variable} demo-touch @container overflow-x-clip [font-family:var(--font-ecrin-sans)] bg-[#faf5f1] text-[#3d2c29] antialiased`}
     >
       <style>{`
         @keyframes ecr-float {
@@ -653,9 +653,9 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
               </p>
             </Reveal>
 
-            <div className="mt-9 grid gap-5 @5xl:grid-cols-[0.82fr_1.18fr] @5xl:gap-7">
+            <div className="mt-9 grid min-w-0 gap-5 @5xl:grid-cols-[0.82fr_1.18fr] @5xl:gap-7">
               {/* Panneau de réassurance + récap live */}
-              <aside className="rounded-[1.75rem] bg-[#3d2c29] p-6 text-[#faf5f1] @3xl:p-8">
+              <aside className="min-w-0 rounded-[1.75rem] bg-[#3d2c29] p-4 text-[#faf5f1] @sm:p-6 @3xl:p-8">
                 <p className="[font-family:var(--font-ecrin-serif)] text-xl font-light @3xl:text-2xl">
                   Un moment rien qu&apos;à vous
                 </p>
@@ -707,24 +707,24 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
               </aside>
 
               {/* Module de réservation */}
-              <div className="rounded-[1.75rem] border border-[#ecdccf] bg-[#fffdfb] p-6 @3xl:p-8">
+              <div className="min-w-0 rounded-[1.75rem] border border-[#ecdccf] bg-[#fffdfb] p-4 @sm:p-6 @3xl:p-8">
                 {/* Fil d'étapes */}
                 <ol
                   aria-label="Étapes de la réservation"
-                  className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[11px] font-medium @3xl:text-xs"
+                  className="scrollbar-none -mx-1 flex min-w-0 snap-x snap-mandatory flex-nowrap items-center gap-2 overflow-x-auto px-1 pb-2 text-[11px] font-medium @3xl:text-xs"
                 >
                   {["Prestation", "Date & heure", "Confirmation"].map((label, i) => {
                     const num = i + 1;
                     const done = etape > num;
                     const current = etape === num;
                     return (
-                      <li key={label} className="flex items-center gap-2">
+                      <li key={label} className="flex shrink-0 snap-start items-center gap-2">
                         {i > 0 && (
                           <span aria-hidden className="h-px w-4 bg-[#e0cbbb] @sm:w-6" />
                         )}
                         <span
                           aria-current={current ? "step" : undefined}
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 ${
+                          className={`inline-flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-2 ${
                             current
                               ? "bg-[#3d2c29] text-[#faf5f1]"
                               : done

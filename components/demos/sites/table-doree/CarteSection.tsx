@@ -44,11 +44,11 @@ export default function CarteSection() {
         </Reveal>
 
         {/* Onglets */}
-        <Reveal className="mt-10 flex justify-center" delay={80}>
+        <Reveal className="scrollbar-none mt-10 flex w-full snap-x snap-mandatory justify-start overflow-x-auto pb-2 @sm:justify-center" delay={80}>
           <div
             role="group"
             aria-label="Catégories de la carte"
-            className="inline-flex rounded-full border border-[#d8c9ac] bg-[#faf6ef] p-1"
+            className="inline-flex w-max rounded-full border border-[#d8c9ac] bg-[#faf6ef] p-1"
           >
             {CATEGORIES.map((key) => (
               <button
@@ -56,7 +56,7 @@ export default function CarteSection() {
                 type="button"
                 aria-pressed={category === key}
                 onClick={() => setCategory(key)}
-                className={`rounded-full px-5 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf6ef] @2xl:px-7 ${
+                className={`min-h-11 snap-start rounded-full px-5 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf6ef] @2xl:px-7 ${
                   category === key
                     ? "bg-[#221a12] text-[#f3ecdd]"
                     : "text-[#6b5c4a] hover:text-[#221a12]"

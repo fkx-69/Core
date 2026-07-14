@@ -60,7 +60,7 @@ const btnFantome = `${focusRing} inline-flex items-center justify-center gap-2 r
 const etiquette =
   "mb-1.5 block text-xs font-bold uppercase tracking-wider text-zinc-400";
 
-const champ = `${focusRing} w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white placeholder:text-zinc-600 transition-colors focus:border-[color:var(--volt-accent)] focus:outline-none`;
+const champ = `${focusRing} min-h-12 w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-base text-white placeholder:text-zinc-600 transition-colors focus:border-[color:var(--volt-accent)] focus:outline-none md:text-sm`;
 
 const ICONES_ORIGINES: Record<string, LucideIcon> = {
   kola: Flame,
@@ -100,7 +100,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
   return (
     <div
       style={theme}
-      className={`${voltDisplay.variable} ${voltBody.variable} @container relative isolate bg-[#0a0a0e] text-zinc-100 [font-family:var(--font-volt-body)] selection:bg-[color:var(--volt-accent)] selection:text-[#0a0a0e]`}
+      className={`${voltDisplay.variable} ${voltBody.variable} demo-touch @container relative isolate bg-[#0a0a0e] text-zinc-100 [font-family:var(--font-volt-body)] selection:bg-[color:var(--volt-accent)] selection:text-[#0a0a0e]`}
     >
       <style>{`
         @keyframes volt-float {
@@ -177,7 +177,7 @@ function EnTete() {
           </nav>
           <a
             href="#distributeurs"
-            className={`${focusRing} rounded-full bg-[color:var(--volt-accent)] px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0a0a0e] transition-[background-color,filter] duration-500 hover:brightness-110 @2xl:text-xs`}
+            className={`${focusRing} inline-flex min-h-11 items-center rounded-full bg-[color:var(--volt-accent)] px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0a0a0e] transition-[background-color,filter] duration-500 hover:brightness-110 @2xl:text-xs`}
           >
             <span className="hidden @xl:inline">Devenir distributeur</span>
             <span className="@xl:hidden">Distributeur</span>
@@ -188,16 +188,16 @@ function EnTete() {
       {/* Ancres rapides quand la navigation inline n'a pas la place */}
       <nav
         aria-label="Accès rapide aux sections"
-        className="border-b border-white/[0.06] @3xl:hidden"
+        className="relative border-b border-white/[0.06] after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-10 after:bg-linear-to-l after:from-[#0a0a0e] after:to-transparent @3xl:hidden"
       >
         <div
-          className={`${conteneur} scrollbar-none flex gap-2 overflow-x-auto py-2.5`}
+          className={`${conteneur} scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto py-2.5 pr-10`}
         >
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`${focusRing} whitespace-nowrap rounded-full border border-white/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-400 transition-colors hover:border-white/30 hover:text-white`}
+              className={`${focusRing} inline-flex min-h-11 shrink-0 snap-start items-center whitespace-nowrap rounded-full border border-white/10 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-wider text-zinc-400 transition-colors hover:border-white/30 hover:text-white`}
             >
               {item.label}
             </a>
@@ -842,7 +842,7 @@ function SelecteurSaveurs({
             type="button"
             aria-pressed={estActive}
             onClick={() => onSelect(s.id)}
-            className={`${focusRing} inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 ${
+            className={`${focusRing} inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 ${
               estActive
                 ? "border-transparent bg-[color:var(--volt-accent)] text-[#0a0a0e]"
                 : "border-white/15 text-zinc-300 hover:border-white/40 hover:text-white"

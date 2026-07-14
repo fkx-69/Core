@@ -119,7 +119,7 @@ export default function Site({
 
   return (
     <div
-      className={`${tdSerif.variable} ${tdSans.variable} @container bg-[#faf6ef] text-[#241d16] antialiased [font-family:var(--font-td-sans)] selection:bg-[#ead9b8] selection:text-[#241d16]`}
+      className={`${tdSerif.variable} ${tdSans.variable} demo-touch @container bg-[#faf6ef] text-[#241d16] antialiased [font-family:var(--font-td-sans)] selection:bg-[#ead9b8] selection:text-[#241d16]`}
     >
       {/* ============================ HEADER ============================ */}
       <header className="sticky top-0 z-40 border-b border-[#e3d8c2] bg-[#faf6ef]/90 backdrop-blur-md">
@@ -179,7 +179,7 @@ export default function Site({
                 aria-expanded={menuOpen}
                 aria-controls="td-nav-mobile"
                 aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d8c9ac] text-[#241d16] transition-colors hover:border-amber-700 hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 @3xl:hidden"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#d8c9ac] text-[#241d16] transition-colors hover:border-amber-700 hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 @3xl:hidden"
               >
                 {menuOpen ? (
                   <X className="h-4.5 w-4.5" aria-hidden />
@@ -203,7 +203,7 @@ export default function Site({
                     key={link.href}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="border-b border-[#efe6d3] py-3.5 text-base text-[#241d16] transition-colors hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 [font-family:var(--font-td-serif)]"
+                    className="flex min-h-11 items-center border-b border-[#efe6d3] py-3.5 text-base text-[#241d16] transition-colors hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 [font-family:var(--font-td-serif)]"
                   >
                     {link.label}
                   </a>
@@ -211,7 +211,7 @@ export default function Site({
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-5 pb-2">
                   <a
                     href={telHref}
-                    className="inline-flex items-center gap-2 text-sm text-[#6b5c4a] hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700"
+                    className="inline-flex min-h-11 items-center gap-2 text-sm text-[#6b5c4a] hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700"
                   >
                     <Phone className="h-3.5 w-3.5" aria-hidden />
                     {SITE.phone}
@@ -219,7 +219,7 @@ export default function Site({
                   <a
                     href={RESERVATION_HREF}
                     onClick={() => setMenuOpen(false)}
-                    className="inline-flex items-center rounded-full bg-[#221a12] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#f3ecdd] transition-colors hover:bg-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700"
+                    className="inline-flex min-h-11 items-center rounded-full bg-[#221a12] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#f3ecdd] transition-colors hover:bg-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700"
                   >
                     Réserver une table
                   </a>

@@ -22,7 +22,7 @@ export default function IntroIllustration({
         {...(isString && width && height ? { width, height } : {})}
         loading="eager"
         sizes="(min-width: 1024px) 34rem, (min-width: 640px) 32rem, 100vw"
-        className="h-auto w-full max-w-md sm:max-w-lg lg:max-w-full"
+        className="h-auto w-full max-w-xs sm:max-w-lg lg:max-w-full"
       />
     </div>
   );

@@ -19,7 +19,7 @@ export default function CtaBanner({
 }) {
   const whatsappHref = `https://wa.me/${CONTACT_INFO.whatsapp.replace(/[^0-9]/g, "")}`;
   return (
-    <section className="relative overflow-hidden bg-accent py-24 text-accent-contrast sm:py-28">
+    <section className="relative overflow-hidden bg-accent py-16 text-accent-contrast sm:py-28">
       <div
         className="dot-grid-accent absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,transparent_35%,black_100%)]"
         aria-hidden
@@ -41,8 +41,8 @@ export default function CtaBanner({
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed opacity-80">
             {text}
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button href="/contact" variant="inverted" size="lg">
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <Button href="/contact" variant="inverted" size="lg" className="w-full sm:w-auto">
               Discutons-en
             </Button>
             {/* accent-contrast plutôt que white : blanc sur l'indigo en clair,
@@ -51,7 +51,7 @@ export default function CtaBanner({
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-accent-contrast/30 px-6 py-3 text-sm font-semibold transition-colors hover:border-accent-contrast/60 hover:bg-accent-contrast/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-contrast"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-accent-contrast/30 px-5 py-3 text-sm font-semibold transition-colors hover:border-accent-contrast/60 hover:bg-accent-contrast/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-contrast sm:w-auto sm:px-6"
             >
               <MessageCircle className="h-4 w-4" aria-hidden />
               Écrivez-nous sur WhatsApp
@@ -59,7 +59,7 @@ export default function CtaBanner({
           </div>
           {/* Pastille qui répond à celle du héro — la page se referme comme
               elle s'est ouverte, sur la disponibilité. */}
-          <p className="mt-8 inline-flex items-center gap-2.5 rounded-full border border-accent-contrast/25 bg-accent-contrast/10 px-4 py-1.5 text-sm">
+          <p className="mt-7 inline-flex items-center gap-2.5 self-center rounded-full border border-accent-contrast/25 bg-accent-contrast/10 px-4 py-2 text-sm sm:mt-8 sm:py-1.5">
             <span
               className="animate-pulse-dot h-2 w-2 rounded-full bg-[#4cd6a1]"
               aria-hidden

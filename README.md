@@ -57,6 +57,17 @@ lib/
 
 Toggle dans le header, persisté en `localStorage`, avec respect de `prefers-color-scheme` au premier chargement. Un script inline dans `app/layout.tsx` applique la classe `.dark` sur `<html>` avant le premier rendu (pas de flash). Les composants consomment des tokens sémantiques (`bg-surface`, `text-muted`, `--chart-*`…), si bien que les démos suivent automatiquement le thème.
 
+## Accès privé de prévisualisation
+
+Le domaine de test peut être protégé par une page de connexion et un cookie de session persistant pendant 30 jours. Cette barrière remplace l’authentification HTTP Basic du reverse proxy, qui perd ses identifiants lorsque Safari iOS est fermé.
+
+1. Copier `.env.example` vers `.env.local`.
+2. Activer `PREVIEW_AUTH_ENABLED`.
+3. Générer `PREVIEW_AUTH_SECRET` avec `openssl rand -base64 48`.
+4. Renseigner `PREVIEW_AUTH_PASSWORD_HASH` avec un hash bcrypt.
+
+Le reverse proxy doit ensuite uniquement transmettre les requêtes à Next.js : laisser une directive `basic_auth` devant l’application conserverait le problème initial.
+
 ## Démos du portfolio
 
 Chaque démo est un composant client isolé, chargé paresseusement (`next/dynamic` + `IntersectionObserver`) et remis à zéro par le bouton « Réinitialiser la démo » (remontage par changement de `key`). Les sites et applications web disposent aussi d’une route autonome sous `/demos/*`. Toutes les données sont factices.
@@ -65,4 +76,4 @@ Chaque démo est un composant client isolé, chargé paresseusement (`next/dynam
 
 - Le formulaire de contact valide les champs côté client, mais simule l'envoi : aucun message ne quitte le navigateur.
 - Les coordonnées, réseaux sociaux, témoignages implicites, résultats annoncés et projets du portfolio sont fictifs.
-- Le projet ne possède ni backend, ni base de données, ni authentification.
+- Le projet ne possède ni backend ni base de données. La seule authentification est la barrière optionnelle de prévisualisation ; elle ne gère pas de comptes utilisateurs.

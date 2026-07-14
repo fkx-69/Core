@@ -54,7 +54,7 @@ const TESTIMONIALS: {
  *  même langage calme que « Pourquoi Core »). */
 export default function Testimonials() {
   return (
-    <section className="bg-background py-24 sm:py-32">
+    <section className="bg-background py-16 sm:py-32">
       <Container>
         <Reveal>
           <SectionHeading
@@ -63,10 +63,14 @@ export default function Testimonials() {
             align="center"
           />
         </Reveal>
-        <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-0 md:divide-x md:divide-line">
+        <div
+          role="region"
+          aria-label="Témoignages clients — faites glisser pour parcourir"
+          className="scrollbar-none -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:mt-14 md:grid md:grid-cols-3 md:gap-0 md:divide-x md:divide-line md:overflow-visible md:px-0 md:pb-0"
+        >
           {TESTIMONIALS.map((testimonial, i) => (
-            <Reveal key={testimonial.name} delay={i * 100} className="md:px-8">
-              <figure className="flex h-full flex-col">
+            <Reveal key={testimonial.name} delay={i * 100} className="w-[82vw] max-w-sm shrink-0 snap-center md:w-auto md:max-w-none md:px-8">
+              <figure className="flex h-full min-h-96 flex-col rounded-card border border-line bg-surface-raised p-6 shadow-card md:min-h-0 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none">
                 <span
                   className="text-outline font-display text-7xl leading-none font-bold select-none"
                   aria-hidden

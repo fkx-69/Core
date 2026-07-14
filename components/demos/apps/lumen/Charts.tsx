@@ -54,12 +54,12 @@ export function RevenueBars({ data, target }: { data: Datum[]; target?: number }
   const targetY = target ? PAD.top + innerH * (1 - target / max) : null;
 
   return (
-    <div className="relative">
+    <div className="relative min-w-0 overflow-hidden">
       <svg
         viewBox={`0 0 ${W} ${H}`}
         role="img"
         aria-label="Chiffre d'affaires mensuel, de janvier à juin"
-        className="w-full"
+        className="block h-auto w-full max-w-full"
       >
         {Array.from({ length: TICKS + 1 }, (_, t) => {
           const y = PAD.top + innerH * (1 - t / TICKS);
@@ -212,8 +212,8 @@ export function CategoryDonut({ data }: { data: Datum[] }) {
   const active = hovered !== null ? data[hovered] : null;
 
   return (
-    <div className="flex items-center gap-5">
-      <div className="relative shrink-0">
+    <div className="flex min-w-0 flex-col items-stretch gap-4 @sm:flex-row @sm:items-center @sm:gap-5">
+      <div className="relative mx-auto shrink-0 @sm:mx-0">
         <svg
           viewBox={`0 0 ${SIZE} ${SIZE}`}
           role="img"

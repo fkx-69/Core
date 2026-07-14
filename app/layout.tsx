@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,6 +20,11 @@ export const metadata: Metadata = {
   },
   description:
     "Core conçoit des sites web, applications web et applications mobiles pour les entreprises d'Afrique de l'Ouest, de Dakar à Abidjan.",
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
 };
 
 // Applique le thème avant le premier paint : localStorage, sinon préférence système.
@@ -37,7 +43,9 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
-        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInit}
+        </Script>
         {children}
       </body>
     </html>

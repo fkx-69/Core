@@ -76,7 +76,7 @@ const arrowLabel = (
 export default function ServicesPreview() {
   const [main, ...others] = SERVICES;
   return (
-    <section className="bg-background py-20 sm:py-28">
+    <section className="bg-background py-16 sm:py-28">
       <Container>
         <Reveal>
           <SectionHeading
@@ -85,7 +85,41 @@ export default function ServicesPreview() {
             intro="Du site vitrine au software métier, une même exigence : un produit soigné, performant et facile à faire évoluer."
           />
         </Reveal>
-        <div className="mt-14 grid gap-4 lg:grid-cols-2">
+        <div className="mt-9 grid gap-3 lg:hidden">
+          {SERVICES.map((service, i) => (
+            <Reveal key={service.id}>
+              <Link
+                href={`/services#${service.id}`}
+                className="group relative grid min-h-32 grid-cols-[5.5rem_1fr_auto] items-center gap-3 overflow-hidden rounded-card border border-line bg-surface-raised p-4 shadow-card transition hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <TileIllustration
+                  serviceId={service.id}
+                  className="aspect-square w-[5.5rem]"
+                  sizes="88px"
+                />
+                <span className="min-w-0">
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="mt-1 block font-display text-lg font-semibold">
+                    {service.title}
+                  </span>
+                  <span className="mt-1 block text-sm leading-snug text-muted">
+                    {service.tagline}
+                  </span>
+                  {i === 0 && (
+                    <span className="mt-2 block text-xs leading-relaxed text-muted">
+                      {service.description.split(". ")[0]}.
+                    </span>
+                  )}
+                </span>
+                <ArrowRight className="h-5 w-5 shrink-0 text-accent transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-14 hidden gap-4 lg:grid lg:grid-cols-2">
           <Reveal variant="left" className="h-full">
             <Link
               href={`/services#${main.id}`}

@@ -28,11 +28,11 @@ export default function ServiceSection({
   return (
     <section
       id={service.id}
-      className={`group scroll-mt-24 py-16 sm:py-24 ${alternate ? "bg-surface" : ""}`}
+      className={`group scroll-mt-24 py-12 md:py-24 ${alternate ? "bg-surface" : ""}`}
     >
       <Container>
         <div
-          className={`grid gap-12 lg:gap-0 ${
+          className={`grid gap-8 lg:gap-0 ${
             alternate
               ? "lg:grid-cols-[1fr_1.6fr]"
               : "lg:grid-cols-[1.6fr_1fr]"
@@ -45,14 +45,14 @@ export default function ServiceSection({
             <div>
               <p
                 aria-hidden
-                className="text-outline font-display text-7xl font-bold transition-colors duration-500 group-hover:text-accent-soft lg:text-8xl"
+                className="text-outline font-display text-5xl font-bold transition-colors duration-500 group-hover:text-accent-soft md:text-7xl lg:text-8xl"
               >
                 {numeral}
               </p>
               <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
                 Service {numeral}
               </p>
-              <h2 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:mt-4 md:text-5xl">
                 {service.title}
               </h2>
               <p className="mt-4 text-lg font-medium">{service.tagline}</p>
@@ -64,8 +64,8 @@ export default function ServiceSection({
                   <Badge key={tech}>{tech}</Badge>
                 ))}
               </div>
-              <div className="mt-10">
-                <Button href={demoHref} variant="outline">
+              <div className="mt-8 md:mt-10">
+                <Button href={demoHref} variant="outline" className="w-full sm:w-auto">
                   {service.demoLabel}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Button>
@@ -83,7 +83,7 @@ export default function ServiceSection({
             }`}
           >
               {SERVICE_ILLUSTRATIONS[service.id] && (
-                <div className="relative aspect-square w-full max-w-xs">
+                <div className="relative mx-auto aspect-square w-full max-w-52 md:mx-0 md:max-w-xs">
                   <Image
                     src={SERVICE_ILLUSTRATIONS[service.id]}
                     alt=""
@@ -94,7 +94,52 @@ export default function ServiceSection({
                   />
                 </div>
               )}
-              <Card>
+              <div className="divide-y divide-line overflow-hidden rounded-card border border-line bg-surface-raised md:hidden">
+                <details className="group/details">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-display font-semibold marker:hidden">
+                    Ce que vous y gagnez
+                    <span
+                      aria-hidden
+                      className="text-xl font-light text-accent transition group-open/details:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <div className="px-4 pb-4">
+                    <ul className="space-y-3">
+                      {service.benefits.map((benefit) => (
+                        <li key={benefit} className="flex items-start gap-3">
+                          <span
+                            className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-accent/40 text-accent"
+                            aria-hidden
+                          >
+                            <Check className="h-3 w-3" />
+                          </span>
+                          <span className="text-sm leading-relaxed">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-4 border-t border-dashed border-teal/50 pt-4 text-sm font-semibold text-accent first-letter:uppercase">
+                      {service.priceFrom}
+                    </p>
+                  </div>
+                </details>
+                <details className="group/details">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-display font-semibold marker:hidden">
+                    {service.useCase.title}
+                    <span
+                      aria-hidden
+                      className="text-xl font-light text-accent transition group-open/details:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="px-4 pb-4 text-sm leading-relaxed text-muted">
+                    {service.useCase.text}
+                  </p>
+                </details>
+              </div>
+              <Card className="hidden md:block">
                 <h3 className="font-display text-lg font-semibold">
                   Ce que vous y gagnez
                 </h3>
@@ -115,7 +160,7 @@ export default function ServiceSection({
                   {service.priceFrom}
                 </p>
               </Card>
-              <Card className="border-accent/30 bg-accent-soft/40">
+              <Card className="hidden border-accent/30 bg-accent-soft/40 md:block">
                 <h3 className="font-display text-lg font-semibold">
                   {service.useCase.title}
                 </h3>

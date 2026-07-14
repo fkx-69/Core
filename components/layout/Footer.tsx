@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { CONTACT_INFO, NAV_LINKS, SOCIAL_LINKS } from "@/lib/site";
 import { SERVICES } from "@/lib/services-data";
 import Container from "@/components/ui/Container";
@@ -20,7 +21,7 @@ export default function Footer() {
       >
         Core.
       </span>
-      <Container className="relative py-16">
+      <Container className="relative py-12 sm:py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-display text-3xl font-bold tracking-tight">
@@ -37,7 +38,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <nav aria-label="Nos services">
+          <nav aria-label="Nos services" className="hidden sm:block">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Services
             </p>
@@ -55,7 +56,7 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Navigation du pied de page">
+          <nav aria-label="Navigation du pied de page" className="hidden sm:block">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Navigation
             </p>
@@ -81,7 +82,7 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <div>
+          <div className="hidden sm:block">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Contact
             </p>
@@ -126,7 +127,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 text-accent transition hover:border-accent hover:bg-accent hover:text-accent-contrast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 text-accent transition hover:border-accent hover:bg-accent hover:text-accent-contrast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:h-9 sm:w-9"
                   >
                     <SocialIcon name={social.name} className="h-4 w-4" />
                   </a>
@@ -136,7 +137,106 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-12 border-t border-line pt-6 text-sm text-muted">
+        {/* Sur smartphone, les trois longues colonnes deviennent des
+            accordéons natifs : tous les liens restent présents et accessibles
+            sans transformer le footer en second écran-fleuve. */}
+        <div className="mt-8 divide-y divide-line border-y border-line sm:hidden">
+          <details className="group">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between py-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden">
+              Services
+              <ChevronDown className="h-4 w-4 text-accent transition-transform group-open:rotate-180" aria-hidden />
+            </summary>
+            <nav aria-label="Nos services sur mobile">
+              <ul className="pb-3">
+                {SERVICES.map((service) => (
+                  <li key={service.id}>
+                    <Link
+                      href={`/services#${service.id}`}
+                      className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                    >
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </details>
+
+          <details className="group">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between py-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden">
+              Navigation
+              <ChevronDown className="h-4 w-4 text-accent transition-transform group-open:rotate-180" aria-hidden />
+            </summary>
+            <nav aria-label="Navigation du pied de page sur mobile">
+              <ul className="pb-3">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/mentions-legales"
+                    className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                  >
+                    Mentions légales
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </details>
+
+          <details className="group">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between py-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden">
+              Contact
+              <ChevronDown className="h-4 w-4 text-accent transition-transform group-open:rotate-180" aria-hidden />
+            </summary>
+            <div className="pb-5">
+              <ul className="space-y-1 text-sm">
+                <li>
+                  <a href={`mailto:${CONTACT_INFO.email}`} className="flex min-h-11 items-center break-all text-muted transition hover:text-accent">
+                    {CONTACT_INFO.email}
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:${CONTACT_INFO.phone.replace(/\s/g, "")}`} className="flex min-h-11 items-center text-muted transition hover:text-accent">
+                    {CONTACT_INFO.phone}
+                  </a>
+                </li>
+                <li>
+                  <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center text-muted transition hover:text-accent">
+                    WhatsApp — {CONTACT_INFO.whatsapp}
+                  </a>
+                </li>
+                <li className="pt-2 leading-relaxed text-muted">
+                  {ADDRESS_LINE_1}<br />{ADDRESS_LINE_2}
+                </li>
+              </ul>
+              <ul className="mt-5 flex gap-3">
+                {SOCIAL_LINKS.map((social) => (
+                  <li key={social.name}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 text-accent transition hover:border-accent hover:bg-accent hover:text-accent-contrast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <SocialIcon name={social.name} className="h-4 w-4" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <p className="mt-8 border-t border-line pt-6 text-sm text-muted sm:mt-12">
           © {new Date().getFullYear()} Core. Tous droits réservés.
         </p>
       </Container>

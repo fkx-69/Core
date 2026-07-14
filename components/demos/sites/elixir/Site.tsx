@@ -110,7 +110,7 @@ function Shell({
 }) {
   return (
     <div
-      className={`mx-auto w-full max-w-[1280px] px-6 @sm:px-8 @3xl:px-14 @5xl:px-20 @7xl:px-28 ${
+      className={`mx-auto w-full max-w-[1280px] px-4 @sm:px-8 @3xl:px-14 @5xl:px-20 @7xl:px-28 ${
         className ?? ""
       }`}
     >
@@ -232,7 +232,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
 
   return (
     <div
-      className={`@container ${displaySerif.variable} ${microSans.variable} [font-family:var(--font-elixir-sans)] bg-[#f7f3ec] text-[#2c241b] antialiased [font-feature-settings:'ss01'] selection:bg-[#e7d8bd] selection:text-[#2c241b]`}
+      className={`@container demo-touch ${displaySerif.variable} ${microSans.variable} [font-family:var(--font-elixir-sans)] bg-[#f7f3ec] text-[#2c241b] antialiased [font-feature-settings:'ss01'] selection:bg-[#e7d8bd] selection:text-[#2c241b]`}
     >
       <style>{`
         .elx-rule {
@@ -251,14 +251,14 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
 
       {/* ============================ HEADER ============================ */}
       <header className="sticky top-0 z-30 border-b border-[#e4dac7] bg-[#f7f3ec]/88 backdrop-blur-md">
-        <Shell className="flex items-center justify-between gap-4 py-4 @3xl:py-5">
+        <Shell className="flex items-center justify-between gap-2 py-3 @sm:gap-4 @sm:py-4 @3xl:py-5">
           <button
             type="button"
             onClick={() => scrollTo("elx-collection")}
             className="group -m-1 flex flex-col p-1 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b08d57]"
             aria-label="Maison Élixir — retour à la collection"
           >
-            <span className="[font-family:var(--font-elixir-display)] text-lg @3xl:text-xl font-medium leading-none tracking-[0.34em] text-[#241d15]">
+            <span className="[font-family:var(--font-elixir-display)] text-base font-medium leading-none tracking-[0.2em] text-[#241d15] @sm:text-lg @sm:tracking-[0.34em] @3xl:text-xl">
               MAISON&nbsp;ÉLIXIR
             </span>
             <span className="mt-1 hidden text-[8px] uppercase tracking-[0.5em] text-[#9a8b73] @3xl:block">
@@ -285,7 +285,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
           <button
             type="button"
             onClick={() => scrollTo("elx-coffret")}
-            className="group inline-flex items-center gap-2 rounded-full border border-[#241d15] px-3.5 py-1.5 text-[10px] uppercase tracking-[0.22em] text-[#241d15] transition-colors hover:bg-[#241d15] hover:text-[#f7f3ec] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b08d57]"
+            className="group inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border border-[#241d15] px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-[#241d15] transition-colors hover:bg-[#241d15] hover:text-[#f7f3ec] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b08d57] @sm:gap-2 @sm:px-3.5 @sm:tracking-[0.22em]"
           >
             Coffret
             <span

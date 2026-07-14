@@ -63,9 +63,9 @@ const FAQ_ITEMS: FaqItem[] = [
 
 export default function ContactPage() {
   return (
-    <div className="py-16 sm:py-20">
+    <div className="py-12 sm:py-20">
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center mb-14">
+        <div className="mb-10 grid gap-6 sm:mb-14 sm:gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
           <SectionHeading
             as="h1"
             eyebrow="Contact"
@@ -75,19 +75,22 @@ export default function ContactPage() {
           <IntroIllustration src="/assets/illustrations/contact-intro.png" alt="" width={1000} height={500} />
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[2fr_1fr] lg:gap-14">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-[2fr_1fr] lg:gap-14">
           <div>
             <ContactForm />
             {/* « Et ensuite ? » : équilibre la colonne face au rail et ancre
                 la promesse — nœuds numérotés et pointillés teal, écho de la
                 timeline Méthode de la page Services. */}
-            <div className="mt-14">
+            <div className="mt-10 sm:mt-14">
               <h2 className="font-display text-lg font-semibold">
                 Et ensuite ?
               </h2>
-              <ol className="mt-6 grid gap-8 sm:grid-cols-3">
+              <ol className="mt-5 grid gap-3 sm:mt-6 sm:grid-cols-3 sm:gap-8">
                 {NEXT_STEPS.map((step, i) => (
-                  <li key={step.title} className="relative">
+                  <li
+                    key={step.title}
+                    className="relative rounded-card border border-line bg-surface-raised p-4 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0"
+                  >
                     {i < NEXT_STEPS.length - 1 && (
                       <span
                         aria-hidden
@@ -110,14 +113,14 @@ export default function ContactPage() {
           </div>
 
           {/* Rail indigo doux continu (réf 8) */}
-          <aside className="h-fit rounded-card bg-accent-soft/60 p-8 lg:sticky lg:top-24">
+          <aside className="h-fit rounded-card bg-accent-soft/60 p-6 sm:p-8 lg:sticky lg:top-24">
             <div className="mb-6 flex justify-center">
               <Image
                 src="/assets/illustrations/contact-sidebar.png"
                 alt=""
                 width={200}
                 height={200}
-                className="h-auto w-full max-w-sm"
+                className="h-auto w-full max-w-52 sm:max-w-sm"
                 aria-hidden
               />
             </div>
@@ -129,7 +132,7 @@ export default function ContactPage() {
                 <Mail className="mt-0.5 h-5 w-5 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="text-muted transition hover:text-accent"
+                  className="inline-flex min-h-11 min-w-0 items-center break-all text-muted transition hover:text-accent"
                 >
                   {CONTACT_INFO.email}
                 </a>
@@ -138,7 +141,7 @@ export default function ContactPage() {
                 <Phone className="mt-0.5 h-5 w-5 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
                 <a
                   href={`tel:${CONTACT_INFO.phone.replace(/\s/g, "")}`}
-                  className="text-muted transition hover:text-accent"
+                  className="inline-flex min-h-11 items-center text-muted transition hover:text-accent"
                 >
                   {CONTACT_INFO.phone}
                 </a>
@@ -149,7 +152,7 @@ export default function ContactPage() {
                   href={WHATSAPP_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted transition hover:text-accent"
+                  className="inline-flex min-h-11 min-w-0 items-center break-words text-muted transition hover:text-accent"
                 >
                   WhatsApp — {CONTACT_INFO.whatsapp}
                 </a>
@@ -179,7 +182,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 text-accent transition hover:border-accent hover:bg-accent hover:text-accent-contrast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 text-accent transition hover:border-accent hover:bg-accent hover:text-accent-contrast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:h-10 sm:w-10"
                   >
                     <SocialIcon name={social.name} />
                   </a>
@@ -189,7 +192,7 @@ export default function ContactPage() {
           </aside>
         </div>
 
-        <div className="mt-20 sm:mt-24">
+        <div className="mt-16 sm:mt-24">
           <SectionHeading eyebrow="FAQ" title="Questions fréquentes" align="center" />
           <div className="mx-auto mt-10 max-w-3xl">
             <Faq items={FAQ_ITEMS} />

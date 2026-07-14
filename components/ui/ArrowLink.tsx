@@ -14,7 +14,7 @@ export default function ArrowLink({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center gap-2 text-sm font-medium text-accent underline decoration-accent/40 underline-offset-8 transition hover:decoration-accent ${className}`}
+      className={`group inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline decoration-accent/40 underline-offset-8 transition hover:decoration-accent md:min-h-0 ${className}`}
     >
       {children}
       <ArrowRight

@@ -187,11 +187,9 @@ html.theme-transition * {
   opacity: 0;
   translate: 0 16px;
 }
-.reveal.reveal-left {
-  translate: -20px 0;
-}
+.reveal.reveal-left,
 .reveal.reveal-right {
-  translate: 20px 0;
+  translate: 0 16px;
 }
 .reveal.reveal-scale {
   translate: 0 0;
@@ -210,6 +208,12 @@ html.theme-transition * {
    chaque élément entre déjà seul dans le viewport — le délai s'additionnerait
    à l'attente au lieu de rythmer une rangée. */
 @media (min-width: 1024px) {
+  .reveal.reveal-left {
+    translate: -20px 0;
+  }
+  .reveal.reveal-right {
+    translate: 20px 0;
+  }
   .reveal.is-visible {
     transition-delay: var(--reveal-delay, 0ms);
   }
@@ -368,6 +372,35 @@ html.theme-transition * {
 .screen-in {
   animation: screen-in 0.25s ease;
 }
+
+/* Cibles tactiles des produits fictifs. Les container queries pilotent leur
+   mise en page, mais la taille des contrôles dépend bien du viewport réel :
+   une démo embarquée sur desktop conserve donc son chrome compact. */
+@media (width < 768px) {
+  .demo-touch :where(button) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .demo-touch :where(a.flex, a.inline-flex) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .demo-touch :where(a[href^="tel:"], a[href^="mailto:"]),
+  .demo-touch footer a {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .demo-touch :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    min-height: 48px;
+    font-size: 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .screen-in {
     animation: none;

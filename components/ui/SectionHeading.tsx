@@ -30,7 +30,11 @@ export default function SectionHeading({
       <Tag className="font-display text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
         {title}
       </Tag>
-      {intro && <p className="mt-5 text-lg leading-relaxed text-muted">{intro}</p>}
+      {intro && (
+        <p className="mt-4 text-base leading-relaxed text-muted sm:mt-5 sm:text-lg">
+          {intro}
+        </p>
+      )}
     </div>
   );
 }

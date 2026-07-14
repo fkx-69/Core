@@ -20,7 +20,7 @@ import {
 type SortKey = "date" | "client" | "amount";
 
 const field =
-  "w-full rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-canvas)]/50 px-3 py-2.5 text-sm text-[var(--lumen-ink)] outline-none transition placeholder:text-[var(--lumen-muted)] focus:border-[var(--lumen-copper)] focus:bg-[var(--lumen-panel)] focus:ring-2 focus:ring-[var(--lumen-copper-soft)]";
+  "min-h-12 w-full rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-canvas)]/50 px-3 py-2.5 text-base text-[var(--lumen-ink)] outline-none transition placeholder:text-[var(--lumen-muted)] focus:border-[var(--lumen-copper)] focus:bg-[var(--lumen-panel)] focus:ring-2 focus:ring-[var(--lumen-copper-soft)] md:text-sm";
 
 /** Panneau de base : surface blanche, bordure fine, sans effet décoratif. */
 const panel =
@@ -145,7 +145,7 @@ export default function VentesView({
   }
 
   return (
-    <div className="screen-in space-y-4 @2xl:space-y-5">
+    <div className="screen-in min-w-0 space-y-4 @2xl:space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--lumen-copper)]">Vue d’ensemble</p>
@@ -154,7 +154,7 @@ export default function VentesView({
         <button
           type="button"
           onClick={() => setFormOpen((value) => !value)}
-          className="inline-flex items-center gap-2 rounded-md bg-[var(--lumen-ink)] px-4.5 py-2.5 text-sm font-bold text-white transition hover:bg-[#444744] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)] focus-visible:ring-offset-2 active:scale-[0.98]"
+          className="inline-flex min-h-11 items-center gap-2 rounded-md bg-[var(--lumen-ink)] px-4.5 py-2.5 text-sm font-bold text-white transition hover:bg-[#444744] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)] focus-visible:ring-offset-2 active:scale-[0.98]"
         >
           {formOpen ? <X className="size-4" aria-hidden /> : <Plus className="size-4" aria-hidden />}
           {formOpen ? "Fermer" : "Nouvelle vente"}
@@ -172,7 +172,7 @@ export default function VentesView({
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs text-[#a03e32]" role="alert">{error}</p>
-            <button type="submit" className="ml-auto rounded-md bg-[var(--lumen-ink)] px-4 py-2 text-sm font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)] active:scale-[0.98]">Enregistrer la vente</button>
+            <button type="submit" className="min-h-11 w-full rounded-md bg-[var(--lumen-ink)] px-4 py-2 text-sm font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)] active:scale-[0.98] @sm:ml-auto @sm:w-auto">Enregistrer la vente</button>
           </div>
         </form>
       )}
@@ -195,8 +195,8 @@ export default function VentesView({
         </div>
       </div>
 
-      <div className="grid gap-3 @3xl:grid-cols-[1.55fr_1fr] @2xl:gap-4">
-        <section className={`${panel} p-4 @2xl:p-5`} aria-labelledby="lumen-revenue-title">
+      <div className="grid min-w-0 gap-3 @2xl:gap-4 @3xl:grid-cols-[1.55fr_1fr]">
+        <section className={`min-w-0 overflow-hidden ${panel} p-4 @2xl:p-5`} aria-labelledby="lumen-revenue-title">
           <div className="flex items-baseline justify-between gap-2">
             <h2 id="lumen-revenue-title" className="text-[13px] font-bold">Chiffre d’affaires mensuel</h2>
             <p className={`${display} text-xs italic text-[var(--lumen-muted)]`}>6 derniers mois</p>
@@ -205,7 +205,7 @@ export default function VentesView({
             <RevenueBars data={[...PREVIOUS_REVENUE, { label: "Juin", value: revenue }]} target={MONTH_TARGET} />
           </div>
         </section>
-        <section className={`${panel} p-4 @2xl:p-5`} aria-labelledby="lumen-category-title">
+        <section className={`min-w-0 overflow-hidden ${panel} p-4 @2xl:p-5`} aria-labelledby="lumen-category-title">
           <div className="flex items-baseline justify-between gap-2">
             <h2 id="lumen-category-title" className="text-[13px] font-bold">Ventes par catégorie</h2>
             <p className={`${display} text-xs italic text-[var(--lumen-muted)]`}>juin</p>
@@ -219,14 +219,44 @@ export default function VentesView({
       <section className={`overflow-hidden ${panel}`} aria-labelledby="lumen-sales-title">
         <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3.5 @2xl:px-5">
           <div className="flex items-baseline gap-2"><h2 id="lumen-sales-title" className="text-[13px] font-bold">Dernières ventes</h2><p className={`${display} text-xs italic text-[var(--lumen-muted)]`}>{visible.length} résultat{visible.length > 1 ? "s" : ""}</p></div>
-          <div className="flex gap-2">
+          <div className="grid w-full grid-cols-2 gap-2 @sm:w-auto">
             <label className="sr-only" htmlFor="lumen-status">Filtrer par statut</label>
-            <select id="lumen-status" value={status} onChange={(e) => setStatus(e.target.value as SaleStatus | "Toutes")} className="rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] px-3 py-1.5 text-xs font-semibold outline-none focus:border-[var(--lumen-copper)]"><option>Toutes</option><option>Payée</option><option>En attente</option><option>Annulée</option></select>
+            <select id="lumen-status" value={status} onChange={(e) => setStatus(e.target.value as SaleStatus | "Toutes")} className="min-h-11 min-w-0 rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] px-3 py-2 text-base font-semibold outline-none focus:border-[var(--lumen-copper)] md:text-xs"><option>Toutes</option><option>Payée</option><option>En attente</option><option>Annulée</option></select>
             <label className="sr-only" htmlFor="lumen-sort">Trier les ventes</label>
-            <span className="relative"><ArrowDownUp className="pointer-events-none absolute left-2.5 top-1/2 size-3 -translate-y-1/2 text-[var(--lumen-muted)]" aria-hidden /><select id="lumen-sort" value={sort} onChange={(e) => setSort(e.target.value as SortKey)} className="rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] py-1.5 pl-7 pr-3 text-xs font-semibold outline-none focus:border-[var(--lumen-copper)]"><option value="date">Récentes</option><option value="amount">Montant</option><option value="client">Client</option></select></span>
+            <span className="relative min-w-0"><ArrowDownUp className="pointer-events-none absolute left-2.5 top-1/2 size-3 -translate-y-1/2 text-[var(--lumen-muted)]" aria-hidden /><select id="lumen-sort" value={sort} onChange={(e) => setSort(e.target.value as SortKey)} className="min-h-11 w-full min-w-0 rounded-lg border border-[var(--lumen-line)] bg-[var(--lumen-panel)] py-2 pl-7 pr-3 text-base font-semibold outline-none focus:border-[var(--lumen-copper)] md:text-xs"><option value="date">Récentes</option><option value="amount">Montant</option><option value="client">Client</option></select></span>
           </div>
         </div>
-        <div className="overflow-x-auto">
+        <ul className="divide-y divide-[var(--lumen-grid)] border-t border-[var(--lumen-line)] @3xl:hidden">
+          {visible.map((sale) => (
+            <li key={sale.id} className="p-4">
+              <div className="flex items-start gap-3">
+                <Initials name={sale.client} />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-bold">{sale.client}</p>
+                      <p className="mt-0.5 truncate text-xs text-[var(--lumen-muted)]">{sale.product}</p>
+                    </div>
+                    <p className="shrink-0 text-sm font-bold tabular-nums">{formatFcfa(sale.amount)}</p>
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+                    <PaymentChip payment={sale.payment} />
+                    <StatusMark status={sale.status} />
+                    <span className="text-[var(--lumen-muted)]">{formatDate(sale.date)}</span>
+                  </div>
+                  <div className="mt-2 flex justify-end gap-1">
+                    {sale.status === "En attente" && (
+                      <button type="button" onClick={() => onMarkPaid(sale.id)} className="grid size-11 place-items-center rounded-full text-[#2f7048] hover:bg-[#e8f0e3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)]" aria-label={`Marquer la vente de ${sale.client} comme payée`}><Check className="size-4" aria-hidden /></button>
+                    )}
+                    <button type="button" onClick={() => onDelete(sale.id)} className="grid size-11 place-items-center rounded-full text-[var(--lumen-muted)] hover:bg-[#f5e4de] hover:text-[#a03e32] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--lumen-copper)]" aria-label={`Supprimer la vente de ${sale.client}`}><Trash2 className="size-4" aria-hidden /></button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+          {visible.length === 0 && <li className="px-4 py-12 text-center text-[var(--lumen-muted)]"><SearchX className="mx-auto mb-2 size-5" aria-hidden />Aucune vente ne correspond à ces critères.</li>}
+        </ul>
+        <div className="hidden overflow-x-auto @3xl:block">
           <table className="w-full min-w-[720px] text-left text-[13px]">
             <thead className="text-[10px] uppercase tracking-[0.12em] text-[var(--lumen-muted)]"><tr className="border-b border-[var(--lumen-line)]"><th className="px-4 pb-2.5 font-bold @2xl:px-5">Client</th><th className="px-3 pb-2.5 font-bold">Produit</th><th className="px-3 pb-2.5 font-bold">Paiement</th><th className="px-3 pb-2.5 text-right font-bold">Montant</th><th className="px-3 pb-2.5 font-bold">Date</th><th className="px-3 pb-2.5 font-bold">Statut</th><th className="px-3 pb-2.5" aria-label="Actions" /></tr></thead>
             <tbody>

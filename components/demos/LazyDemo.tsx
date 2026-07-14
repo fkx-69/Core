@@ -21,59 +21,59 @@ function Skeleton({ minH }: { minH: string }) {
  */
 const DEMOS = {
   vitrine: {
-    minH: "min-h-[640px]",
+    minH: "min-h-[500px] md:min-h-[640px]",
     Component: dynamic(
       () => import("@/components/demos/sites/table-doree/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
+      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
     ),
   },
   volt: {
-    minH: "min-h-[640px]",
+    minH: "min-h-[500px] md:min-h-[640px]",
     Component: dynamic(() => import("@/components/demos/sites/volt/Preview"), {
       ssr: false,
-      loading: () => <Skeleton minH="min-h-[640px]" />,
+      loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" />,
     }),
   },
   parfum: {
-    minH: "min-h-[640px]",
+    minH: "min-h-[500px] md:min-h-[640px]",
     Component: dynamic(
       () => import("@/components/demos/sites/elixir/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
+      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
     ),
   },
   salon: {
-    minH: "min-h-[640px]",
+    minH: "min-h-[500px] md:min-h-[640px]",
     Component: dynamic(() => import("@/components/demos/sites/ecrin/Preview"), {
       ssr: false,
-      loading: () => <Skeleton minH="min-h-[640px]" />,
+      loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" />,
     }),
   },
   dashboard: {
-    minH: "min-h-[640px]",
+    minH: "min-h-[500px] md:min-h-[640px]",
     Component: dynamic(
       () => import("@/components/demos/apps/lumen/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
+      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
     ),
   },
   pressing: {
-    minH: "min-h-[640px]",
+    minH: "min-h-[500px] md:min-h-[640px]",
     Component: dynamic(
       () => import("@/components/demos/apps/sandaga/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[640px]" /> },
+      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
     ),
   },
   mobile: {
-    minH: "min-h-[680px]",
+    minH: "min-h-[600px] md:min-h-[680px]",
     Component: dynamic(() => import("@/components/demos/mobile/MobileDemo"), {
       ssr: false,
-      loading: () => <Skeleton minH="min-h-[680px]" />,
+      loading: () => <Skeleton minH="min-h-[600px] md:min-h-[680px]" />,
     }),
   },
   banque: {
-    minH: "min-h-[680px]",
+    minH: "min-h-[600px] md:min-h-[680px]",
     Component: dynamic(() => import("@/components/demos/banque/BanqueDemo"), {
       ssr: false,
-      loading: () => <Skeleton minH="min-h-[680px]" />,
+      loading: () => <Skeleton minH="min-h-[600px] md:min-h-[680px]" />,
     }),
   },
 } as const;

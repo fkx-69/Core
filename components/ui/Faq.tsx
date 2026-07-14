@@ -9,7 +9,7 @@ export default function Faq({ items }: { items: FaqItem[] }) {
     <div className="divide-y divide-line border-y border-line">
       {items.map((item) => (
         <details key={item.question} className="group">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display font-semibold marker:hidden [&::-webkit-details-marker]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-4 font-display font-semibold marker:hidden [&::-webkit-details-marker]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:py-5">
             {item.question}
             <Plus
               className="h-4 w-4 shrink-0 text-accent transition-transform duration-200 group-open:rotate-45"

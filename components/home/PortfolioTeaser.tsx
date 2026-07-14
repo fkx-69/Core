@@ -31,7 +31,7 @@ const TEASERS = [
 /** Aplat indigo doux, texte à gauche, illustration trait fin indigo à droite (réf 4). */
 export default function PortfolioTeaser() {
   return (
-    <section className="relative bg-accent-soft/50 py-20 sm:py-28">
+    <section className="relative bg-accent-soft/50 py-16 sm:py-28">
       <Image
         src="/assets/illustrations/home-portfolio-teaser.png"
         alt=""
@@ -41,7 +41,7 @@ export default function PortfolioTeaser() {
         aria-hidden
       />
       <Container>
-        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr]">
+        <div className="grid items-center gap-9 sm:gap-14 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <Reveal>
               <SectionHeading
@@ -51,7 +51,7 @@ export default function PortfolioTeaser() {
               />
             </Reveal>
             <Reveal delay={100}>
-              <ul className="mt-10">
+              <ul className="mt-8 sm:mt-10">
                 {TEASERS.map((teaser) => (
                   <li
                     key={teaser.anchor}
@@ -96,7 +96,7 @@ export default function PortfolioTeaser() {
               width={1400}
               height={933}
               sizes="(min-width: 640px) 32rem, 100vw"
-              className="mx-auto h-auto w-full max-w-lg"
+              className="mx-auto h-auto w-full max-w-xs sm:max-w-lg"
               aria-hidden
             />
           </Reveal>

@@ -11,7 +11,7 @@ type View = "orders" | "register";
 
 const mono = "[font-family:var(--font-sandaga-mono)]";
 
-const tab = "relative px-1 pb-2.5 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sandaga-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sandaga-panel)]";
+const tab = "relative inline-flex min-h-11 items-center px-1 pb-2.5 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sandaga-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sandaga-panel)]";
 
 export default function SandagaApp({ embedded = false }: { embedded?: boolean }) {
   const [view, setView] = useState<View>("orders");
@@ -65,7 +65,7 @@ export default function SandagaApp({ embedded = false }: { embedded?: boolean })
   }
 
   return (
-    <div className={`${sandagaBody.variable} ${sandagaDisplay.variable} ${sandagaMono.variable} @container min-h-[720px] bg-[var(--sandaga-canvas)] text-[var(--sandaga-ink)] [--sandaga-accent-soft:#edf1ed] [--sandaga-accent:#667168] [--sandaga-canvas:#f7f6f3] [--sandaga-deep:#292c29] [--sandaga-ink:#292b29] [--sandaga-late:#a45f4c] [--sandaga-line:#e4e2dd] [--sandaga-muted:#747772] [--sandaga-panel:#ffffff] [--sandaga-ready:#55725d] [--sandaga-signal:#eee9dd] [font-family:var(--font-sandaga-body)] selection:bg-[var(--sandaga-signal)] selection:text-[var(--sandaga-deep)]`}>
+    <div className={`${sandagaBody.variable} ${sandagaDisplay.variable} ${sandagaMono.variable} demo-touch @container min-h-[720px] overflow-x-clip bg-[var(--sandaga-canvas)] text-[var(--sandaga-ink)] [--sandaga-accent-soft:#edf1ed] [--sandaga-accent:#667168] [--sandaga-canvas:#f7f6f3] [--sandaga-deep:#292c29] [--sandaga-ink:#292b29] [--sandaga-late:#a45f4c] [--sandaga-line:#e4e2dd] [--sandaga-muted:#747772] [--sandaga-panel:#ffffff] [--sandaga-ready:#55725d] [--sandaga-signal:#eee9dd] [font-family:var(--font-sandaga-body)] selection:bg-[var(--sandaga-signal)] selection:text-[var(--sandaga-deep)]`}>
       <header className="border-b border-[var(--sandaga-line)] bg-[var(--sandaga-panel)] text-[var(--sandaga-ink)]">
         <div className="flex items-center gap-3 px-4 py-3 @2xl:px-6 @4xl:px-8">
           <div className="flex min-w-0 items-center gap-2.5">
@@ -81,7 +81,7 @@ export default function SandagaApp({ embedded = false }: { embedded?: boolean })
             <span className={`hidden text-[9px] font-semibold uppercase tracking-[0.14em] @xl:inline ${mono}`}>Caisse</span>
             <span className={`text-xs font-semibold tabular-nums ${mono}`}>{formatFcfa(total)}</span>
           </button>
-          <button type="button" onClick={reset} className="grid size-9 place-items-center rounded-lg text-[var(--sandaga-muted)] transition hover:bg-[var(--sandaga-canvas)] hover:text-[var(--sandaga-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sandaga-accent)]" aria-label="Réinitialiser Pressing Sandaga" title="Réinitialiser"><RotateCcw className="size-4" aria-hidden /></button>
+          <button type="button" onClick={reset} className="grid size-11 shrink-0 place-items-center rounded-lg text-[var(--sandaga-muted)] transition hover:bg-[var(--sandaga-canvas)] hover:text-[var(--sandaga-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sandaga-accent)] md:size-9" aria-label="Réinitialiser Pressing Sandaga" title="Réinitialiser"><RotateCcw className="size-4" aria-hidden /></button>
           <span className="hidden size-9 place-items-center rounded-full bg-[var(--sandaga-canvas)] text-[var(--sandaga-muted)] @xl:grid"><UserRound className="size-4" aria-hidden /></span>
         </div>
 
@@ -94,7 +94,7 @@ export default function SandagaApp({ embedded = false }: { embedded?: boolean })
             <div className="relative order-last mb-2.5 w-full @sm:order-none @sm:mb-2 @sm:ml-auto @sm:w-64">
               <Search className="pointer-events-none absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-[var(--sandaga-muted)]" aria-hidden />
               <label className="sr-only" htmlFor="sandaga-search">Rechercher une commande</label>
-              <input id="sandaga-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Client, téléphone, article…" className="w-full rounded-lg border border-[var(--sandaga-line)] bg-[var(--sandaga-canvas)] py-2 pl-9 pr-3 text-xs text-[var(--sandaga-ink)] outline-none placeholder:text-[var(--sandaga-muted)] focus:border-[var(--sandaga-accent)] focus:ring-2 focus:ring-[var(--sandaga-accent-soft)]" />
+              <input id="sandaga-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Client, téléphone, article…" className="min-h-12 w-full rounded-lg border border-[var(--sandaga-line)] bg-[var(--sandaga-canvas)] py-2 pl-9 pr-3 text-base text-[var(--sandaga-ink)] outline-none placeholder:text-[var(--sandaga-muted)] focus:border-[var(--sandaga-accent)] focus:ring-2 focus:ring-[var(--sandaga-accent-soft)] md:min-h-0 md:text-xs" />
             </div>
           )}
           <button type="button" className={`relative mb-2 hidden size-8 shrink-0 place-items-center rounded-lg text-[var(--sandaga-muted)] transition hover:bg-[var(--sandaga-canvas)] hover:text-[var(--sandaga-ink)] @sm:grid ${view === "orders" ? "" : "@sm:ml-auto"}`} aria-label="Notifications" title={lateCount > 0 ? `${lateCount} commandes en retard` : "Aucune commande en retard"}>

@@ -190,13 +190,13 @@ export default function HeroShowcase() {
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-[30rem] w-[46rem] max-w-none -translate-x-1/2 rounded-full bg-[color:var(--hero-halo)] blur-3xl transition-[background-color] duration-700"
       />
-      <Container className="relative flex flex-col items-center pt-10 pb-10 sm:pt-14 sm:pb-12">
-        <p className="inline-flex items-center gap-2.5 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-4 py-1.5 text-sm text-[color:var(--hero-muted)] transition-colors duration-700">
+      <Container className="relative flex flex-col items-center pt-8 pb-9 sm:pt-14 sm:pb-12">
+        <p className="inline-flex items-center gap-2 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-1.5 text-xs text-[color:var(--hero-muted)] transition-colors duration-700 sm:gap-2.5 sm:px-4 sm:text-sm">
           <span className="animate-pulse-dot h-2 w-2 rounded-full bg-[color:var(--hero-accent)] transition-colors duration-700" aria-hidden />
           Disponibles — Dakar · Abidjan · à distance
         </p>
         {/* Deux lignes poster, centrées (largeurs mesurées en Space Grotesk bold) */}
-        <h1 className="mt-6 text-center font-display text-[2.125rem] leading-[1.1] font-bold tracking-tight text-[color:var(--hero-ink)] transition-colors duration-700 sm:text-5xl lg:text-6xl xl:text-7xl">
+        <h1 className="mt-5 text-center font-display text-[2.05rem] leading-[1.1] font-bold tracking-tight text-[color:var(--hero-ink)] transition-colors duration-700 sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
           Le logiciel sur mesure,
           <span className="block text-[color:var(--hero-accent)] transition-colors duration-700">
             la preuve à l&apos;écran.
@@ -220,7 +220,7 @@ export default function HeroShowcase() {
           onWheelCapture={stop}
           onKeyDownCapture={stop}
           onFocusCapture={stop}
-          className="mt-5 w-full"
+          className="mt-4 w-full sm:mt-5"
         >
           <BrowserFrame url={site.url}>
             {/* isolate : les z-index internes des sites démos (headers sticky
@@ -237,7 +237,7 @@ export default function HeroShowcase() {
                     id={`hero-panel-${s.id}`}
                     aria-labelledby={`hero-tab-${s.id}`}
                     inert={s.id !== active || undefined}
-                    className={`@container scrollbar-none col-start-1 row-start-1 h-[420px] overflow-y-auto overscroll-contain lg:h-full motion-safe:transition-[opacity,transform] motion-safe:duration-500 ${
+                    className={`@container scrollbar-none col-start-1 row-start-1 h-[clamp(340px,52dvh,420px)] overflow-y-auto overscroll-y-auto lg:h-full lg:overscroll-contain motion-safe:transition-[opacity,transform] motion-safe:duration-500 ${
                       s.id === active
                         ? "opacity-100"
                         : "pointer-events-none opacity-0 motion-safe:translate-y-2 motion-safe:scale-[0.99]"
@@ -250,26 +250,26 @@ export default function HeroShowcase() {
             </div>
           </BrowserFrame>
         </div>
-        <div className="mt-3 flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <div className="mt-3 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-4 sm:gap-y-2">
           <p className="text-xs text-[color:var(--hero-muted)] transition-colors duration-700">
             {site.secteur} — aperçu interactif, tout réagit.
           </p>
           {/* Le héro convainc, cette paire convertit : visite complète en
               secondaire, « Démarrer un projet » en primaire aux couleurs de
               la marque affichée. */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="grid w-full gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center">
             <Link
               href={site.href}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-1.5 text-xs font-medium text-[color:var(--hero-muted)] shadow-card transition-colors duration-300 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)]"
+              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-2 text-xs font-medium text-[color:var(--hero-muted)] shadow-card transition-colors duration-300 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:min-h-0 sm:justify-start sm:py-1.5"
             >
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />
               Visiter le site en entier
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--hero-accent)] px-4 py-1.5 text-sm font-semibold text-[color:var(--hero-accent-ink)] shadow-card transition-colors duration-300 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--hero-bg)]"
+              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-[color:var(--hero-accent)] px-4 py-2 text-sm font-semibold text-[color:var(--hero-accent-ink)] shadow-card transition-colors duration-300 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--hero-bg)] sm:min-h-0 sm:py-1.5"
             >
               Démarrer un projet
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />

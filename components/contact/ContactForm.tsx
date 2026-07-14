@@ -61,7 +61,7 @@ function validateField(field: Field, values: FormValues): string | null {
 }
 
 const inputClasses =
-  "w-full rounded-field border border-line bg-surface-raised px-4 py-3 text-sm text-foreground placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 aria-[invalid=true]:border-danger";
+  "min-h-12 w-full rounded-field border border-line bg-surface-raised px-4 py-3 text-base text-foreground placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 aria-[invalid=true]:border-danger sm:text-sm";
 
 export default function ContactForm() {
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
@@ -136,7 +136,7 @@ export default function ContactForm() {
           Votre message a bien été envoyé. Notre équipe vous répondra sous
           24 heures ouvrées.
         </p>
-        <Button variant="outline" className="mt-8" onClick={resetForm}>
+        <Button variant="outline" className="mt-8 w-full sm:w-auto" onClick={resetForm}>
           Envoyer un autre message
         </Button>
       </div>
@@ -145,7 +145,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <div>
           <label htmlFor="nom" className="mb-1.5 block text-sm font-medium">
             Nom <span className="text-accent">*</span>
@@ -278,7 +278,12 @@ export default function ContactForm() {
       </div>
 
       <div className="mt-8">
-        <Button type="submit" size="lg" disabled={status === "sending"}>
+        <Button
+          type="submit"
+          size="lg"
+          className="w-full sm:w-auto"
+          disabled={status === "sending"}
+        >
           {status === "sending" ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

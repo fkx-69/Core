@@ -26,7 +26,7 @@ const REASONS = [
  *  grand numéral filaire, tiret pointillé teal, titre, texte (réf 3). */
 export default function WhyUs() {
   return (
-    <section className="bg-surface py-24 sm:py-32">
+    <section className="bg-surface py-16 sm:py-32">
       <Container>
         <Reveal>
           <SectionHeading
@@ -35,18 +35,35 @@ export default function WhyUs() {
             align="center"
           />
         </Reveal>
-        <Reveal className="mt-12 flex justify-center">
+        <Reveal className="mt-8 flex justify-center sm:mt-12">
           <Image
             src="/assets/illustrations/home-why-us.png"
             alt=""
             width={1400}
             height={369}
             sizes="(min-width: 768px) 42rem, 100vw"
-            className="w-full max-w-2xl h-auto"
+            className="h-auto w-full max-w-sm sm:max-w-2xl"
             aria-hidden
           />
         </Reveal>
-        <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-line">
+        <div className="mt-8 divide-y divide-line border-y border-line sm:hidden">
+          {REASONS.map((reason, i) => (
+            <details key={reason.title} className="group">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center gap-4 py-3 marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden">
+                <span className="text-outline font-display text-3xl font-bold" aria-hidden>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-display font-semibold">{reason.title}</span>
+                <span className="ml-auto text-xl text-accent transition-transform group-open:rotate-45" aria-hidden>+</span>
+              </summary>
+              <p className="pb-5 pl-[4.25rem] text-sm leading-relaxed text-muted">
+                {reason.text}
+              </p>
+            </details>
+          ))}
+        </div>
+
+        <div className="mt-16 hidden gap-12 sm:grid sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-line">
           {REASONS.map((reason, i) => (
             <Reveal key={reason.title} delay={i * 100} className="lg:px-8">
               <div>

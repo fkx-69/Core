@@ -18,7 +18,7 @@ export default function KeyFigures() {
     // aussi #0b0d13 (invisible en clair, la bande contraste déjà). Le dégradé
     // indigo profond (dark) recrée le « moment poster » que l'inversion
     // clair/sombre produit d'elle-même en mode clair.
-    <section className="relative overflow-hidden border-y border-white/10 bg-[#0b0d13] py-20 sm:py-24 dark:bg-linear-to-b dark:from-[#141733] dark:to-[#0b0d13]">
+    <section className="relative overflow-hidden border-y border-white/10 bg-[#0b0d13] py-16 sm:py-24 dark:bg-linear-to-b dark:from-[#141733] dark:to-[#0b0d13]">
       <div
         className="dot-grid-inverse pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
         aria-hidden
@@ -34,14 +34,14 @@ export default function KeyFigures() {
           Core en chiffres
           <span aria-hidden className="h-px w-6 bg-[#818cf8]/60" />
         </p>
-        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-white/10">
+        <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:mt-12 sm:gap-10 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-white/10">
           {FIGURES.map((figure, i) => (
             <Reveal key={figure.label} delay={i * 100} className="lg:px-8">
               <div className="text-center">
                 <Counter
                   value={figure.value}
                   suffix={figure.suffix}
-                  className="font-display text-5xl font-bold tracking-tight text-[#edeef4] sm:text-6xl"
+                  className="font-display text-4xl font-bold tracking-tight text-[#edeef4] sm:text-6xl"
                   suffixClassName="text-[#818cf8]"
                 />
                 <p className="mt-3 text-sm text-[#9aa0b3]">{figure.label}</p>
