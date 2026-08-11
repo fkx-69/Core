@@ -28,11 +28,11 @@ export default function ServiceSection({
   return (
     <section
       id={service.id}
-      className={`group scroll-mt-24 py-12 md:py-24 ${alternate ? "bg-surface" : ""}`}
+      className={`group scroll-mt-24 py-12 md:py-20 ${alternate ? "bg-surface" : ""}`}
     >
       <Container>
         <div
-          className={`grid gap-8 lg:gap-0 ${
+          className={`grid items-start gap-8 lg:gap-0 ${
             alternate
               ? "lg:grid-cols-[1fr_1.6fr]"
               : "lg:grid-cols-[1.6fr_1fr]"
@@ -45,7 +45,7 @@ export default function ServiceSection({
             <div>
               <p
                 aria-hidden
-                className="text-outline font-display text-5xl font-bold transition-colors duration-500 group-hover:text-accent-soft md:text-7xl lg:text-8xl"
+                className="text-outline-number font-display text-5xl font-bold transition-colors duration-500 group-hover:text-accent-soft md:text-7xl lg:text-8xl"
               >
                 {numeral}
               </p>
@@ -64,7 +64,11 @@ export default function ServiceSection({
                   <Badge key={tech}>{tech}</Badge>
                 ))}
               </div>
-              <div className="mt-8 md:mt-10">
+              <div className="mt-8 flex flex-col gap-3 md:mt-10 sm:flex-row sm:flex-wrap">
+                <Button href={`/services/${service.slug}`} className="w-full sm:w-auto">
+                  Voir la page détaillée
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Button>
                 <Button href={demoHref} variant="outline" className="w-full sm:w-auto">
                   {service.demoLabel}
                   <ArrowRight className="h-4 w-4" aria-hidden />
@@ -119,24 +123,7 @@ export default function ServiceSection({
                         </li>
                       ))}
                     </ul>
-                    <p className="mt-4 border-t border-dashed border-teal/50 pt-4 text-sm font-semibold text-accent first-letter:uppercase">
-                      {service.priceFrom}
-                    </p>
                   </div>
-                </details>
-                <details className="group/details">
-                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-display font-semibold marker:hidden">
-                    {service.useCase.title}
-                    <span
-                      aria-hidden
-                      className="text-xl font-light text-accent transition group-open/details:rotate-45"
-                    >
-                      +
-                    </span>
-                  </summary>
-                  <p className="px-4 pb-4 text-sm leading-relaxed text-muted">
-                    {service.useCase.text}
-                  </p>
                 </details>
               </div>
               <Card className="hidden md:block">
@@ -156,17 +143,6 @@ export default function ServiceSection({
                     </li>
                   ))}
                 </ul>
-                <p className="mt-5 border-t border-dashed border-teal/50 pt-4 text-sm font-semibold text-accent first-letter:uppercase">
-                  {service.priceFrom}
-                </p>
-              </Card>
-              <Card className="hidden border-accent/30 bg-accent-soft/40 md:block">
-                <h3 className="font-display text-lg font-semibold">
-                  {service.useCase.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {service.useCase.text}
-                </p>
               </Card>
           </Reveal>
         </div>

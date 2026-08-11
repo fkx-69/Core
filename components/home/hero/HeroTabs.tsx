@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Pause, Play } from "lucide-react";
 import { HERO_SITES, type HeroSiteId } from "./sites";
-import type { Autoplay } from "./HeroShowcase";
+import type { Autoplay } from "./types";
 
 /**
  * Onglets du héro-scène : tablist accessible à activation manuelle (les
@@ -29,7 +29,20 @@ export default function HeroTabs({
   onToggleAutoplay: () => void;
 }) {
   const refs = useRef<Partial<Record<HeroSiteId, HTMLButtonElement | null>>>({});
+  const listRef = useRef<HTMLDivElement>(null);
   const enabled = autoplay === "playing" || autoplay === "paused";
+
+  // En mobile la rangée déborde : recentre l'onglet actif — défilement
+  // horizontal du conteneur uniquement, jamais de scroll vertical de page.
+  useEffect(() => {
+    const list = listRef.current;
+    const el = refs.current[active];
+    if (!list || !el || list.scrollWidth <= list.clientWidth) return;
+    list.scrollTo({
+      left: el.offsetLeft - (list.clientWidth - el.offsetWidth) / 2,
+      behavior: "smooth",
+    });
+  }, [active]);
 
   function handleKey(e: React.KeyboardEvent<HTMLButtonElement>, id: HeroSiteId) {
     const order = HERO_SITES.map((s) => s.id);
@@ -46,11 +59,12 @@ export default function HeroTabs({
   }
 
   return (
-    <div className="mt-6 flex w-full items-center gap-3 sm:mt-7 sm:w-auto sm:justify-center">
+    <div className="mt-5 hidden w-full items-center gap-3 sm:mt-7 sm:flex sm:w-auto sm:justify-center">
       <div
+        ref={listRef}
         role="tablist"
         aria-label="Démos de sites vitrines"
-        className="grid w-full min-w-0 grid-cols-2 gap-2 sm:flex sm:w-auto"
+        className="scrollbar-none -mx-4 flex w-[calc(100%+2rem)] min-w-0 gap-2 overflow-x-auto px-4 sm:mx-0 sm:w-auto sm:overflow-visible sm:px-0"
       >
         {HERO_SITES.map((s) => (
           <button
@@ -69,7 +83,7 @@ export default function HeroTabs({
             title={s.secteur}
             onClick={() => onSelect(s.id)}
             onKeyDown={(e) => handleKey(e, s.id)}
-            className={`relative flex min-h-11 items-center justify-center whitespace-nowrap rounded-full border px-3 py-2 text-sm font-medium transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:min-h-0 sm:px-4 ${
+            className={`relative flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:min-h-0 sm:px-4 ${
               s.id === active
                 ? "border-transparent bg-[color:var(--hero-accent)] text-[color:var(--hero-accent-ink)]"
                 : "border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] text-[color:var(--hero-muted)] hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)]"
@@ -100,7 +114,7 @@ export default function HeroTabs({
               : "Reprendre le défilement automatique des démos"
           }
           title={enabled ? "Suspendre le défilement" : "Reprendre le défilement"}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] text-[color:var(--hero-muted)] transition-colors duration-500 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:h-9 sm:w-9"
+          className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] text-[color:var(--hero-muted)] transition-colors duration-500 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:h-9 sm:w-9 lg:flex"
         >
           {enabled ? (
             <Pause className="h-3.5 w-3.5" aria-hidden />

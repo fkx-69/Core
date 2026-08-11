@@ -30,7 +30,7 @@ function NotFoundContent() {
         <div className="relative mx-auto w-full max-w-md">
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 hidden select-none items-center justify-center font-display text-[14rem] font-bold leading-none text-outline sm:flex"
+            className="pointer-events-none absolute inset-0 -z-10 hidden select-none items-center justify-center font-display text-[14rem] font-bold leading-none text-outline-number sm:flex"
           >
             404
           </span>

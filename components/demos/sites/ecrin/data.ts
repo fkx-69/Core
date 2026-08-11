@@ -1,7 +1,7 @@
 /**
  * Contenu du site vitrine fictif « L'Écrin » — salon de beauté haut de gamme
- * du Plateau, à Abidjan. Prix en FCFA, prestations et localisation adaptées à
- * la Côte d'Ivoire. Aucune donnée n'est calculée au rendu : le planning est
+ * de Bamako, au Mali. Prix en FCFA, prestations et localisation adaptées à
+ * la démonstration. Aucune donnée n'est calculée au rendu : le planning est
  * dérivé d'une date figée pour rester déterministe entre le serveur et le
  * client (pas de mismatch d'hydratation).
  */
@@ -296,12 +296,12 @@ export const HORAIRES = [
 
 export const CONTACT = {
   adresse: "Immeuble Alpha 2000, rue du Commerce",
-  ville: "Le Plateau, Abidjan",
+  ville: "Bamako, Mali · démonstration",
   telephone: "+225 27 20 31 84 90",
   telephoneLien: "+2252720318490",
   whatsapp: "+225 07 07 12 34 56",
-  email: "bonjour@lecrin.ci",
-  instagram: "lecrin.abidjan",
+  email: "Démonstration uniquement",
+  instagram: "démonstration",
 };
 
 /** Ancres de navigation du site (préfixées pour éviter toute collision d'id). */

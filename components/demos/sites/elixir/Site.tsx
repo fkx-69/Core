@@ -262,7 +262,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
               MAISON&nbsp;ÉLIXIR
             </span>
             <span className="mt-1 hidden text-[8px] uppercase tracking-[0.5em] text-[#9a8b73] @3xl:block">
-              Haute parfumerie · Abidjan
+              Haute parfumerie · Bamako, Mali
             </span>
           </button>
 
@@ -304,7 +304,13 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
       <Main>
         {/* ============================ HERO ============================ */}
         <section className="relative overflow-hidden border-b border-[#e4dac7]">
-          <div className="relative flex min-h-[580px] flex-col justify-end bg-[#17130d] @3xl:min-h-[680px] @5xl:min-h-[760px]">
+          <div
+            className={`relative flex min-h-[580px] flex-col justify-end bg-[#17130d] ${
+              embedded
+                ? "@3xl:min-h-[680px] @5xl:min-h-[760px]"
+                : "@3xl:min-h-[max(680px,calc(100dvh-85px))] @5xl:min-h-[max(760px,calc(100dvh-85px))]"
+            }`}
+          >
             <Image
               src="/assets/demos/parfum/hero.webp"
               alt="Flacon d'eau de parfum Maison Élixir posé sur une pierre de travertin, drapé de soie dorée"
@@ -374,7 +380,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                       <span className="[font-family:var(--font-elixir-display)] text-2xl tracking-normal text-[#f4ecdd]">
                         2019
                       </span>
-                      <span className="mt-1 block">Fondée à Abidjan</span>
+                      <span className="mt-1 block">Démonstration conceptuelle</span>
                     </dd>
                   </div>
                   <div>
@@ -608,7 +614,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                 )}
               </button>
               <p className="mt-4 text-center text-[11px] tracking-[0.02em] text-[#6f6455]">
-                Échantillon 2 ml offert · Livraison à Abidjan sous 48 h · Wave
+                Échantillon conceptuel · Parcours de livraison simulé · Wave
                 &amp; Orange Money
               </p>
             </div>
@@ -659,7 +665,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                   Chez Maison Élixir, chaque essence naît d&apos;une rencontre
                   entre un parfumeur et une matière : le vétiver des plateaux, le
                   beurre de karité du nord, l&apos;hibiscus des marchés
-                  d&apos;Abidjan, la fleur d&apos;oranger des jardins de Cocody.
+                  du Mali, la fleur d&apos;oranger de jardins imaginaires.
                   Nous ne composons que trois parfums — mais nous les composons
                   sans le moindre compromis, en petites séries, à la main.
                 </p>
@@ -723,7 +729,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
             <Reveal className="max-w-2xl">
               <Eyebrow index="N° 03">La boutique</Eyebrow>
               <h2 className="mt-5 [font-family:var(--font-elixir-display)] text-4xl font-light leading-[1.02] text-[#241d15] @2xl:text-5xl @5xl:text-6xl">
-                Cocody, Abidjan.
+                Bamako, Mali.
               </h2>
               <p className="mt-5 max-w-md text-sm leading-relaxed text-[#5f5545]">
                 Notre atelier-boutique vous accueille pour un conseil olfactif
@@ -826,7 +832,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                 téléphone — aucun paiement en ligne n&apos;est requis.
               </p>
               <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-[#8a7c66]">
-                Livraison offerte à Abidjan
+                Livraison simulée · démonstration
               </p>
             </Reveal>
 
@@ -915,7 +921,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                         <dd>{formatFcfa(total)}</dd>
                       </div>
                       <div className="flex justify-between text-[#5f5545]">
-                        <dt>Livraison — Abidjan</dt>
+                        <dt>Livraison — démonstration</dt>
                         <dd className="uppercase tracking-[0.14em] text-[#8a5a24]">
                           Offerte
                         </dd>
@@ -958,7 +964,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                 MAISON ÉLIXIR
               </p>
               <p className="mt-4 max-w-xs [font-family:var(--font-elixir-display)] text-lg leading-relaxed text-[#a99d86]">
-                Haute parfumerie composée à Cocody, à partir des matières de
+                Haute parfumerie composée à Bamako, à partir des matières de
                 l&apos;Afrique de l&apos;Ouest.
               </p>
               <div className="elx-rule mt-6 h-px w-28" aria-hidden />
@@ -1006,7 +1012,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
           </div>
 
           <div className="mt-12 flex flex-col gap-3 border-t border-[#2f261a] pt-6 text-[11px] text-[#8a7c66] @xl:flex-row @xl:items-center @xl:justify-between">
-            <p>© 2026 Maison Élixir — Abidjan. Tous droits réservés.</p>
+            <p>© 2026 Maison Élixir — Démonstration conceptuelle. Tous droits réservés.</p>
             <p className="uppercase tracking-[0.2em]">
               Site fictif de démonstration
             </p>

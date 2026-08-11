@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Site from "@/components/demos/sites/elixir/Site";
 
 export const metadata: Metadata = {
-  title: { absolute: "Maison Élixir — Haute parfumerie d'Abidjan" },
+  title: { absolute: "Maison Élixir — Démonstration de haute parfumerie" },
   description:
-    "Maison de parfumerie fine d'Abidjan : trois eaux de parfum composées à partir des matières d'Afrique de l'Ouest — vétiver, hibiscus, karité. Boutique à Cocody.",
+    "Démonstration conceptuelle d'une maison de parfumerie fine : trois eaux de parfum et une collection éditoriale.",
 };
 
 export default function Page() {

@@ -56,7 +56,7 @@ export default function LumenApp({ embedded = false }: { embedded?: boolean }) {
             <p className="font-[family-name:var(--font-lumen-display)] text-[30px] font-medium italic leading-none tracking-tight">
               lumen<span className="not-italic text-[var(--lumen-copper)]">.</span>
             </p>
-            <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--lumen-muted)]">Boutique · Dakar</p>
+            <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--lumen-muted)]">Boutique · démonstration</p>
           </div>
           <nav className="mt-9 space-y-1" aria-label="Navigation Lumen">
             {nav.map(({ id, label, icon: Icon, count }) => (

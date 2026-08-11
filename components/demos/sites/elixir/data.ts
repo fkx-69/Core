@@ -1,6 +1,6 @@
 /**
  * Contenu éditorial de Maison Élixir — maison de haute parfumerie fictive
- * d'Abidjan (Cocody). Matières premières ouest-africaines, prix en FCFA.
+ * de Bamako, au Mali. Matières premières ouest-africaines, prix en FCFA.
  * Aucune donnée n'est réelle : site de démonstration.
  */
 
@@ -78,7 +78,7 @@ export const PARFUMS: Parfum[] = [
     accent: { text: "#41583f", deep: "#33452f", soft: "#e5ebe0", glow: "#93a986" },
     notes: {
       tete: ["Pamplemousse", "Gingembre", "Cardamome"],
-      coeur: ["Vétiver de Côte d'Ivoire", "Galbanum", "Géranium"],
+      coeur: ["Vétiver d'Afrique de l'Ouest", "Galbanum", "Géranium"],
       fond: ["Cèdre", "Mousse", "Karité fumé"],
     },
     prix: { "50": 52000, "100": 82000 },
@@ -112,7 +112,7 @@ export const ETAPES: { titre: string; texte: string }[] = [
   {
     titre: "Mise en flacon",
     texte:
-      "Chaque flacon est rempli, bouché et étiqueté à la main dans l'atelier de Cocody.",
+      "Chaque flacon est rempli, bouché et étiqueté à la main dans l'atelier de démonstration.",
   },
 ];
 
@@ -121,7 +121,7 @@ export const CHIFFRES: { valeur: string; label: string }[] = [
   { valeur: "6", label: "semaines de macération" },
   { valeur: "37", label: "matières premières" },
   { valeur: "3", label: "eaux de parfum" },
-  { valeur: "100 %", label: "assemblé à Abidjan" },
+  { valeur: "100 %", label: "assemblé pour la démonstration" },
 ];
 
 /** Bandeau défilant des matières. */
@@ -140,21 +140,21 @@ export const MATIERES = [
 
 /** Coordonnées de la boutique. */
 export const BOUTIQUE = {
-  adresse: ["Boulevard Latrille, Cocody", "Abidjan · Côte d'Ivoire"],
+  adresse: ["Bamako, Mali", "Démonstration conceptuelle"],
   horaires: [
     { jours: "Mardi – Samedi", heures: "10 h – 19 h" },
     { jours: "Dimanche & Lundi", heures: "Sur rendez-vous" },
   ],
   telephone: "+225 27 22 44 18 90",
-  email: "bonjour@maisonelixir.ci",
-  livraison: "Offerte à Abidjan sous 48 h · UEMOA en 3 à 5 jours",
+  email: "Démonstration uniquement",
+  livraison: "Parcours de livraison simulé",
   paiement: "Wave · Orange Money · Carte · En boutique",
 };
 
 /** Citations presse. */
 export const PRESSE: { citation: string; source: string }[] = [
   {
-    citation: "La plus belle signature olfactive née à Abidjan.",
+    citation: "Une signature olfactive présentée à titre conceptuel.",
     source: "Fashion Afrique",
   },
   {
@@ -163,7 +163,7 @@ export const PRESSE: { citation: string; source: string }[] = [
   },
   {
     citation: "Trois parfums, zéro compromis.",
-    source: "La Revue d'Abidjan",
+    source: "Source conceptuelle",
   },
 ];
 

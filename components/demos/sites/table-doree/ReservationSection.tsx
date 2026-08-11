@@ -230,7 +230,7 @@ export default function ReservationSection() {
                     type="tel"
                     required
                     autoComplete="tel"
-                    placeholder="+221 77 123 45 67"
+                    placeholder="Votre numéro (démonstration)"
                     value={booking.phone}
                     onChange={(e) => set("phone")(e.target.value)}
                     className={FIELD_CLASSES}

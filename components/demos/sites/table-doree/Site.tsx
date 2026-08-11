@@ -135,7 +135,7 @@ export default function Site({
                 {SITE.name}
               </span>
               <span className="mt-1 hidden text-[9px] uppercase tracking-[0.42em] text-[#8a7a63] @3xl:block">
-                Les Almadies · Dakar
+                Bamako, Mali · démonstration
               </span>
             </a>
 
@@ -232,7 +232,13 @@ export default function Site({
       <Main>
         {/* ============================ HERO ============================ */}
         <section aria-label="Présentation" className="relative">
-          <div className="relative flex min-h-[540px] flex-col justify-end overflow-hidden @3xl:min-h-[640px] @5xl:min-h-[720px]">
+          <div
+            className={`relative flex min-h-[540px] flex-col justify-end overflow-hidden ${
+              embedded
+                ? "@3xl:min-h-[640px] @5xl:min-h-[720px]"
+                : "@3xl:min-h-[max(640px,calc(100dvh-83px))] @5xl:min-h-[max(720px,calc(100dvh-83px))]"
+            }`}
+          >
             <Image
               src={IMAGES.hero.src}
               alt={IMAGES.hero.alt}
@@ -253,10 +259,10 @@ export default function Site({
               <Reveal>
                 <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-300">
                   <span aria-hidden className="h-px w-8 bg-amber-300/70" />
-                  Restaurant gastronomique · Les Almadies, Dakar
+                  Restaurant gastronomique · Bamako, Mali
                 </p>
                 <HeroHeading className="mt-5 max-w-3xl text-[2.75rem] leading-[1.04] text-[#f7f1e4] @2xl:text-6xl @5xl:text-7xl [font-family:var(--font-td-serif)]">
-                  La grande cuisine sénégalaise,
+                  Une grande cuisine inspirée,
                   <br />
                   <span className="italic text-amber-300">
                     servie face à l’océan.
@@ -513,7 +519,7 @@ export default function Site({
               </p>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-[#a3937b]">
                 Restaurant gastronomique aux Almadies — la mémoire culinaire du
-                Sénégal, dressée à l’assiette.
+                Mali, dressée à l’assiette.
               </p>
               <address className="mt-6 space-y-2 text-sm not-italic text-[#cbbda3]">
                 <p className="flex items-start gap-2">
@@ -615,7 +621,7 @@ export default function Site({
           </div>
 
           <div className="mt-12 flex flex-col gap-3 border-t border-[#332a1e] pt-6 text-[11px] text-[#8a7a63] @xl:flex-row @xl:items-center @xl:justify-between">
-            <p>© 2026 {SITE.name} — Dakar. Tous droits réservés.</p>
+            <p>© 2026 {SITE.name} — Démonstration conceptuelle. Tous droits réservés.</p>
             <p className="uppercase tracking-[0.2em]">
               Site fictif de démonstration
             </p>

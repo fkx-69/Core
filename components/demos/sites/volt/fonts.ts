@@ -10,11 +10,13 @@ export const voltDisplay = Anton({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
   variable: "--font-volt-display",
 });
 
 export const voltBody = Archivo({
   subsets: ["latin"],
   display: "swap",
+  preload: false,
   variable: "--font-volt-body",
 });

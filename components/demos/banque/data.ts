@@ -22,13 +22,13 @@ export const SOLDE_INITIAL = 2_843_720;
 
 export const TRANSACTIONS_INITIALES: Transaction[] = [
   { id: 8, libelle: "Auchan Mermoz", categorie: "Courses", icon: ShoppingCart, montant: -54_300, date: "Aujourd'hui" },
-  { id: 7, libelle: "Dakar Dem Dikk", categorie: "Transport", icon: TrainFront, montant: -25_000, date: "Aujourd'hui" },
+  { id: 7, libelle: "Transport urbain", categorie: "Transport", icon: TrainFront, montant: -25_000, date: "Aujourd'hui" },
   { id: 6, libelle: "La Table Dorée", categorie: "Restaurant", icon: UtensilsCrossed, montant: -68_500, date: "Hier" },
   { id: 5, libelle: "Salaire — Studio Nova", categorie: "Revenus", icon: Briefcase, montant: 2_450_000, date: "1 juil." },
   { id: 4, libelle: "Canal+", categorie: "Abonnement", icon: Tv, montant: -13_500, date: "30 juin" },
   { id: 3, libelle: "Pharmacie du Plateau", categorie: "Santé", icon: HeartPulse, montant: -18_900, date: "29 juin" },
   { id: 2, libelle: "Marché Kermel", categorie: "Courses", icon: ShoppingCart, montant: -32_750, date: "28 juin" },
-  { id: 1, libelle: "Air Sénégal", categorie: "Transport", icon: TrainFront, montant: -79_000, date: "27 juin" },
+  { id: 1, libelle: "Transport aérien", categorie: "Transport", icon: TrainFront, montant: -79_000, date: "27 juin" },
 ];
 
 export type Beneficiaire = {

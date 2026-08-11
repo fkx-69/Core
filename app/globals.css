@@ -165,10 +165,15 @@ body {
   background-size: 72px 72px;
 }
 
-/* Numéraux géants au contour filaire (page Services) */
+/* Contours filaires : neutre pour les lettrages décoratifs, accent pour les numéraux. */
 .text-outline {
   -webkit-text-stroke: 1.5px var(--line);
   color: transparent;
+}
+.text-outline-number {
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+  opacity: 0.7;
 }
 
 /* Transition douce appliquée temporairement par le ThemeToggle */
@@ -355,6 +360,35 @@ html.theme-transition * {
 @media (prefers-reduced-motion: reduce) {
   .hero-progress {
     animation: none;
+  }
+}
+
+/* Zoom du carrousel mobile du héro, piloté par le défilement lui-même
+   (view-timeline). Les slides ne contiennent que des posters bitmap : le
+   compositeur peut donc les transformer sans repeindre des sites complets.
+   Cover symétrique : 50 % = slide centrée dans le rail. Sans support, ou en
+   reduced-motion, les slides restent simplement à taille égale. */
+@keyframes hero-slide-pop {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.88);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scale(1.04);
+    opacity: 1;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-carousel-slide {
+      animation-name: hero-slide-pop;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view(inline);
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
   }
 }
 

@@ -32,7 +32,7 @@ export default function CarteSection() {
             id="carte-titre"
             className="mt-4 text-4xl leading-[1.05] @3xl:text-5xl [font-family:var(--font-td-serif)]"
           >
-            La mémoire du Sénégal,
+            Une cuisine d&apos;inspiration ouest-africaine,
             <br />
             <span className="italic text-amber-700">dressée à l&apos;assiette</span>
           </h2>

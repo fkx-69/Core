@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
+import { buildPageMetadata, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,13 +14,24 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const googleSiteVerification =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
+  metadataBase: siteConfig.url,
+  ...buildPageMetadata({
+    title: siteConfig.title,
+    description: siteConfig.description,
+    pathname: "/",
+    titleAbsolute: true,
+  }),
   title: {
-    default: "Core — Agence de développement logiciel",
+    default: siteConfig.title,
     template: "%s | Core",
   },
-  description:
-    "Core conçoit des sites web, applications web et applications mobiles pour les entreprises d'Afrique de l'Ouest, de Dakar à Abidjan.",
+  ...(googleSiteVerification
+    ? { verification: { google: googleSiteVerification } }
+    : {}),
   formatDetection: {
     telephone: false,
     address: false,

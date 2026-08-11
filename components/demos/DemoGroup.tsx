@@ -57,7 +57,7 @@ export default function DemoGroup({
           <div
             role="group"
             aria-label={`Projets de la catégorie ${kind}`}
-            className="mb-4 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap"
+            className="scrollbar-none -mx-4 mb-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
           >
             {entries.map((e, i) => (
               <button
@@ -65,7 +65,7 @@ export default function DemoGroup({
                 type="button"
                 aria-pressed={i === active}
                 onClick={() => setActive(i)}
-                className={`min-h-11 rounded-xl px-3 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:min-h-0 sm:rounded-full sm:px-4 sm:py-1.5 ${
+                className={`min-h-11 shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:min-h-0 sm:px-4 sm:py-1.5 ${
                   i === active
                     ? "bg-accent text-accent-contrast"
                     : "border border-line bg-surface-raised text-muted hover:border-accent/50 hover:text-foreground"

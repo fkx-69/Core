@@ -1,23 +1,19 @@
-import { MessageCircle } from "lucide-react";
-import { CONTACT_INFO } from "@/lib/site";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 
-/** Bannière indigo pleine largeur réutilisable (réf 5), enrichie : trame de
- *  points inversée, filigrane « Core. », CTA WhatsApp secondaire. */
+/** Bannière indigo pleine largeur réutilisable. */
 export default function CtaBanner({
   eyebrow = "Contact",
   title,
   text,
-  note = "Réponse sous 24 h — sans engagement.",
+  note,
 }: {
   eyebrow?: string;
   title: string;
   text: string;
   note?: string;
 }) {
-  const whatsappHref = `https://wa.me/${CONTACT_INFO.whatsapp.replace(/[^0-9]/g, "")}`;
   return (
     <section className="relative overflow-hidden bg-accent py-16 text-accent-contrast sm:py-28">
       <div
@@ -45,27 +41,12 @@ export default function CtaBanner({
             <Button href="/contact" variant="inverted" size="lg" className="w-full sm:w-auto">
               Discutons-en
             </Button>
-            {/* accent-contrast plutôt que white : blanc sur l'indigo en clair,
-                encre sur le périwinkle en sombre. */}
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-accent-contrast/30 px-5 py-3 text-sm font-semibold transition-colors hover:border-accent-contrast/60 hover:bg-accent-contrast/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-contrast sm:w-auto sm:px-6"
-            >
-              <MessageCircle className="h-4 w-4" aria-hidden />
-              Écrivez-nous sur WhatsApp
-            </a>
           </div>
-          {/* Pastille qui répond à celle du héro — la page se referme comme
-              elle s'est ouverte, sur la disponibilité. */}
-          <p className="mt-7 inline-flex items-center gap-2.5 self-center rounded-full border border-accent-contrast/25 bg-accent-contrast/10 px-4 py-2 text-sm sm:mt-8 sm:py-1.5">
-            <span
-              className="animate-pulse-dot h-2 w-2 rounded-full bg-[#4cd6a1]"
-              aria-hidden
-            />
-            {note}
-          </p>
+          {note && (
+            <p className="mt-7 inline-flex items-center gap-2.5 self-center rounded-full border border-accent-contrast/25 bg-accent-contrast/10 px-4 py-2 text-sm sm:mt-8 sm:py-1.5">
+              {note}
+            </p>
+          )}
         </Reveal>
       </Container>
     </section>

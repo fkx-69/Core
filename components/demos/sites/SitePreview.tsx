@@ -1,16 +1,25 @@
+"use client";
+
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import BrowserFrame from "@/components/demos/mockups/BrowserFrame";
+import PhonePreview from "@/components/demos/PhonePreview";
+import useIsMobile from "@/components/demos/useIsMobile";
 
 /**
- * Aperçu embarqué d'un site de démonstration : le vrai site (composant
- * partagé avec la page /demos/*) défile dans un mockup navigateur à hauteur
- * fixe. Le conteneur est un `@container` : le site, écrit en container
- * queries, y adopte de lui-même sa mise en page compacte.
+ * Aperçu embarqué d'un site de démonstration, partagé avec la page /demos/*.
+ * En desktop : le vrai site défile dans un mockup navigateur à hauteur fixe.
+ * En mobile (<md) : aperçu inerte aux mêmes dimensions que le téléphone des
+ * démos mobiles. Son CTA ouvre la démo complète dans un nouvel onglet.
+ * Les deux branches s'appuient sur un `@container` : le site, écrit en
+ * container queries, y adopte de lui-même sa mise en page compacte. Jamais
+ * prérendu (monté via LazyDemo/ssr:false), donc le branchement JS sur la media
+ * query est sans risque d'hydratation.
  */
 export default function SitePreview({
   url,
   href,
+  title,
   linkLabel = "Visiter le site en entier",
   children,
 }: {
@@ -18,10 +27,27 @@ export default function SitePreview({
   url: string;
   /** Route réelle de la page démo (/demos/…), ouverte dans un nouvel onglet. */
   href: string;
+  /** Nom du projet, utilisé dans le libellé accessible de l'aperçu. */
+  title: string;
   /** Libellé adapté au type de produit présenté. */
   linkLabel?: string;
   children: React.ReactNode;
 }) {
+  const isMobile = useIsMobile("(max-width: 767px)");
+
+  if (isMobile) {
+    return (
+      <PhonePreview
+        label={title}
+        url={url}
+        href={href}
+        className="mx-auto aspect-[320/660] h-auto w-full max-w-80"
+      >
+        {children}
+      </PhonePreview>
+    );
+  }
+
   return (
     <div>
       <BrowserFrame url={url}>

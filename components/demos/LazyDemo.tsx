@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 
 function Skeleton({ minH }: { minH: string }) {
   return (
@@ -16,67 +16,61 @@ function Skeleton({ minH }: { minH: string }) {
  * Les démos sont chargées dynamiquement (ssr: false — légal ici car composant
  * client) et montées à l'approche du viewport. Les hauteurs des skeletons
  * approchent celles des démos réelles pour que les ancres ne sautent pas.
- * Les sites vitrines et applications web pointent vers leurs aperçus dédiés
- * (mockup navigateur ~48px + zone scrollable 560px + lien « Visiter » ~36px).
+ * Les sites vitrines et applications web pointent vers leurs aperçus dédiés :
+ * en mobile, aperçu au même format que les démos d'applications mobiles ;
+ * en desktop,
+ * mockup navigateur ~48px + zone scrollable 560px + lien « Visiter » ~36px.
  */
+const WEB_DEMO_HEIGHT = "min-h-[660px] md:min-h-[640px]";
+const MOBILE_DEMO_HEIGHT = "min-h-[600px] md:min-h-[680px]";
+
+function lazyDemo(
+  loader: () => Promise<{ default: ComponentType }>,
+  minH: string,
+) {
+  return {
+    minH,
+    Component: dynamic(loader, {
+      ssr: false,
+      loading: () => <Skeleton minH={minH} />,
+    }),
+  };
+}
+
 const DEMOS = {
-  vitrine: {
-    minH: "min-h-[500px] md:min-h-[640px]",
-    Component: dynamic(
-      () => import("@/components/demos/sites/table-doree/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
-    ),
-  },
-  volt: {
-    minH: "min-h-[500px] md:min-h-[640px]",
-    Component: dynamic(() => import("@/components/demos/sites/volt/Preview"), {
-      ssr: false,
-      loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" />,
-    }),
-  },
-  parfum: {
-    minH: "min-h-[500px] md:min-h-[640px]",
-    Component: dynamic(
-      () => import("@/components/demos/sites/elixir/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
-    ),
-  },
-  salon: {
-    minH: "min-h-[500px] md:min-h-[640px]",
-    Component: dynamic(() => import("@/components/demos/sites/ecrin/Preview"), {
-      ssr: false,
-      loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" />,
-    }),
-  },
-  dashboard: {
-    minH: "min-h-[500px] md:min-h-[640px]",
-    Component: dynamic(
-      () => import("@/components/demos/apps/lumen/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
-    ),
-  },
-  pressing: {
-    minH: "min-h-[500px] md:min-h-[640px]",
-    Component: dynamic(
-      () => import("@/components/demos/apps/sandaga/Preview"),
-      { ssr: false, loading: () => <Skeleton minH="min-h-[500px] md:min-h-[640px]" /> },
-    ),
-  },
-  mobile: {
-    minH: "min-h-[600px] md:min-h-[680px]",
-    Component: dynamic(() => import("@/components/demos/mobile/MobileDemo"), {
-      ssr: false,
-      loading: () => <Skeleton minH="min-h-[600px] md:min-h-[680px]" />,
-    }),
-  },
-  banque: {
-    minH: "min-h-[600px] md:min-h-[680px]",
-    Component: dynamic(() => import("@/components/demos/banque/BanqueDemo"), {
-      ssr: false,
-      loading: () => <Skeleton minH="min-h-[600px] md:min-h-[680px]" />,
-    }),
-  },
-} as const;
+  vitrine: lazyDemo(
+    () => import("@/components/demos/sites/table-doree/Preview"),
+    WEB_DEMO_HEIGHT,
+  ),
+  volt: lazyDemo(
+    () => import("@/components/demos/sites/volt/Preview"),
+    WEB_DEMO_HEIGHT,
+  ),
+  parfum: lazyDemo(
+    () => import("@/components/demos/sites/elixir/Preview"),
+    WEB_DEMO_HEIGHT,
+  ),
+  salon: lazyDemo(
+    () => import("@/components/demos/sites/ecrin/Preview"),
+    WEB_DEMO_HEIGHT,
+  ),
+  dashboard: lazyDemo(
+    () => import("@/components/demos/apps/lumen/Preview"),
+    WEB_DEMO_HEIGHT,
+  ),
+  pressing: lazyDemo(
+    () => import("@/components/demos/apps/sandaga/Preview"),
+    WEB_DEMO_HEIGHT,
+  ),
+  mobile: lazyDemo(
+    () => import("@/components/demos/mobile/MobileDemo"),
+    MOBILE_DEMO_HEIGHT,
+  ),
+  banque: lazyDemo(
+    () => import("@/components/demos/banque/BanqueDemo"),
+    MOBILE_DEMO_HEIGHT,
+  ),
+};
 
 export type DemoName = keyof typeof DEMOS;
 

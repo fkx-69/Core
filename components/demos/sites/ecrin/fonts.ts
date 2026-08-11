@@ -11,6 +11,7 @@ export const fraunces = Fraunces({
   subsets: ["latin"],
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
   variable: "--font-ecrin-serif",
 });
 
@@ -18,5 +19,6 @@ export const fraunces = Fraunces({
 export const karla = Karla({
   subsets: ["latin"],
   display: "swap",
+  preload: false,
   variable: "--font-ecrin-sans",
 });

@@ -22,27 +22,27 @@ Les recommandations ci-dessous sont classées par rapport impact/effort.
 ### 1. L'illustration du bandeau CTA est invisible
 **Constat.** `home-cta.png` est à 99 % transparente (alpha moyen 3/255) et ses traits sont quasi blancs (`#eef1f2`). Affichée à `opacity-25` sur l'indigo du bandeau, elle ne se voit **ni en clair ni en sombre** — vérifié sur captures. On télécharge une image de 600 px pour rien.
 **Reco.** Régénérer l'asset avec des traits blanc franc et plus denses (pipeline gpt-image + sharp existant) et monter à `opacity-40`–`50`, ou supprimer l'image et laisser le filigrane « Core. » porter seul le décor.
-**Où :** [CtaBanner.tsx:28-35](components/shared/CtaBanner.tsx#L28-L35)
+**Où :** [CtaBanner.tsx:28-35](../../components/shared/CtaBanner.tsx#L28-L35)
 
 ### 2. La couture header / héro — la première impression du site
 **Constat.** Le header (`bg-background/80`) reste blanc au-dessus du héro crème « La Table Dorée » ; en mode sombre c'est une barre noire posée sur un bloc crème. La scène immersive commence sous une bande qui n'appartient pas à l'ambiance.
 **Reco.** Sur la home, faire hériter le header de `--hero-bg` tant qu'on est en haut de page (ou le rendre transparent au-dessus du héro, opaque au scroll). Effet immédiat : la scène de marque occupe tout le premier écran, la transition de thème au changement d'onglet colore aussi le header — l'immersion promise par le commentaire du code devient totale.
-**Où :** [Header.tsx:26](components/layout/Header.tsx#L26), [HeroShowcase.tsx:170-178](components/home/hero/HeroShowcase.tsx#L170-L178)
+**Où :** [Header.tsx:26](../../components/layout/Header.tsx#L26), [HeroShowcase.tsx:170-178](../../components/home/hero/HeroShowcase.tsx#L170-L178)
 
 ### 3. Le héro convainc mais ne convertit pas
 **Constat.** Le seul « Démarrer un projet » est dans le header. Dans le héro : un lien discret « Visiter le site en entier » et c'est tout. Un visiteur séduit par la démo doit remonter chercher le CTA.
 **Reco.** Ajouter un CTA primaire dans la barre méta sous le cadre (légende à gauche, `Démarrer un projet` + `Visiter le site` à droite), stylé avec `--hero-accent` pour qu'il se rethème avec la scène. Ne pas le mettre au-dessus du cadre : le titre-poster respire bien tel quel.
-**Où :** [HeroShowcase.tsx:238-251](components/home/hero/HeroShowcase.tsx#L238-L251)
+**Où :** [HeroShowcase.tsx:238-251](../../components/home/hero/HeroShowcase.tsx#L238-L251)
 
 ### 4. Chiffres clés : ajouter `tabular-nums`
 **Constat.** Le compteur anime 0 → 40 en chiffres proportionnels : la largeur tremble pendant le comptage et le suffixe « + » danse.
 **Reco.** Une classe `tabular-nums` sur le span du compteur (ou dans `KeyFigures`).
-**Où :** [Counter.tsx:63-68](components/ui/Counter.tsx#L63-L68), [KeyFigures.tsx:39-44](components/home/KeyFigures.tsx#L39-L44)
+**Où :** [Counter.tsx:63-68](../../components/ui/Counter.tsx#L63-L68), [KeyFigures.tsx:39-44](../../components/home/KeyFigures.tsx#L39-L44)
 
 ### 5. `sizes` manquants sur les illustrations à largeur fixe
 **Constat.** Sondé en live : `home-portfolio-stack.png` charge **1400 px pour un slot de 512 px**, `home-why-us.png` 1400 px pour 672 px, `home-cta.png` 640 px pour 384 px.
 **Reco.** Ajouter des `sizes` réalistes (`(min-width: 1024px) 32rem, 100vw`, etc.). Coût quasi nul, gain net sur mobile ouest-africain — cohérent avec le positionnement du site.
-**Où :** [PortfolioTeaser.tsx:92-100](components/home/PortfolioTeaser.tsx#L92-L100), [WhyUs.tsx:38-47](components/home/WhyUs.tsx#L38-L47), [CtaBanner.tsx:28-35](components/shared/CtaBanner.tsx#L28-L35)
+**Où :** [PortfolioTeaser.tsx:92-100](../../components/home/PortfolioTeaser.tsx#L92-L100), [WhyUs.tsx:38-47](../../components/home/WhyUs.tsx#L38-L47), [CtaBanner.tsx:28-35](../../components/shared/CtaBanner.tsx#L28-L35)
 
 ---
 
@@ -60,12 +60,12 @@ Le thème sombre est bien construit (tokens, ombres compensées par bordures) ma
 ### 7. Le poster « Core en chiffres » disparaît en sombre
 **Constat.** La bande est en `#0b0d13` absolu… qui est aussi le fond du site en dark. Le « moment poster » voulu (commentaire du code) n'existe plus que par deux filets `white/10`.
 **Reco.** En dark, donner une vraie surface à la bande : dégradé indigo profond (`#12142a → #0b0d13`), ou halo indigo renforcé + trame plus visible. L'inversion clair/sombre du reste de la page fait déjà le travail en mode clair ; en dark il faut recréer le contraste autrement.
-**Où :** [KeyFigures.tsx:19-28](components/home/KeyFigures.tsx#L19-L28)
+**Où :** [KeyFigures.tsx:19-28](../../components/home/KeyFigures.tsx#L19-L28)
 
 ### 8. Les filigranes du bandeau CTA meurent en sombre
 **Constat.** En dark, `bg-accent` devient périwinkle **clair** (`#818cf8`) — mais le filigrane « Core. » garde son contour *blanc* 15 % et la trame ses points *blancs* 25 % : quasi invisibles sur fond clair.
 **Reco.** Variantes dark : contour et points en encre (`rgb(11 13 19 / 0.12)`) quand `.dark`. Deux petites classes dans `globals.css`.
-**Où :** [globals.css:137-140](app/globals.css#L137-L140), [globals.css:157-160](app/globals.css#L157-L160), [CtaBanner.tsx:24-41](components/shared/CtaBanner.tsx#L24-L41)
+**Où :** [globals.css:137-140](../../app/globals.css#L137-L140), [globals.css:157-160](../../app/globals.css#L157-L160), [CtaBanner.tsx:24-41](../../components/shared/CtaBanner.tsx#L24-L41)
 
 ---
 
@@ -74,26 +74,26 @@ Le thème sombre est bien construit (tokens, ombres compensées par bordures) ma
 ### 9. Contact : équilibrer la grille et ancrer la promesse
 - Le formulaire (~½ hauteur de la sidebar) laisse un grand vide à gauche avant la FAQ. Ajouter sous le bouton un bloc **« Et ensuite ? »** en 3 jalons (réponse sous 24 h → appel de cadrage → devis en FCFA sous 48 h) : ça comble, ça rassure, et ça réutilise le langage timeline de la page Services.
 - La FAQ (max-w-3xl) est collée à gauche avec un tiers de page vide à droite : la centrer, ou passer le titre en `align="center"` avec la liste centrée.
-**Où :** [contact/page.tsx:62-150](app/(site)/contact/page.tsx#L62-L150)
+**Où :** [contact/page.tsx:62-150](../../app/%28site%29/contact/page.tsx#L62-L150)
 
 ### 10. Portfolio : donner un sommaire aux 5 500 px
 **Constat.** Trois chips inertes (« 8 démos · 3 catégories · 0 capture d'écran ») décorent l'intro alors que la page a exactement trois sections ancrées.
 **Reco.** Remplacer/compléter par des chips-ancres cliquables (Sites vitrines · Applications web · Applications mobiles), éventuellement en barre sticky discrète sous le header. Les ancres existent déjà (`DEMO_ANCHORS`), il ne manque que la navigation.
-**Où :** [portfolio/page.tsx:129-138](app/(site)/portfolio/page.tsx#L129-L138)
+**Où :** [portfolio/page.tsx:129-138](../../app/%28site%29/portfolio/page.tsx#L129-L138)
 
 ### 11. Services : casser le rythme des 4 blocs identiques
-**Constat.** `alternate` ne change que le fond ([ServiceSection.tsx:29](components/services/ServiceSection.tsx#L29)) : les 4 sections sont 4 fois la même composition (récit gauche / rail droit), très hautes — la page devient prévisible dès le 2ᵉ écran.
+**Constat.** `alternate` ne change que le fond ([ServiceSection.tsx:29](../../components/services/ServiceSection.tsx#L29)) : les 4 sections sont 4 fois la même composition (récit gauche / rail droit), très hautes — la page devient prévisible dès le 2ᵉ écran.
 **Reco.** Au choix : miroir gauche/droite sur 02 et 04 (une ligne de grid), ou varier le rail (le « Cas d'usage » en pleine largeur sous le bloc une fois sur deux). Le survol du numéral (`group-hover:text-accent-soft`) est un joli détail — le généraliser aux autres numéraux filaires du site.
 
 ### 12. Bento services : la tuile 02 perd son illustration en mobile
 **Constat.** « Applications web » masque son visuel sous `sm` (`hidden sm:block`) alors que les tuiles 03/04 gardent le leur : en mobile, une seule tuile du bento est « nue ».
 **Reco.** Vignette compacte (96–128 px) à droite du titre en mobile plutôt que masquage.
-**Où :** [ServicesPreview.tsx:139-145](components/home/ServicesPreview.tsx#L139-L145)
+**Où :** [ServicesPreview.tsx:139-145](../../components/home/ServicesPreview.tsx#L139-L145)
 
 ### 13. Bento services : trancher le fond fantôme de la grande tuile
 **Constat.** `home-services-preview.png` en `object-cover opacity-10` sous l'illustration principale : invisible à l'œil (vérifié sur capture), mais téléchargée. Deux illustrations empilées dans la même tuile se neutralisent.
 **Reco.** Supprimer l'image de fond (l'illustration principale suffit), ou l'assumer à `opacity-20+` en la décalant (coin bas droit) pour qu'elle raconte quelque chose.
-**Où :** [ServicesPreview.tsx:94-101](components/home/ServicesPreview.tsx#L94-L101)
+**Où :** [ServicesPreview.tsx:94-101](../../components/home/ServicesPreview.tsx#L94-L101)
 
 ---
 
@@ -105,11 +105,11 @@ Le thème sombre est bien construit (tokens, ombres compensées par bordures) ma
 
 ### 15. Témoignages : rendre les résultats scannables
 Les citations contiennent les vrais arguments (« doublé nos réservations en trois mois », « remplace trois cahiers et un tableur ») noyés dans le gris du texte. Graisser (`<strong>`) le résultat chiffré de chaque citation ; en lecture en Z, la section devient une rangée de preuves.
-**Où :** [Testimonials.tsx:5-27](components/home/Testimonials.tsx#L5-L27)
+**Où :** [Testimonials.tsx:5-27](../../components/home/Testimonials.tsx#L5-L27)
 
 ### 16. Mur de logos : une décision à prendre, pas un bug
 Les huit marques sont fictives (cohérentes avec les témoignages — bien vu), en `text-muted/70` (~3,1:1, acceptable pour du décoratif). Deux points à trancher : **(a)** la promesse « Ils nous font confiance » sur des marques inventées peut coûter cher en crédibilité si un prospect le réalise — un libellé du type « Pensé pour les commerces de Dakar & Abidjan » vend la même chose sans sur-promettre ; **(b)** si le mur reste, le garder — l'exécution (traitements typo variés, fondu, pause au survol) est bonne.
-**Où :** [LogoMarquee.tsx:86-107](components/home/LogoMarquee.tsx#L86-L107)
+**Où :** [LogoMarquee.tsx:86-107](../../components/home/LogoMarquee.tsx#L86-L107)
 
 ### 17. Micro-finitions
 - **Reveal en mobile** : les `delay` échelonnés (100–300 ms) s'ajoutent alors qu'en colonne chaque élément entre déjà seul dans le viewport — réserver le stagger à `lg:` ou le plafonner à 100 ms en mobile.

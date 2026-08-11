@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { CONTACT_INFO } from "@/lib/site";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Mentions légales",
   description: "Mentions légales du site de l'agence Core.",
-};
+  pathname: "/mentions-legales",
+});
 
 export default function MentionsLegalesPage() {
   return (
@@ -20,24 +20,10 @@ export default function MentionsLegalesPage() {
               Éditeur du site
             </h2>
             <p>
-              Core SARL (société fictive) — présentée à titre de
-              démonstration.
+              Les informations officielles concernant l&apos;entreprise Core
+              seront complétées ici.
               <br />
-              RCCM SN-DKR-2026-B-000 (fictif) · NINEA 004587923 (fictif)
-              <br />
-              {CONTACT_INFO.address}
-              <br />
-              {CONTACT_INFO.email} · {CONTACT_INFO.phone}
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-2 font-display text-lg font-semibold text-foreground">
-              Hébergement
-            </h2>
-            <p>
-              Zone Cloud, Dakar (hébergeur fictif). Ce site est un exemple :
-              aucune donnée n&apos;est réellement collectée ni hébergée.
+              Localisation déclarée : Bamako, Mali.
             </p>
           </section>
 
@@ -49,9 +35,19 @@ export default function MentionsLegalesPage() {
               Le formulaire de contact de ce site est une démonstration : les
               informations saisies ne sont ni transmises ni conservées. Sur un
               site en production, cette section détaillerait vos droits et les
-              traitements réalisés, conformément au RGPD et à la loi
-              sénégalaise n° 2008-12 sur la protection des données
-              personnelles.
+              traitements réalisés, conformément aux règles applicables.
+            </p>
+            <p className="mt-3">
+              Une mesure d&apos;audience facultative est proposée avec votre
+              consentement explicite. Elle conserve pendant 90 jours des
+              événements limités et pseudonymisés, puis leurs statistiques,
+              pour les visiteurs consentants : chemin de
+              page, hôte référent externe, catégorie d&apos;appareil et, si la
+              base GeoLite2 est configurée, code pays ISO. Les adresses IP,
+              agents utilisateurs, paramètres de requête, fragments et données
+              de formulaire ne sont jamais enregistrés. Le choix est conservé
+              180 jours et peut être retiré via le lien de préférences du pied
+              de page ; le retrait supprime l&apos;historique du visiteur courant.
             </p>
           </section>
 

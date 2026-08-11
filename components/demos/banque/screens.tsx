@@ -71,7 +71,7 @@ export function AccueilScreen({
             type="button"
             onClick={() => setSoldeVisible((v) => !v)}
             aria-label={soldeVisible ? "Masquer le solde" : "Afficher le solde"}
-            className="rounded-full border border-line p-1.5 text-muted transition hover:text-foreground"
+            className="inline-flex items-center justify-center rounded-full border border-line p-1.5 text-muted transition hover:text-foreground"
           >
             {soldeVisible ? (
               <Eye className="h-3.5 w-3.5" aria-hidden />
@@ -238,7 +238,7 @@ export function VirementScreen({
               type="button"
               onClick={() => tape(touche)}
               aria-label={touche === "⌫" ? "Effacer" : undefined}
-              className="rounded-field py-2.5 text-base font-semibold transition hover:bg-surface active:scale-95"
+              className="flex items-center justify-center rounded-field py-2.5 text-base font-semibold transition hover:bg-surface active:scale-95"
             >
               {touche === "⌫" ? (
                 <Delete className="mx-auto h-4.5 w-4.5" aria-hidden />

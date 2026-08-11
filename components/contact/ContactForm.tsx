@@ -49,7 +49,7 @@ function validateField(field: Field, values: FormValues): string | null {
       if (!value) return null;
       return PHONE_INTL_RE.test(value)
         ? null
-        : "Entrez un numéro valide (ex. +221 77 123 45 67).";
+        : "Entrez un numéro valide.";
     case "typeProjet":
       return value ? null : "Veuillez sélectionner un type de projet.";
     case "message":
@@ -119,7 +119,7 @@ export default function ContactForm() {
     return (
       <div
         role="status"
-        className="flex h-full flex-col items-center justify-center rounded-card border border-line bg-surface-raised p-10 text-center shadow-card"
+        className="flex flex-col items-center justify-center rounded-card border border-line bg-surface-raised p-10 text-center shadow-card"
       >
         <Image
           src="/assets/illustrations/contact-success.webp"
@@ -133,8 +133,7 @@ export default function ContactForm() {
           Merci, {values.nom.trim().split(" ")[0]} !
         </h2>
         <p className="mt-2 max-w-sm leading-relaxed text-muted">
-          Votre message a bien été envoyé. Notre équipe vous répondra sous
-          24 heures ouvrées.
+          Ceci est une démonstration : votre message n&apos;a pas été transmis.
         </p>
         <Button variant="outline" className="mt-8 w-full sm:w-auto" onClick={resetForm}>
           Envoyer un autre message
@@ -155,7 +154,7 @@ export default function ContactForm() {
             name="nom"
             type="text"
             autoComplete="name"
-            placeholder="Awa Ndiaye"
+            placeholder="Votre nom"
             value={values.nom}
             onChange={(e) => handleChange("nom", e.target.value)}
             onBlur={() => handleBlur("nom")}
@@ -179,7 +178,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
-            placeholder="awa@entreprise.sn"
+            placeholder="vous@entreprise.com"
             value={values.email}
             onChange={(e) => handleChange("email", e.target.value)}
             onBlur={() => handleBlur("email")}
@@ -207,7 +206,7 @@ export default function ContactForm() {
             name="telephone"
             type="tel"
             autoComplete="tel"
-            placeholder="77 123 45 67"
+            placeholder="Votre numéro (facultatif)"
             value={values.telephone}
             onChange={(e) => handleChange("telephone", e.target.value)}
             onBlur={() => handleBlur("telephone")}
@@ -261,7 +260,7 @@ export default function ContactForm() {
             id="message"
             name="message"
             rows={5}
-            placeholder="Décrivez votre projet en quelques lignes : objectifs, délais, budget indicatif en FCFA…"
+            placeholder="Décrivez votre projet en quelques lignes…"
             value={values.message}
             onChange={(e) => handleChange("message", e.target.value)}
             onBlur={() => handleBlur("message")}

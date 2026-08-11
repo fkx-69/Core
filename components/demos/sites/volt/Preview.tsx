@@ -4,7 +4,7 @@ import Site from "./Site";
 /** Aperçu embarqué pour le portfolio. */
 export default function VoltPreview() {
   return (
-    <SitePreview url="https://drinkvolt.ci" href="/demos/volt">
+    <SitePreview url="Démo conceptuelle" title="VOLT Energy" href="/demos/volt">
       <Site embedded />
     </SitePreview>
   );

@@ -214,7 +214,7 @@ export default function Header() {
             <div className="mt-auto pt-8">
               <p className="mb-4 flex items-center gap-2 text-sm text-muted">
                 <span className="h-2 w-2 rounded-full bg-ok" aria-hidden />
-                Disponibles — Dakar · Abidjan · à distance
+                Basée à Bamako, Mali
               </p>
               <Link
                 href="/contact"

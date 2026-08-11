@@ -31,7 +31,7 @@ const TEASERS = [
 /** Aplat indigo doux, texte à gauche, illustration trait fin indigo à droite (réf 4). */
 export default function PortfolioTeaser() {
   return (
-    <section className="relative bg-accent-soft/50 py-16 sm:py-28">
+    <section className="relative border-t border-line bg-accent-soft py-16 sm:py-28">
       <Image
         src="/assets/illustrations/home-portfolio-teaser.png"
         alt=""
@@ -93,8 +93,9 @@ export default function PortfolioTeaser() {
             <Image
               src="/assets/illustrations/home-portfolio-stack.png"
               alt=""
-              width={1400}
-              height={933}
+              width={1536}
+              height={1024}
+              quality={95}
               sizes="(min-width: 640px) 32rem, 100vw"
               className="mx-auto h-auto w-full max-w-xs sm:max-w-lg"
               aria-hidden

@@ -159,7 +159,7 @@ function Bloc({
 // —— Site ————————————————————————————————————————————————————————————————————
 
 /**
- * Site vitrine complet du salon « L'Écrin » (Le Plateau, Abidjan). Rendu à
+ * Site vitrine complet du salon conceptuel « L'Écrin » (Bamako, Mali). Rendu à
  * l'identique en pleine page (/demos/ecrin) et en aperçu embarqué dans le
  * portfolio : toute la mise en page passe par des container queries Tailwind
  * (@sm…@7xl), jamais par les breakpoints d'écran.
@@ -292,10 +292,16 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
             aria-hidden
             className="ecr-float pointer-events-none absolute -right-16 -top-10 h-64 w-64 rounded-full bg-[#f0ddd0] opacity-70 blur-2xl"
           />
-          <Bloc className="relative py-12 @3xl:py-16 @5xl:py-24">
+          <Bloc
+            className={`relative flex flex-col justify-center py-12 @3xl:py-16 @5xl:py-24 ${
+              embedded
+                ? ""
+                : "@3xl:min-h-[max(712px,calc(100dvh-100px))]"
+            }`}
+          >
             <div className="grid items-center gap-10 @5xl:grid-cols-[1.02fr_1fr] @5xl:gap-14">
               <div className="screen-in">
-                <Eyebrow>Salon de beauté — Le Plateau, Abidjan</Eyebrow>
+                <Eyebrow>Salon de beauté — Bamako, Mali</Eyebrow>
                 <HeroHeading className="mt-5 [font-family:var(--font-ecrin-serif)] text-[2.4rem] font-light leading-[1.02] tracking-[-0.02em] text-[#3d2c29] @xl:text-[3rem] @3xl:text-[3.6rem] @5xl:text-[4.1rem]">
                   Prenez le temps
                   <br />
@@ -494,7 +500,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                   Une maison de beauté pensée comme un cocon
                 </h2>
                 <p className="mt-5 text-[15px] leading-relaxed text-[#6b544e]">
-                  Née en 2016 d&apos;une envie simple — offrir aux Abidjanaises un
+                  Née d&apos;une envie simple — offrir aux clientes un
                   lieu où l&apos;on prend vraiment soin d&apos;elles — L&apos;Écrin
                   réunit aujourd&apos;hui coiffeuses, esthéticiennes et prothésistes
                   autour d&apos;une même exigence.
@@ -625,7 +631,7 @@ export default function Site({ embedded = false }: { embedded?: boolean }) {
                           {a.nom}
                         </span>
                         <span className="block text-xs text-[#8a746c]">
-                          {a.quartier}, Abidjan
+                          {a.quartier}, Bamako
                         </span>
                       </span>
                     </figcaption>

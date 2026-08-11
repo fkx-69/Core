@@ -3,6 +3,7 @@ import { Fraunces, Manrope } from "next/font/google";
 export const lumenBody = Manrope({
   subsets: ["latin"],
   display: "swap",
+  preload: false,
   variable: "--font-lumen-body",
 });
 
@@ -13,5 +14,6 @@ export const lumenDisplay = Fraunces({
   display: "swap",
   style: ["normal", "italic"],
   axes: ["opsz"],
+  preload: false,
   variable: "--font-lumen-display",
 });

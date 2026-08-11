@@ -38,7 +38,7 @@ export default function StockView({
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--lumen-copper)]">Inventaire</p>
         <Heading className={`mt-1.5 ${display} text-[28px] font-semibold leading-none tracking-tight @2xl:text-[34px]`}>État du stock</Heading>
-        <p className="mt-2 text-sm text-[var(--lumen-muted)]">Boutique Dakar · mise à jour instantanée</p>
+        <p className="mt-2 text-sm text-[var(--lumen-muted)]">Boutique · mise à jour instantanée · démonstration</p>
       </div>
 
       {/* Bande KPI éditoriale : un seul panneau, cellules séparées par des filets. */}

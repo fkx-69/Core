@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
 import { MousePointerClick } from "lucide-react";
 import { DEMO_ANCHORS, SERVICE_ANCHORS } from "@/lib/site";
+import { getServiceById } from "@/lib/services-data";
+import { buildPageMetadata } from "@/lib/seo";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
@@ -8,11 +9,12 @@ import DemoGroup, { type DemoEntry } from "@/components/demos/DemoGroup";
 import CtaBanner from "@/components/shared/CtaBanner";
 import IntroIllustration from "@/components/ui/IntroIllustration";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Portfolio",
   description:
-    "Découvrez huit démos interactives de réalisations Core : sites vitrines, applications web et applications mobiles, à tester directement dans votre navigateur.",
-};
+    "Découvrez huit démos interactives et conceptuelles de sites vitrines, applications web et applications mobiles, à tester directement dans votre navigateur.",
+  pathname: "/portfolio",
+});
 
 const DEMO_SECTIONS: {
   anchor: string;
@@ -33,28 +35,28 @@ const DEMO_SECTIONS: {
         demo: "vitrine",
         title: "La Table Dorée",
         description:
-          "Site complet d'un restaurant gastronomique fictif des Almadies, à Dakar : menu par catégories, galerie photo avec lightbox, réservation. L'aperçu se navigue tel quel dans le mockup ; « Visiter le site en entier » ouvre le vrai site pleine page, dans un nouvel onglet.",
+          "Interface conceptuelle d'un restaurant gastronomique : menu par catégories, galerie photo avec lightbox et réservation. Explorez la démonstration dans le mockup ou ouvrez son interface dédiée.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
       },
       {
         demo: "volt",
         title: "VOLT Energy",
         description:
-          "Site complet d'une marque de boisson énergisante abidjanaise : identité sombre et néon, sélecteur de saveurs qui rethème toute la page. Faites défiler l'aperçu comme un vrai site, puis cliquez sur « Visiter le site en entier » pour l'ouvrir pleine page dans un nouvel onglet.",
+          "Interface conceptuelle d'une marque de boisson énergisante : identité sombre et néon, sélecteur de saveurs et page thématique. Faites défiler la démonstration ou ouvrez son interface dédiée.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Motion"],
       },
       {
         demo: "parfum",
         title: "Maison Élixir",
         description:
-          "Site complet d'une maison de parfum d'Abidjan : direction artistique éditoriale, collection cliquable, pyramide olfactive et prix par contenance. Explorez l'aperçu directement dans le mockup, ou ouvrez le vrai site pleine page via « Visiter le site en entier », dans un nouvel onglet.",
+          "Interface conceptuelle d'une maison de parfum : direction artistique éditoriale, collection cliquable et pyramide olfactive. Explorez la démonstration directement dans le mockup ou ouvrez son interface dédiée.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
       },
       {
         demo: "salon",
         title: "L'Écrin",
         description:
-          "Site complet d'un salon de beauté du Plateau, à Abidjan, avec prise de rendez-vous en trois étapes : prestation, jour, créneau. Réservez directement dans l'aperçu, puis cliquez sur « Visiter le site en entier » pour ouvrir le vrai site pleine page dans un nouvel onglet.",
+          "Interface conceptuelle d'un salon de beauté avec prise de rendez-vous en trois étapes : prestation, jour et créneau. Testez le parcours dans la démonstration ou ouvrez son interface dédiée.",
         stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
       },
     ],
@@ -70,14 +72,14 @@ const DEMO_SECTIONS: {
         demo: "dashboard",
         title: "Boutique Lumen",
         description:
-          "Application de gestion d'une boutique de décoration dakaroise fictive : ventes en FCFA, paiements Wave, Orange Money, espèces ou carte, indicateurs vivants et vraie vue stock avec alertes de réassort. Naviguez dans l'aperçu ou ouvrez l'application complète en pleine page.",
+          "Démonstration conceptuelle d'une application de gestion de boutique : ventes, paiements, indicateurs et vue stock avec alertes de réassort. Naviguez dans l'interface ou ouvrez sa version dédiée.",
         stack: ["React", "Next.js", "Node.js", "PostgreSQL"],
       },
       {
         demo: "pressing",
         title: "Pressing Sandaga",
         description:
-          "Outil de comptoir d'un pressing du quartier Sandaga, à Dakar : pipeline de production, retards, SMS simulés, encaissement en espèces, Wave ou Orange Money et caisse du jour détaillée en FCFA. Testez le parcours ici ou ouvrez l'application complète.",
+          "Démonstration conceptuelle d'un outil de comptoir pour pressing : pipeline de production, retards, notifications simulées, encaissement et caisse du jour. Testez le parcours ici ou ouvrez sa version dédiée.",
         stack: ["React", "Next.js", "NestJS", "PostgreSQL"],
       },
     ],
@@ -93,7 +95,7 @@ const DEMO_SECTIONS: {
         demo: "mobile",
         title: "Rapido",
         description:
-          "App de commande d'un service de livraison de repas fictif à Abidjan. Parcourez les restaurants, composez un panier, commandez, puis suivez la livraison qui progresse en temps réel dans l'onglet Suivi.",
+          "Démonstration conceptuelle d'une app de commande et de livraison de repas. Parcourez les restaurants, composez un panier, commandez, puis suivez la livraison dans l'onglet Suivi.",
         stack: ["React Native", "Expo", "TypeScript", "Firebase"],
       },
       {
@@ -106,6 +108,14 @@ const DEMO_SECTIONS: {
     ],
   },
 ];
+
+function serviceHref(anchor: string): string {
+  const service = getServiceById(anchor);
+  if (!service) {
+    throw new Error(`Unknown service anchor: ${anchor}`);
+  }
+  return `/services/${service.slug}`;
+}
 
 export default function PortfolioPage() {
   return (
@@ -122,7 +132,7 @@ export default function PortfolioPage() {
                 as="h1"
                 eyebrow="Portfolio"
                 title="Des démos à essayer, pas des captures d'écran"
-                intro="Huit projets fictifs, huit vraies interfaces fonctionnelles. Cliquez, filtrez, réservez, commandez — et visitez chaque site et chaque application web en pleine page, comme s'ils étaient déjà en ligne : chaque projet réagit comme un produit réellement livré par Core."
+                intro="Huit interfaces conceptuelles et interactives. Cliquez, filtrez, réservez et commandez pour explorer des parcours de produit, sans les présenter comme des réalisations livrées par Core."
               />
               {/* Sommaire ancré : trois écrans-fleuves plus bas, ces pilules y mènent. */}
               <ul className="mt-6 flex flex-wrap gap-2">
@@ -164,7 +174,7 @@ export default function PortfolioPage() {
           )}
           <span
             aria-hidden
-            className="text-outline pointer-events-none absolute -top-8 right-2 hidden select-none font-display text-[12rem] font-bold leading-none lg:block"
+            className="text-outline-number pointer-events-none absolute -top-8 right-2 hidden select-none font-display text-[12rem] font-bold leading-none lg:block"
           >
             {String(i + 1).padStart(2, "0")}
           </span>
@@ -174,7 +184,7 @@ export default function PortfolioPage() {
                 index={i}
                 kind={section.kind}
                 entries={section.entries}
-                serviceHref={`/services#${section.serviceAnchor}`}
+                serviceHref={serviceHref(section.serviceAnchor)}
                 serviceLabel={section.serviceLabel}
                 flip={i % 2 === 1}
                 illustration={section.illustration}
@@ -185,7 +195,7 @@ export default function PortfolioPage() {
       ))}
       <CtaBanner
         title="Votre projet mérite une démo aussi convaincante."
-        text="Racontez-nous votre idée : nous vous montrons, planning et budget en FCFA à l'appui, comment la transformer en produit que vos clients utilisent vraiment."
+        text="Racontez-nous votre idée : nous pouvons explorer avec vous une interface adaptée à votre besoin."
       />
     </>
   );

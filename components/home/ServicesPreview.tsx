@@ -35,7 +35,7 @@ function TileIndex({ n }: { n: string }) {
   return (
     <span
       aria-hidden
-      className="text-outline pointer-events-none absolute top-5 right-6 select-none font-display text-3xl font-bold"
+      className="text-outline-number pointer-events-none absolute top-5 right-6 select-none font-display text-3xl font-bold"
     >
       {n}
     </span>
@@ -89,7 +89,7 @@ export default function ServicesPreview() {
           {SERVICES.map((service, i) => (
             <Reveal key={service.id}>
               <Link
-                href={`/services#${service.id}`}
+                href={`/services/${service.slug}`}
                 className="group relative grid min-h-32 grid-cols-[5.5rem_1fr_auto] items-center gap-3 overflow-hidden rounded-card border border-line bg-surface-raised p-4 shadow-card transition hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <TileIllustration
@@ -122,7 +122,7 @@ export default function ServicesPreview() {
         <div className="mt-14 hidden gap-4 lg:grid lg:grid-cols-2">
           <Reveal variant="left" className="h-full">
             <Link
-              href={`/services#${main.id}`}
+              href={`/services/${main.slug}`}
               className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface-raised p-8 shadow-card transition duration-200 hover:-translate-y-1 hover:border-accent/50 hover:shadow-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <TileIndex n="01" />
@@ -147,7 +147,7 @@ export default function ServicesPreview() {
           <div className="grid gap-4">
             <Reveal variant="right" delay={100}>
               <Link
-                href={`/services#${others[0].id}`}
+                href={`/services/${others[0].slug}`}
                 className="group relative flex h-full flex-col rounded-card border border-line bg-surface-raised p-6 shadow-card transition duration-200 hover:-translate-y-1 hover:border-accent/50 hover:shadow-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <TileIndex n="02" />
@@ -184,7 +184,7 @@ export default function ServicesPreview() {
                   className="h-full"
                 >
                   <Link
-                    href={`/services#${service.id}`}
+                    href={`/services/${service.slug}`}
                     className={`group relative flex h-full flex-col rounded-card border border-line p-6 shadow-card transition duration-200 hover:-translate-y-1 hover:border-accent/50 hover:shadow-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                       i === 0 ? "bg-accent-soft/60" : "bg-surface-raised"
                     }`}

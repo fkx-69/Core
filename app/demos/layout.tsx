@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import DemoBadge from "@/components/demos/sites/DemoBadge";
+import AnalyticsConsent from "@/components/analytics/AnalyticsConsent";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   // Produits fictifs de démonstration : jamais indexés.
@@ -20,6 +22,9 @@ export default function DemosLayout({
     <div className="@container flex-1">
       {children}
       <DemoBadge />
+      <Suspense fallback={null}>
+        <AnalyticsConsent />
+      </Suspense>
     </div>
   );
 }

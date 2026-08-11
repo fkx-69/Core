@@ -1,18 +1,18 @@
 /**
  * Contenu du site fictif « La Table Dorée » — restaurant gastronomique
- * des Almadies, Dakar. Cuisine sénégalaise revisitée, prix en FCFA.
+ * à Bamako, Mali. Cuisine d'inspiration ouest-africaine, prix en FCFA.
  */
 
 export const SITE = {
   name: "La Table Dorée",
-  baseline: "Cuisine sénégalaise de haute volée, face à l'Atlantique",
+  baseline: "Cuisine ouest-africaine de haute volée, dans un décor contemporain",
   address: "12, route des Almadies",
-  city: "Dakar — Sénégal",
-  phone: "+221 33 869 24 10",
-  phoneHref: "tel:+221338692410",
-  mobile: "+221 77 452 18 60",
-  email: "contact@latabledoree.sn",
-  emailHref: "mailto:contact@latabledoree.sn",
+  city: "Bamako — Mali · démonstration",
+  phone: "Démonstration uniquement",
+  phoneHref: "#",
+  mobile: "Démonstration uniquement",
+  email: "Démonstration uniquement",
+  emailHref: "#",
 } as const;
 
 export const NAV_LINKS = [

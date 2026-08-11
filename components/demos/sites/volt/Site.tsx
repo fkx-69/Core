@@ -80,7 +80,8 @@ const ICONES_POINTS: Record<string, LucideIcon> = {
 /* ------------------------------------------------------------------ */
 
 /**
- * Site vitrine complet de VOLT, boisson énergisante fictive d'Abidjan.
+ * Site vitrine complet de VOLT, boisson énergisante fictive présentée à titre
+ * de démonstration.
  * Rendu en pleine page sur /demos/volt et embarqué dans un mockup
  * navigateur sur /portfolio : tout le responsive est en container queries,
  * calées sur le `@container` porté par ce root. Le sélecteur de saveur
@@ -224,7 +225,7 @@ function PiedDePage() {
               </span>
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-zinc-400">
-              L’énergie d’Abidjan. Zéro sucre, kola et guarana — trois saveurs
+              L’énergie d’une ville en mouvement. Zéro sucre, kola et guarana — trois saveurs
               taillées pour la ville qui ne dort pas.
             </p>
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Réseaux sociaux">
@@ -299,7 +300,7 @@ function PiedDePage() {
         <div className="mt-12 space-y-2 border-t border-white/[0.06] pt-6 text-[11px] leading-relaxed text-zinc-500">
           <p>{AVERTISSEMENT}</p>
           <p>
-            © 2026 VOLT Beverages CI — Marcory, Abidjan. VOLT est une marque
+            © 2026 VOLT Beverages — Démonstration conceptuelle. VOLT est une marque
             fictive : ce site est une démonstration réalisée par l’agence Core.
           </p>
         </div>
@@ -339,7 +340,11 @@ function Hero({
       </p>
 
       <div
-        className={`${conteneur} relative grid items-center gap-10 py-12 @xl:grid-cols-[1.05fr_0.95fr] @xl:gap-8 @2xl:py-16 @5xl:gap-14 @5xl:py-24`}
+        className={`${conteneur} relative grid items-center gap-10 py-12 @xl:grid-cols-[1.05fr_0.95fr] @xl:gap-8 @2xl:py-16 @5xl:gap-14 @5xl:py-24 ${
+          embedded
+            ? ""
+            : "@3xl:min-h-[max(640px,calc(100dvh-67px))] @5xl:min-h-[max(695px,calc(100dvh-67px))]"
+        }`}
       >
         <div>
           <p
@@ -358,12 +363,12 @@ function Hero({
             L’énergie
             <br />
             <span className="italic text-[color:var(--volt-accent)] transition-colors duration-500 [text-shadow:0_0_50px_var(--volt-glow)]">
-              d’Abidjan.
+              de Bamako.
             </span>
           </Heading>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-zinc-400 @2xl:text-base">
             Boisson énergisante sans sucre, montée sur la noix de kola et le
-            guarana. Préparée et embouteillée à Abidjan, taillée pour les
+            guarana. Préparée et embouteillée pour la démonstration, taillée pour les
             journées longues et les nuits encore plus longues.
           </p>
           <div className="mt-6">
@@ -664,7 +669,7 @@ function Marque() {
       <div className={`${conteneur} relative py-16 @2xl:py-20 @5xl:py-28`}>
         <TitreSection
           kicker="La marque"
-          titre="Née dans le bruit des nuits d’Abidjan."
+          titre="Née dans le bruit d’une ville en mouvement."
         />
         <p className="mt-6 max-w-xl text-sm leading-relaxed text-zinc-300 @2xl:text-base">
           {MANIFESTE}
@@ -696,7 +701,7 @@ function PointsDeVente() {
         <TitreSection
           kicker="Où nous trouver"
           titre="Partout où la ville veille."
-          texte="Plus de 400 frigos VOLT tournent déjà dans le Grand Abidjan. Repérez l’éclair : il n’est jamais bien loin."
+          texte="Un parcours de distribution présenté à titre conceptuel. Repérez l’éclair : il n’est jamais bien loin."
         />
 
         <div className="mt-10 grid gap-3 @sm:grid-cols-2 @2xl:gap-4 @5xl:grid-cols-4">
@@ -938,7 +943,7 @@ function FormulaireDistributeur() {
                 name="ville"
                 type="text"
                 required
-                placeholder="Marcory, Abidjan"
+                placeholder="Ville (démonstration)"
                 className={champ}
               />
             </label>

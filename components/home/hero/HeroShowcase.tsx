@@ -1,68 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useState, type ComponentType } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Container from "@/components/ui/Container";
-import BrowserFrame from "@/components/demos/mockups/BrowserFrame";
+import useIsMobile from "@/components/demos/useIsMobile";
 import { HERO_SITES, type HeroSiteId } from "./sites";
+import HeroDesktopStage from "./HeroDesktopStage";
+import HeroMobileStage, {
+  type HeroMobileStageHandle,
+} from "./HeroMobileStage";
+import HeroOverlay from "./HeroOverlay";
 import HeroTabs from "./HeroTabs";
-
-export type Autoplay = "idle" | "playing" | "paused" | "stopped";
-
-/** Squelette de page web pendant le chargement du bundle d'un site. */
-function SiteSkeleton() {
-  return (
-    <div aria-hidden className="h-full animate-pulse p-6 sm:p-8">
-      <div className="flex items-center justify-between">
-        <span className="h-3 w-24 rounded-full bg-line" />
-        <span className="hidden h-2.5 w-48 rounded-full bg-line sm:block" />
-      </div>
-      <div className="mt-14 space-y-3">
-        <span className="block h-7 w-4/5 rounded-full bg-line" />
-        <span className="block h-7 w-3/5 rounded-full bg-line" />
-      </div>
-      <div className="mt-6 space-y-2.5">
-        <span className="block h-2.5 w-2/3 rounded-full bg-line/70" />
-        <span className="block h-2.5 w-1/2 rounded-full bg-line/70" />
-      </div>
-      <div className="mt-10 grid grid-cols-3 gap-4">
-        <span className="h-28 rounded-card bg-line/50" />
-        <span className="h-28 rounded-card bg-line/50" />
-        <span className="h-28 rounded-card bg-line/50" />
-      </div>
-    </div>
-  );
-}
-
-/*
- * Chaque site n'est téléchargé qu'à sa première activation (ssr: false —
- * légal ici car composant client), puis reste monté dans la pile : revenir
- * dessus est instantané et son état interne (saveur VOLT, réservation…)
- * survit aux changements.
- */
-const SITE_COMPONENTS: Record<
-  HeroSiteId,
-  ComponentType<{ embedded?: boolean }>
-> = {
-  "table-doree": dynamic(
-    () => import("@/components/demos/sites/table-doree/Site"),
-    { ssr: false, loading: () => <SiteSkeleton /> },
-  ),
-  volt: dynamic(() => import("@/components/demos/sites/volt/Site"), {
-    ssr: false,
-    loading: () => <SiteSkeleton />,
-  }),
-  elixir: dynamic(() => import("@/components/demos/sites/elixir/Site"), {
-    ssr: false,
-    loading: () => <SiteSkeleton />,
-  }),
-  ecrin: dynamic(() => import("@/components/demos/sites/ecrin/Site"), {
-    ssr: false,
-    loading: () => <SiteSkeleton />,
-  }),
-};
+import type { Autoplay } from "./types";
 
 const ORDER = HERO_SITES.map((s) => s.id);
 
@@ -71,11 +21,20 @@ function nextOf(id: HeroSiteId): HeroSiteId {
 }
 
 /**
- * Héro-scène immersif : un titre, les onglets, un grand navigateur — et le
- * héro entier (fond, encre, accent) prend les couleurs de la marque affichée
- * via les classes .hero-theme-* de globals.css. L'auto-rotation (5 s par
- * site) est cadencée par la barre de progression de l'onglet actif
+ * Héro-scène immersif : un titre, les onglets, la démo — et le héro entier
+ * (fond, encre, accent) prend les couleurs de la marque affichée via les
+ * classes .hero-theme-* de globals.css.
+ *
+ * Desktop (≥lg) : grand navigateur 16:9 interactif, auto-rotation (5 s par
+ * site) cadencée par la barre de progression de l'onglet actif
  * (animationend → démo suivante) ; toute interaction l'arrête pour de bon.
+ *
+ * Mobile (<lg) : le swipe remplace l'auto-rotation — carrousel snap
+ * d'aperçus inertes au format téléphone (le thème suit la slide centrée),
+ * et le tap ouvre la démo en plein écran (DemoOverlay) où tout réagit.
+ * Les deux scènes sont dans le DOM (CSS décide, zéro layout shift) mais
+ * une seule monte les sites, via isMobile.
+ *
  * Composant client, mais le titre et la légende sont bien prérendus (seuls
  * les sites en ssr:false ne le sont pas).
  */
@@ -83,7 +42,10 @@ export default function HeroShowcase() {
   const [active, setActive] = useState<HeroSiteId>("table-doree");
   const [visited, setVisited] = useState<HeroSiteId[]>(["table-doree"]);
   const [autoplay, setAutoplay] = useState<Autoplay>("idle");
+  const [overlay, setOverlay] = useState(false);
+  const isMobile = useIsMobile("(max-width: 1023px)");
   const sceneRef = useRef<HTMLDivElement>(null);
+  const mobileStageRef = useRef<HeroMobileStageHandle>(null);
   const site = HERO_SITES.find((s) => s.id === active) ?? HERO_SITES[0];
 
   // idle → playing : à l'idle du navigateur, quand la scène est visible, en
@@ -164,10 +126,11 @@ export default function HeroShowcase() {
     setActive(n);
   }
 
-  function select(id: HeroSiteId) {
+  function select(id: HeroSiteId, scrollBehavior: ScrollBehavior = "smooth") {
     setAutoplay("stopped");
     setVisited((v) => (v.includes(id) ? v : [...v, id]));
     setActive(id);
+    mobileStageRef.current?.scrollTo(id, scrollBehavior);
   }
 
   function toggleAutoplay() {
@@ -177,6 +140,11 @@ export default function HeroShowcase() {
   /** Interaction directe avec les démos : l'auto-rotation s'arrête pour de bon. */
   function stop() {
     setAutoplay("stopped");
+  }
+
+  function openOverlay(id: HeroSiteId) {
+    select(id, "auto");
+    setOverlay(true);
   }
 
   return (
@@ -193,7 +161,7 @@ export default function HeroShowcase() {
       <Container className="relative flex flex-col items-center pt-8 pb-9 sm:pt-14 sm:pb-12">
         <p className="inline-flex items-center gap-2 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-1.5 text-xs text-[color:var(--hero-muted)] transition-colors duration-700 sm:gap-2.5 sm:px-4 sm:text-sm">
           <span className="animate-pulse-dot h-2 w-2 rounded-full bg-[color:var(--hero-accent)] transition-colors duration-700" aria-hidden />
-          Disponibles — Dakar · Abidjan · à distance
+          Basée à Bamako, Mali
         </p>
         {/* Deux lignes poster, centrées (largeurs mesurées en Space Grotesk bold) */}
         <h1 className="mt-5 text-center font-display text-[2.05rem] leading-[1.1] font-bold tracking-tight text-[color:var(--hero-ink)] transition-colors duration-700 sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
@@ -210,59 +178,54 @@ export default function HeroShowcase() {
           onProgressEnd={advance}
           onToggleAutoplay={toggleAutoplay}
         />
-        <div
-          ref={sceneRef}
-          aria-roledescription="carrousel"
-          aria-label="Aperçus interactifs des sites vitrines"
-          onPointerEnter={() => setAutoplay((p) => (p === "playing" ? "paused" : p))}
-          onPointerLeave={() => setAutoplay((p) => (p === "paused" ? "playing" : p))}
-          onPointerDownCapture={stop}
-          onWheelCapture={stop}
-          onKeyDownCapture={stop}
-          onFocusCapture={stop}
-          className="mt-4 w-full sm:mt-5"
-        >
-          <BrowserFrame url={site.url}>
-            {/* isolate : les z-index internes des sites démos (headers sticky
-                z-50…) restent confinés au cadre. En desktop la zone d'aperçu
-                est un vrai écran 16:9 ; en mobile, hauteur fixe plus haute
-                que large (16:9 y serait illisible). */}
-            <div className="isolate grid lg:aspect-video">
-              {HERO_SITES.filter((s) => visited.includes(s.id)).map((s) => {
-                const Site = SITE_COMPONENTS[s.id];
-                return (
-                  <div
-                    key={s.id}
-                    role="tabpanel"
-                    id={`hero-panel-${s.id}`}
-                    aria-labelledby={`hero-tab-${s.id}`}
-                    inert={s.id !== active || undefined}
-                    className={`@container scrollbar-none col-start-1 row-start-1 h-[clamp(340px,52dvh,420px)] overflow-y-auto overscroll-y-auto lg:h-full lg:overscroll-contain motion-safe:transition-[opacity,transform] motion-safe:duration-500 ${
-                      s.id === active
-                        ? "opacity-100"
-                        : "pointer-events-none opacity-0 motion-safe:translate-y-2 motion-safe:scale-[0.99]"
-                    }`}
-                  >
-                    <Site embedded />
-                  </div>
-                );
-              })}
-            </div>
-          </BrowserFrame>
-        </div>
-        <div className="mt-3 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-4 sm:gap-y-2">
+
+        <HeroDesktopStage
+          active={active}
+          enabled={!isMobile}
+          visited={visited}
+          url={site.url}
+          sceneRef={sceneRef}
+          onPause={() =>
+            setAutoplay((current) =>
+              current === "playing" ? "paused" : current,
+            )
+          }
+          onResume={() =>
+            setAutoplay((current) =>
+              current === "paused" ? "playing" : current,
+            )
+          }
+          onStop={stop}
+        />
+
+        <HeroMobileStage
+          ref={mobileStageRef}
+          active={active}
+          enabled={isMobile}
+          overlayOpen={overlay}
+          onActiveChange={setActive}
+          onOpen={openOverlay}
+          onSelect={select}
+        />
+
+        <div className="mt-4 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-4 sm:gap-y-2 lg:mt-3">
           <p className="text-xs text-[color:var(--hero-muted)] transition-colors duration-700">
-            {site.secteur} — aperçu interactif, tout réagit.
+            <span className="lg:hidden">
+              {site.secteur} — touchez l&apos;aperçu pour l&apos;essayer en plein écran.
+            </span>
+            <span className="hidden lg:inline">
+              {site.secteur} — aperçu interactif, tout réagit.
+            </span>
           </p>
           {/* Le héro convainc, cette paire convertit : visite complète en
-              secondaire, « Démarrer un projet » en primaire aux couleurs de
-              la marque affichée. */}
+              secondaire (desktop — en mobile l'overlay joue ce rôle),
+              « Démarrer un projet » en primaire aux couleurs de la marque. */}
           <div className="grid w-full gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center">
             <Link
               href={site.href}
               target="_blank"
               rel="noopener"
-              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-2 text-xs font-medium text-[color:var(--hero-muted)] shadow-card transition-colors duration-300 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] sm:min-h-0 sm:justify-start sm:py-1.5"
+              className="hidden min-h-11 items-center justify-center gap-1.5 rounded-full border border-[color:var(--hero-line)] bg-[color:var(--hero-surface)] px-3 py-2 text-xs font-medium text-[color:var(--hero-muted)] shadow-card transition-colors duration-300 hover:border-[color:var(--hero-accent)] hover:text-[color:var(--hero-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--hero-accent)] lg:inline-flex lg:min-h-0 lg:justify-start lg:py-1.5"
             >
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />
               Visiter le site en entier
@@ -280,6 +243,14 @@ export default function HeroShowcase() {
           Démo affichée : {site.nom} — {site.secteur}
         </p>
       </Container>
+
+      {overlay && (
+        <HeroOverlay
+          active={active}
+          onClose={() => setOverlay(false)}
+          onSelect={(id) => select(id, "auto")}
+        />
+      )}
     </section>
   );
 }

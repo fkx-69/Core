@@ -13,6 +13,7 @@ export const tdSerif = Cormorant_Garamond({
   style: ["normal", "italic"],
   variable: "--font-td-serif",
   display: "swap",
+  preload: false,
 });
 
 /** Sans géométrique discrète — corps de texte, navigation, formulaires. */
@@ -21,4 +22,5 @@ export const tdSans = Jost({
   style: ["normal", "italic"],
   variable: "--font-td-sans",
   display: "swap",
+  preload: false,
 });

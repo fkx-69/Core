@@ -1,6 +1,6 @@
 /**
  * Contenu éditorial du site VOLT — marque fictive de boisson énergisante née
- * à Abidjan. La palette néon de chaque saveur est injectée en variables CSS
+ * à Bamako, au Mali. La palette néon de chaque saveur est injectée en variables CSS
  * (--volt-accent / --volt-glow / --volt-halo) sur le root de Site.tsx : c'est
  * elle qui rethème toute la page au changement de saveur.
  */
@@ -87,7 +87,7 @@ export const MARQUEE = [
   "Zéro sucre",
   "160 mg de caféine",
   "Kola & guarana",
-  "Née à Abidjan",
+  "Démonstration conceptuelle",
   "Canette recyclable",
   "1 000 FCFA prix conseillé",
 ];
@@ -208,7 +208,7 @@ export const EXPANSION = "Bientôt : Bouaké, Yamoussoukro & San Pedro";
 
 export const AVANTAGES_DISTRIBUTEUR = [
   "Jusqu’à 25 % de marge sur le prix conseillé",
-  "Livraison sous 48 h partout dans le Grand Abidjan",
+  "Parcours de livraison simulé pour la démonstration",
   "Paiement à la livraison — Wave, Orange Money ou espèces",
   "Frigo VOLT et PLV offerts dès 40 packs par mois",
 ];
@@ -222,10 +222,10 @@ export const TYPES_COMMERCE = [
 ];
 
 export const CONTACT = {
-  adresse: "Rue du Canal, Zone 4C — Marcory, Abidjan",
+  adresse: "Bamako, Mali · démonstration",
   telephone: "+225 07 07 89 21 45",
   telephoneLien: "tel:+2250707892145",
-  email: "hello@drinkvolt.ci",
+  email: "Démonstration uniquement",
 };
 
 export const RESEAUX = ["Instagram", "TikTok", "Facebook", "WhatsApp"];

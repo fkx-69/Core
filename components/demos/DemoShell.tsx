@@ -50,12 +50,23 @@ export default function DemoShell({
       }`}
     >
       <div className={`min-w-0 ${flip ? "lg:order-2" : ""}`}>
+        {/* En-tête mobile : catégorie et titre AVANT la démo — on sait ce
+            qu'on regarde avant de le voir (la légende de droite n'existe
+            qu'à partir de lg). */}
+        <div className="mb-5 lg:hidden">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            {numeral} — {kind}
+          </p>
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            {title}
+          </h2>
+        </div>
         {switcher}
         <div key={resetKey}>{children}</div>
       </div>
       <div className={`min-w-0 lg:sticky lg:top-24 ${flip ? "lg:order-1" : ""}`}>
         {illustration && (
-          <div className="relative mx-auto mb-4 aspect-video w-full max-w-56 md:mb-6 md:max-w-none">
+          <div className="relative mb-6 hidden aspect-video w-full lg:block">
             <Image
               src={illustration}
               alt=""
@@ -66,10 +77,10 @@ export default function DemoShell({
             />
           </div>
         )}
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+        <p className="hidden text-xs font-semibold uppercase tracking-[0.2em] text-accent lg:block">
           {numeral} — {kind}
         </p>
-        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="mt-4 hidden font-display text-3xl font-bold tracking-tight sm:text-4xl lg:block">
           {title}
         </h2>
         <details className="group/details mt-5 overflow-hidden rounded-card border border-line bg-surface-raised md:hidden">

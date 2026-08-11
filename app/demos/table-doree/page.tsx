@@ -3,10 +3,10 @@ import Site from "@/components/demos/sites/table-doree/Site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "La Table Dorée — Restaurant gastronomique aux Almadies, Dakar",
+    absolute: "La Table Dorée — Démonstration de restaurant gastronomique",
   },
   description:
-    "Cuisine sénégalaise de saison, produits locaux et cave choisie, au cœur des Almadies. Réservez votre table au +221 33 869 12 40.",
+    "Démonstration conceptuelle d'une interface de restaurant gastronomique : menu, produits et réservation.",
 };
 
 export default function Page() {

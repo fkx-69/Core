@@ -40,7 +40,7 @@ export default function CaisseView({
         <div>
           <p className={`text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--sandaga-accent)] ${mono}`}>Encaissements</p>
           <Heading className={`mt-1.5 text-2xl font-extrabold tracking-tight @2xl:text-3xl ${display}`}>Caisse du jour</Heading>
-          <p className={`mt-1 text-xs text-[var(--sandaga-muted)] ${mono}`}>Lun. 6 juil. 2026 · Sandaga, Dakar</p>
+          <p className={`mt-1 text-xs text-[var(--sandaga-muted)] ${mono}`}>Données conceptuelles · démonstration</p>
         </div>
         <button type="button" onClick={() => setClosed((value) => !value)} className={`inline-flex min-h-11 items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sandaga-accent)] ${closed ? "bg-[#e6f5ec] text-[var(--sandaga-ready)]" : "bg-[var(--sandaga-deep)] text-white hover:bg-[var(--sandaga-accent)]"}`}>{closed ? <CheckCircle2 className="size-4" aria-hidden /> : <Landmark className="size-4" aria-hidden />}{closed ? "Caisse clôturée" : "Clôturer la caisse"}</button>
       </div>

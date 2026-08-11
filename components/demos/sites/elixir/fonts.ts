@@ -13,6 +13,7 @@ export const displaySerif = Cormorant_Garamond({
   style: ["normal", "italic"],
   variable: "--font-elixir-display",
   display: "swap",
+  preload: false,
 });
 
 /** Sans géométrique — capitales espacées, libellés, prix, navigation. */
@@ -21,4 +22,5 @@ export const microSans = Jost({
   weight: ["300", "400", "500"],
   variable: "--font-elixir-sans",
   display: "swap",
+  preload: false,
 });
