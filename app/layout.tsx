@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Script from "next/script";
+import { buildPageMetadata, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,13 +14,29 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const googleSiteVerification =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
+  metadataBase: siteConfig.url,
+  ...buildPageMetadata({
+    title: siteConfig.title,
+    description: siteConfig.description,
+    pathname: "/",
+    titleAbsolute: true,
+  }),
   title: {
-    default: "Core — Agence de développement logiciel",
+    default: siteConfig.title,
     template: "%s | Core",
   },
-  description:
-    "Core conçoit des sites web, applications web et mobiles, et logiciels sur mesure pour accélérer votre activité.",
+  ...(googleSiteVerification
+    ? { verification: { google: googleSiteVerification } }
+    : {}),
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
 };
 
 // Applique le thème avant le premier paint : localStorage, sinon préférence système.
@@ -39,10 +55,10 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
-        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInit}
+        </Script>
+        {children}
       </body>
     </html>
   );

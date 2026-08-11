@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 
 /* L'état du thème vit sur <html> (classe .dark, posée par le script
@@ -21,6 +21,17 @@ const getServerIsDark = () => false;
 /** Bascule clair/sombre, persistée dans localStorage. */
 export default function ThemeToggle() {
   const isDark = useSyncExternalStore(subscribe, getIsDark, getServerIsDark);
+  const transitionTimer = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (transitionTimer.current !== null) {
+        window.clearTimeout(transitionTimer.current);
+      }
+      document.documentElement.classList.remove("theme-transition");
+    },
+    [],
+  );
 
   function toggle() {
     const root = document.documentElement;
@@ -32,7 +43,13 @@ export default function ThemeToggle() {
     } catch {
       // localStorage indisponible (navigation privée) : le toggle reste fonctionnel.
     }
-    window.setTimeout(() => root.classList.remove("theme-transition"), 350);
+    if (transitionTimer.current !== null) {
+      window.clearTimeout(transitionTimer.current);
+    }
+    transitionTimer.current = window.setTimeout(() => {
+      root.classList.remove("theme-transition");
+      transitionTimer.current = null;
+    }, 350);
   }
 
   return (
@@ -42,7 +59,7 @@ export default function ThemeToggle() {
       aria-label={
         isDark ? "Activer le thème clair" : "Activer le thème sombre"
       }
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface-raised text-foreground transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface-raised text-foreground transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:h-10 md:w-10"
     >
       {isDark ? (
         <Sun className="h-5 w-5" aria-hidden />

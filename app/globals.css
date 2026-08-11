@@ -38,6 +38,9 @@
   --shadow-card: 0 1px 2px rgb(16 18 26 / 0.04);
   --shadow-raised: 0 12px 32px -12px rgb(16 18 26 / 0.18);
   --shadow-overlay: 0 24px 48px -12px rgb(16 18 26 / 0.28);
+
+  /* Teal éditorial — pointillés d'accent, hérité du langage des illustrations */
+  --teal: #2f7e6d;
 }
 
 .dark {
@@ -74,6 +77,9 @@
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
   --shadow-raised: 0 12px 32px -12px rgb(0 0 0 / 0.55);
   --shadow-overlay: 0 24px 48px -12px rgb(0 0 0 / 0.65);
+
+  /* Teal éditorial — éclairci pour rester lisible sur fond sombre */
+  --teal: #3fae95;
 }
 
 @theme inline {
@@ -98,6 +104,7 @@
   --color-warn-soft: var(--warn-soft);
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
+  --color-teal: var(--teal);
   --shadow-card: var(--shadow-card);
   --shadow-raised: var(--shadow-raised);
   --shadow-overlay: var(--shadow-overlay);
@@ -126,10 +133,47 @@ body {
   background-size: 24px 24px;
 }
 
-/* Numéraux géants au contour filaire (page Services) */
+/* Variante inversée pour les bandeaux toujours sombres (chiffres clés) */
+.dot-grid-inverse {
+  background-image: radial-gradient(rgb(255 255 255 / 0.25) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Textures du bandeau accent (CtaBanner) : blanches sur l'indigo en clair,
+   encre sur le périwinkle clair en sombre — sinon elles disparaissent quand
+   l'accent s'inverse avec le thème. */
+.dot-grid-accent {
+  background-image: radial-gradient(rgb(255 255 255 / 0.25) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.text-outline-accent {
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.15);
+  color: transparent;
+}
+.dark .dot-grid-accent {
+  background-image: radial-gradient(rgb(11 13 19 / 0.2) 1px, transparent 1px);
+}
+.dark .text-outline-accent {
+  -webkit-text-stroke-color: rgb(11 13 19 / 0.14);
+}
+
+/* Papier millimétré discret (héro) */
+.grid-paper {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Contours filaires : neutre pour les lettrages décoratifs, accent pour les numéraux. */
 .text-outline {
   -webkit-text-stroke: 1.5px var(--line);
   color: transparent;
+}
+.text-outline-number {
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+  opacity: 0.7;
 }
 
 /* Transition douce appliquée temporairement par le ThemeToggle */
@@ -143,22 +187,47 @@ html.theme-transition * {
     stroke 300ms ease !important;
 }
 
-/* Apparition au scroll (composant Reveal) */
+/* Apparition au scroll (composant Reveal) — variantes directionnelles */
 .reveal {
   opacity: 0;
   translate: 0 16px;
 }
+.reveal.reveal-left,
+.reveal.reveal-right {
+  translate: 0 16px;
+}
+.reveal.reveal-scale {
+  translate: 0 0;
+  scale: 0.96;
+}
 .reveal.is-visible {
   opacity: 1;
   translate: 0 0;
+  scale: 1;
   transition:
     opacity 0.6s ease,
-    translate 0.6s ease;
+    translate 0.6s ease,
+    scale 0.6s ease;
+}
+/* Échelonnement (--reveal-delay) réservé au desktop : en colonne mobile,
+   chaque élément entre déjà seul dans le viewport — le délai s'additionnerait
+   à l'attente au lieu de rythmer une rangée. */
+@media (min-width: 1024px) {
+  .reveal.reveal-left {
+    translate: -20px 0;
+  }
+  .reveal.reveal-right {
+    translate: 20px 0;
+  }
+  .reveal.is-visible {
+    transition-delay: var(--reveal-delay, 0ms);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     translate: none;
+    scale: none;
     transition: none;
   }
 }
@@ -183,9 +252,143 @@ html.theme-transition * {
 .animate-marquee {
   animation: marquee 18s linear infinite;
 }
+/* Variante lente (bandeau logos du site), en pause au survol */
+.animate-marquee-slow {
+  animation: marquee 40s linear infinite;
+}
+.marquee-pausable:hover .animate-marquee-slow {
+  animation-play-state: paused;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .animate-marquee-slow {
     animation: none;
+  }
+}
+
+/* Flottement doux des éléments décoratifs (héro) */
+@keyframes float-y {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -8px;
+  }
+}
+.animate-float {
+  animation: float-y 5s ease-in-out infinite alternate;
+}
+
+/* Pastille de disponibilité qui pulse (héro) */
+@keyframes pulse-dot {
+  50% {
+    opacity: 0.4;
+  }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-pulse-dot {
+    animation: none;
+  }
+}
+
+/* — Ambiances de marque du héro-scène — un attribut par démo vitrine active.
+   Immersion totale : fond, encre, muted, filets et accent viennent de la
+   marque affichée. Palettes absolues (identiques en light et dark : la
+   marque EST le thème) ; accents et muted vérifiés AA sur leur fond.
+   Posé sur la section du héro (SSR) ET reflété sur <html> après hydratation,
+   pour que le header — hors de la section — puisse peindre les mêmes vars. */
+[data-hero-theme="table-doree"] {
+  --hero-bg: #faf6ef;
+  --hero-ink: #241d16;
+  --hero-muted: #6b5c4a;
+  --hero-line: #e3d8c2;
+  --hero-surface: #fffdf8;
+  --hero-accent: #b45309;
+  --hero-accent-ink: #ffffff;
+  --hero-halo: rgb(180 83 9 / 0.14);
+}
+[data-hero-theme="volt"] {
+  --hero-bg: #0a0a0e;
+  --hero-ink: #f4f4f5;
+  --hero-muted: #a1a1aa;
+  --hero-line: #26262e;
+  --hero-surface: #15151b;
+  --hero-accent: #38bdf8;
+  --hero-accent-ink: #0a0a0e;
+  --hero-halo: rgb(56 189 248 / 0.13);
+}
+[data-hero-theme="elixir"] {
+  --hero-bg: #f7f3ec;
+  --hero-ink: #2c241b;
+  --hero-muted: #6e604c;
+  --hero-line: #e6dcc8;
+  --hero-surface: #fffcf5;
+  --hero-accent: #8a6a3b;
+  --hero-accent-ink: #ffffff;
+  --hero-halo: rgb(176 141 87 / 0.18);
+}
+[data-hero-theme="ecrin"] {
+  --hero-bg: #faf5f1;
+  --hero-ink: #3d2c29;
+  --hero-muted: #6b544e;
+  --hero-line: #ecdccf;
+  --hero-surface: #fffaf6;
+  --hero-accent: #b4552f;
+  --hero-accent-ink: #ffffff;
+  --hero-halo: rgb(201 111 74 / 0.14);
+}
+
+/* Barre de progression de l'auto-rotation du héro : le minuteur, c'est elle.
+   onAnimationEnd déclenche le passage à la démo suivante ; reduced-motion
+   coupe l'animation → l'événement ne part jamais, l'autoplay meurt seul. */
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.hero-progress {
+  animation: hero-progress 5s linear forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-progress {
+    animation: none;
+  }
+}
+
+/* Zoom du carrousel mobile du héro, piloté par le défilement lui-même
+   (view-timeline). Les slides ne contiennent que des posters bitmap : le
+   compositeur peut donc les transformer sans repeindre des sites complets.
+   Cover symétrique : 50 % = slide centrée dans le rail. Sans support, ou en
+   reduced-motion, les slides restent simplement à taille égale. */
+@keyframes hero-slide-pop {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.88);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scale(1.04);
+    opacity: 1;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-carousel-slide {
+      animation-name: hero-slide-pop;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view(inline);
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
   }
 }
 
@@ -203,6 +406,35 @@ html.theme-transition * {
 .screen-in {
   animation: screen-in 0.25s ease;
 }
+
+/* Cibles tactiles des produits fictifs. Les container queries pilotent leur
+   mise en page, mais la taille des contrôles dépend bien du viewport réel :
+   une démo embarquée sur desktop conserve donc son chrome compact. */
+@media (width < 768px) {
+  .demo-touch :where(button) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .demo-touch :where(a.flex, a.inline-flex) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .demo-touch :where(a[href^="tel:"], a[href^="mailto:"]),
+  .demo-touch footer a {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .demo-touch :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    min-height: 48px;
+    font-size: 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .screen-in {
     animation: none;

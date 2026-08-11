@@ -148,7 +148,7 @@ export function RestaurantScreen({
           type="button"
           onClick={onBack}
           aria-label="Retour à la liste des restaurants"
-          className="relative rounded-full bg-black/35 p-1.5 transition hover:bg-black/55"
+          className="relative inline-flex items-center justify-center rounded-full bg-black/35 p-1.5 transition hover:bg-black/55"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
         </button>
@@ -185,7 +185,7 @@ export function RestaurantScreen({
               type="button"
               onClick={() => onAdd(plat)}
               aria-label={`Ajouter ${plat.nom} au panier`}
-              className="rounded-full bg-accent p-1.5 text-accent-contrast transition hover:bg-accent-hover active:scale-90"
+              className="inline-flex items-center justify-center rounded-full bg-accent p-1.5 text-accent-contrast transition hover:bg-accent-hover active:scale-90"
             >
               <Plus className="h-4 w-4" aria-hidden />
             </button>
@@ -234,18 +234,18 @@ export function CartScreen({
         {panier.map(({ plat, qte }) => (
           <li
             key={plat.id}
-            className="flex items-center gap-2 rounded-field border border-line bg-surface-raised p-2.5"
+            className="relative rounded-field border border-line bg-surface-raised p-2.5 md:flex md:items-center md:gap-2"
           >
-            <div className="min-w-0 flex-1">
+            <div className="min-w-0 pr-12 md:flex-1 md:pr-0">
               <p className="truncate text-sm font-medium">{plat.nom}</p>
               <p className="text-xs text-muted">{formatPrix(plat.prix)}</p>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="mt-1 flex items-center justify-end gap-1.5 md:mt-0">
               <button
                 type="button"
                 onClick={() => onDec(plat.id)}
                 aria-label={`Retirer un ${plat.nom}`}
-                className="rounded-full border border-line p-1 text-muted transition hover:border-accent hover:text-accent"
+                className="inline-flex items-center justify-center rounded-full border border-line p-1 text-muted transition hover:border-accent hover:text-accent"
               >
                 <Minus className="h-3 w-3" aria-hidden />
               </button>
@@ -256,19 +256,19 @@ export function CartScreen({
                 type="button"
                 onClick={() => onInc(plat.id)}
                 aria-label={`Ajouter un ${plat.nom}`}
-                className="rounded-full border border-line p-1 text-muted transition hover:border-accent hover:text-accent"
+                className="inline-flex items-center justify-center rounded-full border border-line p-1 text-muted transition hover:border-accent hover:text-accent"
               >
                 <Plus className="h-3 w-3" aria-hidden />
               </button>
-              <button
-                type="button"
-                onClick={() => onRemove(plat.id)}
-                aria-label={`Supprimer ${plat.nom} du panier`}
-                className="ml-1 rounded-full p-1 text-muted transition hover:text-red-500"
-              >
-                <Trash2 className="h-3.5 w-3.5" aria-hidden />
-              </button>
             </div>
+            <button
+              type="button"
+              onClick={() => onRemove(plat.id)}
+              aria-label={`Supprimer ${plat.nom} du panier`}
+              className="absolute right-2.5 top-2.5 inline-flex items-center justify-center rounded-full p-1 text-muted transition hover:text-red-500 md:static md:ml-1"
+            >
+              <Trash2 className="h-3.5 w-3.5" aria-hidden />
+            </button>
           </li>
         ))}
       </ul>

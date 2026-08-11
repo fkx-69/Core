@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Loader2, Send } from "lucide-react";
 import Button from "@/components/ui/Button";
@@ -32,7 +32,7 @@ const INITIAL_VALUES: FormValues = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const PHONE_FR_RE = /^(\+33|0)\s?[1-9](\s?\d{2}){4}$/;
+const PHONE_INTL_RE = /^\+?[0-9][0-9 .-]{7,18}$/;
 
 function validateField(field: Field, values: FormValues): string | null {
   const value = values[field].trim();
@@ -47,9 +47,9 @@ function validateField(field: Field, values: FormValues): string | null {
     case "telephone":
       // Optionnel, mais vérifié si renseigné.
       if (!value) return null;
-      return PHONE_FR_RE.test(value)
+      return PHONE_INTL_RE.test(value)
         ? null
-        : "Ce numéro ne semble pas valide (format attendu : 06 12 34 56 78).";
+        : "Entrez un numéro valide.";
     case "typeProjet":
       return value ? null : "Veuillez sélectionner un type de projet.";
     case "message":
@@ -61,13 +61,22 @@ function validateField(field: Field, values: FormValues): string | null {
 }
 
 const inputClasses =
-  "w-full rounded-field border border-line bg-surface-raised px-4 py-3 text-sm text-foreground placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 aria-[invalid=true]:border-danger";
+  "min-h-12 w-full rounded-field border border-line bg-surface-raised px-4 py-3 text-base text-foreground placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 aria-[invalid=true]:border-danger sm:text-sm";
 
 export default function ContactForm() {
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const timeoutRef = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (timeoutRef.current !== null) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    },
+    [],
+  );
 
   function handleChange(field: Field, value: string) {
     setValues((v) => ({ ...v, [field]: value }));
@@ -92,11 +101,15 @@ export default function ContactForm() {
 
     // Envoi simulé : pas de backend.
     setStatus("sending");
-    timeoutRef.current = window.setTimeout(() => setStatus("sent"), 900);
+    timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = null;
+      setStatus("sent");
+    }, 900);
   }
 
   function resetForm() {
-    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current);
+    timeoutRef.current = null;
     setValues(INITIAL_VALUES);
     setErrors({});
     setStatus("idle");
@@ -106,7 +119,7 @@ export default function ContactForm() {
     return (
       <div
         role="status"
-        className="flex h-full flex-col items-center justify-center rounded-card border border-line bg-surface-raised p-10 text-center shadow-card"
+        className="flex flex-col items-center justify-center rounded-card border border-line bg-surface-raised p-10 text-center shadow-card"
       >
         <Image
           src="/assets/illustrations/contact-success.webp"
@@ -120,10 +133,9 @@ export default function ContactForm() {
           Merci, {values.nom.trim().split(" ")[0]} !
         </h2>
         <p className="mt-2 max-w-sm leading-relaxed text-muted">
-          Votre message a bien été envoyé. Notre équipe vous répondra sous
-          24 heures ouvrées.
+          Ceci est une démonstration : votre message n&apos;a pas été transmis.
         </p>
-        <Button variant="outline" className="mt-8" onClick={resetForm}>
+        <Button variant="outline" className="mt-8 w-full sm:w-auto" onClick={resetForm}>
           Envoyer un autre message
         </Button>
       </div>
@@ -132,7 +144,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <div>
           <label htmlFor="nom" className="mb-1.5 block text-sm font-medium">
             Nom <span className="text-accent">*</span>
@@ -142,7 +154,7 @@ export default function ContactForm() {
             name="nom"
             type="text"
             autoComplete="name"
-            placeholder="Marie Dupont"
+            placeholder="Votre nom"
             value={values.nom}
             onChange={(e) => handleChange("nom", e.target.value)}
             onBlur={() => handleBlur("nom")}
@@ -166,7 +178,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
-            placeholder="marie@entreprise.fr"
+            placeholder="vous@entreprise.com"
             value={values.email}
             onChange={(e) => handleChange("email", e.target.value)}
             onBlur={() => handleBlur("email")}
@@ -194,7 +206,7 @@ export default function ContactForm() {
             name="telephone"
             type="tel"
             autoComplete="tel"
-            placeholder="06 12 34 56 78"
+            placeholder="Votre numéro (facultatif)"
             value={values.telephone}
             onChange={(e) => handleChange("telephone", e.target.value)}
             onBlur={() => handleBlur("telephone")}
@@ -248,7 +260,7 @@ export default function ContactForm() {
             id="message"
             name="message"
             rows={5}
-            placeholder="Décrivez votre projet en quelques lignes : objectifs, délais, budget indicatif…"
+            placeholder="Décrivez votre projet en quelques lignes…"
             value={values.message}
             onChange={(e) => handleChange("message", e.target.value)}
             onBlur={() => handleBlur("message")}
@@ -265,7 +277,12 @@ export default function ContactForm() {
       </div>
 
       <div className="mt-8">
-        <Button type="submit" size="lg" disabled={status === "sending"}>
+        <Button
+          type="submit"
+          size="lg"
+          className="w-full sm:w-auto"
+          disabled={status === "sending"}
+        >
           {status === "sending" ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

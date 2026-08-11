@@ -74,7 +74,7 @@ export default function MobileDemo() {
 
   return (
     <PhoneFrame>
-      <div className="flex h-full flex-col">
+      <div className="demo-touch flex h-full flex-col">
         <div
           key={`${tab}-${selectedRestaurantId ?? "liste"}`}
           className="screen-in min-h-0 flex-1"
