@@ -1,4 +1,11 @@
-import { Globe, LayoutDashboard, Puzzle, Smartphone } from "lucide-react";
+import {
+  Globe,
+  LayoutDashboard,
+  Puzzle,
+  ShoppingCart,
+  Smartphone,
+  Workflow,
+} from "lucide-react";
 import type { Service } from "@/lib/services-data";
 
 const icons: Record<Service["icon"], typeof Globe> = {
@@ -6,6 +13,8 @@ const icons: Record<Service["icon"], typeof Globe> = {
   "layout-dashboard": LayoutDashboard,
   smartphone: Smartphone,
   puzzle: Puzzle,
+  "shopping-cart": ShoppingCart,
+  workflow: Workflow,
 };
 
 /** Icône d'un service dans une pastille accentuée. */

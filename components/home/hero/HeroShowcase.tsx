@@ -163,13 +163,17 @@ export default function HeroShowcase() {
           <span className="animate-pulse-dot h-2 w-2 rounded-full bg-[color:var(--hero-accent)] transition-colors duration-700" aria-hidden />
           Basée à Bamako, Mali
         </p>
-        {/* Deux lignes poster, centrées (largeurs mesurées en Space Grotesk bold) */}
+        {/* Le positionnement explicite rend l'offre compréhensible avant la
+            démonstration, tout en gardant le slogan comme signature éditoriale. */}
         <h1 className="mt-5 text-center font-display text-[2.05rem] leading-[1.1] font-bold tracking-tight text-[color:var(--hero-ink)] transition-colors duration-700 sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
-          Le logiciel sur mesure,
-          <span className="block text-[color:var(--hero-accent)] transition-colors duration-700">
-            la preuve à l&apos;écran.
-          </span>
+          Agence de développement logiciel à Bamako
         </h1>
+        <p className="mt-5 max-w-2xl text-center text-base leading-relaxed text-[color:var(--hero-muted)] transition-colors duration-700 sm:text-lg">
+          Sites web, applications web, applications mobiles et logiciels métier sur mesure au Mali.
+        </p>
+        <p className="mt-3 text-center font-display text-lg font-semibold text-[color:var(--hero-accent)] transition-colors duration-700 sm:text-xl">
+          Le logiciel sur mesure, la preuve à l&apos;écran.
+        </p>
         <HeroTabs
           active={active}
           visited={visited}

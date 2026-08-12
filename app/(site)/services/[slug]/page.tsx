@@ -51,6 +51,69 @@ function serviceLink(service: Service): string {
   return `/services/${service.slug}`;
 }
 
+const RESOURCE_LINKS_BY_SERVICE: Record<
+  string,
+  Array<{ href: string; label: string }>
+> = {
+  "creation-site-web-bamako": [
+    {
+      href: "/ressources/prix-creation-site-web-mali",
+      label: "Préparer et comparer un devis web",
+    },
+    {
+      href: "/ressources/generateur-cahier-des-charges",
+      label: "Structurer un premier cahier des charges",
+    },
+  ],
+  "creation-site-ecommerce-mali": [
+    {
+      href: "/ressources/prix-creation-site-web-mali",
+      label: "Comprendre les facteurs de coût d'un site",
+    },
+    {
+      href: "/ressources/generateur-cahier-des-charges",
+      label: "Décrire le parcours de commande",
+    },
+  ],
+  "developpement-application-web-mali": [
+    {
+      href: "/ressources/digitaliser-excel-whatsapp",
+      label: "Diagnostiquer un flux dispersé",
+    },
+    {
+      href: "/ressources/generateur-cahier-des-charges",
+      label: "Décrire les rôles et le premier flux",
+    },
+  ],
+  "logiciel-sur-mesure-mali": [
+    {
+      href: "/ressources/digitaliser-excel-whatsapp",
+      label: "Préparer une intégration à étudier",
+    },
+    {
+      href: "/ressources/generateur-cahier-des-charges",
+      label: "Structurer les contraintes métier",
+    },
+  ],
+  "digitalisation-processus-entreprise-mali": [
+    {
+      href: "/ressources/digitaliser-excel-whatsapp",
+      label: "Diagnostiquer Excel, WhatsApp ou papier",
+    },
+    {
+      href: "/ressources/generateur-cahier-des-charges",
+      label: "Décrire un premier flux",
+    },
+  ],
+  "developpement-application-mobile-mali": [
+    {
+      href: "/ressources/generateur-cahier-des-charges",
+      label: "Clarifier le parcours et les utilisateurs",
+    },
+    { href: "/ressources", label: "Voir toutes les ressources" },
+  ],
+};
+
 export default async function ServiceDetailPage({
   params,
 }: ServicePageProps) {
@@ -288,6 +351,45 @@ export default async function ServiceDetailPage({
                 </li>
               ))}
             </ul>
+          </Container>
+        </section>
+
+        <section
+          className="border-t border-line bg-surface py-14 sm:py-24"
+          aria-labelledby="service-resources"
+        >
+          <Container>
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-20">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                  Ressources
+                </p>
+                <h2
+                  id="service-resources"
+                  className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl"
+                >
+                  Préparer la prochaine discussion
+                </h2>
+              </div>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {(RESOURCE_LINKS_BY_SERVICE[service.slug] ?? [
+                  { href: "/ressources", label: "Voir les ressources" },
+                ]).map((resourceLink) => (
+                  <li key={resourceLink.href}>
+                    <Link
+                      href={resourceLink.href}
+                      className="group flex h-full items-center justify-between gap-4 rounded-card border border-line bg-surface-raised p-5 text-sm font-medium shadow-card transition hover:-translate-y-0.5 hover:border-accent/50"
+                    >
+                      <span>{resourceLink.label}</span>
+                      <ArrowRight
+                        className="h-4 w-4 shrink-0 text-accent transition-transform group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Container>
         </section>
       </article>

@@ -72,7 +72,7 @@ const arrowLabel = (
   </span>
 );
 
-/** Les quatre services en bento asymétrique : une grande tuile + trois tuiles. */
+/** Les services en bento asymétrique : une grande tuile + des tuiles secondaires. */
 export default function ServicesPreview() {
   const [main, ...others] = SERVICES;
   return (
@@ -189,7 +189,7 @@ export default function ServicesPreview() {
                       i === 0 ? "bg-accent-soft/60" : "bg-surface-raised"
                     }`}
                   >
-                    <TileIndex n={i === 0 ? "03" : "04"} />
+                    <TileIndex n={String(i + 3).padStart(2, "0")} />
                     <CornerTicks />
                     <TileIllustration
                       serviceId={service.id}

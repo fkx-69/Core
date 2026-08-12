@@ -15,14 +15,14 @@ export default function Footer() {
         Core.
       </span>
       <Container className="relative py-12 sm:py-16">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div>
             <p className="font-display text-3xl font-bold tracking-tight">
               Core<span className="text-accent">.</span>
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-              Core conçoit des sites, applications web et mobiles depuis
-              Bamako, au Mali.
+              Core conçoit des sites, applications web, mobiles et logiciels
+              métier depuis Bamako, au Mali.
             </p>
             <p className="mt-4 flex items-center gap-2 text-sm text-muted">
               <span className="h-2 w-2 rounded-full bg-ok" aria-hidden />
@@ -65,10 +65,58 @@ export default function Footer() {
               ))}
               <li>
                 <Link
+                  href="/a-propos"
+                  className="text-sm text-muted transition hover:text-accent"
+                >
+                  À propos
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/mentions-legales"
                   className="text-sm text-muted transition hover:text-accent"
                 >
                   Mentions légales
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <nav aria-label="Ressources" className="hidden sm:block">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+              Ressources
+            </p>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <Link
+                  href="/ressources"
+                  className="text-sm text-muted transition hover:text-accent"
+                >
+                  Tous les contenus
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/ressources/prix-creation-site-web-mali"
+                  className="text-sm text-muted transition hover:text-accent"
+                >
+                  Préparer un devis web
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/ressources/digitaliser-excel-whatsapp"
+                  className="text-sm text-muted transition hover:text-accent"
+                >
+                  Digitaliser un flux
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/ressources/generateur-cahier-des-charges"
+                  className="text-sm text-muted transition hover:text-accent"
+                >
+                  Générateur de cahier des charges
                 </Link>
               </li>
             </ul>
@@ -82,7 +130,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Sur smartphone, les trois longues colonnes deviennent des
+        {/* Sur smartphone, les longues colonnes deviennent des
             accordéons natifs : tous les liens restent présents et accessibles
             sans transformer le footer en second écran-fleuve. */}
         <div className="mt-8 divide-y divide-line border-y border-line sm:hidden">
@@ -126,10 +174,61 @@ export default function Footer() {
                 ))}
                 <li>
                   <Link
+                    href="/a-propos"
+                    className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                  >
+                    À propos
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/mentions-legales"
                     className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
                   >
                     Mentions légales
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </details>
+
+          <details className="group">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between py-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden">
+              Ressources
+              <ChevronDown className="h-4 w-4 text-accent transition-transform group-open:rotate-180" aria-hidden />
+            </summary>
+            <nav aria-label="Ressources sur mobile">
+              <ul className="pb-3">
+                <li>
+                  <Link
+                    href="/ressources"
+                    className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                  >
+                    Tous les contenus
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/ressources/prix-creation-site-web-mali"
+                    className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                  >
+                    Préparer un devis web
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/ressources/digitaliser-excel-whatsapp"
+                    className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                  >
+                    Digitaliser un flux
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/ressources/generateur-cahier-des-charges"
+                    className="flex min-h-11 items-center text-sm text-muted transition hover:text-accent"
+                  >
+                    Générateur de cahier des charges
                   </Link>
                 </li>
               </ul>

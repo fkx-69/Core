@@ -43,9 +43,9 @@ export const SITE_URL = resolveSiteUrl();
 
 export const siteConfig = {
   name: "Core",
-  title: "Core — Agence de développement logiciel",
+  title: "Agence de développement logiciel à Bamako | Core",
   description:
-    "Core conçoit des sites web, applications web et applications mobiles depuis Bamako, au Mali.",
+    "Core conçoit des sites web, applications web, applications mobiles et logiciels métier sur mesure au Mali depuis Bamako.",
   location: COMPANY_LOCATION,
   url: SITE_URL,
 } as const;
@@ -169,6 +169,19 @@ type StructuredService = {
   seoDescription: string;
 };
 
+export type StructuredDataGraph = {
+  "@context": "https://schema.org";
+  "@graph": Array<Record<string, unknown>>;
+};
+
+export type StructuredResource = {
+  path: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  updatedAt: string;
+};
+
 export function getServiceStructuredData(service: StructuredService) {
   const serviceUrl = canonicalUrl(`/services/${service.slug}`);
   const homeUrl = canonicalUrl("/");
@@ -214,6 +227,90 @@ export function getServiceStructuredData(service: StructuredService) {
           },
         ],
       },
+    ],
+  };
+}
+
+function getResourceBreadcrumbs(resource: StructuredResource) {
+  const resourceUrl = canonicalUrl(resource.path);
+  return {
+    "@type": "BreadcrumbList",
+    "@id": `${resourceUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Accueil",
+        item: canonicalUrl("/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Ressources",
+        item: canonicalUrl("/ressources"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: resource.title,
+        item: resourceUrl,
+      },
+    ],
+  };
+}
+
+/** Structured data for a durable editorial guide, without invented authors. */
+export function getArticleStructuredData(
+  resource: StructuredResource,
+): StructuredDataGraph {
+  const resourceUrl = canonicalUrl(resource.path);
+  const homeUrl = canonicalUrl("/");
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${resourceUrl}#article`,
+        headline: resource.title,
+        description: resource.description,
+        url: resourceUrl,
+        mainEntityOfPage: resourceUrl,
+        datePublished: resource.publishedAt,
+        dateModified: resource.updatedAt,
+        inLanguage: "fr-FR",
+        author: { "@id": `${homeUrl}#organization` },
+        publisher: { "@id": `${homeUrl}#organization` },
+        image: canonicalUrl("/opengraph-image"),
+      },
+      getResourceBreadcrumbs(resource),
+    ],
+  };
+}
+
+/** Structured data for the local, browser-only project brief generator. */
+export function getWebApplicationStructuredData(
+  resource: StructuredResource,
+): StructuredDataGraph {
+  const resourceUrl = canonicalUrl(resource.path);
+  const homeUrl = canonicalUrl("/");
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": `${resourceUrl}#application`,
+        name: resource.title,
+        description: resource.description,
+        url: resourceUrl,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Any",
+        inLanguage: "fr-FR",
+        isAccessibleForFree: true,
+        provider: { "@id": `${homeUrl}#organization` },
+      },
+      getResourceBreadcrumbs(resource),
     ],
   };
 }

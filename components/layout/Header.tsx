@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { NAV_LINKS } from "@/lib/site";
+import { isNavLinkActive, NAV_LINKS } from "@/lib/site";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 import Container from "@/components/ui/Container";
 
@@ -81,7 +81,7 @@ export default function Header() {
         <nav aria-label="Navigation principale" className="hidden md:block">
           <ul className="flex items-center gap-1">
             {NAV_LINKS.map((link) => {
-              const active = pathname === link.href;
+              const active = isNavLinkActive(pathname, link.href);
               return (
                 <li key={link.href}>
                   <Link
@@ -184,7 +184,7 @@ export default function Header() {
             <nav aria-label="Navigation mobile">
               <ul className="flex flex-col gap-2">
                 {NAV_LINKS.map((link) => {
-                  const active = pathname === link.href;
+                  const active = isNavLinkActive(pathname, link.href);
                   return (
                     <li key={link.href}>
                       <Link

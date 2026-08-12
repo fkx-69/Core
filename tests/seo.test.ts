@@ -7,18 +7,27 @@ import {
   generateMetadata,
   generateStaticParams,
 } from "@/app/(site)/services/[slug]/page";
+import { metadata as demosMetadata } from "@/app/demos/layout";
 import robots from "@/app/robots";
 import sitemap, { PUBLIC_SITEMAP_PATHS } from "@/app/sitemap";
+import {
+  buildProjectBrief,
+  PROJECT_TYPE_OPTIONS,
+} from "@/components/resources/generator-model";
+import { RESOURCES } from "@/lib/resources-data";
 import { SERVICES } from "@/lib/services-data";
 import {
   buildPageMetadata,
   canonicalUrl,
+  getArticleStructuredData,
   getHomeStructuredData,
   getServiceStructuredData,
+  getWebApplicationStructuredData,
   resolveSiteUrl,
   siteConfig,
   serializeJsonLd,
 } from "@/lib/seo";
+import { isNavLinkActive } from "@/lib/site";
 
 async function loadProxyForTest(): Promise<
   (request: NextRequest) => Response
@@ -48,7 +57,7 @@ test("sitemap exposes exactly the canonical public pages", () => {
   const expected = PUBLIC_SITEMAP_PATHS.map((pathname) => canonicalUrl(pathname));
 
   assert.deepEqual(entries.map((entry) => entry.url), expected);
-  assert.equal(entries.length, 9);
+  assert.equal(entries.length, 16);
   assert.ok(entries.every((entry) => !("lastModified" in entry)));
   assert.ok(
     entries.every(
@@ -80,6 +89,19 @@ test("service records have unique stable slugs and static params", () => {
   assert.ok(slugs.includes("developpement-application-web-mali"));
   assert.ok(slugs.includes("developpement-application-mobile-mali"));
   assert.ok(slugs.includes("logiciel-sur-mesure-mali"));
+  assert.ok(slugs.includes("creation-site-ecommerce-mali"));
+  assert.ok(slugs.includes("digitalisation-processus-entreprise-mali"));
+  assert.equal(SERVICES.length, 6);
+  assert.deepEqual(
+    SERVICES.filter((service) => service.demoAnchor === null).map(
+      (service) => service.slug,
+    ),
+    [
+      "logiciel-sur-mesure-mali",
+      "creation-site-ecommerce-mali",
+      "digitalisation-processus-entreprise-mali",
+    ],
+  );
   assert.ok(
     SERVICES.every(
       (service) =>
@@ -89,12 +111,35 @@ test("service records have unique stable slugs and static params", () => {
         service.problems.length > 0 &&
         service.deliverables.length > 0 &&
         service.approach.length > 0 &&
-        service.faq.length > 0,
+        service.faq.length > 0 &&
+        service.benefits.length > 0 &&
+        service.technologies.length > 0 &&
+        service.demoLabel.length > 0,
+    ),
+  );
+});
+
+test("resource records have stable dates, paths and unique metadata", () => {
+  assert.equal(RESOURCES.length, 3);
+  assert.equal(new Set(RESOURCES.map((resource) => resource.path)).size, 3);
+  assert.equal(new Set(RESOURCES.map((resource) => resource.title)).size, 3);
+  assert.ok(
+    RESOURCES.every(
+      (resource) =>
+        resource.publishedAt === "2026-08-12" &&
+        resource.updatedAt === "2026-08-12" &&
+        resource.path.startsWith("/ressources/") &&
+        resource.title.length > 0 &&
+        resource.description.length > 0,
     ),
   );
 });
 
 test("public page metadata has page-specific canonical, OpenGraph, and Twitter values", () => {
+  assert.equal(
+    siteConfig.title,
+    "Agence de développement logiciel à Bamako | Core",
+  );
   const pages = [
     {
       pathname: "/",
@@ -125,6 +170,23 @@ test("public page metadata has page-specific canonical, OpenGraph, and Twitter v
       title: "Mentions légales",
       description: "Mentions légales du site de l'agence Core.",
     },
+    {
+      pathname: "/a-propos",
+      title: "À propos de Core",
+      description:
+        "Le périmètre de Core, son approche de développement logiciel à Bamako et la distinction entre démos conceptuelles et projets livrés.",
+    },
+    {
+      pathname: "/ressources",
+      title: "Ressources pour cadrer un projet logiciel au Mali",
+      description:
+        "Guides et outil local de Core pour préparer un projet web, e-commerce ou métier au Mali, comparer un devis et structurer un premier besoin.",
+    },
+    ...RESOURCES.map((resource) => ({
+      pathname: resource.path,
+      title: resource.title,
+      description: resource.description,
+    })),
     ...SERVICES.map((service) => ({
       pathname: `/services/${service.slug}`,
       title: service.seoTitle,
@@ -245,6 +307,80 @@ test("structured data contains only the declared website and service facts", () 
     serializeJsonLd({ unsafe: "</script><script>" }),
     /\\u003c\/script>/,
   );
+});
+
+test("resource structured data identifies guides and the local tool", () => {
+  const guide = RESOURCES.find((resource) => resource.type === "guide");
+  const tool = RESOURCES.find((resource) => resource.type === "outil");
+  assert.ok(guide);
+  assert.ok(tool);
+  const article = getArticleStructuredData(guide) as unknown as {
+    "@graph": Array<{
+      "@type": string;
+      datePublished?: string;
+      author?: { "@id"?: string };
+      image?: string;
+    }>;
+  };
+  assert.deepEqual(
+    article["@graph"].map((entry) => entry["@type"]),
+    ["Article", "BreadcrumbList"],
+  );
+  assert.equal(article["@graph"][0]?.datePublished, "2026-08-12");
+  assert.equal(
+    article["@graph"][0]?.author?.["@id"],
+    `${canonicalUrl("/")}#organization`,
+  );
+  assert.equal(
+    article["@graph"][0]?.image,
+    canonicalUrl("/opengraph-image"),
+  );
+
+  const application = getWebApplicationStructuredData(tool) as unknown as {
+    "@graph": Array<{
+      "@type": string;
+      isAccessibleForFree?: boolean;
+      url?: string;
+      name?: string;
+    }>;
+  };
+  assert.deepEqual(
+    application["@graph"].map((entry) => entry["@type"]),
+    ["WebApplication", "BreadcrumbList"],
+  );
+  assert.equal(application["@graph"][0]?.isAccessibleForFree, true);
+  assert.equal(application["@graph"][0]?.url, canonicalUrl(tool.path));
+  assert.equal(application["@graph"][0]?.name, tool.title);
+});
+
+test("navigation recognizes section descendants without prefix collisions", () => {
+  assert.equal(isNavLinkActive("/services/logiciel-sur-mesure-mali", "/services"), true);
+  assert.equal(isNavLinkActive("/ressources/digitaliser-excel-whatsapp", "/ressources"), true);
+  assert.equal(isNavLinkActive("/services-old", "/services"), false);
+  assert.equal(isNavLinkActive("/", "/"), true);
+  assert.equal(isNavLinkActive("/a-propos", "/"), false);
+});
+
+test("demo segment remains explicitly noindex", () => {
+  assert.deepEqual(demosMetadata.robots, { index: false, follow: false });
+});
+
+test("project brief model produces a local, structured text document", () => {
+  const brief = buildProjectBrief({
+    projectName: "Suivi des commandes",
+    projectType: PROJECT_TYPE_OPTIONS[1].value,
+    objective: "Voir l'état des commandes",
+    users: "Équipe de comptoir et responsable",
+    firstFlow: "Créer une commande puis la marquer prête",
+    existingTools: "Excel et messages",
+    integrations: "Paiement à étudier",
+    constraints: "Priorité au mobile",
+  });
+
+  assert.match(brief, /MINI CAHIER DES CHARGES/);
+  assert.match(brief, /Site e-commerce/);
+  assert.match(brief, /Voir l'état des commandes/);
+  assert.match(brief, /Les réponses ont été traitées dans le navigateur/);
 });
 
 test("site URL override accepts only an origin and otherwise uses production", () => {

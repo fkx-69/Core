@@ -35,7 +35,7 @@ export default function ServicesPage() {
                 as="h1"
                 eyebrow="Services"
                 title="Ce que nous construisons pour vous"
-                intro="Quatre expertises complémentaires, un même objectif : concevoir un logiciel utile, fiable et agréable à utiliser. Chaque service dispose d'une page détaillée et d'une démo conceptuelle à explorer."
+                intro="Des expertises complémentaires, un même objectif : concevoir un logiciel utile, fiable et agréable à utiliser. Chaque service dispose d'une page détaillée et d'un périmètre à explorer, avec des démos conceptuelles lorsque cela est pertinent."
               />
               <ul className="mt-6 flex flex-wrap gap-2">
                 {INTRO_CHIPS.map((chip) => (
