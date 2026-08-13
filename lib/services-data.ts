@@ -5,7 +5,13 @@ export type Service = {
   slug: string;
   title: string;
   /** Nom d'icône lucide résolu côté composant (les données restent sérialisables). */
-  icon: "globe" | "layout-dashboard" | "smartphone" | "puzzle";
+  icon:
+    | "globe"
+    | "layout-dashboard"
+    | "smartphone"
+    | "puzzle"
+    | "shopping-cart"
+    | "workflow";
   tagline: string;
   description: string;
   seoTitle: string;
@@ -264,6 +270,126 @@ export const SERVICES: Service[] = [
     technologies: ["Node.js", "Python", "Docker", "AWS"],
     demoAnchor: null,
     demoLabel: "Explorer toutes nos démos",
+  },
+  {
+    id: SERVICE_ANCHORS.creationSiteEcommerce,
+    slug: "creation-site-ecommerce-mali",
+    title: "Création e-commerce",
+    icon: "shopping-cart",
+    tagline: "Catalogue, commande et parcours d'achat",
+    description:
+      "Nous concevons des expériences e-commerce claires pour présenter un catalogue, guider la commande et donner un cadre aux opérations qui suivent. Les intégrations de paiement, de livraison et de stock sont des options à analyser et à cadrer selon vos outils, vos règles et vos contraintes au Mali.",
+    seoTitle: "Création de site e-commerce au Mali",
+    seoDescription:
+      "Création de site e-commerce au Mali : catalogue, parcours de commande et options de paiement, livraison ou stock à cadrer selon votre activité.",
+    h1: "Création de site e-commerce au Mali",
+    intro:
+      "Une boutique en ligne ne se résume pas à afficher des produits. Il faut rendre le catalogue compréhensible, clarifier les étapes de commande et vérifier ce qui doit se passer après l'achat. Nous commençons par ce parcours et par les options d'intégration réellement nécessaires.",
+    problems: [
+      "Votre catalogue existe mais vos visiteurs ne trouvent pas facilement le bon produit ou les informations utiles.",
+      "Le parcours de commande doit tenir compte du paiement, de la livraison ou du retrait sans ajouter de friction inutile.",
+      "Les stocks, commandes ou demandes client sont suivis dans plusieurs outils dont les responsabilités restent à préciser.",
+    ],
+    deliverables: [
+      "Arborescence de catalogue, fiches produit et parcours d'achat à valider.",
+      "Interface responsive avec panier, étapes de commande et états d'erreur explicites.",
+      "Étude des options de paiement, livraison, retrait et gestion de stock avant toute intégration.",
+      "Documentation du périmètre retenu, des données nécessaires et des opérations à assurer après la mise en ligne.",
+    ],
+    approach: [
+      "Décrire les produits, les profils d'acheteurs et le chemin de commande prioritaire.",
+      "Séparer les fonctions indispensables des options à tester ou à connecter plus tard.",
+      "Prototyper le catalogue et la commande, puis vérifier les cas incomplets ou interrompus.",
+      "Cadrer les accès, données, responsabilités et conditions d'exploitation avant la suite.",
+    ],
+    faq: [
+      {
+        question: "Quels moyens de paiement pouvez-vous intégrer ?",
+        answer:
+          "Le choix dépend des moyens réellement disponibles pour votre activité, des conditions du prestataire et des contraintes de rapprochement. Nous les recensons avant de promettre une intégration.",
+      },
+      {
+        question: "La livraison et le stock sont-ils inclus d'office ?",
+        answer:
+          "Non. Ils peuvent faire partie du périmètre, mais leurs règles, leurs données et leurs outils doivent être précisés. Une boutique peut aussi commencer par un parcours de commande plus simple.",
+      },
+      {
+        question: "Faut-il déjà avoir toutes les fiches produit ?",
+        answer:
+          "Les contenus disponibles permettent de mieux cadrer le catalogue. Nous pouvons identifier les champs nécessaires et les manques, sans inventer les informations qui devront être fournies par votre équipe.",
+      },
+    ],
+    nextStep:
+      "Décrivez votre catalogue, le parcours de commande souhaité et ce qui se passe après le paiement ou la demande. Cette base aide à distinguer site catalogue, boutique et intégrations métier.",
+    benefits: [
+      "Un catalogue lisible sur mobile comme sur desktop",
+      "Un parcours de commande découpé en étapes vérifiables",
+      "Des options d'intégration étudiées selon vos outils réels",
+      "Un périmètre documenté avant d'engager les fonctions plus complexes",
+    ],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "API à préciser"],
+    demoAnchor: null,
+    demoLabel: "Explorer le portfolio",
+  },
+  {
+    id: SERVICE_ANCHORS.digitalisationProcessusEntreprise,
+    slug: "digitalisation-processus-entreprise-mali",
+    title: "Digitalisation des processus",
+    icon: "workflow",
+    tagline: "Du flux Excel, WhatsApp ou papier à un outil métier",
+    description:
+      "Nous aidons à examiner un flux aujourd'hui réparti entre fichiers Excel, messages WhatsApp, cahiers ou formulaires papier, puis à définir un premier outil métier proportionné. L'objectif est de rendre le travail et les données plus explicites, sans supposer qu'il faut tout remplacer d'un coup.",
+    seoTitle: "Digitalisation des processus d'entreprise au Mali",
+    seoDescription:
+      "Digitalisation des processus d'entreprise au Mali : transformer un flux Excel, WhatsApp ou papier en outil métier après un cadrage prudent.",
+    h1: "Digitalisation des processus d'entreprise au Mali",
+    intro:
+      "Quand une équipe coordonne une activité par feuilles Excel, messages WhatsApp et documents papier, le premier enjeu est de choisir un flux concret à clarifier. Nous cartographions les rôles, les données et les exceptions avant de proposer un outil métier ou une application web.",
+    problems: [
+      "Une même information circule entre Excel, WhatsApp et papier avec des versions difficiles à rapprocher.",
+      "Les responsabilités, validations et relances dépendent de messages individuels ou de la mémoire de l'équipe.",
+      "Un projet de digitalisation risque de devenir trop large si le premier flux utile n'est pas délimité.",
+    ],
+    deliverables: [
+      "Description du flux actuel, des rôles, des entrées et des sorties attendues.",
+      "Priorisation d'un premier parcours testable plutôt qu'une refonte globale supposée.",
+      "Maquette d'un outil métier avec recherche, saisie, suivi et états à confirmer.",
+      "Repères sur les données à reprendre, les connexions possibles, la sécurité et l'accompagnement des utilisateurs.",
+    ],
+    approach: [
+      "Partir d'une opération fréquente et observable, avec les personnes qui la réalisent.",
+      "Lister les données obligatoires, les doublons, les validations et les cas d'exception.",
+      "Construire un premier parcours simple, puis confronter ses écrans au terrain.",
+      "Décider ensuite ce qui mérite une intégration, une migration ou reste manuel pour le moment.",
+    ],
+    faq: [
+      {
+        question: "Faut-il remplacer Excel et WhatsApp immédiatement ?",
+        answer:
+          "Non. Un premier outil peut couvrir un flux précis et coexister avec l'existant pendant le cadrage. Le rythme de remplacement dépend des données, des rôles et de l'adoption par l'équipe.",
+      },
+      {
+        question: "Comment choisir le premier processus à digitaliser ?",
+        answer:
+          "On peut commencer par un flux fréquent, suffisamment délimité et dont les informations de départ sont accessibles. Le coût des erreurs, la ressaisie et le nombre de personnes concernées aident à prioriser, sans promettre un résultat avant observation.",
+      },
+      {
+        question: "Que faire des données papier ou des anciens fichiers ?",
+        answer:
+          "Le format, la qualité et le volume sont examinés avant toute reprise. Certaines données peuvent être importées, d'autres vérifiées manuellement ou conservées comme historique selon leur utilité.",
+      },
+    ],
+    nextStep:
+      "Prenez un exemple récent : qui a saisi quoi, dans quel outil, qui a validé et où le suivi s'est arrêté. Ce récit concret suffit pour commencer à délimiter un premier flux.",
+    benefits: [
+      "Un premier flux métier décrit avant de multiplier les écrans",
+      "Des rôles et des données explicites pour réduire les ambiguïtés",
+      "Une place claire pour les intégrations et la sécurité à étudier",
+      "Une adoption accompagnée par des parcours proches du travail réel",
+    ],
+    technologies: ["Applications web", "TypeScript", "API à préciser", "Données à cadrer"],
+    demoAnchor: null,
+    demoLabel: "Explorer le portfolio",
   },
 ];
 

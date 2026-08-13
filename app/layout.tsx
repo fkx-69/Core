@@ -29,6 +29,13 @@ export const metadata: Metadata = {
     default: siteConfig.title,
     template: "%s | Core",
   },
+  icons: {
+    icon: {
+      url: "/favicon.svg",
+      type: "image/svg+xml",
+      sizes: "96x96",
+    },
+  },
   ...(googleSiteVerification
     ? { verification: { google: googleSiteVerification } }
     : {}),

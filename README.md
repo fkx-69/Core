@@ -17,8 +17,34 @@ Autres commandes :
 
 - `npm run build` : build de production avec Turbopack ;
 - `npm run start` : serveur de production après un build ;
+- `npm run deploy` : déploiement atomique sur le VPS de production ;
 - `npm run lint` : vérification ESLint ;
 - `npx tsc --noEmit` : vérification TypeScript stricte.
+
+## Déploiement en une commande
+
+Depuis ce dépôt sur le VPS, lancer :
+
+```bash
+npm run deploy
+```
+
+La commande vérifie les tests et ESLint, copie l'état actuel du dossier de
+travail dans une release horodatée sous `/opt/core/releases`, installe les
+dépendances avec `npm ci`, construit Next.js avec l'environnement protégé de
+`/etc/core/core.env`, puis démarre temporairement la release sur un port local
+pour la tester. Si ce test réussit, le lien `/opt/core/current` est remplacé
+atomiquement et `core.service` est redémarré.
+
+Le site local et `https://mycore.work` sont ensuite contrôlés. En cas d'échec
+après la bascule, le script restaure automatiquement la release précédente. Il
+conserve les cinq releases les plus récentes pour limiter l'espace disque.
+
+Cette commande est propre à l'infrastructure de production actuelle. Elle
+requiert `systemd`, le service `core.service`, le compte système `core`, le
+fichier `/etc/core/core.env` et un accès `sudo` non interactif. Elle déploie
+volontairement les changements non commités présents dans le dossier, mais ne
+copie ni `.env.local`, ni `.git`, ni `node_modules`, ni `.data`.
 
 ## Stack
 
